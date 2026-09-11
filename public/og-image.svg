@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0F172A"/>
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  
+  <!-- Logo Icon -->
+  <rect x="100" y="100" width="90" height="90" rx="20" fill="#0F172A" stroke="#10B981" stroke-width="3"/>
+  <circle cx="145" cy="145" r="24" stroke="#10B981" stroke-width="6" fill="none"/>
+  <circle cx="145" cy="145" r="10" fill="#10B981"/>
+  
+  <!-- Title Text -->
+  <text x="215" y="145" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">optical<tspan fill="#10B981">.de</tspan></text>
+  <text x="215" y="180" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="600">Kontaktlinsen-Preisvergleich &amp; Eigenmarken-Decoder</text>
+  
+  <!-- Main Tagline -->
+  <text x="100" y="290" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="44" font-weight="800" letter-spacing="-0.5">Bis zu 60% sparen bei Optiker-Eigenmarken</text>
+  <text x="100" y="340" fill="#CBD5E1" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="26" font-weight="400">Apollo iWear, Fielmann &amp; Mister Spex – Markenoriginale im Direktvergleich</text>
+  
+  <!-- Feature Badges -->
+  <rect x="100" y="420" width="280" height="60" rx="12" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4"/>
+  <text x="120" y="457" fill="#34D399" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700">✓ 20+ Händler im Vergleich</text>
+  
+  <rect x="400" y="420" width="310" height="60" rx="12" fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-opacity="0.4"/>
+  <text x="420" y="457" fill="#FBBF24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700">✓ DIN EN ISO 14534 Konform</text>
+
+  <rect x="730" y="420" width="270" height="60" rx="12" fill="#3B82F6" fill-opacity="0.15" stroke="#3B82F6" stroke-opacity="0.4"/>
+  <text x="750" y="457" fill="#60A5FA" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700">✓ 100% Unabhängig</text>
+
+  <!-- Footer Info -->
+  <text x="100" y="540" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18">© 2026 optical.de Media · Stand: September 2026</text>
+</svg>

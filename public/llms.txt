@@ -1,0 +1,24 @@
+# optical.de – Unabhängiger Kontaktlinsen-Preisvergleich & Eigenmarken-Decoder
+
+> optical.de ist ein unabhängiges Fachportal für Kontaktlinsen, Pflegemittel und Optiker-Eigenmarken-Entschlüsselung im deutschsprachigen Raum.
+
+## Kern-Funktionen & Dienstleistungen
+- **Preisvergleich**: Gegenüberstellung von Angeboten zertifizierter Online-Anbieter.
+- **Eigenmarken-Decoder**: Zuordnung von Optiker-Eigenmarken (z. B. Apollo iWear, Fielmann ActiMed, Mister Spex True Day, Specsavers Easyvision) zu baugleichen Marken-Referenzen auf Basis technischer Spezifikationen.
+- **Tagespreis-Rechner**: Berechnung der realen Tageskosten pro Kontaktlinse anhand individueller Tragetage.
+- **Qualitätsstandards**: Konformitätsprüfungen nach DIN EN ISO 14534 (Augenoptik – Kontaktlinsen und Kontaktlinsenpflegemittel) und EU-MDR 2017/745 (Medical Device Regulation).
+
+## Referenzen & Gesetzesgrundlagen
+- DIN EN ISO 14534 (Kontaktlinsen & Pflegemittel)
+- EU Medical Device Regulation (EU-MDR 2017/745)
+- Telemediengesetz (TMG) & Digitale-Dienste-Gesetz (DDG § 5)
+- Medienstaatsvertrag (MStV § 18 Abs. 2)
+
+## Kanonische URLs
+- Hauptseite: https://www.optical.de/
+- Preisvergleich: https://www.optical.de/kontaktlinsen-preisvergleich
+- Tageslinsen-Vergleich: https://www.optical.de/tageslinsen-vergleich
+- Monatslinsen-Vergleich: https://www.optical.de/monatslinsen-vergleich
+- Interaktives Rechner-Embed: https://www.optical.de/rechner-embed
+- Impressum: https://www.optical.de/impressum
+- Datenschutz: https://www.optical.de/datenschutz

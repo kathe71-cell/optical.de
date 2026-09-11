@@ -1,0 +1,50 @@
+================================================================================
+SCHNELLSTART-ANLEITUNG: WEBSPACE UPLOAD (FERTIGE WEBSITE)
+================================================================================
+
+Dieses Archiv enthält die fertig kompilierte, produktionsreife Webapplikation.
+Es wird kein Node.js, npm oder Server-Backend benötigt. Ein ganz normaler
+Webspace / PHP- oder HTML-Hosting-Tarif reicht vollständig aus.
+
+--------------------------------------------------------------------------------
+1. WIE LÄDST DU DIE WEBSITE HOCH? (FTP / FileZilla / Hoster-Dateimanager)
+--------------------------------------------------------------------------------
+1. Öffne dein FTP-Programm (z. B. FileZilla, Cyberduck, WinSCP) oder den 
+   Web-Dateimanager deines Webhosting-Anbieters (z. B. Strato, IONOS, Hetzner, 
+   All-Inkl, Hostinger, cPanel, Plesk).
+2. Verbinde dich mit deinem Webspace.
+3. Wechsle in das Hauptverzeichnis deiner Domain (dieser Ordner heißt je nach 
+   Hoster meist "public_html", "html", "htdocs" oder "httpdocs").
+4. Lade ALLE Dateien und Ordner aus diesem Verzeichnis in das Hauptverzeichnis hoch:
+   - index.html
+   - assets/ (Ordner mit CSS & JS)
+   - .htaccess (SEHR WICHTIG!)
+   - ads.txt, robots.txt, sitemap.xml, feed.xml, llms.txt, favicon.svg, og-image.svg
+
+--------------------------------------------------------------------------------
+2. WICHTIGER HINWEIS ZU .HTACCESS (FÜR APACHE / LITESPEED HOSTER)
+--------------------------------------------------------------------------------
+Die beiliegende Datei ".htaccess" ist zwingend erforderlich! Da es sich um eine
+moderne React Single Page Application (SPA) handelt, sorgt die .htaccess dafür,
+dass Unterseiten (wie /impressum, /datenschutz, /rechner-embed) direkt im 
+Browser aufgerufen und aktualisiert werden können, ohne dass ein "404 Not Found"
+Fehler entsteht.
+
+TIPP: Manche FTP-Programme blenden Dateien mit führendem Punkt standardmäßig aus.
+Stelle sicher, dass "Versteckte Dateien anzeigen" in deinem FTP-Programm aktiv ist.
+
+--------------------------------------------------------------------------------
+3. FÜR NGINX WEBSERVER (FALLS STATT APACHE EINGESETZT)
+--------------------------------------------------------------------------------
+Falls dein Server auf Nginx läuft, trage in deiner Domain-Konfiguration ein:
+   location / {
+       try_files $uri $uri/ /index.html;
+   }
+
+--------------------------------------------------------------------------------
+4. ANPASSUNGEN NACH DER ÜBERGABE
+--------------------------------------------------------------------------------
+- Impressum & Datenschutz: Bitte passe die Kontaktdaten auf deinen Firmennamen an.
+- Affiliate- / Partnerlinks: Falls du eigene Affiliate-Codes nutzt, kannst du
+  diese in den Links hinterlegen.
+================================================================================
