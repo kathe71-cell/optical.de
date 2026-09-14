@@ -773,7 +773,7 @@ export default function Home({ activeSection }) {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-slate-600 gap-2 text-center sm:text-left">
-          <span>© {new Date().getFullYear()} Jens Kathe / optical.de Media. Alle Rechte vorbehalten.</span>
+          <span>© {new Date().getFullYear()} optical.de Media. Alle Rechte vorbehalten.</span>
           <span className="text-slate-700">optical.de ist keine Augenarztpraxis und kein Optiker-Fachbetrieb.</span>
         </div>
       </footer>

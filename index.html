@@ -164,6 +164,23 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+      <script type="speculationrules">
+    {
+      "prefetch": [
+        {
+          "source": "document",
+          "where": {
+            "and": [
+              { "href_matches": "/*" },
+              { "not": { "href_matches": ["/api/*", "/*\\?(.+)"] } },
+              { "not": { "selector_matches": "a[rel~=\"nofollow\"]" } }
+            ]
+          },
+          "eagerness": "conservative"
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-500 selection:text-white font-sans min-h-screen">
     <div id="root"></div>
