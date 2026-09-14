@@ -30,7 +30,7 @@ export default function ProductComparisonPage() {
     { label: 'Basiskurve (BC)', valA: pA.base_curve, valB: pB.base_curve },
     { label: 'Durchmesser (DIA)', valA: pA.diameter, valB: pB.diameter },
     { label: 'Packungsgröße', valA: pA.pack_size, valB: pB.pack_size },
-    { label: 'Online-Vergleichspreis', valA: `ab ${pA.price.toFixed(2)} € *`, valB: `ab ${pB.price.toFixed(2)} € *` },
+    { label: 'Orientierungspreis / UVP', valA: `ca. ${pA.price.toFixed(2)} € *`, valB: `ca. ${pB.price.toFixed(2)} € *` },
     { label: 'Preis pro Einzellinse', valA: pA.price_per_lens, valB: pB.price_per_lens },
     { label: 'Kosten pro Tragetag (2 Linsen)', valA: pA.cost_per_day, valB: pB.cost_per_day },
     { label: 'Kosten pro Monat (2 Linsen)', valA: pA.cost_per_month, valB: pB.cost_per_month },
@@ -122,6 +122,9 @@ export default function ProductComparisonPage() {
                 <span>Air Optix suchen *</span>
                 <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
               </a>
+            </div>
+            <div className="col-span-12 text-center text-[9px] text-slate-400 pt-1 leading-tight">
+              * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
             </div>
           </div>
         </div>

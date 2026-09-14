@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { 
   Search, 
   Filter, 
@@ -8,7 +8,7 @@ import {
   Check, 
   SlidersHorizontal,
   Info,
-  ShieldCheck,
+  ShieldCheck, 
   RotateCcw
 } from 'lucide-react';
 import Header from '../components/Header';
@@ -18,6 +18,7 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { PRODUCTS } from '../data/products';
+import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { 
   trackSearchUsed, 
@@ -35,13 +36,21 @@ const getAmazonLink = (query) => {
 };
 
 export default function VergleichskatalogPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlQuery = searchParams.get('q') || '';
+  const [searchQuery, setSearchQuery] = useState(urlQuery);
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeBrand, setActiveBrand] = useState('all');
   const [activeMaterial, setActiveMaterial] = useState('all');
   const [sortBy, setSortBy] = useState('popular'); // 'popular', 'price_asc', 'dkt_desc'
 
   const { isSaved, toggleSave } = useSavedLenses();
+
+  // URL-Parameter 'q' bei direkter Navigation oder Browser-Zurück/Vorwärts übernehmen
+  useEffect(() => {
+    const q = searchParams.get('q') || '';
+    setSearchQuery(q);
+  }, [searchParams]);
 
   // Gefilterte & sortierte Produkte
   const filteredProducts = PRODUCTS.filter((item) => {
@@ -64,13 +73,36 @@ export default function VergleichskatalogPage() {
     if (activeMaterial === 'silicone' && !item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
     if (activeMaterial === 'hydrogel' && item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
 
-    // Textsuche
+    // Textsuche mit Token-Zerlegung, Groß-/Kleinschreibung & Alias-Berücksichtigung
     if (searchQuery.trim().length > 0) {
-      const q = searchQuery.toLowerCase();
-      const matchName = item.product_name.toLowerCase().includes(q);
-      const matchBrand = item.manufacturer.toLowerCase().includes(q);
-      const matchMat = item.material ? item.material.toLowerCase().includes(q) : false;
-      return matchName || matchBrand || matchMat;
+      const searchTokens = searchQuery
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+      // Zugeordnete Handelsmarken für dieses Produkt finden
+      const relatedEigenmarken = EIGENMARKEN_DATABASE.filter(
+        (em) => em.matched_brand_product_id === item.id
+      ).map((em) => `${em.optician_private_label} ${em.optician_chain}`).join(' ');
+
+      const aliasesStr = Array.isArray(item.aliases) ? item.aliases.join(' ') : '';
+
+      const searchableText = [
+        item.product_name,
+        item.manufacturer,
+        item.brand,
+        item.material || '',
+        item.lens_type || '',
+        item.id,
+        item.amazon_query || '',
+        aliasesStr,
+        relatedEigenmarken
+      ].join(' ').toLowerCase();
+
+      // Jedes Token muss vorkommen (AND-Logik)
+      const matchesAllTokens = searchTokens.every((token) => searchableText.includes(token));
+      if (!matchesAllTokens) return false;
     }
 
     return true;
@@ -84,9 +116,25 @@ export default function VergleichskatalogPage() {
     const val = e.target.value;
     setSearchQuery(val);
     trackSearchUsed(val);
+
+    const newParams = new URLSearchParams(searchParams);
+    if (val.trim()) {
+      newParams.set('q', val);
+    } else {
+      newParams.delete('q');
+    }
+    setSearchParams(newParams, { replace: true });
+
     if (val.trim().length > 2 && filteredProducts.length === 0) {
       trackZeroResults(val);
     }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('q');
+    setSearchParams(newParams, { replace: true });
   };
 
   const resetFilters = () => {
@@ -95,6 +143,9 @@ export default function VergleichskatalogPage() {
     setActiveBrand('all');
     setActiveMaterial('all');
     setSortBy('popular');
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('q');
+    setSearchParams(newParams, { replace: true });
   };
 
   return (
@@ -145,8 +196,9 @@ export default function VergleichskatalogPage() {
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={handleClearSearch}
                   className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-700"
+                  aria-label="Suche leeren"
                 >
                   ✕
                 </button>
@@ -243,7 +295,10 @@ export default function VergleichskatalogPage() {
 
           {/* Treffer-Zähler */}
           <div className="text-xs text-slate-500 pt-2 flex items-center justify-between">
-            <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'Kontaktlinse' : 'Kontaktlinsen'} gefunden</span>
+            <span>
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'Kontaktlinse' : 'Kontaktlinsen'} gefunden
+              {searchQuery.trim() ? ` für „${searchQuery.trim()}“` : ''}
+            </span>
             <span className="text-[11px] text-slate-400">Verifizierte Herstellerdaten ohne Siegel</span>
           </div>
         </div>
@@ -337,18 +392,18 @@ export default function VergleichskatalogPage() {
                 <div className="mt-5 pt-3 border-t border-slate-100">
                   <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
                     <div className="flex items-baseline justify-between">
-                      <span className="text-[11px] text-slate-500">Online-Vergleichspreis:</span>
-                      <span className="text-base font-extrabold text-slate-900">ab {p.price.toFixed(2)} € *</span>
+                      <span className="text-[11px] text-slate-600 font-medium">Orientierungspreis / UVP:</span>
+                      <span className="text-base font-extrabold text-slate-900">ca. {p.price.toFixed(2)} € *</span>
                     </div>
-                    <div className="text-[9px] text-slate-400 italic">
-                      Hersteller-Standardpackung
+                    <div className="text-[10px] text-slate-500">
+                      Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                     </div>
                     <div className="flex justify-between text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
                       <span>Preis pro Einzellinse:</span>
                       <span className="font-semibold text-slate-800">{p.price_per_lens || '–'}</span>
                     </div>
                     <div className="flex justify-between text-[11px] text-slate-600">
-                      <span>Kosten pro Tragetag:</span>
+                      <span>Kosten pro Tragetag (2 Linsen):</span>
                       <span className="font-semibold text-emerald-700">{p.cost_per_day || '–'}</span>
                     </div>
                   </div>
@@ -368,13 +423,13 @@ export default function VergleichskatalogPage() {
                       onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'vergleichskatalog')}
                       className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
                     >
-                      <span>Amazon-Suche *</span>
+                      <span>Angebote bei Amazon *</span>
                       <ExternalLink className="w-3 h-3 text-emerald-400" />
                     </a>
                   </div>
 
-                  <div className="text-center mt-2 text-[9px] text-slate-400">
-                    * Amazon-Partnerlink (Suche) · Preis kann abweichen
+                  <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
+                    * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
                   </div>
                 </div>
 
@@ -384,15 +439,32 @@ export default function VergleichskatalogPage() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500 text-xs mb-12">
-            <p className="text-sm font-bold text-slate-800 mb-2">Keine Kontaktlinsen für diese Filterung gefunden.</p>
-            <p className="mb-4">Bitte ändern Sie Ihre Suchbegriffe oder setzen Sie die Filter zurück.</p>
-            <button
-              onClick={resetFilters}
-              className="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs"
-            >
-              Filter zurücksetzen
-            </button>
+          <div className="p-10 sm:p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-600 shadow-xs mb-12">
+            <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-200 text-slate-600 flex items-center justify-center mx-auto mb-4">
+              <Search className="w-6 h-6 text-slate-500" />
+            </div>
+            <h3 className="text-base sm:text-lg font-black text-slate-900 mb-2">
+              Keine Kontaktlinsen für {searchQuery.trim() ? `„${searchQuery.trim()}“` : 'diese Filterung'} gefunden
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
+              Überprüfe bitte die Schreibweise oder setze die Filtereinstellungen zurück, um alle 17 Kontaktlinsen im Katalog anzuzeigen.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {searchQuery && (
+                <button
+                  onClick={handleClearSearch}
+                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-xs transition"
+                >
+                  Suche zurücksetzen
+                </button>
+              )}
+              <button
+                onClick={resetFilters}
+                className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl text-xs transition"
+              >
+                Alle Filter zurücksetzen
+              </button>
+            </div>
           </div>
         )}
 

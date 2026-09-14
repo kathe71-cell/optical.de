@@ -168,14 +168,14 @@ export default function SavedLensesPage() {
                   <div className="mt-5 pt-4 border-t border-slate-100">
                     <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
                       <div className="flex items-baseline justify-between">
-                        <span className="text-[11px] text-slate-500">Online-Vergleichspreis:</span>
-                        <span className="text-base font-extrabold text-slate-900">ab {p.price.toFixed(2)} € *</span>
+                        <span className="text-[11px] text-slate-600 font-medium">Orientierungspreis / UVP:</span>
+                        <span className="text-base font-extrabold text-slate-900">ca. {p.price.toFixed(2)} € *</span>
                       </div>
-                      <div className="text-[9px] text-slate-400 italic">
-                        Hersteller-Standardpackung
+                      <div className="text-[10px] text-slate-500">
+                        Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                       </div>
                       <div className="flex justify-between text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
-                        <span>Kosten pro Tragetag:</span>
+                        <span>Kosten pro Tragetag (2 Linsen):</span>
                         <span className="font-semibold text-emerald-700">{p.cost_per_day || '–'}</span>
                       </div>
                     </div>
@@ -194,13 +194,13 @@ export default function SavedLensesPage() {
                         onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'saved_lenses_page')}
                         className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
                       >
-                        <span>Nachkaufen *</span>
+                        <span>Angebote bei Amazon *</span>
                         <ExternalLink className="w-3 h-3 text-emerald-400" />
                       </a>
                     </div>
 
-                    <div className="text-center mt-2 text-[9px] text-slate-400">
-                      * Amazon-Partnerlink (Suche)
+                    <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
+                      * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
                     </div>
                   </div>
                 </div>

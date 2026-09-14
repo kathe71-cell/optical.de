@@ -41,7 +41,8 @@ export const PRODUCTS = [
     source_url: 'https://coopervision.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 160', 'Comfilcon A', 'Aquaform®']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 160', 'Comfilcon A', 'Aquaform®'],
+    aliases: ['Biofinity', 'CooperVision Biofinity', 'Comfilcon A', 'Biofinity 6er']
   },
   {
     id: 'airoptix-hydraglyde',
@@ -73,7 +74,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 138', 'Lotrafilcon B', 'SmartShield®']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 138', 'Lotrafilcon B', 'SmartShield®'],
+    aliases: ['Air Optix', 'Air Optix Plus HydraGlyde', 'Air Optix HydraGlyde', 'AirOptix', 'Lotrafilcon B']
   },
   {
     id: 'bausch-ultra',
@@ -105,7 +107,8 @@ export const PRODUCTS = [
     source_url: 'https://bausch-lomb.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 163', 'Samfilcon A', 'MoistureSeal®']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 163', 'Samfilcon A', 'MoistureSeal®'],
+    aliases: ['Ultra', 'Bausch Ultra', 'Bausch + Lomb Ultra', 'Samfilcon A']
   },
   {
     id: 'purevision2',
@@ -137,7 +140,8 @@ export const PRODUCTS = [
     source_url: 'https://bausch-lomb.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 130', 'Balafilcon A', 'High Definition Optik']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 130', 'Balafilcon A', 'High Definition Optik'],
+    aliases: ['PureVision', 'PureVision 2', 'PureVision 2 HD', 'Balafilcon A']
   },
   {
     id: 'proclear-sphere',
@@ -169,7 +173,8 @@ export const PRODUCTS = [
     source_url: 'https://coopervision.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Hydrogel biokompatibel', 'Dk/t 42', 'Wassergehalt 62 %', 'PC Technology™']
+    objective_badges: ['Hydrogel biokompatibel', 'Dk/t 42', 'Wassergehalt 62 %', 'PC Technology™'],
+    aliases: ['Proclear', 'Proclear Sphere', 'CooperVision Proclear', 'Omafilcon B']
   },
   {
     id: 'air-optix-night-day',
@@ -201,7 +206,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 175 (Höchster Wert im Datensatz)', 'Lotrafilcon A']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 175 (Höchster Wert im Datensatz)', 'Lotrafilcon A'],
+    aliases: ['Air Optix', 'Air Optix Night & Day Aqua', 'Air Optix Night and Day', 'Night & Day', 'Night and Day Aqua', 'Lotrafilcon A']
   },
 
   // --- TAGESLINSEN (SPHÄRISCH) ---
@@ -235,7 +241,8 @@ export const PRODUCTS = [
     source_url: 'https://acuvue.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Hydrogel', 'Dk/t 33', 'Etafilcon A', 'LACREON® Technologie', 'UV-Schutz Klasse 2']
+    objective_badges: ['Hydrogel', 'Dk/t 33', 'Etafilcon A', 'LACREON® Technologie', 'UV-Schutz Klasse 2'],
+    aliases: ['Acuvue Moist', '1-Day Acuvue Moist', 'Acuvue 1-Day', 'Etafilcon A', 'Acuvue']
   },
   {
     id: 'acuvue-oasys-1day',
@@ -267,7 +274,8 @@ export const PRODUCTS = [
     source_url: 'https://acuvue.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 121', 'Senofilcon A', 'HydraLuxe®', 'UV-Schutz Klasse 1']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 121', 'Senofilcon A', 'HydraLuxe®', 'UV-Schutz Klasse 1'],
+    aliases: ['Acuvue Oasys', 'Acuvue Oasys 1-Day', 'Acuvue Oasys 1 Day', 'Oasys', 'HydraLuxe', 'Senofilcon A', 'Acuvue']
   },
   {
     id: 'dailies-total-1',
@@ -299,7 +307,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Wassergradient', 'Dk/t 156', 'Delefilcon A', 'Silikon-Hydrogel-Kern']
+    objective_badges: ['Wassergradient', 'Dk/t 156', 'Delefilcon A', 'Silikon-Hydrogel-Kern'],
+    aliases: ['Dailies Total 1', 'Total 1', 'DT1', 'Dailies Total1', 'Alcon Dailies', 'Delefilcon A', 'Total1']
   },
   {
     id: 'dailies-aquacomfort',
@@ -331,7 +340,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Hydrogel', 'Dk/t 26', 'Wassergehalt 69 %', '3-Phasen-Feuchtigkeitskomplex']
+    objective_badges: ['Hydrogel', 'Dk/t 26', 'Wassergehalt 69 %', '3-Phasen-Feuchtigkeitskomplex'],
+    aliases: ['Dailies AquaComfort Plus', 'AquaComfort Plus', 'Dailies Plus', 'Dailies', 'Nelfilcon A']
   },
   {
     id: 'clariti-1day',
@@ -363,7 +373,8 @@ export const PRODUCTS = [
     source_url: 'https://coopervision.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 86', 'Somofilcon A', 'WetLoc® Technologie']
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 86', 'Somofilcon A', 'WetLoc® Technologie'],
+    aliases: ['Clariti', 'Clariti 1 Day', 'Clariti 1-Day', 'Somofilcon A']
   },
   {
     id: 'biotrue-oneday',
@@ -395,7 +406,8 @@ export const PRODUCTS = [
     source_url: 'https://bausch-lomb.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['HyperGel', 'Dk/t 42', 'Wassergehalt 78 %', 'Nesofilcon A']
+    objective_badges: ['HyperGel', 'Dk/t 42', 'Wassergehalt 78 %', 'Nesofilcon A'],
+    aliases: ['Biotrue', 'Biotrue ONEday', 'Bio True', 'Nesofilcon A']
   },
 
   // --- TORISCHE LINSEN (HORNHAUTVERKRÜMMUNG) ---
@@ -429,7 +441,8 @@ export const PRODUCTS = [
     source_url: 'https://coopervision.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Torisch (Astigmatismus)', 'Dk/t 160', 'Comfilcon A', 'Optimized Toric Geometry™']
+    objective_badges: ['Torisch (Astigmatismus)', 'Dk/t 160', 'Comfilcon A', 'Optimized Toric Geometry™'],
+    aliases: ['Biofinity Toric', 'Biofinity Astigmatism', 'Biofinity torisch', 'Biofinity']
   },
   {
     id: 'airoptix-toric',
@@ -461,7 +474,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Torisch', 'Dk/t 108', 'Lotrafilcon B', 'Precision Balance 8|4™']
+    objective_badges: ['Torisch', 'Dk/t 108', 'Lotrafilcon B', 'Precision Balance 8|4™'],
+    aliases: ['Air Optix Toric', 'Air Optix Astigmatism', 'Air Optix HydraGlyde Toric', 'Air Optix']
   },
 
   // --- MULTIFOKALE LINSEN (GLEITSICHT / ALTERSSICHTIGKEIT) ---
@@ -495,7 +509,8 @@ export const PRODUCTS = [
     source_url: 'https://coopervision.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Multifokal (Gleitsicht)', 'Dk/t 160', 'Comfilcon A', 'Balanced Progressive®']
+    objective_badges: ['Multifokal (Gleitsicht)', 'Dk/t 160', 'Comfilcon A', 'Balanced Progressive®'],
+    aliases: ['Biofinity Multifocal', 'Biofinity Gleitsicht', 'Biofinity multifokal', 'Biofinity']
   },
 
   // --- PFLEGEMITTEL & TROPFEN ---
@@ -529,7 +544,8 @@ export const PRODUCTS = [
     source_url: 'https://bausch-lomb.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Kombilösung', 'Mit Hyaluronan', 'pH-Wert an Tränenflüssigkeit angepasst']
+    objective_badges: ['Kombilösung', 'Mit Hyaluronan', 'pH-Wert an Tränenflüssigkeit angepasst'],
+    aliases: ['Biotrue All in One', 'Biotrue Pflegemittel', 'Kombilösung', 'Biotrue Fluid']
   },
   {
     id: 'aosept-hydraglyde',
@@ -561,7 +577,8 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Peroxidsystem', 'Ohne Konservierungsstoffe', 'HydraGlyde® Moisture Matrix']
+    objective_badges: ['Peroxidsystem', 'Ohne Konservierungsstoffe', 'HydraGlyde® Moisture Matrix'],
+    aliases: ['AOSept', 'AO Sept', 'AOSept Plus HydraGlyde', 'Peroxidsystem', 'Peroxidlösung']
   }
 ];
 

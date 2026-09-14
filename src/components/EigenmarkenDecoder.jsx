@@ -320,12 +320,12 @@ export default function EigenmarkenDecoder({ standalone = false }) {
 
                   {/* Marken-Original */}
                   <div className="bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-200">
-                    <div className="font-bold text-slate-900 flex justify-between">
-                      <span>Online-Vergleichspreis ab:</span>
-                      <span className="text-emerald-700 font-extrabold text-sm">{matchedProduct.price.toFixed(2)} € *</span>
+                    <div className="font-bold text-slate-900 flex justify-between items-baseline">
+                      <span className="text-xs">Orientierungspreis / UVP:</span>
+                      <span className="text-emerald-700 font-extrabold text-sm">ca. {matchedProduct.price.toFixed(2)} € *</span>
                     </div>
-                    <div className="text-[10px] text-slate-500 italic mt-0.5">
-                      Packungsgröße/Händler beachten.
+                    <div className="text-[10px] text-slate-500 mt-0.5">
+                      Tagesaktueller Händlerpreis auf Amazon.de einsehbar.
                     </div>
                     <div className="text-[11px] text-slate-600 flex justify-between mt-1">
                       <span>Preis pro Einzellinse:</span>
@@ -379,12 +379,12 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   onClick={() => trackAffiliateClick(matchedProduct.product_name, 'amazon', 'eigenmarken_decoder')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all group"
                 >
-                  <span>Preise &amp; Verfügbarkeit bei Amazon prüfen *</span>
+                  <span>Angebote bei Amazon suchen *</span>
                   <ExternalLink className="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <div className="text-center mt-2 space-y-0.5">
                   <div className="text-[10px] text-slate-500 font-medium">
-                    Amazon-Partnerlink · Preis kann sich ändern
+                    Amazon-Partnerlink (Suche) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                   </div>
                   <div className="text-[9px] text-slate-400">
                     * Werbelink / Partnerlink

@@ -160,11 +160,14 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   <span>Standardpackung:</span>
                   <span className="font-semibold text-slate-800">{matchedProduct?.pack_size || `${entry.optician_pack_count}er Packung`}</span>
                 </div>
-                <div className="flex justify-between items-center text-slate-900 font-bold">
-                  <span>Online-Vergleichspreis:</span>
+                <div className="flex justify-between items-baseline text-slate-900">
+                  <span className="text-xs text-slate-600 font-medium">Orientierungspreis / UVP:</span>
                   <span className="text-emerald-700 font-black text-lg">
-                    ab {matchedProduct?.price ? matchedProduct.price.toFixed(2) : '–'} € *
+                    ca. {matchedProduct?.price ? matchedProduct.price.toFixed(2) : '–'} € *
                   </span>
+                </div>
+                <div className="text-[10px] text-slate-500">
+                  Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                 </div>
               </div>
 
@@ -189,8 +192,8 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   </Link>
                 )}
 
-                <div className="text-center pt-1 text-[9px] text-slate-400">
-                  * Amazon-Partnerlink (Suche) · Preis kann abweichen
+                <div className="text-center pt-1 text-[9px] text-slate-400 leading-tight">
+                  * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
                 </div>
               </div>
             </div>
