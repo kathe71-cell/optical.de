@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Eye, ArrowLeft, ArrowUpDown, Filter, ExternalLink, ShieldCheck, Check } from 'lucide-react';
+import { Eye, ArrowLeft, ArrowUpDown, Filter, ExternalLink, ShieldCheck, Check, Bookmark } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import MetaTags from '../components/MetaTags';
 import { PRODUCTS, getProductsByCategory } from '../data/products';
+import { useSavedLenses } from '../hooks/useSavedLenses';
 import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
-import AdvisorChatbot from '../components/AdvisorChatbot';
-import { trackAffiliateClick, trackFilterUsed } from '../utils/tracking';
+import { trackAffiliateClick, trackFilterUsed, trackProductClicked } from '../utils/tracking';
 
 const AMAZON_TAG = 'esstri-21';
 const AMAZON_SUBID = 'optical.de-21';
@@ -18,35 +21,35 @@ const getAmazonLink = (query) => {
 const CATEGORY_CONFIG = {
   'tageslinsen-vergleich': {
     categoryKey: 'tag',
-    title: 'Tageslinsen im transparenten Vergleich 2026',
+    title: 'Tageslinsen im transparenten Vergleich 2026 | optical.de',
     subtitle: 'Tägliche Hygiene ohne Pflegemittelaufwand. Vergleichen Sie Dk/t-Werte, Wassergehalt und die tatsächlichen Kosten pro Tag.',
     h1: 'Tageslinsen Vergleich: Technische Daten & Preis pro Tag',
     descriptionText: 'Tageslinsen werden nach einmaligem Tragen entsorgt. Dadurch entfällt der tägliche Reinigungsaufwand vollständig. Wichtige technische Kriterien sind die Sauerstofftransmissibilität (Dk/t) sowie das Material (klassisches Hydrogel vs. modernes Silikon-Hydrogel oder Wassergradient).'
   },
   'monatslinsen-vergleich': {
     categoryKey: 'monat',
-    title: 'Monatslinsen im transparenten Vergleich 2026',
+    title: 'Monatslinsen im transparenten Vergleich 2026 | optical.de',
     subtitle: 'Der günstigste Weg bei täglichem Tragen. Finden Sie Linsen mit hoher Sauerstofftransmissibilität und kalkulieren Sie Ihre monatlichen Gesamtkosten.',
     h1: 'Monatslinsen Vergleich: Sauerstofffluss & Kostenkalkulation',
     descriptionText: 'Monatslinsen bieten bei regelmäßiger Nutzung den wirtschaftlich günstigsten Preis pro Tragetag (oft ab ca. 0,33 €/Tag). Entscheidend für die Augengesundheit bei langen Tragezeiten sind hochwertige Silikon-Hydrogel-Materialien mit hohem Dk/t-Wert.'
   },
   'torische-kontaktlinsen': {
     categoryKey: 'toric',
-    title: 'Torische Kontaktlinsen bei Hornhautverkrümmung (Astigmatismus)',
+    title: 'Torische Kontaktlinsen bei Hornhautverkrümmung | optical.de',
     subtitle: 'Spezielle Linsengeometrien mit Zylinder (CYL) und Achse (AXIS). Vergleichen Sie Stabilisierungsmethoden und Preise.',
     h1: 'Torische Kontaktlinsen Vergleich: Stabilität & Sauerstoffversorgung',
     descriptionText: 'Torische Kontaktlinsen korrigieren eine Hornhautverkrümmung (Astigmatismus). Durch spezielle Gewichtungs- und Stabilisierungszonen richten sich diese Linsen bei jedem Lidschlag exakt an der Hornhaut aus.'
   },
   'multifokale-kontaktlinsen': {
     categoryKey: 'multifocal',
-    title: 'Multifokale Kontaktlinsen (Gleitsicht) im Vergleich',
+    title: 'Multifokale Kontaktlinsen (Gleitsicht) im Vergleich | optical.de',
     subtitle: 'Scharfes Sehen in Nähe, Zwischenbereich und Ferne bei Alterssichtigkeit (Presbyopie). Technische Parameter im Überblick.',
     h1: 'Multifokale Kontaktlinsen Vergleich: Addition & Sehzonen',
     descriptionText: 'Multifokale Kontaktlinsen kombinieren mehrere konzentrische Sehzonen, um die nachlassende Akkommodationsfähigkeit des Auges im Nahbereich (Presbyopie) auszugleichen.'
   },
   'kontaktlinsen-preisvergleich': {
     categoryKey: 'all',
-    title: 'Kontaktlinsen Preisvergleich: Kosten pro Tag transparent berechnen',
+    title: 'Kontaktlinsen Preisvergleich: Kosten pro Tag berechnen | optical.de',
     subtitle: 'Alle Linsentypen, Hersteller und Packungsgrößen auf einen Blick. Unabhängige Datenmatrix ohne Werbesiegel.',
     h1: 'Der neutrale Kontaktlinsen-Preis- und Datenvergleich',
     descriptionText: 'Vergleichen Sie alle marktgängigen Kontaktlinsen unabhängig von Markennamen oder Herstellerversprechungen. Berechnen Sie die realen Kosten pro Linse und pro Tragetag.'
@@ -59,6 +62,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
   const config = CATEGORY_CONFIG[slug] || CATEGORY_CONFIG['kontaktlinsen-preisvergleich'];
 
   const [sortBy, setSortBy] = useState('price_asc'); // 'price_asc', 'dkt_desc', 'water_desc'
+  const { isSaved, toggleSave } = useSavedLenses();
 
   const rawProducts = getProductsByCategory(config.categoryKey);
 
@@ -79,42 +83,26 @@ export default function CategoryLanding({ categorySlugOverride }) {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased">
-      
-      {/* Navigation Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-sm">
-              <Eye className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <span className="font-black text-2xl tracking-tight text-slate-900">optical<span className="text-emerald-600">.de</span></span>
-              <span className="hidden sm:inline-block ml-2 text-xs font-semibold text-slate-500 border-l border-slate-200 pl-2">Kategorie-Vergleich</span>
-            </div>
-          </Link>
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
+      <MetaTags 
+        title={config.title}
+        description={config.subtitle}
+        canonical={`https://www.optical.de/${slug}`}
+      />
+      <Header />
 
-          <Link to="/" className="text-xs font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Zurück zur Übersicht</span>
-          </Link>
-        </div>
-      </header>
-
-      {/* Breadcrumb Navigation */}
-      <div className="bg-white border-b border-slate-200/80 py-2.5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-slate-500 flex items-center gap-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full flex-grow">
+        
+        {/* Breadcrumb Navigation */}
+        <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
           <Link to="/" className="hover:text-emerald-700">Startseite</Link>
           <span>/</span>
           <span className="font-semibold text-slate-900">{config.h1}</span>
         </div>
-      </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        
         {/* Header */}
         <div className="max-w-3xl mb-8">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
             {config.h1}
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
@@ -140,120 +128,152 @@ export default function CategoryLanding({ categorySlugOverride }) {
             {sortedProducts.length} verifizierte Produkte im Datensatz
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-500 font-medium">Objektiv sortieren nach:</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-500 font-semibold">Sortierung:</span>
             <select
               value={sortBy}
               onChange={(e) => {
                 setSortBy(e.target.value);
                 trackFilterUsed('sort_by', e.target.value);
               }}
-              className="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+              className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-emerald-500"
             >
-              <option value="price_asc">Niedrigster Packungspreis</option>
-              <option value="dkt_desc">Höchster Dk/t-Wert</option>
+              <option value="price_asc">Günstigster Preis</option>
+              <option value="dkt_desc">Höchste Sauerstoffdurchlässigkeit (Dk/t)</option>
               <option value="water_desc">Höchster Wassergehalt</option>
             </select>
           </div>
         </div>
 
-        {/* Product Cards Grid */}
+        {/* Produkt Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {sortedProducts.map((p) => (
-            <div key={p.id} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition">
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="text-[11px] font-bold text-slate-500 uppercase">{p.manufacturer}</span>
-                  <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
-                    {p.lens_type}
-                  </span>
-                </div>
-                <h3 className="text-lg font-black text-slate-900 leading-snug">
-                  {p.product_name}
-                </h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  Packungsgröße: {p.pack_size}
-                </p>
+          {sortedProducts.map((p) => {
+            const saved = isSaved(p.id);
 
-                {/* Badges */}
-                <div className="flex flex-wrap gap-1 mt-2.5">
-                  {p.objective_badges.map((b, idx) => (
-                    <span key={idx} className="bg-emerald-50 text-emerald-950 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded">
-                      {b}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Spezifikations-Liste */}
-                <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
-                  <div className="flex justify-between">
-                    <span>Material:</span>
-                    <strong className="text-slate-900">{p.material}</strong>
-                  </div>
-                  {p.dk_t && (
-                    <div className="flex justify-between">
-                      <span>Sauerstofffluss (Dk/t):</span>
-                      <strong className="text-slate-900">{p.dk_t} Dk/t</strong>
+            return (
+              <div 
+                key={p.id} 
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition group"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase">{p.manufacturer}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
+                        {p.lens_type}
+                      </span>
+                      <button
+                        onClick={() => toggleSave(p.id)}
+                        className={`p-1.5 rounded-lg border transition ${
+                          saved 
+                            ? 'bg-emerald-50 border-emerald-300 text-emerald-700' 
+                            : 'bg-white border-slate-200 text-slate-400 hover:text-emerald-700'
+                        }`}
+                        title={saved ? 'Aus Merkliste entfernen' : 'Linse merken'}
+                      >
+                        <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600' : ''}`} />
+                      </button>
                     </div>
-                  )}
-                  {p.water_content && (
+                  </div>
+
+                  <h3 className="text-lg font-black text-slate-900 leading-snug">
+                    <Link 
+                      to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`} 
+                      onClick={() => trackProductClicked(p.id, p.product_name)}
+                      className="hover:text-emerald-700 transition"
+                    >
+                      {p.product_name}
+                    </Link>
+                  </h3>
+
+                  <div className="mt-2 text-xs text-slate-500 flex items-center justify-between">
+                    <span>Packungsgröße:</span>
+                    <strong className="text-slate-800 font-semibold">{p.pack_size}</strong>
+                  </div>
+
+                  {/* Objektive Badges */}
+                  <div className="flex flex-wrap gap-1 mt-2.5">
+                    {p.objective_badges?.map((b, bIdx) => (
+                      <span key={bIdx} className="bg-emerald-50 text-emerald-950 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Spezifikations-Liste */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
                     <div className="flex justify-between">
-                      <span>Wassergehalt:</span>
-                      <strong className="text-slate-900">{p.water_content}</strong>
+                      <span>Linsenmaterial:</span>
+                      <strong className="text-slate-900 font-semibold">{p.material}</strong>
                     </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span>Geometrie (BC / DIA):</span>
-                    <strong className="text-slate-900">{p.base_curve} / {p.diameter}</strong>
-                  </div>
-                </div>
-              </div>
-
-              {/* Preisteil & CTA */}
-              <div className="mt-5 pt-3 border-t border-slate-100">
-                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-[11px] text-slate-500">Online-Vergleichspreis:</span>
-                    <span className="text-base font-extrabold text-slate-900">ab {p.price.toFixed(2)} € *</span>
-                  </div>
-                  <div className="text-[9px] text-slate-400 italic">
-                    Packungsgröße: {p.pack_size}. Händlerbedingungen beachten.
-                  </div>
-                  <div className="flex justify-between text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
-                    <span>Preis pro Einzellinse:</span>
-                    <span className="font-semibold text-slate-800">{p.price_per_lens || '–'}</span>
-                  </div>
-                  <div className="flex justify-between text-[11px] text-slate-600">
-                    <span>Kosten pro Tragetag (2 Linsen):</span>
-                    <span className="font-semibold text-emerald-700">{p.cost_per_day || '–'}</span>
-                  </div>
-                  <div className="flex justify-between text-[11px] text-slate-600">
-                    <span>Kosten pro Monat (2 Linsen):</span>
-                    <span className="font-semibold text-slate-800">{p.cost_per_month || '–'}</span>
+                    {p.dk_t && (
+                      <div className="flex justify-between">
+                        <span>Sauerstofffluss (Dk/t):</span>
+                        <strong className="text-slate-900 font-semibold">{p.dk_t} Dk/t</strong>
+                      </div>
+                    )}
+                    {p.water_content && (
+                      <div className="flex justify-between">
+                        <span>Wassergehalt:</span>
+                        <strong className="text-slate-900 font-semibold">{p.water_content}</strong>
+                      </div>
+                    )}
+                    {p.base_curve && (
+                      <div className="flex justify-between">
+                        <span>Geometrie (BC / DIA):</span>
+                        <strong className="text-slate-900 font-semibold">{p.base_curve} / {p.diameter}</strong>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <a
-                  href={getAmazonLink(p.amazon_query)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'category_page')}
-                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition"
-                >
-                  <span>Angebote bei Amazon *</span>
-                  <ExternalLink className="w-3 h-3 text-emerald-400" />
-                </a>
-                <div className="text-center mt-2 space-y-0.5">
-                  <span className="text-[10px] text-slate-500 block font-medium">
-                    Amazon-Partnerlink · Preis kann sich ändern
-                  </span>
-                  <span className="text-[9px] text-slate-400 block font-medium">
-                    * Werbelink / Partnerlink
-                  </span>
+                {/* Preisteil & CTA */}
+                <div className="mt-5 pt-3 border-t border-slate-100">
+                  <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-[11px] text-slate-500">Online-Vergleichspreis:</span>
+                      <span className="text-base font-extrabold text-slate-900">ab {p.price.toFixed(2)} € *</span>
+                    </div>
+                    <div className="text-[9px] text-slate-400 italic">
+                      Hersteller-Standardpackung
+                    </div>
+                    <div className="flex justify-between text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
+                      <span>Preis pro Einzellinse:</span>
+                      <span className="font-semibold text-slate-800">{p.price_per_lens || '–'}</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] text-slate-600">
+                      <span>Kosten pro Tragetag:</span>
+                      <span className="font-semibold text-emerald-700">{p.cost_per_day || '–'}</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`}
+                      className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"
+                    >
+                      Datenblatt
+                    </Link>
+                    <a
+                      href={getAmazonLink(p.amazon_query)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'category_page')}
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
+                    >
+                      <span>Amazon-Suche *</span>
+                      <ExternalLink className="w-3 h-3 text-emerald-400" />
+                    </a>
+                  </div>
+
+                  <div className="text-center mt-2 text-[9px] text-slate-400">
+                    * Amazon-Partnerlink (Suche) · Preis kann abweichen
+                  </div>
                 </div>
+
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Vertrauensbereich */}
@@ -261,23 +281,8 @@ export default function CategoryLanding({ categorySlugOverride }) {
 
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-white py-10 border-t border-slate-800 text-xs mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 text-slate-400">
-          <p>© {new Date().getFullYear()} optical.de Media. Unabhängiges Recherche- und Vergleichsportal.</p>
-          <div className="flex justify-center gap-4 text-slate-300 font-semibold">
-            <Link to="/impressum" className="hover:text-white">Impressum</Link>
-            <span>·</span>
-            <Link to="/datenschutz" className="hover:text-white">Datenschutz</Link>
-            <span>·</span>
-            <Link to="/" className="hover:text-white">Startseite</Link>
-          </div>
-        </div>
-      </footer>
-
+      <Footer />
       <ScrollToTop />
-      <AdvisorChatbot />
-
     </div>
   );
 }

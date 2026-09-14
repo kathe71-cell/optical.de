@@ -1,32 +1,30 @@
 import React from 'react';
-import { Eye, ArrowLeft, Lock } from 'lucide-react';
+import { ShieldCheck, Lock, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import MetaTags from '../components/MetaTags';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function Datenschutz() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col">
-      {/* HEADER */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-sm">
-              <Eye className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <span className="font-black text-2xl tracking-tight text-slate-900">optical<span className="text-emerald-600">.de</span></span>
-            </div>
-          </Link>
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
+      <MetaTags 
+        title="Datenschutzerklärung | optical.de"
+        description="Datenschutzerklärung von optical.de: DSGVO-konforme Datenverarbeitung ohne Profiling, ohne externe Google CDN Fonts und mit 100% lokalem Merkzettel."
+        canonical="https://www.optical.de/datenschutz"
+      />
+      <Header />
 
-          <Link to="/" className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-emerald-600 transition bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-lg">
-            <ArrowLeft className="w-4 h-4" />
-            <span>Zurück zur Startseite</span>
-          </Link>
-        </div>
-      </header>
-
-      {/* CONTENT */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-grow w-full">
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-sm">
+        
+        <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
+          <Link to="/" className="hover:text-emerald-700">Startseite</Link>
+          <span>/</span>
+          <span className="font-semibold text-slate-900">Datenschutz</span>
+        </div>
+
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-xs">
           
           <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-950 text-xs font-extrabold px-3 py-1 rounded-full mb-6">
             <Lock className="w-4 h-4 text-emerald-600" />
@@ -58,66 +56,59 @@ export default function Datenschutz() {
               <p>
                 Diese Website wird extern bei <strong>Vercel Inc.</strong> gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert.
               </p>
-              <p className="mt-2 text-xs text-slate-500">
-                Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
-                3. Zero External Fonts &amp; Keine IP-Übertragung an Drittstaaten
-              </h2>
-              <p>
-                Auf optical.de werden <strong>keine externen Schriftarten (wie Google Fonts CDNs)</strong> eingebunden. Die Typografie wird ausschließlich über lokale System-Schriftarten deines Endgeräts gerendert. Es findet somit keine Übermittlung deiner IP-Adresse an externe Schriftserver statt.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
-                4. Werbe- &amp; Affiliate-Partnerlinks (* Sternchenlinks)
-              </h2>
-              <p>
-                Auf unserer Website setzen wir Partner-Links ein, die mit einem Sternchen (*) gekennzeichnet sind. Wenn du auf einen solchen Affiliate-Link klickst und anschließend ein Produkt beim Händler kaufst, erhalten wir eine Vermittlungsprovision. Dabei werden anonymisierte Parameter zur Zuordnung der Transaktion verarbeitet.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
-                5. Webanalyse via Vercel Analytics (Cookielos &amp; Datenschutzkonform)
-              </h2>
-              <p>
-                Diese Website nutzt <strong>Vercel Web Analytics</strong> (Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA). Vercel Analytics arbeitet <strong>vollständig ohne Cookies</strong>, speichert keine personenbezogenen Daten und erstellt keine geräteübergreifenden Profile.
+              <p className="mt-2">
+                Hierbei kann es sich um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Webseitenzugriffe und sonstige Daten handeln, die über eine Website generiert werden.
               </p>
               <p className="mt-2 text-xs text-slate-500">
-                Erfasst werden ausschließlich aggregierte Metriken wie Seitenaufrufe, Verweildauer, Referrer-URLs sowie anonymisierte Systeminformationen (Browser, Betriebssystem, Land). Die Verarbeitung erfolgt auf Grundlage unseres berechtigten Interesses an der statistischen Analyse und Optimierung unseres Webangebots (Art. 6 Abs. 1 lit. f DSGVO).
+                Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren, schnellen und fehlerfreien Bereitstellung unseres Online-Angebots).
               </p>
             </div>
 
             <div>
               <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
-                6. Deine Betroffenenrechte nach DSGVO
+                3. Lokale Speicherung der Merkliste („Meine Linsen“)
               </h2>
-              <ul className="list-disc pl-5 space-y-1 text-slate-600">
-                <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
-                <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-                <li>Recht auf Löschung („Recht auf Vergessenwerden“, Art. 17 DSGVO)</li>
-                <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-                <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-              </ul>
-              <p className="mt-3 text-xs">
-                Zur Ausübung deiner Rechte wende dich bitte an die im <Link to="/impressum" className="text-emerald-700 underline font-bold">Impressum</Link> genannten Kontaktdaten.
+              <p>
+                Die Merkliste („Meine Linsen“) nutzt die lokale Speichertechnologie Ihres Browsers (<strong>Local Storage</strong>). Die Identifikatoren Ihrer gemerkten Kontaktlinsen werden ausschließlich lokal auf Ihrem Endgerät gespeichert. Es findet keinerlei Übertragung Ihrer gemerkten Produkte an unsere Server oder an Drittanbieter statt.
+              </p>
+              <p className="mt-2 text-xs text-slate-500">
+                Rechtsgrundlage: § 25 Abs. 2 Nr. 2 TDDDG i.V.m. Art. 6 Abs. 1 lit. f DSGVO (technisch erforderlich zur Bereitstellung der vom Nutzer ausdrücklich gewünschten Merkfunktion ohne Registrierungszwang).
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
+                4. Keine externen Schriftarten (Zero Google Fonts CDN)
+              </h2>
+              <p>
+                Diese Seite bindet <strong>keine externen Schriftarten über Google Fonts oder sonstige CDNs</strong> ein. Es werden ausschließlich systemeigene System-Schriftarten (System Fonts) verwendet, sodass keine IP-Adressen zu Typografiezwecken an Dritte übermittelt werden.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
+                5. Vercel Web Analytics (DSGVO-konform ohne Cookies)
+              </h2>
+              <p>
+                Wir nutzen Vercel Web Analytics zur aggregierten Reichweitenmessung. Vercel Analytics verwendet keine Cookies, speichert keine IP-Adressen und erstellt keine nutzerübergreifenden Profile. Es werden ausschließlich anonymisierte Telemetriedaten erfasst.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
+                6. Ihre Rechte als betroffene Person
+              </h2>
+              <p>
+                Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung (Art. 15 DSGVO) sowie ein Recht auf Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO) oder Einschränkung der Verarbeitung (Art. 18 DSGVO).
               </p>
             </div>
 
           </div>
-
         </div>
       </main>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-900 text-white py-6 text-xs text-center border-t border-slate-800">
-        <p className="text-slate-400">© {new Date().getFullYear()} optical.de Media. Alle Rechte vorbehalten.</p>
-      </footer>
+      <Footer />
+      <ScrollToTop />
     </div>
   );
 }

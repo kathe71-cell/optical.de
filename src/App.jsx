@@ -2,6 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import VercelAnalytics from './components/VercelAnalytics';
 import Home from './pages/Home';
+import VergleichskatalogPage from './pages/VergleichskatalogPage';
+import PreisrechnerPage from './pages/PreisrechnerPage';
+import DecoderPage from './pages/DecoderPage';
+import SavedLensesPage from './pages/SavedLensesPage';
+import NotFoundPage from './pages/NotFoundPage';
 import RechnerEmbed from './pages/RechnerEmbed';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
@@ -15,18 +20,24 @@ export default function App() {
     <Router>
       <VercelAnalytics />
       <Routes>
-        {/* Hauptseite & Sektionen als saubere URLs */}
+        {/* Hauptseite mit Nachkauf-Fokus */}
         <Route path="/" element={<Home />} />
-        <Route path="/eigenmarken-decoder" element={<Home activeSection="decoder" />} />
-        <Route path="/vergleichskatalog" element={<Home activeSection="vergleich" />} />
-        <Route path="/preisrechner" element={<Home activeSection="rechner" />} />
-        <Route path="/transparenz" element={<Home activeSection="trust" />} />
-        <Route path="/faq" element={<Home activeSection="faq" />} />
 
-        {/* Saubere Kurz-URLs & Weiterleitungen ohne Hash */}
+        {/* ECHTE STANDALONE-SEITEN (Keine Startseiten-Klone mehr) */}
+        <Route path="/vergleichskatalog" element={<VergleichskatalogPage />} />
+        <Route path="/preisrechner" element={<PreisrechnerPage />} />
+        <Route path="/eigenmarken-decoder" element={<DecoderPage />} />
+        <Route path="/meine-linsen" element={<SavedLensesPage />} />
+
+        {/* Saubere Kurz-URLs & Weiterleitungen */}
         <Route path="/decoder" element={<Navigate to="/eigenmarken-decoder" replace />} />
         <Route path="/vergleich" element={<Navigate to="/vergleichskatalog" replace />} />
         <Route path="/rechner" element={<Navigate to="/preisrechner" replace />} />
+        <Route path="/bookmarks" element={<Navigate to="/meine-linsen" replace />} />
+
+        {/* Transparenz & FAQ als dedizierte Routen mit sauberem Anchor-Sprung */}
+        <Route path="/transparenz" element={<VergleichskatalogPage />} />
+        <Route path="/faq" element={<Home />} />
 
         {/* SEO-Landingpages: Handelsmarken / Private Labels */}
         <Route path="/apollo-iwear-oxygen" element={<PrivateLabelLanding slugOverride="apollo-iwear-oxygen" />} />
@@ -52,8 +63,8 @@ export default function App() {
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />
 
-        {/* 404 Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* ECHTER 404 FEHLER-ROUTENFALLBACK (Kein Pseudo-Home Redirect) */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

@@ -10,7 +10,7 @@ export default function MedicalDisclaimer({ compact = false, className = '' }) {
       <div className={`bg-amber-50/80 border border-amber-200/80 rounded-lg px-3 py-2 text-[11px] text-amber-950 flex items-start gap-2 ${className}`}>
         <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
         <p className="leading-snug">
-          <strong>Medizinischer Hinweis:</strong> Die Angaben auf optical.de dienen dem technischen Produktvergleich und ersetzen keine individuelle Anpassung oder Untersuchung durch Augenarzt oder Augenoptiker.
+          <strong>Medizinischer Hinweis:</strong> optical.de hilft Ihnen, genau die Linse und das Markenoriginal zu finden, die Sie bereits verwenden. Keine medizinische Beratung oder Empfehlung zum Produktwechsel. Kontaktlinsen bedürfen einer fachgerechten Anpassung durch Augenarzt oder Augenoptiker.
         </p>
       </div>
     );
@@ -24,10 +24,10 @@ export default function MedicalDisclaimer({ compact = false, className = '' }) {
       <div className="space-y-1">
         <h4 className="font-bold text-amber-950 text-xs uppercase tracking-wide">Wichtiger Verbraucher- &amp; Gesundheitshinweis</h4>
         <p className="leading-relaxed text-amber-900">
-          Die Informationen auf optical.de dienen dem sachlichen Produkt- und Preisvergleich. Sie stellen <strong>keine medizinische Beratung oder Heilaussage</strong> dar und ersetzen keinesfalls eine fachgerechte Erstanpassung, Sehschärfenprüfung oder Spaltlampenuntersuchung durch einen Augenarzt oder eine augenoptische Fachkraft.
+          Die Informationen auf optical.de dienen dem sachlichen Produkt- und Preisvergleich für Kontaktlinsen, die Ihnen bereits von einer augenoptischen oder augenärztlichen Fachkraft angepasst wurden. Sie stellen <strong>keine medizinische Beratung oder Heilaussage</strong> dar.
         </p>
         <p className="leading-relaxed text-amber-900 font-medium pt-0.5">
-          Bei Schmerzen, Augenrötungen, Fremdkörpergefühl, Tränenfluss oder akuten Sehstörungen nehmen Sie die Kontaktlinsen unverzüglich heraus und suchen Sie eine augenärztliche Praxis auf.
+          optical.de empfiehlt keinen eigenmächtigen Wechsel auf andere Linsenmodelle und behauptet nicht, dass abweichende Produkte einander ohne fachmännische Neuanpassung ersetzen können. Bei Schmerzen, Augenrötungen oder Sehstörungen entfernen Sie die Kontaktlinsen unverzüglich und suchen Sie eine augenärztliche Praxis auf.
         </p>
       </div>
     </div>

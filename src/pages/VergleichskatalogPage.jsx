@@ -1,0 +1,411 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Search, 
+  Filter, 
+  Bookmark, 
+  ExternalLink, 
+  Check, 
+  SlidersHorizontal,
+  Info,
+  ShieldCheck,
+  RotateCcw
+} from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import MetaTags from '../components/MetaTags';
+import MedicalDisclaimer from '../components/MedicalDisclaimer';
+import TrustSection from '../components/TrustSection';
+import ScrollToTop from '../components/ScrollToTop';
+import { PRODUCTS } from '../data/products';
+import { useSavedLenses } from '../hooks/useSavedLenses';
+import { 
+  trackSearchUsed, 
+  trackZeroResults, 
+  trackFilterUsed, 
+  trackAffiliateClick,
+  trackProductClicked
+} from '../utils/tracking';
+
+const AMAZON_TAG = 'esstri-21';
+const AMAZON_SUBID = 'optical.de-21';
+
+const getAmazonLink = (query) => {
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+};
+
+export default function VergleichskatalogPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeBrand, setActiveBrand] = useState('all');
+  const [activeMaterial, setActiveMaterial] = useState('all');
+  const [sortBy, setSortBy] = useState('popular'); // 'popular', 'price_asc', 'dkt_desc'
+
+  const { isSaved, toggleSave } = useSavedLenses();
+
+  // Gefilterte & sortierte Produkte
+  const filteredProducts = PRODUCTS.filter((item) => {
+    // Kategorie
+    if (activeCategory === 'monat' && !(item.lens_type.includes('Monatslinse') && !item.lens_type.includes('Torisch') && !item.lens_type.includes('Multifokal'))) return false;
+    if (activeCategory === 'tag' && !(item.lens_type.includes('Tageslinse') && !item.lens_type.includes('Torisch'))) return false;
+    if (activeCategory === 'toric' && !item.lens_type.includes('Torisch')) return false;
+    if (activeCategory === 'multifocal' && !item.lens_type.includes('Multifokal')) return false;
+    if (activeCategory === 'pflege' && !(item.lens_type.includes('Pflegemittel') || item.lens_type.includes('Augentropfen'))) return false;
+
+    // Hersteller
+    if (activeBrand !== 'all') {
+      if (activeBrand === 'coopervision' && item.manufacturer !== 'CooperVision') return false;
+      if (activeBrand === 'alcon' && item.manufacturer !== 'Alcon') return false;
+      if (activeBrand === 'bausch' && item.manufacturer !== 'Bausch + Lomb') return false;
+      if (activeBrand === 'johnson' && item.manufacturer !== 'Johnson & Johnson') return false;
+    }
+
+    // Material-Typ
+    if (activeMaterial === 'silicone' && !item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
+    if (activeMaterial === 'hydrogel' && item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
+
+    // Textsuche
+    if (searchQuery.trim().length > 0) {
+      const q = searchQuery.toLowerCase();
+      const matchName = item.product_name.toLowerCase().includes(q);
+      const matchBrand = item.manufacturer.toLowerCase().includes(q);
+      const matchMat = item.material ? item.material.toLowerCase().includes(q) : false;
+      return matchName || matchBrand || matchMat;
+    }
+
+    return true;
+  }).sort((a, b) => {
+    if (sortBy === 'price_asc') return a.price - b.price;
+    if (sortBy === 'dkt_desc') return (b.dk_t || 0) - (a.dk_t || 0);
+    return 0; // standard / popular
+  });
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+    trackSearchUsed(val);
+    if (val.trim().length > 2 && filteredProducts.length === 0) {
+      trackZeroResults(val);
+    }
+  };
+
+  const resetFilters = () => {
+    setSearchQuery('');
+    setActiveCategory('all');
+    setActiveBrand('all');
+    setActiveMaterial('all');
+    setSortBy('popular');
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
+      <MetaTags 
+        title="Kontaktlinsen finden & vergleichen | optical.de Katalog"
+        description="Vergleiche technische Spezifikationen marktgängiger Kontaktlinsen (Biofinity, Dailies Total 1, Acuvue uvm.): Dk/t, Basiskurve, Wassergehalt und Preise."
+        canonical="https://www.optical.de/vergleichskatalog"
+      />
+      <Header />
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full flex-grow">
+        
+        {/* Breadcrumb Navigation */}
+        <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
+          <Link to="/" className="hover:text-emerald-700">Startseite</Link>
+          <span>/</span>
+          <span className="font-semibold text-slate-900">Kontaktlinsen-Vergleichskatalog</span>
+        </div>
+
+        {/* Header Title & Intro */}
+        <div className="max-w-3xl mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-2">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-600" />
+            Objektive Spezifikationen
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+            Kontaktlinsen finden &amp; vergleichen
+          </h1>
+          <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+            Filtern Sie nach Linsentyp, Hersteller und Material. Prüfen Sie verifizierte Hersteller-Parameter und finden Sie transparente Händlerangebote zum Nachkauf.
+          </p>
+        </div>
+
+        {/* Filter- & Suchleiste (Direkter Einstieg oben) */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs mb-8 space-y-4">
+          
+          {/* Suche & Sortierung */}
+          <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
+            <div className="relative flex-grow">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="Linsenname, Hersteller oder Material suchen (z. B. Biofinity, Comfilcon)..."
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-700"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-500 whitespace-nowrap">Sortieren nach:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="popular">Standard / Beliebt</option>
+                <option value="price_asc">Niedrigster Packungspreis</option>
+                <option value="dkt_desc">Höchster Dk/t-Wert (Sauerstoff)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Filter-Zeile: Kategorien, Hersteller, Material */}
+          <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            
+            {/* Linsentyp Pills */}
+            <div className="flex flex-wrap gap-1.5 text-xs">
+              {[
+                { key: 'all', label: 'Alle Linsen' },
+                { key: 'monat', label: 'Monatslinsen' },
+                { key: 'tag', label: 'Tageslinsen' },
+                { key: 'toric', label: 'Torisch (Astigmatismus)' },
+                { key: 'multifocal', label: 'Multifokal (Gleitsicht)' },
+                { key: 'pflege', label: 'Pflegemittel' }
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => {
+                    setActiveCategory(tab.key);
+                    trackFilterUsed('category', tab.key);
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                    activeCategory === tab.key
+                      ? 'bg-slate-950 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Dropdowns für Hersteller & Material */}
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <select
+                value={activeBrand}
+                onChange={(e) => {
+                  setActiveBrand(e.target.value);
+                  trackFilterUsed('brand', e.target.value);
+                }}
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="all">Alle Hersteller</option>
+                <option value="coopervision">CooperVision</option>
+                <option value="alcon">Alcon Vision Care</option>
+                <option value="bausch">Bausch + Lomb</option>
+                <option value="johnson">Johnson &amp; Johnson</option>
+              </select>
+
+              <select
+                value={activeMaterial}
+                onChange={(e) => {
+                  setActiveMaterial(e.target.value);
+                  trackFilterUsed('material', e.target.value);
+                }}
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="all">Alle Materialien</option>
+                <option value="silicone">Nur Silikon-Hydrogel</option>
+                <option value="hydrogel">Klassisches Hydrogel</option>
+              </select>
+
+              {(activeCategory !== 'all' || activeBrand !== 'all' || activeMaterial !== 'all' || searchQuery) && (
+                <button
+                  onClick={resetFilters}
+                  className="flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-rose-600 px-2 py-1 transition"
+                  title="Filter zurücksetzen"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Reset</span>
+                </button>
+              )}
+            </div>
+
+          </div>
+
+          {/* Treffer-Zähler */}
+          <div className="text-xs text-slate-500 pt-2 flex items-center justify-between">
+            <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'Kontaktlinse' : 'Kontaktlinsen'} gefunden</span>
+            <span className="text-[11px] text-slate-400">Verifizierte Herstellerdaten ohne Siegel</span>
+          </div>
+        </div>
+
+        {/* PRODUKT-GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {filteredProducts.map((p) => {
+            const saved = isSaved(p.id);
+
+            return (
+              <div 
+                key={p.id} 
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition group"
+              >
+                <div>
+                  {/* Header-Zeile mit Hersteller, Linsentyp & Merken-Button */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[11px] font-bold text-slate-500 uppercase">{p.manufacturer}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
+                        {p.lens_type}
+                      </span>
+                      <button
+                        onClick={() => toggleSave(p.id)}
+                        className={`p-1.5 rounded-lg border transition ${
+                          saved 
+                            ? 'bg-emerald-50 border-emerald-300 text-emerald-700' 
+                            : 'bg-white border-slate-200 text-slate-400 hover:text-emerald-700 hover:border-emerald-200'
+                        }`}
+                        title={saved ? 'Aus Merkliste entfernen' : 'Linse merken'}
+                        aria-label={`${p.product_name} ${saved ? 'aus Merkliste entfernen' : 'merken'}`}
+                      >
+                        <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600' : ''}`} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Titel */}
+                  <h2 className="text-lg font-black text-slate-900 leading-snug">
+                    <Link 
+                      to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`} 
+                      onClick={() => trackProductClicked(p.id, p.product_name)}
+                      className="hover:text-emerald-700 transition"
+                    >
+                      {p.product_name}
+                    </Link>
+                  </h2>
+                  
+                  <div className="mt-2 text-xs text-slate-500 flex items-center justify-between">
+                    <span>Packungsgröße:</span>
+                    <strong className="text-slate-800 font-semibold">{p.pack_size}</strong>
+                  </div>
+
+                  {/* Objektive Badges */}
+                  <div className="flex flex-wrap gap-1 mt-2.5">
+                    {p.objective_badges?.map((b, bIdx) => (
+                      <span key={bIdx} className="bg-emerald-50 text-emerald-950 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Spezifikations-Liste */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+                    <div className="flex justify-between">
+                      <span>Linsenmaterial:</span>
+                      <strong className="text-slate-900 font-semibold">{p.material}</strong>
+                    </div>
+                    {p.dk_t && (
+                      <div className="flex justify-between">
+                        <span>Sauerstofffluss (Dk/t):</span>
+                        <strong className="text-slate-900 font-semibold">{p.dk_t} Dk/t</strong>
+                      </div>
+                    )}
+                    {p.water_content && (
+                      <div className="flex justify-between">
+                        <span>Wassergehalt:</span>
+                        <strong className="text-slate-900 font-semibold">{p.water_content}</strong>
+                      </div>
+                    )}
+                    {p.base_curve && (
+                      <div className="flex justify-between">
+                        <span>Geometrie (BC / DIA):</span>
+                        <strong className="text-slate-900 font-semibold">{p.base_curve} / {p.diameter}</strong>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Preisteil & CTAs */}
+                <div className="mt-5 pt-3 border-t border-slate-100">
+                  <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-[11px] text-slate-500">Online-Vergleichspreis:</span>
+                      <span className="text-base font-extrabold text-slate-900">ab {p.price.toFixed(2)} € *</span>
+                    </div>
+                    <div className="text-[9px] text-slate-400 italic">
+                      Hersteller-Standardpackung
+                    </div>
+                    <div className="flex justify-between text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
+                      <span>Preis pro Einzellinse:</span>
+                      <span className="font-semibold text-slate-800">{p.price_per_lens || '–'}</span>
+                    </div>
+                    <div className="flex justify-between text-[11px] text-slate-600">
+                      <span>Kosten pro Tragetag:</span>
+                      <span className="font-semibold text-emerald-700">{p.cost_per_day || '–'}</span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`}
+                      onClick={() => trackProductClicked(p.id, p.product_name)}
+                      className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"
+                    >
+                      Datenblatt
+                    </Link>
+                    <a
+                      href={getAmazonLink(p.amazon_query)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'vergleichskatalog')}
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
+                    >
+                      <span>Amazon-Suche *</span>
+                      <ExternalLink className="w-3 h-3 text-emerald-400" />
+                    </a>
+                  </div>
+
+                  <div className="text-center mt-2 text-[9px] text-slate-400">
+                    * Amazon-Partnerlink (Suche) · Preis kann abweichen
+                  </div>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-500 text-xs mb-12">
+            <p className="text-sm font-bold text-slate-800 mb-2">Keine Kontaktlinsen für diese Filterung gefunden.</p>
+            <p className="mb-4">Bitte ändern Sie Ihre Suchbegriffe oder setzen Sie die Filter zurück.</p>
+            <button
+              onClick={resetFilters}
+              className="px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs"
+            >
+              Filter zurücksetzen
+            </button>
+          </div>
+        )}
+
+        {/* Medizinischer Pflicht-Hinweis */}
+        <MedicalDisclaimer className="mb-12" />
+
+        {/* Transparenz-Standard */}
+        <TrustSection />
+
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}

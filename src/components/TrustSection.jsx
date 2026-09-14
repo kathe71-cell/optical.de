@@ -50,7 +50,7 @@ export default function TrustSection() {
             </div>
             <h3 className="font-extrabold text-sm text-slate-900 mb-2">Was optical.de nicht leistet</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              optical.de ist keine Augenarztpraxis und kein Optikerbetrieb. Wir führen keine Sehstärkenmessungen durch und geben keine individuellen medizinischen Heilsversprechen ab. Die Nutzung ersetzt keinesfalls die regelmäßige Kontrolle durch Augenarzt oder Augenoptiker.
+              optical.de ist keine Augenarztpraxis und kein Optikerbetrieb. Wir führen keine Sehstärkenmessungen durch und raten niemals zu einem eigenmächtigen Linsenwechsel. optical.de hilft Ihnen ausschließlich, genau die Linse zu finden und transparent zu vergleichen, die Sie bereits verwenden und die Ihnen fachgerecht angepasst wurde.
             </p>
           </div>
 

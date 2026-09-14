@@ -48,6 +48,10 @@ export const trackProductClicked = (productId, productName) => {
   trackEvent('product_clicked', { product_id: productId, product_name: productName });
 };
 
+export const trackProductView = (productId, productName) => {
+  trackEvent('product_view', { product_id: productId, product_name: productName });
+};
+
 export const trackAffiliateClick = (productName, destination = 'amazon', sourceComponent = 'catalog') => {
   trackEvent('affiliate_click', {
     product_name: productName,
@@ -64,6 +68,14 @@ export const trackSearchUsed = (searchQuery) => {
   trackEvent('search_used', { query_term: searchQuery ? searchQuery.substring(0, 30) : '' });
 };
 
+export const trackZeroResults = (searchQuery) => {
+  trackEvent('zero_results', { query_term: searchQuery ? searchQuery.substring(0, 30) : '' });
+};
+
 export const trackFilterUsed = (filterType, filterValue) => {
   trackEvent('filter_used', { filter_type: filterType, filter_value: filterValue });
+};
+
+export const trackBookmarkToggle = (productId, isBookmarked) => {
+  trackEvent('bookmark_toggle', { product_id: productId, saved: isBookmarked });
 };
