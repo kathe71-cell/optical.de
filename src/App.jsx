@@ -15,9 +15,9 @@ import CategoryLanding from './pages/CategoryLanding';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductComparisonPage from './pages/ProductComparisonPage';
 
-export default function App() {
+export function AppRoutes() {
   return (
-    <Router>
+    <>
       <VercelAnalytics />
       <Routes>
         {/* Hauptseite mit Nachkauf-Fokus */}
@@ -35,9 +35,9 @@ export default function App() {
         <Route path="/rechner" element={<Navigate to="/preisrechner" replace />} />
         <Route path="/bookmarks" element={<Navigate to="/meine-linsen" replace />} />
 
-        {/* Transparenz & FAQ als dedizierte Routen mit sauberem Anchor-Sprung */}
-        <Route path="/transparenz" element={<VergleichskatalogPage />} />
-        <Route path="/faq" element={<Home />} />
+        {/* Transparenz & FAQ als Weiterleitungen zu entsprechenden Anchors */}
+        <Route path="/transparenz" element={<Navigate to="/#trust" replace />} />
+        <Route path="/faq" element={<Navigate to="/#trust" replace />} />
 
         {/* SEO-Landingpages: Handelsmarken / Private Labels */}
         <Route path="/apollo-iwear-oxygen" element={<PrivateLabelLanding slugOverride="apollo-iwear-oxygen" />} />
@@ -66,6 +66,14 @@ export default function App() {
         {/* ECHTER 404 FEHLER-ROUTENFALLBACK (Kein Pseudo-Home Redirect) */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <AppRoutes />
     </Router>
   );
 }

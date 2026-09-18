@@ -6,6 +6,38 @@
       "destination": "/index.html"
     }
   ],
+  "redirects": [
+    {
+      "source": "/transparenz",
+      "destination": "/#trust",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/#trust",
+      "permanent": true
+    },
+    {
+      "source": "/decoder",
+      "destination": "/eigenmarken-decoder",
+      "permanent": true
+    },
+    {
+      "source": "/vergleich",
+      "destination": "/vergleichskatalog",
+      "permanent": true
+    },
+    {
+      "source": "/rechner",
+      "destination": "/preisrechner",
+      "permanent": true
+    },
+    {
+      "source": "/bookmarks",
+      "destination": "/meine-linsen",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/rechner-embed",

@@ -51,8 +51,8 @@ export default function Footer() {
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/impressum" className="hover:text-white font-semibold text-emerald-400 transition">→ Impressum</Link></li>
             <li><Link to="/datenschutz" className="hover:text-white transition">→ Datenschutzerklärung</Link></li>
-            <li><Link to="/transparenz" className="hover:text-white transition">→ Transparenz-Standard</Link></li>
-            <li><Link to="/faq" className="hover:text-white transition">→ Häufige Fragen (FAQ)</Link></li>
+            <li><Link to="/#trust" className="hover:text-white transition">→ Transparenz-Standard</Link></li>
+            <li><Link to="/#trust" className="hover:text-white transition">→ Häufige Fragen (FAQ)</Link></li>
           </ul>
         </div>
 

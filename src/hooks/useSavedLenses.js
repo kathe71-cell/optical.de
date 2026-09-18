@@ -6,6 +6,7 @@ const STORAGE_EVENT = 'optical_saved_lenses_changed';
 
 export function useSavedLenses() {
   const [savedIds, setSavedIds] = useState(() => {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') return [];
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
