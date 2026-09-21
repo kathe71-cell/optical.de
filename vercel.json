@@ -8,6 +8,17 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "optical.de"
+        }
+      ],
+      "destination": "https://www.optical.de/$1",
+      "permanent": true
+    },
+    {
       "source": "/transparenz",
       "destination": "/#trust",
       "permanent": true
