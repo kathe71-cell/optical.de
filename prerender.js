@@ -81,9 +81,14 @@ const ROUTES = {
     title: 'Biofinity vs. Air Optix Plus HydraGlyde im Vergleich | optical.de',
     description: 'Direkter 1:1 Parametervergleich zwischen CooperVision Biofinity und Alcon Air Optix Plus HydraGlyde: Dk/t, Wassergehalt, Material und Preise.',
   },
+  '/ratgeber/kontaktlinsen-anpassen': {
+    title: 'Kontaktlinsen anpassen: Ablauf, Kosten & Parameter | optical.de',
+    description: 'Warum Brillenwerte nicht für Linsen reichen: Alles zu Basiskurve (BC), Durchmesser (DIA), Dioptrien-Umrechnung und Ablauf beim Optiker.',
+  },
   '/rechner-embed': {
     title: 'Kontaktlinsen-Rechner Widget | optical.de',
     description: 'Kostenloses Embed-Widget für den Kontaktlinsen-Kostenrechner.',
+    robots: 'noindex, follow',
   },
   '/impressum': {
     title: 'Impressum | optical.de',
@@ -111,6 +116,10 @@ for (const [url, meta] of Object.entries(ROUTES)) {
   html = html.replace(/<meta name="description" content=".*?" \/>/, `<meta name="description" content="${meta.description}" />`);
   html = html.replace(/<meta property="og:description" content=".*?" \/>/, `<meta property="og:description" content="${meta.description}" />`);
   html = html.replace(/<meta name="twitter:description" content=".*?" \/>/, `<meta name="twitter:description" content="${meta.description}" />`);
+
+  // Update Robots
+  const robotsValue = meta.robots || 'index, follow';
+  html = html.replace(/<meta name="robots" content=".*?" \/>/, `<meta name="robots" content="${robotsValue}" />`);
 
   // Update Canonical & OG URL
   const canonicalUrl = `https://www.optical.de${url === '/' ? '/' : url}`;

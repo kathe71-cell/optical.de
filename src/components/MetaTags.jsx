@@ -8,11 +8,21 @@ export default function MetaTags({
   title = 'optical.de – Deine Kontaktlinsen. Einfach wiederfinden.',
   description = 'Finde deine gewohnten Kontaktlinsen, prüfe verfügbare Angebote und merke sie dir für deinen nächsten Kauf. Unabhängig & verifiziert.',
   canonical = 'https://www.optical.de/',
-  ogType = 'website'
+  ogType = 'website',
+  robots = 'index, follow'
 }) {
   useEffect(() => {
     // Title
     document.title = title;
+
+    // Meta Robots
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.name = 'robots';
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.content = robots;
 
     // Meta Description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -51,7 +61,7 @@ export default function MetaTags({
 
     let twitterDesc = document.querySelector('meta[name="twitter:description"]');
     if (twitterDesc) twitterDesc.content = description;
-  }, [title, description, canonical, ogType]);
+  }, [title, description, canonical, ogType, robots]);
 
   return null;
 }

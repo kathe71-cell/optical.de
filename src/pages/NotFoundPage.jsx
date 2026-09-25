@@ -13,6 +13,7 @@ export default function NotFoundPage() {
         title="404 – Seite nicht gefunden | optical.de"
         description="Die angeforderte Seite existiert leider nicht auf optical.de. Nutzen Sie unsere Suche oder das Inhaltsverzeichnis."
         canonical="https://www.optical.de/404"
+        robots="noindex, follow"
       />
       <Header />
 

@@ -31,7 +31,6 @@ Ziel ist der Aufbau einer autoritären Nischen-Website, die bei Google für lukr
      - Adresse: Hansastraße 6, 34119 Kassel, Deutschland
      - E-Mail: jens@kathe.org (als `<a href="mailto:jens@kathe.org">` verlinken)
      - Telefon: +49 178 6652623 (als `<a href="tel:+4917866526230">` verlinken)
-     - Steuerstatus: Kleinunternehmer nach § 19 UStG
      - Verantwortlich nach § 18 Abs. 2 MStV: Jens Kathe, Hansastraße 6, 34119 Kassel
    - **WICHTIG – Datenschutz der Betreiberdaten**:
      - Die persönliche Adresse (Hansastraße 6, 34119 Kassel) und der vollständige Name dürfen NIEMALS im sichtbaren Bereich (Footer, Header, Copyright-Zeile, Startseite) erscheinen.

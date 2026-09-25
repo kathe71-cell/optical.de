@@ -1,3 +1,4 @@
+import AnpassungGuidePage from './pages/AnpassungGuidePage';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import VercelAnalytics from './components/VercelAnalytics';
@@ -60,6 +61,7 @@ export function AppRoutes() {
 
         {/* Rechtliches & Tools */}
         <Route path="/rechner-embed" element={<RechnerEmbed />} />
+        <Route path="/ratgeber/kontaktlinsen-anpassen" element={<AnpassungGuidePage />} />
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />
 

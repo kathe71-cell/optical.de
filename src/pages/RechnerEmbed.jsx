@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, ExternalLink, Sparkles, RefreshCw, Check } from 'lucide-react';
+import MetaTags from '../components/MetaTags';
 
 export default function RechnerEmbed() {
   const [selectedBrand, setSelectedBrand] = useState('apollo');
@@ -60,6 +61,12 @@ export default function RechnerEmbed() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-4 sm:p-6 font-sans antialiased flex flex-col justify-between border border-slate-800 rounded-xl">
+      <MetaTags
+        title="Kontaktlinsen-Rechner Widget | optical.de"
+        description="Kostenloses Embed-Widget für den Kontaktlinsen-Kostenrechner."
+        canonical="https://www.optical.de/rechner-embed"
+        robots="noindex, follow"
+      />
       <div>
         {/* EMBED HEADER */}
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">

@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Eye, Bookmark, Sparkles, Menu, X, Layers, Calculator, Search } from 'lucide-react';
 import { useSavedLenses } from '../hooks/useSavedLenses';
+import SearchModal from './SearchModal';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { savedCount } = useSavedLenses();
   const location = useLocation();
+
+  useEffect(() => {
+    const handleCustomToggle = () => setSearchOpen(prev => !prev);
+    window.addEventListener('toggle-optical-search', handleCustomToggle);
+    return () => window.removeEventListener('toggle-optical-search', handleCustomToggle);
+  }, []);
 
   const navLinks = [
     { to: '/vergleichskatalog', label: 'Kontaktlinsen finden', icon: Layers },
@@ -61,8 +69,19 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Action Button: Meine Linsen (Bookmark) */}
+        {/* Action Buttons: Suche & Meine Linsen */}
         <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition"
+            title="Suche öffnen (Strg + K)"
+            aria-label="Suche öffnen"
+          >
+            <Search className="w-4 h-4 text-slate-600" />
+            <span className="hidden sm:inline">Suche</span>
+            <kbd className="hidden lg:inline-block bg-white border border-slate-300 text-[10px] font-mono px-1 rounded text-slate-500">⌘K</kbd>
+          </button>
+
           <Link
             to="/meine-linsen"
             aria-label={`Meine gemerkten Linsen (${savedCount})`}
@@ -96,6 +115,8 @@ export default function Header() {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+
+        <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       </div>
 
