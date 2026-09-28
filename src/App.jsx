@@ -35,7 +35,7 @@ export function AppRoutes() {
 
         {/* Saubere Kurz-URLs & Weiterleitungen */}
         <Route path="/decoder" element={<Navigate to="/eigenmarken-decoder" replace />} />
-        <Route path="/vergleich" element={<Navigate to="/vergleichskatalog" replace />} />
+        <Route path="/vergleich" element={<ProductComparisonPage />} />
         <Route path="/rechner" element={<Navigate to="/preisrechner" replace />} />
         <Route path="/bookmarks" element={<Navigate to="/meine-linsen" replace />} />
 
@@ -60,6 +60,7 @@ export function AppRoutes() {
 
         {/* SEO-Landingpages: Einzelprodukt & Direktvergleich */}
         <Route path="/biofinity" element={<ProductDetailPage productIdOverride="biofinity" />} />
+        <Route path="/produkt/:productId" element={<ProductDetailPage />} />
         <Route path="/biofinity-vs-air-optix" element={<ProductComparisonPage />} />
 
         {/* Rechtliches & Tools */}

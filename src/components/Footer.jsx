@@ -1,11 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Eye } from 'lucide-react';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToTrust = (e) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      // Already on home, just scroll
+      const el = document.getElementById('trust');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Navigate to home first, then scroll after render
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById('trust');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  };
+
   return (
     <footer className="bg-slate-900 text-white py-12 border-t border-slate-800 text-xs mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 xl:grid-cols-5 gap-8 mb-8">
         
         {/* Brand Info */}
         <div className="space-y-3">
@@ -45,14 +64,25 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Ratgeber */}
+        <div className="hidden md:block">
+          <h4 className="font-bold text-white mb-3 tracking-wide">Ratgeber</h4>
+          <ul className="space-y-2 text-slate-400">
+            <li><Link to="/ratgeber/astigmatismus-kontaktlinsen" className="hover:text-white transition">Kontaktlinsen bei Astigmatismus</Link></li>
+            <li><Link to="/ratgeber/tageslinsen-vs-monatslinsen-kosten" className="hover:text-white transition">Tages- vs. Monatslinsen Kosten</Link></li>
+            <li><Link to="/ratgeber/kontaktlinsen-pflegemittel-vergleich" className="hover:text-white transition">Pflegemittel-Vergleich</Link></li>
+            <li><Link to="/ratgeber/kontaktlinsen-anpassen" className="hover:text-white transition">Kontaktlinsen anpassen</Link></li>
+          </ul>
+        </div>
+
         {/* Rechtliches & Transparenz */}
         <div>
           <h4 className="font-bold text-white mb-3 tracking-wide">Rechtliches &amp; Schutz</h4>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/impressum" className="hover:text-white font-semibold text-emerald-400 transition">→ Impressum</Link></li>
             <li><Link to="/datenschutz" className="hover:text-white transition">→ Datenschutzerklärung</Link></li>
-            <li><Link to="/#trust" className="hover:text-white transition">→ Transparenz-Standard</Link></li>
-            <li><Link to="/#trust" className="hover:text-white transition">→ Häufige Fragen (FAQ)</Link></li>
+            <li><button onClick={scrollToTrust} className="hover:text-white transition text-left">→ Transparenz-Standard</button></li>
+            <li><button onClick={scrollToTrust} className="hover:text-white transition text-left">→ Häufige Fragen (FAQ)</button></li>
           </ul>
         </div>
 
