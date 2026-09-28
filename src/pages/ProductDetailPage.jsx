@@ -24,11 +24,14 @@ import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { trackAffiliateClick, trackProductView } from '../utils/tracking';
 
-const AMAZON_TAG = 'esstri-21';
+const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (query) => {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+const getAmazonLink = (queryOrAsin, asin) => {
+  if (asin) {
+    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
 };
 
 export default function ProductDetailPage({ productIdOverride }) {
@@ -266,7 +269,7 @@ export default function ProductDetailPage({ productIdOverride }) {
               {/* Kauf-Button */}
               <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
                 <a
-                  href={getAmazonLink(product.amazon_query)}
+                  href={getAmazonLink(product.amazon_query, product.asin)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
@@ -291,7 +294,7 @@ export default function ProductDetailPage({ productIdOverride }) {
 
                 <div className="text-center space-y-0.5 pt-1">
                   <span className="text-[10px] text-slate-500 block font-medium">
-                    Amazon-Partnerlink (Suche) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
+                    Amazon-Partnerlink (Amazon.de) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                   </span>
                   <span className="text-[9px] text-slate-400 block font-medium">
                     * Werbelink / Partnerlink

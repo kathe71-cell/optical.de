@@ -13,6 +13,7 @@ export const PRODUCTS = [
   // --- MONATSLINSEN (SPHÄRISCH) ---
   {
     id: 'biofinity',
+    asin: 'B007UITPAQ',
     product_name: 'CooperVision Biofinity',
     manufacturer: 'CooperVision',
     brand: 'CooperVision',
@@ -46,6 +47,7 @@ export const PRODUCTS = [
   },
   {
     id: 'airoptix-hydraglyde',
+    asin: 'B01G5LHDUW',
     product_name: 'Air Optix Plus HydraGlyde',
     manufacturer: 'Alcon',
     brand: 'Alcon',
@@ -79,6 +81,7 @@ export const PRODUCTS = [
   },
   {
     id: 'bausch-ultra',
+    asin: 'B01HRK8K4S',
     product_name: 'Bausch + Lomb Ultra',
     manufacturer: 'Bausch + Lomb',
     brand: 'Bausch + Lomb',
@@ -112,6 +115,7 @@ export const PRODUCTS = [
   },
   {
     id: 'purevision2',
+    asin: 'B00ANRZ5R8',
     product_name: 'Bausch + Lomb PureVision 2 HD',
     manufacturer: 'Bausch + Lomb',
     brand: 'Bausch + Lomb',
@@ -145,6 +149,7 @@ export const PRODUCTS = [
   },
   {
     id: 'proclear-sphere',
+    asin: 'B00D28J31E',
     product_name: 'CooperVision Proclear Sphere',
     manufacturer: 'CooperVision',
     brand: 'CooperVision',
@@ -178,6 +183,7 @@ export const PRODUCTS = [
   },
   {
     id: 'air-optix-night-day',
+    asin: 'B008HJR1DU',
     product_name: 'Air Optix Night & Day Aqua',
     manufacturer: 'Alcon',
     brand: 'Alcon',
@@ -213,6 +219,7 @@ export const PRODUCTS = [
   // --- TAGESLINSEN (SPHÄRISCH) ---
   {
     id: 'acuvue-moist',
+    asin: 'B00198CDH0',
     product_name: '1-Day Acuvue Moist',
     manufacturer: 'Johnson & Johnson',
     brand: 'Acuvue',
@@ -246,6 +253,7 @@ export const PRODUCTS = [
   },
   {
     id: 'acuvue-oasys-1day',
+    asin: 'B01I13PY6C',
     product_name: 'Acuvue Oasys 1-Day mit HydraLuxe',
     manufacturer: 'Johnson & Johnson',
     brand: 'Acuvue',
@@ -279,6 +287,7 @@ export const PRODUCTS = [
   },
   {
     id: 'dailies-total-1',
+    asin: 'B00FN36Y86',
     product_name: 'Alcon Dailies Total 1',
     manufacturer: 'Alcon',
     brand: 'Alcon',
@@ -312,6 +321,7 @@ export const PRODUCTS = [
   },
   {
     id: 'dailies-aquacomfort',
+    asin: 'B0017J4FAO',
     product_name: 'Alcon Dailies AquaComfort Plus',
     manufacturer: 'Alcon',
     brand: 'Alcon',
@@ -345,6 +355,7 @@ export const PRODUCTS = [
   },
   {
     id: 'clariti-1day',
+    asin: 'B007BBUL78',
     product_name: 'CooperVision Clariti 1-Day',
     manufacturer: 'CooperVision',
     brand: 'CooperVision',
@@ -378,6 +389,7 @@ export const PRODUCTS = [
   },
   {
     id: 'biotrue-oneday',
+    asin: 'B00EALB1QM',
     product_name: 'Bausch + Lomb Biotrue ONEday',
     manufacturer: 'Bausch + Lomb',
     brand: 'Bausch + Lomb',
@@ -413,6 +425,7 @@ export const PRODUCTS = [
   // --- TORISCHE LINSEN (HORNHAUTVERKRÜMMUNG) ---
   {
     id: 'biofinity-toric',
+    asin: 'B00D2AVNEM',
     product_name: 'CooperVision Biofinity Toric',
     manufacturer: 'CooperVision',
     brand: 'CooperVision',
@@ -446,6 +459,7 @@ export const PRODUCTS = [
   },
   {
     id: 'airoptix-toric',
+    asin: 'B07MD1X1Z5',
     product_name: 'Air Optix Plus HydraGlyde for Astigmatism',
     manufacturer: 'Alcon',
     brand: 'Alcon',
@@ -481,6 +495,7 @@ export const PRODUCTS = [
   // --- MULTIFOKALE LINSEN (GLEITSICHT / ALTERSSICHTIGKEIT) ---
   {
     id: 'biofinity-multifocal',
+    asin: 'B01N3YSW2T',
     product_name: 'CooperVision Biofinity Multifocal',
     manufacturer: 'CooperVision',
     brand: 'CooperVision',
@@ -516,6 +531,7 @@ export const PRODUCTS = [
   // --- PFLEGEMITTEL & TROPFEN ---
   {
     id: 'biotrue-fluid',
+    asin: 'B0055HY2TS',
     product_name: 'Bausch + Lomb Biotrue All-in-One',
     manufacturer: 'Bausch + Lomb',
     brand: 'Bausch + Lomb',
@@ -549,6 +565,7 @@ export const PRODUCTS = [
   },
   {
     id: 'aosept-hydraglyde',
+    asin: 'B00U7E5IK6',
     product_name: 'Alcon AOSept Plus mit HydraGlyde',
     manufacturer: 'Alcon',
     brand: 'Alcon',

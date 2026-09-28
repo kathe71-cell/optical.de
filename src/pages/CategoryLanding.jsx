@@ -11,11 +11,14 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick, trackFilterUsed, trackProductClicked } from '../utils/tracking';
 
-const AMAZON_TAG = 'esstri-21';
+const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (query) => {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+const getAmazonLink = (queryOrAsin, asin) => {
+  if (asin) {
+    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
 };
 
 const CATEGORY_CONFIG = {
@@ -255,7 +258,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                       Datenblatt
                     </Link>
                     <a
-                      href={getAmazonLink(p.amazon_query)}
+                      href={getAmazonLink(p.amazon_query, p.asin)}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'category_page')}
@@ -267,7 +270,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                   </div>
 
                   <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
-                    * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+                    * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
                   </div>
                 </div>
 

@@ -18,11 +18,14 @@ import { EIGENMARKEN_DATABASE, searchEigenmarken, calculateOpticianCosts } from 
 import { getProductById } from '../data/products';
 import { trackDecoderStarted, trackDecoderCompleted, trackAffiliateClick } from '../utils/tracking';
 
-const AMAZON_TAG = 'esstri-21';
+const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (query) => {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+const getAmazonLink = (queryOrAsin, asin) => {
+  if (asin) {
+    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
 };
 
 export default function EigenmarkenDecoder({ standalone = false }) {
@@ -373,7 +376,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
               {/* Call To Action zu Amazon mit transparenter Kennzeichnung */}
               <div className="mt-5 pt-3 border-t border-slate-100">
                 <a
-                  href={getAmazonLink(matchedProduct.amazon_query)}
+                  href={getAmazonLink(matchedProduct.amazon_query, matchedProduct.asin)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackAffiliateClick(matchedProduct.product_name, 'amazon', 'eigenmarken_decoder')}
@@ -384,7 +387,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                 </a>
                 <div className="text-center mt-2 space-y-0.5">
                   <div className="text-[10px] text-slate-500 font-medium">
-                    Amazon-Partnerlink (Suche) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
+                    Amazon-Partnerlink (Amazon.de) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                   </div>
                   <div className="text-[9px] text-slate-400">
                     * Werbelink / Partnerlink

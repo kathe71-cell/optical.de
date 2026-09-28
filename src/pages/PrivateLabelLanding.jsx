@@ -11,11 +11,14 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick } from '../utils/tracking';
 
-const AMAZON_TAG = 'esstri-21';
+const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (query) => {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+const getAmazonLink = (queryOrAsin, asin) => {
+  if (asin) {
+    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
 };
 
 export default function PrivateLabelLanding({ slugOverride }) {
@@ -173,7 +176,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
 
               <div className="mt-6 pt-4 border-t border-slate-100 space-y-2">
                 <a
-                  href={getAmazonLink(entry.brand_amazon_query)}
+                  href={getAmazonLink(entry.brand_amazon_query, entry.asin)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackAffiliateClick(entry.original_brand_name, 'amazon', 'private_label_page')}
@@ -193,7 +196,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 )}
 
                 <div className="text-center pt-1 text-[9px] text-slate-400 leading-tight">
-                  * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+                  * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
                 </div>
               </div>
             </div>

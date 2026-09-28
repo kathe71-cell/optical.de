@@ -10,11 +10,14 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick } from '../utils/tracking';
 
-const AMAZON_TAG = 'esstri-21';
+const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (query) => {
-  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}&ascsubtag=${AMAZON_SUBID}`;
+const getAmazonLink = (queryOrAsin, asin) => {
+  if (asin) {
+    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
+  }
+  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
 };
 
 export default function ProductComparisonPage() {
@@ -101,7 +104,7 @@ export default function ProductComparisonPage() {
             <div className="col-span-4 hidden sm:block"></div>
             <div className="col-span-6 sm:col-span-4">
               <a
-                href={getAmazonLink(pA.amazon_query)}
+                href={getAmazonLink(pA.amazon_query, pA.asin)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackAffiliateClick(pA.product_name, 'amazon', 'comparison_page')}
@@ -113,7 +116,7 @@ export default function ProductComparisonPage() {
             </div>
             <div className="col-span-6 sm:col-span-4">
               <a
-                href={getAmazonLink(pB.amazon_query)}
+                href={getAmazonLink(pB.amazon_query, pB.asin)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackAffiliateClick(pB.product_name, 'amazon', 'comparison_page')}
@@ -124,7 +127,7 @@ export default function ProductComparisonPage() {
               </a>
             </div>
             <div className="col-span-12 text-center text-[9px] text-slate-400 pt-1 leading-tight">
-              * Werbelink / Partnerlink (Suche) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+              * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
             </div>
           </div>
         </div>
