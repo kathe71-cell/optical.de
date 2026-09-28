@@ -45,11 +45,6 @@
       "permanent": true
     },
     {
-      "source": "/vergleich",
-      "destination": "/vergleichskatalog",
-      "permanent": true
-    },
-    {
       "source": "/rechner",
       "destination": "/preisrechner",
       "permanent": true
