@@ -45,7 +45,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
         title={`${entry.optician_private_label} (${entry.optician_chain}) – Original-Linse | optical.de`}
-        description={`Welches Markenprodukt steckt hinter ${entry.optician_private_label}? Baugleich mit ${entry.original_brand_name} (${entry.brand_manufacturer}). Verifizierte Parameter & Preisvergleich.`}
+        description={`Welches Markenprodukt steckt hinter ${entry.optician_private_label}? Baugleich mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
         canonical={`https://www.optical.de/${slug}`}
       />
       <Header />
@@ -71,7 +71,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
             {entry.optician_private_label}: Original-Hersteller &amp; Preisvergleich
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
-            Detaillierte Gegenüberstellung der Optiker-Handelsmarke {entry.optician_private_label} mit dem baugleichen Markenprodukt {entry.original_brand_name}.
+            Detaillierte Gegenüberstellung der Optiker-Handelsmarke {entry.optician_private_label} mit dem baugleichen Markenprodukt {matchedProduct?.product_name || ''}.
           </p>
         </div>
 
@@ -91,33 +91,15 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 <div className="grid grid-cols-12 px-4 py-3 bg-slate-50 font-semibold text-slate-700">
                   <span className="col-span-4">Parameter</span>
                   <span className="col-span-4">{entry.optician_private_label} ({entry.optician_chain})</span>
-                  <span className="col-span-4">{entry.original_brand_name} ({entry.brand_manufacturer})</span>
+                  <span className="col-span-4">{matchedProduct?.product_name || 'Markenprodukt'} ({matchedProduct?.manufacturer || ''})</span>
                 </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-4 text-slate-500 font-medium">Linsentyp</span>
-                  <span className="col-span-4 font-semibold text-slate-800">{entry.lens_type}</span>
-                  <span className="col-span-4 font-semibold text-emerald-700">{entry.lens_type}</span>
-                </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-4 text-slate-500 font-medium">Material (USAN)</span>
-                  <span className="col-span-4 font-semibold text-slate-800">{entry.material}</span>
-                  <span className="col-span-4 font-semibold text-emerald-700">{entry.material}</span>
-                </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-4 text-slate-500 font-medium">Sauerstofffluss (Dk/t)</span>
-                  <span className="col-span-4 font-semibold text-slate-800">{entry.dk_t} Dk/t</span>
-                  <span className="col-span-4 font-semibold text-emerald-700">{entry.dk_t} Dk/t</span>
-                </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-4 text-slate-500 font-medium">Wassergehalt</span>
-                  <span className="col-span-4 font-semibold text-slate-800">{entry.water_content}</span>
-                  <span className="col-span-4 font-semibold text-emerald-700">{entry.water_content}</span>
-                </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-4 text-slate-500 font-medium">Geometrie (BC / DIA)</span>
-                  <span className="col-span-4 font-semibold text-slate-800">{entry.base_curve} / {entry.diameter}</span>
-                  <span className="col-span-4 font-semibold text-emerald-700">{entry.base_curve} / {entry.diameter}</span>
-                </div>
+                {entry.matched_parameters?.map((param, i) => (
+                  <div key={i} className="grid grid-cols-12 px-4 py-3">
+                    <span className="col-span-4 text-slate-500 font-medium">{param.parameter}</span>
+                    <span className="col-span-4 font-semibold text-slate-800">{param.private_label_value}</span>
+                    <span className={'col-span-4 font-semibold ' + (param.match ? 'text-emerald-700' : 'text-red-600')}>{param.brand_value}</span>
+                  </div>
+                ))}
               </div>
 
               {/* Status Badge */}
@@ -151,13 +133,13 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 Original-Markenprodukt
               </span>
               <h3 className="text-xl font-black text-slate-950 mt-1">
-                {entry.original_brand_name}
+                {matchedProduct?.product_name || 'Markenprodukt'}
               </h3>
 
               <div className="mt-5 pt-4 border-t border-slate-100 space-y-2.5 text-xs">
                 <div className="flex justify-between items-center text-slate-600">
                   <span>Hersteller:</span>
-                  <span className="font-semibold text-slate-800">{entry.brand_manufacturer}</span>
+                  <span className="font-semibold text-slate-800">{matchedProduct?.manufacturer || '–'}</span>
                 </div>
                 <div className="flex justify-between items-center text-slate-600">
                   <span>Standardpackung:</span>
@@ -176,10 +158,10 @@ export default function PrivateLabelLanding({ slugOverride }) {
 
               <div className="mt-6 pt-4 border-t border-slate-100 space-y-2">
                 <a
-                  href={getAmazonLink(entry.brand_amazon_query, entry.asin)}
+                  href={getAmazonLink(matchedProduct?.amazon_query, matchedProduct?.asin)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackAffiliateClick(entry.original_brand_name, 'amazon', 'private_label_page')}
+                  onClick={() => trackAffiliateClick(matchedProduct?.product_name || entry.optician_private_label, 'amazon', 'private_label_page')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition group"
                 >
                   <span>Angebote bei Amazon suchen *</span>
@@ -188,7 +170,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
 
                 {matchedProduct && (
                   <Link
-                    to={`/${matchedProduct.id === 'biofinity' ? 'biofinity' : matchedProduct.id}`}
+                    to={matchedProduct.id === 'biofinity' ? '/biofinity' : `/produkt/${matchedProduct.id}`}
                     className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 px-3 rounded-xl block text-center transition"
                   >
                     Vollständiges Datenblatt öffnen
