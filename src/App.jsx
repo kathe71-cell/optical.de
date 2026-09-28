@@ -1,4 +1,7 @@
 import AnpassungGuidePage from './pages/AnpassungGuidePage';
+import AstigmatismusGuide from './pages/AstigmatismusGuide';
+import MonatsVsTagesGuide from './pages/MonatsVsTagesGuide';
+import PflegemittelGuide from './pages/PflegemittelGuide';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import VercelAnalytics from './components/VercelAnalytics';
@@ -62,6 +65,9 @@ export function AppRoutes() {
         {/* Rechtliches & Tools */}
         <Route path="/rechner-embed" element={<RechnerEmbed />} />
         <Route path="/ratgeber/kontaktlinsen-anpassen" element={<AnpassungGuidePage />} />
+        <Route path="/ratgeber/astigmatismus-kontaktlinsen" element={<AstigmatismusGuide />} />
+        <Route path="/ratgeber/tageslinsen-vs-monatslinsen-kosten" element={<MonatsVsTagesGuide />} />
+        <Route path="/ratgeber/kontaktlinsen-pflegemittel-vergleich" element={<PflegemittelGuide />} />
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />
 

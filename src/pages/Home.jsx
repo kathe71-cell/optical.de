@@ -49,6 +49,8 @@ const POPULAR_SEARCHES = [
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [homeCategory, setHomeCategory] = useState('all');
+  const [homeSort, setHomeSort] = useState('popular');
   const navigate = useNavigate();
   const { savedIds, isSaved, toggleSave } = useSavedLenses();
 
@@ -76,8 +78,31 @@ export default function Home() {
     }
   };
 
-  // Top 6 Linsen für den schnellen Nachkauf-Einstieg
-  const featuredProducts = PRODUCTS.slice(0, 6);
+  // Gefilterte & sortierte Produkte für Startseite
+  const featuredProducts = PRODUCTS.filter(p => {
+    if (homeCategory === 'tag') return p.lens_type.toLowerCase().includes('tageslinse') && !p.lens_type.toLowerCase().includes('torisch');
+    if (homeCategory === 'monat') return p.lens_type.toLowerCase().includes('monatslinse') && !p.lens_type.toLowerCase().includes('torisch');
+    if (homeCategory === 'toric') return p.lens_type.toLowerCase().includes('torisch');
+    if (homeCategory === 'pflege') return p.lens_type.toLowerCase().includes('pflegemittel') || p.lens_type.toLowerCase().includes('augentropfen');
+    if (homeCategory === 'zubehoer') return p.lens_type.toLowerCase().includes('zubeh') || p.lens_type.toLowerCase().includes('augentropfen');
+    return !p.lens_type.toLowerCase().includes('pflegemittel') && !p.lens_type.toLowerCase().includes('augentropfen') && !p.lens_type.toLowerCase().includes('zubeh');
+  }).sort((a, b) => {
+    if (homeSort === 'price_asc') return a.price - b.price;
+    if (homeSort === 'price_day') {
+      const aDay = parseFloat((a.cost_per_day || '99').replace(',','.'));
+      const bDay = parseFloat((b.cost_per_day || '99').replace(',','.'));
+      return aDay - bDay;
+    }
+    return 0;
+  });
+
+  const cheapestPerDayTag = PRODUCTS
+    .filter(p => p.lens_type.toLowerCase().includes('tageslinse') && p.cost_per_day)
+    .sort((a, b) => parseFloat((a.cost_per_day||'99').replace(',','.')) - parseFloat((b.cost_per_day||'99').replace(',','.')));
+  const cheapestTagId = cheapestPerDayTag[0]?.id;
+  const cheapestMonatId = PRODUCTS
+    .filter(p => p.lens_type.toLowerCase().includes('monatslinse') && !p.lens_type.toLowerCase().includes('torisch') && p.cost_per_day)
+    .sort((a, b) => parseFloat((a.cost_per_day||'99').replace(',','.')) - parseFloat((b.cost_per_day||'99').replace(',','.')))[0]?.id;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
@@ -293,6 +318,41 @@ export default function Home() {
             </Link>
           </div>
 
+          {/* Kategorie-Filter & Sortierung */}
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { key: 'all', label: 'Alle' },
+                { key: 'tag', label: 'Tageslinsen' },
+                { key: 'monat', label: 'Monatslinsen' },
+                { key: 'toric', label: 'Torisch' },
+                { key: 'pflege', label: 'Pflege' },
+                { key: 'zubehoer', label: 'Zubehör' },
+              ].map(tab => (
+                <button
+                  key={tab.key}
+                  onClick={() => setHomeCategory(tab.key)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                    homeCategory === tab.key
+                      ? 'bg-slate-950 text-white'
+                      : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            <select
+              value={homeSort}
+              onChange={e => setHomeSort(e.target.value)}
+              className="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none"
+            >
+              <option value="popular">Standard</option>
+              <option value="price_asc">Preis aufsteigend</option>
+              <option value="price_day">Günstigste / Tag</option>
+            </select>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProducts.map((p) => {
               const saved = isSaved(p.id);
@@ -309,6 +369,11 @@ export default function Home() {
                         <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
                           {p.lens_type}
                         </span>
+                        {(p.id === cheapestTagId || p.id === cheapestMonatId) && (
+                          <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[9px] font-black px-1.5 py-0.5 rounded uppercase">
+                            Günstigste/Tag
+                          </span>
+                        )}
                         <button
                           onClick={() => toggleSave(p.id)}
                           className={`p-1.5 rounded-lg border transition ${

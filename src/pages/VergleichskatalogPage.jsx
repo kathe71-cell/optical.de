@@ -48,6 +48,21 @@ export default function VergleichskatalogPage() {
   const [sortBy, setSortBy] = useState('popular'); // 'popular', 'price_asc', 'dkt_desc'
 
   const { isSaved, toggleSave } = useSavedLenses();
+  const [compareList, setCompareList] = useState([]);
+
+  const toggleCompare = (id) => {
+    setCompareList(prev =>
+      prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 3 ? [...prev, id] : prev
+    );
+  };
+
+  // Günstigste Tageslinse und Monatslinse je Kategorie finden
+  const cheapestPerDayTag = PRODUCTS
+    .filter(p => p.lens_type.toLowerCase().includes('tageslinse') && p.cost_per_day)
+    .sort((a, b) => parseFloat(a.cost_per_day) - parseFloat(b.cost_per_day))[0]?.id;
+  const cheapestPerDayMonat = PRODUCTS
+    .filter(p => p.lens_type.toLowerCase().includes('monatslinse') && !p.lens_type.toLowerCase().includes('torisch') && p.cost_per_day)
+    .sort((a, b) => parseFloat(a.cost_per_day) - parseFloat(b.cost_per_day))[0]?.id;
 
   // URL-Parameter 'q' bei direkter Navigation oder Browser-Zurück/Vorwärts übernehmen
   useEffect(() => {
@@ -63,6 +78,7 @@ export default function VergleichskatalogPage() {
     if (activeCategory === 'toric' && !item.lens_type.includes('Torisch')) return false;
     if (activeCategory === 'multifocal' && !item.lens_type.includes('Multifokal')) return false;
     if (activeCategory === 'pflege' && !(item.lens_type.includes('Pflegemittel') || item.lens_type.includes('Augentropfen'))) return false;
+    if (activeCategory === 'zubehoer' && !(item.lens_type.includes('Zubehoer') || item.lens_type.includes('Augentropfen') || item.lens_type.includes('Zubehör'))) return false;
 
     // Hersteller
     if (activeBrand !== 'all') {
@@ -233,7 +249,8 @@ export default function VergleichskatalogPage() {
                 { key: 'tag', label: 'Tageslinsen' },
                 { key: 'toric', label: 'Torisch (Astigmatismus)' },
                 { key: 'multifocal', label: 'Multifokal (Gleitsicht)' },
-                { key: 'pflege', label: 'Pflegemittel' }
+                { key: 'pflege', label: 'Pflegemittel' },
+                { key: 'zubehoer', label: 'Zubehör & Tropfen' }
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -306,6 +323,35 @@ export default function VergleichskatalogPage() {
           </div>
         </div>
 
+        {/* VERGLEICHS-LEISTE */}
+        {compareList.length > 0 && (
+          <div className="sticky top-0 z-40 bg-emerald-900 text-white rounded-2xl px-5 py-3 mb-4 flex items-center justify-between gap-3 shadow-lg">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider">Vergleichen:</span>
+              {compareList.map(id => {
+                const prod = PRODUCTS.find(p => p.id === id);
+                return (
+                  <span key={id} className="bg-emerald-700 text-white text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                    {prod?.product_name}
+                    <button onClick={() => toggleCompare(id)} className="text-emerald-300 hover:text-white ml-0.5">✕</button>
+                  </span>
+                );
+              })}
+            </div>
+            <div className="flex items-center gap-2">
+              <Link
+                to={`/vergleich?ids=${compareList.join(',')}`}
+                className="bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-black text-xs px-4 py-2 rounded-xl transition whitespace-nowrap"
+              >
+                Jetzt vergleichen →
+              </Link>
+              <button onClick={() => setCompareList([])} className="text-emerald-400 hover:text-white text-xs font-bold">
+                Alle löschen
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* PRODUKT-GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredProducts.map((p) => {
@@ -324,6 +370,11 @@ export default function VergleichskatalogPage() {
                       <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
                         {p.lens_type}
                       </span>
+                      {(p.id === cheapestPerDayTag || p.id === cheapestPerDayMonat) && (
+                        <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide">
+                          Günstigste/Tag
+                        </span>
+                      )}
                       <button
                         onClick={() => toggleSave(p.id)}
                         className={`p-1.5 rounded-lg border transition ${
@@ -411,7 +462,7 @@ export default function VergleichskatalogPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     <Link
                       to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`}
                       onClick={() => trackProductClicked(p.id, p.product_name)}
@@ -419,6 +470,19 @@ export default function VergleichskatalogPage() {
                     >
                       Datenblatt
                     </Link>
+                    <button
+                      onClick={() => toggleCompare(p.id)}
+                      className={`w-full font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition border ${
+                        compareList.includes(p.id)
+                          ? 'bg-emerald-600 text-white border-emerald-700'
+                          : compareList.length >= 3
+                          ? 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'
+                          : 'bg-white text-emerald-700 border-emerald-300 hover:bg-emerald-50'
+                      }`}
+                      disabled={compareList.length >= 3 && !compareList.includes(p.id)}
+                    >
+                      {compareList.includes(p.id) ? '✓ Ausgewählt' : 'Vergleichen'}
+                    </button>
                     <a
                       href={getAmazonLink(p.amazon_query, p.asin)}
                       target="_blank"
@@ -450,7 +514,7 @@ export default function VergleichskatalogPage() {
               Keine Kontaktlinsen für {searchQuery.trim() ? `„${searchQuery.trim()}“` : 'diese Filterung'} gefunden
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
-              Überprüfe bitte die Schreibweise oder setze die Filtereinstellungen zurück, um alle 17 Kontaktlinsen im Katalog anzuzeigen.
+              Überprüfe bitte die Schreibweise oder setze die Filtereinstellungen zurück, um alle Produkte im Katalog anzuzeigen.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               {searchQuery && (
