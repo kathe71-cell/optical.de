@@ -234,7 +234,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                 <div className="mt-5 pt-3 border-t border-slate-100">
                   <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
                     <div className="flex items-baseline justify-between">
-                      <span className="text-[11px] text-slate-600 font-medium">Orientierungspreis / UVP:</span>
+                      <span className="text-[11px] text-slate-600 font-medium">Beispielpreis auf Amazon.de:</span>
                       <span className="text-base font-extrabold text-slate-900">ca. {p.price.toFixed(2)} € *</span>
                     </div>
                     <div className="text-[10px] text-slate-500">
@@ -270,7 +270,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                   </div>
 
                   <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
-                    * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+                    * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </div>
                 </div>
 

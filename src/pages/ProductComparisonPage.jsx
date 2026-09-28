@@ -33,7 +33,7 @@ export default function ProductComparisonPage() {
     { label: 'Basiskurve (BC)', valA: pA.base_curve, valB: pB.base_curve },
     { label: 'Durchmesser (DIA)', valA: pA.diameter, valB: pB.diameter },
     { label: 'Packungsgröße', valA: pA.pack_size, valB: pB.pack_size },
-    { label: 'Orientierungspreis / UVP', valA: `ca. ${pA.price.toFixed(2)} € *`, valB: `ca. ${pB.price.toFixed(2)} € *` },
+    { label: 'Beispielpreis auf Amazon.de', valA: `ca. ${pA.price.toFixed(2)} € *`, valB: `ca. ${pB.price.toFixed(2)} € *` },
     { label: 'Preis pro Einzellinse', valA: pA.price_per_lens, valB: pB.price_per_lens },
     { label: 'Kosten pro Tragetag (2 Linsen)', valA: pA.cost_per_day, valB: pB.cost_per_day },
     { label: 'Kosten pro Monat (2 Linsen)', valA: pA.cost_per_month, valB: pB.cost_per_month },
@@ -127,7 +127,7 @@ export default function ProductComparisonPage() {
               </a>
             </div>
             <div className="col-span-12 text-center text-[9px] text-slate-400 pt-1 leading-tight">
-              * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+              * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
             </div>
           </div>
         </div>

@@ -324,7 +324,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   {/* Marken-Original */}
                   <div className="bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-200">
                     <div className="font-bold text-slate-900 flex justify-between items-baseline">
-                      <span className="text-xs">Orientierungspreis / UVP:</span>
+                      <span className="text-xs">Beispielpreis auf Amazon.de:</span>
                       <span className="text-emerald-700 font-extrabold text-sm">ca. {matchedProduct.price.toFixed(2)} € *</span>
                     </div>
                     <div className="text-[10px] text-slate-500 mt-0.5">
@@ -387,7 +387,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                 </a>
                 <div className="text-center mt-2 space-y-0.5">
                   <div className="text-[10px] text-slate-500 font-medium">
-                    Amazon-Partnerlink (Amazon.de) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
+                    Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </div>
                   <div className="text-[9px] text-slate-400">
                     * Werbelink / Partnerlink

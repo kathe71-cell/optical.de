@@ -242,7 +242,7 @@ export default function ProductDetailPage({ productIdOverride }) {
                 </div>
                 
                 <div className="flex justify-between items-baseline text-slate-900">
-                  <span className="text-xs text-slate-600 font-medium">Orientierungspreis / UVP:</span>
+                  <span className="text-xs text-slate-600 font-medium">Beispielpreis auf Amazon.de:</span>
                   <span className="text-emerald-700 font-black text-xl">ca. {product.price.toFixed(2)} € *</span>
                 </div>
 
@@ -294,7 +294,7 @@ export default function ProductDetailPage({ productIdOverride }) {
 
                 <div className="text-center space-y-0.5 pt-1">
                   <span className="text-[10px] text-slate-500 block font-medium">
-                    Amazon-Partnerlink (Amazon.de) · Tagesaktueller Händlerpreis auf Amazon.de einsehbar
+                    Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </span>
                   <span className="text-[9px] text-slate-400 block font-medium">
                     * Werbelink / Partnerlink

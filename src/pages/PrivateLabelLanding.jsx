@@ -164,7 +164,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   <span className="font-semibold text-slate-800">{matchedProduct?.pack_size || `${entry.optician_pack_count}er Packung`}</span>
                 </div>
                 <div className="flex justify-between items-baseline text-slate-900">
-                  <span className="text-xs text-slate-600 font-medium">Orientierungspreis / UVP:</span>
+                  <span className="text-xs text-slate-600 font-medium">Beispielpreis auf Amazon.de:</span>
                   <span className="text-emerald-700 font-black text-lg">
                     ca. {matchedProduct?.price ? matchedProduct.price.toFixed(2) : '–'} € *
                   </span>
@@ -196,7 +196,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 )}
 
                 <div className="text-center pt-1 text-[9px] text-slate-400 leading-tight">
-                  * Werbelink / Partnerlink (Amazon.de) · Tatsächlicher Händlerpreis auf Amazon.de einsehbar
+                  * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                 </div>
               </div>
             </div>

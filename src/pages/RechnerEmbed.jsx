@@ -161,7 +161,7 @@ export default function RechnerEmbed() {
             <div className="text-xl font-black text-white">{current.originalName}</div>
             <div className="text-xs text-slate-300 mt-0.5">Hersteller: <strong className="text-white">{current.manufacturer}</strong></div>
             <div className="text-xl font-black text-emerald-400 mt-2">ca. {current.bestPrice} *</div>
-            <div className="text-[10px] text-slate-400">Orientierungspreis / UVP. Tagesaktueller Händlerpreis auf Amazon.de einsehbar.</div>
+            <div className="text-[10px] text-slate-400">Beispielpreis auf Amazon.de. Tagesaktueller Händlerpreis auf Amazon.de einsehbar.</div>
           </div>
         </div>
 
