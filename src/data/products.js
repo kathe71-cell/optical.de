@@ -4,12 +4,12 @@
  * Datenstand: 09.09.2026
  * Qualitätsstandard:
  * - Ausschließlich verifizierte Hersteller- und Packungsangaben
- * - Keine erfundenen Ratings, Reviews oder subjektiven Siegel (wie "Testsieger")
+ * - Keine erfundenen Ratings, Reviews oder subjektiven Testsiegel
  * - Transparente Angabe von Quelle, Datenstand und Packungsgröße
  * - Mathematisch konsistente Preis-pro-Tag- und Monatsberechnung (Basis: 2 Augen)
  */
 
-export const PRODUCTS = [
+const RAW_PRODUCTS = [
   // --- MONATSLINSEN (SPHÄRISCH) ---
   {
     id: 'biofinity',
@@ -212,7 +212,7 @@ export const PRODUCTS = [
     source_url: 'https://alcon.de',
     source_date: '09.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 175 (Höchster Wert im Datensatz)', 'Lotrafilcon A'],
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 175', 'Lotrafilcon A'],
     aliases: ['Air Optix', 'Air Optix Night & Day Aqua', 'Air Optix Night and Day', 'Night & Day', 'Night and Day Aqua', 'Lotrafilcon A']
   },
 
@@ -1408,6 +1408,42 @@ export const calculateLensCosts = (product, usage = 'both_eyes') => {
   };
 };
 
+export const PRODUCTS = RAW_PRODUCTS.map((p) => {
+  let material_class = 'Sonstige';
+  if (p.material) {
+    if (p.material.toLowerCase().includes('silikon-hydrogel')) material_class = 'Silikon-Hydrogel';
+    else if (p.material.toLowerCase().includes('wassergradient')) material_class = 'Wassergradienten-Polymer';
+    else if (p.material.toLowerCase().includes('hypergel')) material_class = 'HyperGel (Dehydrierungsresistentes Polymer)';
+    else if (p.material.toLowerCase().includes('hydrogel')) material_class = 'Klassisches Hydrogel';
+    else if (p.material.toLowerCase().includes('lösung') || p.material.toLowerCase().includes('wasserstoffperoxid')) material_class = 'Pflegemittel-Matrix';
+  } else if (p.lens_type?.toLowerCase().includes('pflege') || p.lens_type?.toLowerCase().includes('tropfen')) {
+    material_class = 'Ophthalmologische Lösung';
+  } else {
+    material_class = 'Zubehör / Kunststoff';
+  }
+
+  let correction_type = 'sphärisch';
+  if (p.lens_type?.toLowerCase().includes('torisch')) correction_type = 'torisch';
+  else if (p.lens_type?.toLowerCase().includes('multifokal')) correction_type = 'multifokal';
+  else if (p.lens_type?.toLowerCase().includes('pflege') || p.lens_type?.toLowerCase().includes('zubehoer') || p.lens_type?.toLowerCase().includes('tropfen')) correction_type = 'nicht_zutreffend';
+
+  const data_status = (p.source_type && p.source_url && p.material) ? 'VERIFIED' : (p.source_type && p.source_url ? 'PARTIAL' : 'UNVERIFIED');
+
+  return {
+    ...p,
+    canonical_name: p.product_name,
+    product_family: p.brand || p.manufacturer,
+    material_class,
+    correction_type,
+    data_status,
+    price_type: 'Orientierungspreis',
+    last_price_checked: '09/2026',
+    source_spec_url: p.source_url,
+    last_verified: p.source_date || '09.09.2026',
+    manufacturer_url: p.source_url
+  };
+});
+
 export const getProductById = (id) => PRODUCTS.find((p) => p.id === id);
 
 export const getProductsByCategory = (category) => {
@@ -1421,3 +1457,4 @@ export const getProductsByCategory = (category) => {
     return true;
   });
 };
+

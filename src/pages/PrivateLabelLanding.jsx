@@ -45,7 +45,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
         title={`${entry.optician_private_label} (${entry.optician_chain}) – Original-Linse | optical.de`}
-        description={`Welches Markenprodukt steckt hinter ${entry.optician_private_label}? Baugleich mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
+        description={`Welches Markenprodukt steckt hinter ${entry.optician_private_label}? Technische Übereinstimmung mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
         canonical={`https://www.optical.de/${slug}`}
       />
       <Header />
@@ -71,7 +71,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
             {entry.optician_private_label}: Original-Hersteller &amp; Preisvergleich
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
-            Detaillierte Gegenüberstellung der Optiker-Handelsmarke {entry.optician_private_label} mit dem baugleichen Markenprodukt {matchedProduct?.product_name || ''}.
+            Detaillierte Gegenüberstellung der Optiker-Handelsmarke {entry.optician_private_label} mit der Marken-Referenz {matchedProduct?.product_name || ''} auf Basis technischer Spezifikationen.
           </p>
         </div>
 
@@ -83,9 +83,18 @@ export default function PrivateLabelLanding({ slugOverride }) {
           
           <div className="lg:col-span-8 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-              <h2 className="text-lg font-black text-slate-900 mb-4">
-                1:1 Parameter-Vergleich
-              </h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-black text-slate-900">
+                  Technischer Parameter-Vergleich
+                </h2>
+                <span className={`text-xs font-bold px-2.5 py-1 rounded-md border ${
+                  entry.confidence_level === 'VERIFIED_IDENTICAL'
+                    ? 'bg-emerald-100 text-emerald-950 border-emerald-300'
+                    : 'bg-sky-100 text-sky-950 border-sky-300'
+                }`}>
+                  Einstufung: {entry.confidence_label || 'Hohe Übereinstimmung'}
+                </span>
+              </div>
               
               <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 text-xs">
                 <div className="grid grid-cols-12 px-4 py-3 bg-slate-50 font-semibold text-slate-700">
@@ -102,12 +111,18 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 ))}
               </div>
 
-              {/* Status Badge */}
-              <div className="mt-4 p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-950 flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>
-                  <strong>Verifizierter Abgleich:</strong> Chemische Zusammensetzung, Fertigungsverfahren und Parameter sind identisch.
-                </span>
+              {/* Status Badge & Reasoning */}
+              <div className="mt-4 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-2">
+                <div className="flex items-center gap-2 text-slate-900 font-bold">
+                  <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <span>Fachliche Bewertung &amp; Herleitung:</span>
+                </div>
+                <p className="text-[11px] leading-relaxed text-slate-600">
+                  {entry.reasoning || entry.derivation_evaluation}
+                </p>
+                <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-900 text-[10px] font-semibold">
+                  * Auch bei technischer Übereinstimmung empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung durch Augenarzt oder Augenoptiker.
+                </div>
               </div>
             </div>
 
@@ -118,10 +133,16 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 <span>Dokumentation &amp; Nachweis</span>
               </div>
               <p className="text-[11px] leading-relaxed">
-                <strong>Quellentyp:</strong> {entry.source_type}
+                <strong>Quelle 1:</strong> {entry.source_1 || entry.source_name}
               </p>
               <p className="text-[11px] leading-relaxed">
-                <strong>Nachweis:</strong> {entry.source_name} ({entry.mapping_source})
+                <strong>Quelle 2:</strong> {entry.source_2 || entry.source_type}
+              </p>
+              <p className="text-[11px] leading-relaxed">
+                <strong>Erfassungsmethode:</strong> {entry.mapping_source}
+              </p>
+              <p className="text-[11px] leading-relaxed">
+                <strong>Letzte Prüfung:</strong> {entry.last_verified}
               </p>
             </div>
           </div>

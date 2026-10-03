@@ -4,7 +4,7 @@
 
 ## Kern-Funktionen & Dienstleistungen
 - **Preisvergleich**: Gegenüberstellung von Angeboten zertifizierter Online-Anbieter.
-- **Eigenmarken-Decoder**: Zuordnung von Optiker-Eigenmarken (z. B. Apollo iWear, Fielmann ActiMed, Mister Spex True Day, Specsavers Easyvision) zu baugleichen Marken-Referenzen auf Basis technischer Spezifikationen.
+- **Eigenmarken-Decoder**: Zuordnung von Optiker-Eigenmarken (z. B. Apollo iWear, Fielmann ActiMed, Mister Spex True Day, Specsavers Easyvision) zu entsprechenden Marken-Referenzen auf Basis technischer Spezifikationen (Material/USAN, Wassergehalt, Dk/t, Geometrie).
 - **Tagespreis-Rechner**: Berechnung der realen Tageskosten pro Kontaktlinse anhand individueller Tragetage.
 - **Qualitätsstandards**: Konformitätsprüfungen nach DIN EN ISO 14534 (Augenoptik – Kontaktlinsen und Kontaktlinsenpflegemittel) und EU-MDR 2017/745 (Medical Device Regulation).
 
@@ -19,6 +19,7 @@
 - Preisvergleich: https://www.optical.de/kontaktlinsen-preisvergleich
 - Tageslinsen-Vergleich: https://www.optical.de/tageslinsen-vergleich
 - Monatslinsen-Vergleich: https://www.optical.de/monatslinsen-vergleich
+- Transparenzstandard: https://www.optical.de/transparenz
 - Interaktives Rechner-Embed: https://www.optical.de/rechner-embed
 - Impressum: https://www.optical.de/impressum
 - Datenschutz: https://www.optical.de/datenschutz
@@ -31,11 +32,11 @@
 - **Basiskurve (BC)**: Radius der Rückfläche in mm (i.d.R. 8,3–9,0 mm), bestimmt Passform auf Hornhaut
 
 ## Eigenmarken-Decoder (Beispiele)
-- **Apollo iWear Comfort** ≈ baugleich mit CooperVision Biomedics 1 Day Extra (Hydrogel, 58 % H₂O)
-- **Fielmann ActiMed** ≈ Proclear 1 Day (CooperVision, Phosphorylcholin-Technologie)
-- **Mister Spex True Day** ≈ Clariti 1 Day (CooperVision, Silikonhydrogel)
-- **Specsavers Easyvision Daily** ≈ 1-Day Acuvue Moist (Hydrogel, Lacreon-Technologie)
-- Hinweis: Zuordnungen basieren auf öffentlichen Herstellerangaben und technischen Parametervergleichen; keine Garantie auf Aktualität
+- **Apollo iWear Comfort** ≈ Parameter-Übereinstimmung mit CooperVision Biomedics 1 Day Extra (Hydrogel, 58 % H₂O)
+- **Fielmann ActiMed** ≈ Parameter-Übereinstimmung mit Biofinity (CooperVision, Comfilcon A)
+- **Mister Spex True Day** ≈ Parameter-Übereinstimmung mit Dailies AquaComfort Plus (Alcon, Nelfilcon A)
+- **Specsavers Easyvision Opteyes** ≈ Parameter-Übereinstimmung mit Bausch + Lomb Ultra (Samfilcon A)
+- Hinweis: Zuordnungen basieren auf öffentlichen Herstellerangaben und technischen Parametervergleichen (4 Konfidenz-Klassen); keine eigenmächtige Wechselempfehlung ohne fachliche Anpassung.
 
 ## Tagespreis-Berechnung
 - Formel: Tagespreis = (Packungspreis ÷ Linsenanzahl pro Packung) × 2 (für beide Augen)

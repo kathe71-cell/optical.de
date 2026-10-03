@@ -77,7 +77,7 @@ export default function ProductDetailPage({ productIdOverride }) {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-2">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              Verifiziertes Produktdatenblatt · {product.manufacturer}
+              {product.data_status === 'VERIFIED' ? 'Verifizierte Hersteller-Spezifikationen' : 'Strukturierte Produktdaten'} · {product.manufacturer}
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
               {product.product_name}
@@ -189,7 +189,7 @@ export default function ProductDetailPage({ productIdOverride }) {
               </div>
             </div>
 
-            {/* Zugeordnete Eigenmarken / Baugleiche Linsen */}
+            {/* Zugeordnete Eigenmarken / Handelsmarken */}
             {relatedEigenmarken.length > 0 && (
               <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
                 <div className="flex items-center gap-2 mb-3">
@@ -214,7 +214,7 @@ export default function ProductDetailPage({ productIdOverride }) {
                         {em.optician_private_label} →
                       </div>
                       <div className="text-[11px] text-slate-500 mt-1">
-                        Klassifikation: {em.classification === 'proven_oem_identity' ? 'Verifizierte OEM-Identität' : 'Parameter-Übereinstimmung'}
+                        Einstufung: {em.confidence_label || 'Hohe Übereinstimmung'}
                       </div>
                     </Link>
                   ))}

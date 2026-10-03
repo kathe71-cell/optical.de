@@ -485,7 +485,7 @@ export default function Home() {
                 Trägst du eine Eigenmarke von Apollo, Fielmann oder Mister Spex?
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Viele Optiker vertreiben exakt dieselben Linsen wie die großen Hersteller (CooperVision, Alcon) unter eigenem Namen. Unser Decoder zeigt dir die Übereinstimmung anhand von Material und Geometrie.
+                Viele Handelsmarken großer Optikerketten stammen von bekannten Linsenherstellern (wie CooperVision oder Alcon). Unser Decoder gleicht Material, Wassergehalt und Geometrie objektiv ab.
               </p>
               <div className="flex flex-wrap gap-2 pt-2 text-xs">
                 <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Apollo iWear Oxygen</span>

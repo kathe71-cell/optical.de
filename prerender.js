@@ -31,27 +31,27 @@ const ROUTES = {
   },
   '/apollo-iwear-oxygen': {
     title: 'iWear oxygen (Apollo-Optik) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter iWear oxygen? Baugleich mit Biofinity (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter iWear oxygen? Technische Übereinstimmung mit Biofinity (CooperVision). Verifizierte Parameter & Preisvergleich.',
   },
   '/fielmann-actimed': {
     title: 'ActiMed (Fielmann) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter ActiMed? Baugleich mit Biomedics 55 Evolution (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter ActiMed? Technische Übereinstimmung mit Biofinity (CooperVision). Verifizierte Parameter & Preisvergleich.',
   },
   '/fielmann-atmo': {
     title: 'Atmo (Fielmann) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter Atmo? Baugleich mit Biofinity (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter Atmo? Technische Übereinstimmung mit Air Optix Plus HydraGlyde (Alcon). Verifizierte Parameter & Preisvergleich.',
   },
   '/mister-spex-true-day': {
     title: 'True Day (Mister Spex) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter True Day? Baugleich mit Live Daily disposable (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter True Day? Technische Übereinstimmung mit Dailies AquaComfort Plus (Alcon). Verifizierte Parameter & Preisvergleich.',
   },
   '/specsavers-easyvision-opteyes': {
     title: 'easyvision opteyes (Specsavers) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter easyvision opteyes? Baugleich mit Biofinity (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter easyvision opteyes? Technische Übereinstimmung mit Bausch + Lomb Ultra. Verifizierte Parameter & Preisvergleich.',
   },
   '/apollo-iwear-harmony': {
     title: 'iWear harmony (Apollo-Optik) – Original-Linse | optical.de',
-    description: 'Welches Markenprodukt steckt hinter iWear harmony? Baugleich mit MyDay (CooperVision). Verifizierte Parameter & Preisvergleich.',
+    description: 'Welches Markenprodukt steckt hinter iWear harmony? Technische Übereinstimmung mit Proclear Sphere (CooperVision). Verifizierte Parameter & Preisvergleich.',
   },
   '/tageslinsen-vergleich': {
     title: 'Tageslinsen im Vergleich | optical.de',
@@ -90,6 +90,10 @@ const ROUTES = {
     description: 'Kostenloses Embed-Widget für den Kontaktlinsen-Kostenrechner.',
     robots: 'noindex, follow',
   },
+  '/transparenz': {
+    title: 'Transparenzstandard & Datenethik | optical.de',
+    description: 'Wie optical.de Daten erfasst, verifiziert und zuordnet. Konfidenz-Klassen, Unabhängigkeit, Ausschluss von Testsiegeln und Schutz vor Fehlinformationen.',
+  },
   '/impressum': {
     title: 'Impressum | optical.de',
     description: 'Impressum und rechtliche Anbieterkennzeichnung von optical.de gemäß § 5 DDG und § 18 MStV.',
@@ -97,6 +101,11 @@ const ROUTES = {
   '/datenschutz': {
     title: 'Datenschutzerklärung | optical.de',
     description: 'Datenschutzerklärung von optical.de: DSGVO-konforme Datenverarbeitung ohne Profiling, ohne externe Google CDN Fonts und mit 100% lokalem Merkzettel.',
+  },
+  '/404': {
+    title: '404 – Seite nicht gefunden | optical.de',
+    description: 'Die angeforderte Seite existiert leider nicht auf optical.de. Nutzen Sie unsere Suche oder das Inhaltsverzeichnis.',
+    robots: 'noindex, follow',
   },
 };
 
@@ -133,6 +142,9 @@ for (const [url, meta] of Object.entries(ROUTES)) {
   }
 
   fs.writeFileSync(toAbsolute(filePath), html);
+  if (url === '/404') {
+    fs.writeFileSync(toAbsolute('dist/404.html'), html);
+  }
   console.log(`  ✓ ${url} -> ${filePath} (${(html.length / 1024).toFixed(1)} kB)`);
 }
 

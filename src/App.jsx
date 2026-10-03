@@ -18,6 +18,7 @@ import PrivateLabelLanding from './pages/PrivateLabelLanding';
 import CategoryLanding from './pages/CategoryLanding';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductComparisonPage from './pages/ProductComparisonPage';
+import TransparencyPage from './pages/TransparencyPage';
 
 export function AppRoutes() {
   return (
@@ -39,8 +40,8 @@ export function AppRoutes() {
         <Route path="/rechner" element={<Navigate to="/preisrechner" replace />} />
         <Route path="/bookmarks" element={<Navigate to="/meine-linsen" replace />} />
 
-        {/* Transparenz & FAQ als Weiterleitungen zu entsprechenden Anchors */}
-        <Route path="/transparenz" element={<Navigate to="/#trust" replace />} />
+        {/* Transparenz-Standard & FAQ */}
+        <Route path="/transparenz" element={<TransparencyPage />} />
         <Route path="/faq" element={<Navigate to="/#trust" replace />} />
 
         {/* SEO-Landingpages: Handelsmarken / Private Labels */}

@@ -158,9 +158,17 @@ export default function EigenmarkenDecoder({ standalone = false }) {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-950 text-xs font-bold px-2.5 py-1 rounded-md border border-emerald-300">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-                Einstufung: {activeEntry.classification_label}
+              <span className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md border ${
+                activeEntry.confidence_level === 'VERIFIED_IDENTICAL'
+                  ? 'bg-emerald-100 text-emerald-950 border-emerald-300'
+                  : activeEntry.confidence_level === 'HIGH_CONFIDENCE_MATCH'
+                  ? 'bg-sky-100 text-sky-950 border-sky-300'
+                  : activeEntry.confidence_level === 'RELATED_MATERIAL_FAMILY'
+                  ? 'bg-amber-100 text-amber-950 border-amber-300'
+                  : 'bg-slate-100 text-slate-800 border-slate-300'
+              }`}>
+                <ShieldCheck className="w-3.5 h-3.5 text-current" />
+                Konfidenz: {activeEntry.confidence_label || activeEntry.classification_label}
               </span>
             </div>
           </div>
@@ -185,8 +193,14 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   </ul>
                 </div>
                 <p className="text-slate-600 text-[11px] pt-1">
-                  <strong>Fachliche Bewertung:</strong> {activeEntry.derivation_evaluation}
+                  <strong>Fachliche Bewertung:</strong> {activeEntry.reasoning || activeEntry.derivation_evaluation}
                 </p>
+
+                {/* Verbindlicher Sicherheits- und Anpassungshinweis */}
+                <div className="p-2.5 bg-amber-50/80 border border-amber-200 rounded-lg text-amber-950 text-[11px] font-medium flex items-center gap-2">
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                  <span>Auch bei technischer Übereinstimmung empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung.</span>
+                </div>
 
                 {/* Toggle zur detaillierten Quelleneinsicht */}
                 <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
@@ -196,18 +210,19 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                     className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 transition"
                   >
                     <Database className="w-3.5 h-3.5" />
-                    <span>{showSourceDetails ? 'Datenquelle ausblenden' : 'Datenquelle anzeigen'}</span>
+                    <span>{showSourceDetails ? 'Datenquellen ausblenden' : 'Verifizierte Primärquellen anzeigen'}</span>
                     {showSourceDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                   </button>
-                  <span className="text-[10px] text-slate-400">Keine KI-Schätzung · rein dokumentenbasierte Erfassung</span>
+                  <span className="text-[10px] text-slate-400">Keine Schätzung · rein dokumentenbasierte Erfassung</span>
                 </div>
 
                 {showSourceDetails && (
                   <div className="mt-2 p-2.5 bg-slate-100 rounded-lg text-[11px] text-slate-700 space-y-1 border border-slate-200">
-                    <div><strong>Quellentyp:</strong> {activeEntry.source_type}</div>
-                    <div><strong>Quellenangabe:</strong> {activeEntry.source_name}</div>
+                    <div><strong>Quelle 1:</strong> {activeEntry.source_1 || activeEntry.source_name}</div>
+                    <div><strong>Quelle 2:</strong> {activeEntry.source_2 || activeEntry.source_type}</div>
                     <div><strong>Erfassungsmethode:</strong> {activeEntry.mapping_source}</div>
-                    <div><strong>Zusatzhinweis:</strong> {activeEntry.notes}</div>
+                    <div><strong>Letzte Verifikation:</strong> {activeEntry.last_verified}</div>
+                    {activeEntry.notes && <div><strong>Zusatzhinweis:</strong> {activeEntry.notes}</div>}
                   </div>
                 )}
               </div>

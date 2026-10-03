@@ -52,7 +52,7 @@ export default function VergleichskatalogPage() {
 
   const toggleCompare = (id) => {
     setCompareList(prev =>
-      prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 3 ? [...prev, id] : prev
+      prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 4 ? [...prev, id] : prev
     );
   };
 
@@ -479,7 +479,7 @@ export default function VergleichskatalogPage() {
                           ? 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'
                           : 'bg-white text-emerald-700 border-emerald-300 hover:bg-emerald-50'
                       }`}
-                      disabled={compareList.length >= 3 && !compareList.includes(p.id)}
+                      disabled={compareList.length >= 4 && !compareList.includes(p.id)}
                     >
                       {compareList.includes(p.id) ? '✓ Ausgewählt' : 'Vergleichen'}
                     </button>
