@@ -32,9 +32,9 @@ const CATEGORY_CONFIG = {
   'monatslinsen-vergleich': {
     categoryKey: 'monat',
     title: 'Monatslinsen im transparenten Vergleich 2026 | optical.de',
-    subtitle: 'Der günstigste Weg bei täglichem Tragen. Finden Sie Linsen mit hoher Sauerstofftransmissibilität und kalkulieren Sie Ihre monatlichen Gesamtkosten.',
+    subtitle: 'Wirtschaftliche Option bei täglichem Tragen. Vergleichen Sie Linsen mit hoher Sauerstofftransmissibilität und kalkulieren Sie Ihre monatlichen Gesamtkosten.',
     h1: 'Monatslinsen Vergleich: Sauerstofffluss & Kostenkalkulation',
-    descriptionText: 'Monatslinsen bieten bei regelmäßiger Nutzung den wirtschaftlich günstigsten Preis pro Tragetag (oft ab ca. 0,33 €/Tag). Entscheidend für die Augengesundheit bei langen Tragezeiten sind hochwertige Silikon-Hydrogel-Materialien mit hohem Dk/t-Wert.'
+    descriptionText: 'Monatslinsen bieten bei regelmäßiger Nutzung häufig einen niedrigen rechnerischen Preis pro Tragetag (oft ab ca. 0,22 €/Tag bei beidseitigem Tragen). Entscheidend für die Augengesundheit bei langen Tragezeiten sind hochwertige Silikon-Hydrogel-Materialien mit adäquatem Dk/t-Wert.'
   },
   'torische-kontaktlinsen': {
     categoryKey: 'toric',

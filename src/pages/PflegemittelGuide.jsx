@@ -21,8 +21,8 @@ export default function PflegemittelGuide() {
   return (
     <div className="min-h-screen bg-gray-50">
       <MetaTags
-        title="Kontaktlinsen-Pflegemittel Vergleich 2024 | optical.de"
-        description="Welches Pflegemittel ist das beste? Wir vergleichen All-in-One-Systeme, H2O2-Pflege und Augentropfen nach Kosten, Vertraeglichkeit und Reinigungsleistung."
+        title="Kontaktlinsen-Pflegemittel: Systeme & Unterschiede im Vergleich | optical.de"
+        description="All-in-One-Lösungen, Peroxidsysteme und Kochsalzlösungen im objektiven Vergleich: Inhaltsstoffe, Einwirkzeiten und Verträglichkeit im Überblick."
         canonical="https://www.optical.de/ratgeber/kontaktlinsen-pflegemittel-vergleich"
       />
 
@@ -41,7 +41,7 @@ export default function PflegemittelGuide() {
             <span className="text-gray-400 text-sm">Lesezeit: ca. 7 Min.</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Kontaktlinsen-Pflegemittel: Welches ist das Beste?
+            Kontaktlinsen-Pflegemittel: Systeme &amp; Unterschiede im Vergleich
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed">
             All-in-One, H2O2 oder No-Rub? Wir erkl&auml;ren die Unterschiede und zeigen, wann welches System sinnvoll ist.
@@ -94,7 +94,7 @@ export default function PflegemittelGuide() {
             <h3 className="font-bold text-purple-800 mb-2">H2O2-Systeme</h3>
             <p className="text-sm text-gray-600 mb-3">Wasserstoffperoxid neutralisiert alle Keime. Danach wird es zu Wasser umgewandelt. Ideal bei empfindlichen Augen.</p>
             <div className="text-xs text-gray-500 space-y-1">
-              <div>&#10003; Beste Reinigungsleistung</div>
+              <div>&#10003; Hohe Desinfektionsleistung</div>
               <div>&#10003; Keine Konservierungsstoffe im Endprodukt</div>
               <div>&#10007; L&auml;ngere Einwirkzeit n&ouml;tig</div>
             </div>

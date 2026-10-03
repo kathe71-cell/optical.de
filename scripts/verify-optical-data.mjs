@@ -85,7 +85,9 @@ const forbiddenPhrases = [
   'exakt dieselben Linsen',
   'baugleich mit',
   'beste Linse',
-  'Testsieger'
+  'Testsieger',
+  'Günstigste/Tag',
+  'Wir zeigen dir sofort die verifizierten Hersteller-Spezifikationen'
 ];
 
 filesToCheck.forEach(relPath => {
@@ -101,7 +103,7 @@ filesToCheck.forEach(relPath => {
     }
   });
 });
-console.log('  ✓ No forbidden superlatives or blanket identity claims found in scanned files.');
+console.log('  ✓ No forbidden superlatives, pricing badges or blanket claims found in scanned files.');
 
 // 4. Verify Canonical Routes & Sitemap
 console.log('\n[4/5] Checking Sitemap and Prerender Routes...');

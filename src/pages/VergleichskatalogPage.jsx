@@ -56,14 +56,6 @@ export default function VergleichskatalogPage() {
     );
   };
 
-  // Günstigste Tageslinse und Monatslinse je Kategorie finden
-  const cheapestPerDayTag = PRODUCTS
-    .filter(p => p.lens_type.toLowerCase().includes('tageslinse') && p.cost_per_day)
-    .sort((a, b) => parseFloat(a.cost_per_day) - parseFloat(b.cost_per_day))[0]?.id;
-  const cheapestPerDayMonat = PRODUCTS
-    .filter(p => p.lens_type.toLowerCase().includes('monatslinse') && !p.lens_type.toLowerCase().includes('torisch') && p.cost_per_day)
-    .sort((a, b) => parseFloat(a.cost_per_day) - parseFloat(b.cost_per_day))[0]?.id;
-
   // URL-Parameter 'q' bei direkter Navigation oder Browser-Zurück/Vorwärts übernehmen
   useEffect(() => {
     const q = searchParams.get('q') || '';
@@ -370,11 +362,6 @@ export default function VergleichskatalogPage() {
                       <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
                         {p.lens_type}
                       </span>
-                      {(p.id === cheapestPerDayTag || p.id === cheapestPerDayMonat) && (
-                        <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide">
-                          Günstigste/Tag
-                        </span>
-                      )}
                       <button
                         onClick={() => toggleSave(p.id)}
                         className={`p-1.5 rounded-lg border transition ${

@@ -160,7 +160,7 @@ export default function AnpassungGuidePage() {
             <span className="text-xs font-mono uppercase text-emerald-400 font-bold">Linsenpass bereits zur Hand?</span>
             <h2 className="text-2xl font-bold tracking-tight">Finde jetzt passende Angebote für deine angepassten Linsen</h2>
             <p className="text-sm text-slate-300">
-              Vergleiche verifizierte Spezifikationen, prüfe ob deine Filial-Linse eine umgelabelte Eigenmarke ist und kaufe transparent zum besten Preis.
+              Vergleiche hinterlegte Spezifikationen, prüfe ob deine Filial-Linse einer bekannten Handelsmarke entspricht und finde transparente Angebote zum Nachkauf.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">

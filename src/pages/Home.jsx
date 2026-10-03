@@ -96,14 +96,6 @@ export default function Home() {
     return 0;
   });
 
-  const cheapestPerDayTag = PRODUCTS
-    .filter(p => p.lens_type.toLowerCase().includes('tageslinse') && p.cost_per_day)
-    .sort((a, b) => parseFloat((a.cost_per_day||'99').replace(',','.')) - parseFloat((b.cost_per_day||'99').replace(',','.')));
-  const cheapestTagId = cheapestPerDayTag[0]?.id;
-  const cheapestMonatId = PRODUCTS
-    .filter(p => p.lens_type.toLowerCase().includes('monatslinse') && !p.lens_type.toLowerCase().includes('torisch') && p.cost_per_day)
-    .sort((a, b) => parseFloat((a.cost_per_day||'99').replace(',','.')) - parseFloat((b.cost_per_day||'99').replace(',','.')))[0]?.id;
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
@@ -263,7 +255,7 @@ export default function Home() {
                 Gewohnte Linse finden
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Suche nach deinem Linsennamen (z. B. Biofinity) oder deiner Optiker-Handelsmarke (z. B. iWear Oxygen). Wir zeigen dir sofort die verifizierten Hersteller-Spezifikationen.
+                Suche nach deinem Linsennamen (z. B. Biofinity) oder deiner Optiker-Handelsmarke (z. B. iWear Oxygen). Wir zeigen dir die hinterlegten technischen Produktspezifikationen und kennzeichnen transparent den jeweiligen Verifizierungsstatus.
               </p>
             </div>
 
@@ -349,7 +341,6 @@ export default function Home() {
             >
               <option value="popular">Standard</option>
               <option value="price_asc">Preis aufsteigend</option>
-              <option value="price_day">Günstigste / Tag</option>
             </select>
           </div>
 
@@ -369,11 +360,6 @@ export default function Home() {
                         <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded">
                           {p.lens_type}
                         </span>
-                        {(p.id === cheapestTagId || p.id === cheapestMonatId) && (
-                          <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[9px] font-black px-1.5 py-0.5 rounded uppercase">
-                            Günstigste/Tag
-                          </span>
-                        )}
                         <button
                           onClick={() => toggleSave(p.id)}
                           className={`p-1.5 rounded-lg border transition ${
