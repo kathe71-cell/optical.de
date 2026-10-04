@@ -2,8 +2,8 @@ import AnpassungGuidePage from './pages/AnpassungGuidePage';
 import AstigmatismusGuide from './pages/AstigmatismusGuide';
 import MonatsVsTagesGuide from './pages/MonatsVsTagesGuide';
 import PflegemittelGuide from './pages/PflegemittelGuide';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import VercelAnalytics from './components/VercelAnalytics';
 import Home from './pages/Home';
 import VergleichskatalogPage from './pages/VergleichskatalogPage';
@@ -20,10 +20,17 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import ProductComparisonPage from './pages/ProductComparisonPage';
 import TransparencyPage from './pages/TransparencyPage';
 
+function ScrollToTopOnNav() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 export function AppRoutes() {
   return (
     <>
       <VercelAnalytics />
+      <ScrollToTopOnNav />
       <Routes>
         {/* Hauptseite mit Nachkauf-Fokus */}
         <Route path="/" element={<Home />} />
