@@ -60,7 +60,7 @@ export default function Home() {
         ...PRODUCTS.filter(p => p.product_name.toLowerCase().includes(searchQuery.toLowerCase()) || p.manufacturer.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 4).map(p => ({
           label: p.product_name,
           sub: `${p.manufacturer} · ${p.lens_type}`,
-          path: `/${p.id === 'biofinity' ? 'biofinity' : p.id}`
+          path: `/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`
         })),
         ...EIGENMARKEN_DATABASE.filter(e => e.optician_private_label.toLowerCase().includes(searchQuery.toLowerCase()) || e.optician_chain.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 3).map(e => ({
           label: e.optician_private_label,
@@ -377,7 +377,7 @@ export default function Home() {
 
                     <h3 className="text-lg font-black text-slate-900 leading-snug">
                       <Link 
-                        to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`} 
+                        to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`} 
                         onClick={() => trackProductClicked(p.id, p.product_name)}
                         className="hover:text-emerald-700 transition"
                       >
@@ -430,7 +430,7 @@ export default function Home() {
 
                     <div className="grid grid-cols-2 gap-2">
                       <Link
-                        to={`/${p.id === 'biofinity' ? 'biofinity' : p.id}`}
+                        to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
                         className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"
                       >
                         Datenblatt
