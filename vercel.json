@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "rewrites": [
-    {
-      "source": "/((?!ads\\.txt|robots\\.txt|sitemap\\.xml|feed\\.xml|llms\\.txt|.*\\.svg|.*\\.png|.*\\.ico).*)",
-      "destination": "/index.html"
-    }
-  ],
   "redirects": [
     {
       "source": "/(.*)",
@@ -86,5 +80,7 @@
         }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

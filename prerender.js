@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PRODUCTS } from './src/data/products.js';
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const toAbsolute = (p) => path.resolve(__dirname, p);
@@ -102,12 +104,39 @@ const ROUTES = {
     title: 'Datenschutzerklärung | optical.de',
     description: 'Datenschutzerklärung von optical.de: DSGVO-konforme Datenverarbeitung ohne Profiling, ohne externe Google CDN Fonts und mit 100% lokalem Merkzettel.',
   },
+    '/vergleich': {
+    title: 'Kontaktlinsen Direktvergleich | optical.de',
+    description: 'Vergleiche Spezifikationen, Preise und Materialien von Kontaktlinsen direkt miteinander.',
+  },
+  '/ratgeber/astigmatismus-kontaktlinsen': {
+    title: 'Kontaktlinsen bei Astigmatismus | optical.de',
+    description: 'Ratgeber zu torischen Kontaktlinsen: Zylinder, Achse und Stabilisationsdesigns richtig verstehen.',
+  },
+  '/ratgeber/tageslinsen-vs-monatslinsen-kosten': {
+    title: 'Tageslinsen vs. Monatslinsen Kostenvergleich | optical.de',
+    description: 'Was ist günstiger? Ein detaillierter Kostenvergleich zwischen Tages- und Monatslinsen inkl. Pflegemittel.',
+  },
+  '/ratgeber/kontaktlinsen-pflegemittel-vergleich': {
+    title: 'Kontaktlinsen-Pflegemittel Vergleich | optical.de',
+    description: 'Peroxid vs. All-in-One: Welches Pflegemittel ist das beste für Ihre Kontaktlinsen?',
+  },
   '/404': {
     title: '404 – Seite nicht gefunden | optical.de',
     description: 'Die angeforderte Seite existiert leider nicht auf optical.de. Nutzen Sie unsere Suche oder das Inhaltsverzeichnis.',
     robots: 'noindex, follow',
   },
 };
+
+
+// Add dynamic products
+PRODUCTS.forEach(p => {
+  if (p.id !== 'biofinity') {
+    ROUTES[`/produkt/${p.id}`] = {
+      title: `${p.product_name} – Spezifikationen & Preisvergleich | optical.de`,
+      description: `Verifizierte Spezifikationen und Preisübersicht für ${p.product_name} von ${p.manufacturer}.`
+    };
+  }
+});
 
 console.log(`Starting prerendering of ${Object.keys(ROUTES).length} routes...`);
 
@@ -147,5 +176,33 @@ for (const [url, meta] of Object.entries(ROUTES)) {
   }
   console.log(`  ✓ ${url} -> ${filePath} (${(html.length / 1024).toFixed(1)} kB)`);
 }
+
+
+console.log('Generating sitemap.xml...');
+const today = new Date().toISOString().split('T')[0];
+let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+for (const [url, meta] of Object.entries(ROUTES)) {
+  if (meta.robots && meta.robots.includes('noindex')) continue;
+  
+  const fullUrl = `https://www.optical.de${url === '/' ? '/' : url}`;
+  let priority = '0.8';
+  if (url === '/') priority = '1.0';
+  else if (url.includes('vergleichskatalog') || url.includes('eigenmarken-decoder')) priority = '0.9';
+  
+  sitemapXml += `
+  <url>
+    <loc>${fullUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+sitemapXml += `
+</urlset>`;
+fs.writeFileSync(toAbsolute('dist/sitemap.xml'), sitemapXml);
+fs.writeFileSync(toAbsolute('public/sitemap.xml'), sitemapXml);
+console.log('sitemap.xml generated.');
 
 console.log('Static Site Prerendering complete!');
