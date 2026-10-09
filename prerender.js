@@ -160,7 +160,7 @@ for (const [url, meta] of Object.entries(ROUTES)) {
   html = html.replace(/<meta name="robots" content=".*?" \/>/, `<meta name="robots" content="${robotsValue}" />`);
 
   // Update Canonical & OG URL
-  const canonicalUrl = `https://www.optical.de${url === '/' ? '/' : url}`;
+  const canonicalUrl = `https://optical.de${url === '/' ? '/' : url}`;
   html = html.replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="${canonicalUrl}" />`);
   html = html.replace(/<meta property="og:url" content=".*?" \/>/, `<meta property="og:url" content="${canonicalUrl}" />`);
 
@@ -186,7 +186,7 @@ let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 for (const [url, meta] of Object.entries(ROUTES)) {
   if (meta.robots && meta.robots.includes('noindex')) continue;
   
-  const fullUrl = `https://www.optical.de${url === '/' ? '/' : url}`;
+  const fullUrl = `https://optical.de${url === '/' ? '/' : url}`;
   let priority = '0.8';
   if (url === '/') priority = '1.0';
   else if (url.includes('vergleichskatalog') || url.includes('eigenmarken-decoder')) priority = '0.9';

@@ -46,6 +46,15 @@
   ],
   "headers": [
     {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/sitemap.xml",
       "headers": [
         {
@@ -82,5 +91,11 @@
     }
   ],
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/((?!ads\\.txt|robots\\.txt|sitemap\\.xml|feed\\.xml|llms\\.txt|og-image\\.png|favicon\\.svg|assets/.*).*)",
+      "destination": "/index.html"
+    }
+  ]
 }
