@@ -388,7 +388,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity XR",
     "research_date": "2026-10-13",
-    "pipeline_status": "DISCOVERED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erweiterter Lieferbereich von +15.00 bis -20.00 dpt; alternativlose Spezialversorgung."
@@ -413,7 +413,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity XR Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DISCOVERED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Zylinder bis -5.75 dpt; essenziell für komplexe Hornhautverkrümmungen; hohe Kundenloyalität."
@@ -438,7 +438,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity Toric Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Kombinierte Korrektur von Astigmatismus und Presbyopie in einer Premium-Monatslinse."
@@ -463,7 +463,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation MyDay Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "PRODUCT_IDENTITY_VERIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "CooperVision Joy-Optics Gleitsicht-Tageslinse mit Smart Silicone Technologie."
@@ -488,7 +488,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "PRODUCT_IDENTITY_VERIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Preisgünstige SiHy-Tageslinse bei Astigmatismus mit WetLoc® Technologie."
@@ -513,7 +513,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erschwingliche SiHy-Tageslinse für Presbyope Träger."
@@ -538,7 +538,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Avaira Vitality",
     "research_date": "2026-10-13",
-    "pipeline_status": "PRODUCT_IDENTITY_VERIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Häufig angepasste Monatslinse mit integriertem Klasse-1-UV-Filter."
@@ -563,7 +563,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Avaira Vitality Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Optimierte Ballast-Geometrie für stabile torische Achsenlage."
@@ -588,7 +588,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Linse bei trockenen Augen mit Hornhautverkrümmung."
@@ -638,7 +638,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Bewährte biokompatible Gleitsicht-Monatslinse mit Balanced Progressive Technology."
@@ -688,7 +688,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear 1 Day Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Gleitsicht-Tageslinse für Presbyopie bei reduzierter Tränenfilmstabilität."
@@ -738,7 +738,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics 55 evolution",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einer der weltweit meistverkauften Monatslinsen-Klassiker im Einstiegssegment."
@@ -763,7 +763,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "SOURCE_IDENTIFIED",
+    "pipeline_status": "TECHNICAL_DATA_VERIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Bewährte torische Hydrogel-Monatslinse mit stabiler Ballastgeometrie."

@@ -44,6 +44,19 @@ for (const p of PILOT_VERIFICATION) {
   if (p.verification_status === 'TECHNICAL_DATA_VERIFIED') t(!!p.human_review_required, 'Pilot: Review-Hinweis fehlt ' + p.product_id);
   // Katalogwert muss belegtem Wert entsprechen (Variantenvermischung verhindern)
   if (e && p.verified_attributes.dk_t) t(String(p.verified_attributes.dk_t.value).startsWith(String(e.dk_t)), 'Pilot: dk_t Katalog != Quelle ' + p.product_id);
+  // Phase 9.6 Qualitätsprüfungen:
+  // Jedes Datenblatt/PDF muss einen Dokumenttitel besitzen
+  for (const s of p.sources) {
+    if (s.source_type === 'OFFICIAL_PRODUCT_DOCUMENT') {
+      t(!!s.document_title, 'PDF Quelle ohne document_title ' + p.product_id);
+    }
+  }
+  // Konflikte müssen sauber dokumentiert sein
+  if (p.conflicts && p.conflicts.length > 0) {
+    for (const conf of p.conflicts) {
+      t(!!conf.attribute && conf.catalog_value !== undefined && conf.source_value !== undefined && !!conf.note, 'Unvollständiger Konflikt-Datensatz ' + p.product_id);
+    }
+  }
 }
 // Eigenmarken im Live-Datenbestand dürfen nicht als belegt gelten
 for (const m of EIGENMARKEN_DATABASE) {
