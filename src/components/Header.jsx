@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Eye, Bookmark, Sparkles, Menu, X, Layers, Calculator, Search } from 'lucide-react';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import SearchModal from './SearchModal';
+import RefillBanner from './RefillBanner';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,8 +26,10 @@ export default function Header() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <>
+      <RefillBanner />
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Brand Logo */}
         <Link 
@@ -168,5 +171,6 @@ export default function Header() {
         </div>
       )}
     </header>
+  </>
   );
 }
