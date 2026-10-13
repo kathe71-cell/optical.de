@@ -19,7 +19,7 @@ export default function AstigmatismusGuide() {
         <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
           <Link to="/" className="hover:text-emerald-700">Startseite</Link>
           <span>/</span>
-          <Link to="/ratgeber" className="hover:text-emerald-700">Ratgeber</Link>
+          <Link to="/vergleichskatalog" className="hover:text-emerald-700">Katalog</Link>
           <span>/</span>
           <span className="font-semibold text-slate-900">Astigmatismus &amp; torische Linsen</span>
         </div>

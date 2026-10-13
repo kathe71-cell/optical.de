@@ -23,16 +23,7 @@ import { getProductById, PRODUCTS } from '../data/products';
 import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { trackAffiliateClick, trackProductView } from '../utils/tracking';
-
-const AMAZON_TAG = 'optical.de-21';
-const AMAZON_SUBID = 'optical.de-21';
-
-const getAmazonLink = (queryOrAsin, asin) => {
-  if (asin) {
-    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
-  }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
-};
+import { getProductAffiliateUrl } from '../utils/affiliate';
 
 export default function ProductDetailPage({ productIdOverride }) {
   const { productId: routeId } = useParams();
@@ -269,13 +260,13 @@ export default function ProductDetailPage({ productIdOverride }) {
               {/* Kauf-Button */}
               <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
                 <a
-                  href={getAmazonLink(product.amazon_query, product.asin)}
+                  href={getProductAffiliateUrl(product)}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
+                  rel="noopener noreferrer sponsored"
+                  onClick={() => trackAffiliateClick(product.product_name, 'partner', 'product_detail_sidebar')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
                 >
-                  <span>Angebote bei Amazon suchen *</span>
+                  <span>Angebote bei Partner prüfen *</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 

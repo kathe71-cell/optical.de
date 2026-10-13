@@ -1,4 +1,3 @@
-import ProjektuebernahmePage from "./pages/ProjektuebernahmePage.jsx";
 import AnpassungGuidePage from './pages/AnpassungGuidePage';
 import AstigmatismusGuide from './pages/AstigmatismusGuide';
 import MonatsVsTagesGuide from './pages/MonatsVsTagesGuide';
@@ -83,7 +82,7 @@ export function AppRoutes() {
 
         {/* ECHTER 404 FEHLER-ROUTENFALLBACK (Kein Pseudo-Home Redirect) */}
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/projektuebernahme" element={<ProjektuebernahmePage />} />
+
 </Routes>
     </>
   );

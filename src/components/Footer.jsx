@@ -103,13 +103,6 @@ export default function Footer() {
         <span className="text-slate-600">Keine Vor-Ort-Anpassung · Keine Sehstärkenbestimmung.</span>
       </div>
     
-            <div className="mt-8 p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-300">
-              <span className="font-bold text-white block mb-1">Projektübernahme</span>
-              <p className="mb-2">Interesse an der Übernahme von optical.de inklusive Projekt?</p>
-              <a href="/projektuebernahme" className="text-blue-400 hover:text-blue-300 font-medium">
-                Mehr erfahren &rarr;
-              </a>
-            </div>
 
 </footer>
   );

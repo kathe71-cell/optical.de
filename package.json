@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js && npm run test:qa",
+    "test": "node scripts/qa/run-qa.js",
+    "test:qa": "node scripts/qa/run-qa.js",
+    "test:sources": "node scripts/qa/check-external-sources.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
