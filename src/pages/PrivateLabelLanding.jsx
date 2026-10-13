@@ -86,14 +86,12 @@ export default function PrivateLabelLanding({ slugOverride }) {
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-black text-slate-900">
-                  Technischer Parameter-Vergleich
+                  Parameterangaben (ungeprüfte Erfassung)
                 </h2>
                 <span className={`text-xs font-bold px-2.5 py-1 rounded-md border ${
-                  entry.confidence_level === 'VERIFIED_IDENTICAL'
-                    ? 'bg-emerald-100 text-emerald-950 border-emerald-300'
-                    : 'bg-sky-100 text-sky-950 border-sky-300'
+                  'bg-slate-100 text-slate-900 border-slate-300'
                 }`}>
-                  Einstufung: {entry.confidence_label || 'Hohe Übereinstimmung'}
+                  Einstufung: {entry.confidence_label}
                 </span>
               </div>
               
@@ -107,7 +105,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   <div key={i} className="grid grid-cols-12 px-4 py-3">
                     <span className="col-span-4 text-slate-500 font-medium">{param.parameter}</span>
                     <span className="col-span-4 font-semibold text-slate-800">{param.private_label_value}</span>
-                    <span className={'col-span-4 font-semibold ' + (param.match ? 'text-emerald-700' : 'text-red-600')}>{param.brand_value}</span>
+                    <span className={'col-span-4 font-semibold ' + 'text-slate-800'}>{param.brand_value}</span>
                   </div>
                 ))}
               </div>
@@ -116,13 +114,13 @@ export default function PrivateLabelLanding({ slugOverride }) {
               <div className="mt-4 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-2">
                 <div className="flex items-center gap-2 text-slate-900 font-bold">
                   <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>Fachliche Bewertung &amp; Herleitung:</span>
+                  <span>Einordnung:</span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-slate-600">
                   {entry.reasoning || entry.derivation_evaluation}
                 </p>
                 <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-900 text-[10px] font-semibold">
-                  * Auch bei technischer Übereinstimmung empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung durch Augenarzt oder Augenoptiker.
+                  * Unabhängig von ähnlichen Angaben empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung durch Augenarzt oder Augenoptiker.
                 </div>
               </div>
             </div>
@@ -131,7 +129,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
             <div className="bg-slate-100 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2">
               <div className="flex items-center gap-2 font-bold text-slate-800">
                 <Database className="w-4 h-4 text-emerald-600" />
-                <span>Dokumentation &amp; Nachweis</span>
+                <span>Quellenstatus</span>
               </div>
               <p className="text-[11px] leading-relaxed">
                 <strong>Quelle 1:</strong> {entry.source_1 || entry.source_name}

@@ -205,7 +205,7 @@ export default function ProductDetailPage({ productIdOverride }) {
                         {em.optician_private_label} →
                       </div>
                       <div className="text-[11px] text-slate-500 mt-1">
-                        Einstufung: {em.confidence_label || 'Hohe Übereinstimmung'}
+                        Einstufung: {em.confidence_label}
                       </div>
                     </Link>
                   ))}

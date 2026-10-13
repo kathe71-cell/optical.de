@@ -62,7 +62,7 @@ RESEARCH_CATALOG.forEach((item, index) => {
   }
 
   // 4. Status-Gültigkeit
-  const validStatuses = ['DISCOVERED', 'SOURCE_IDENTIFIED', 'DATA_VERIFIED', 'EDITORIAL_REVIEW', 'APPROVED'];
+  const validStatuses = ['DISCOVERED', 'SOURCE_IDENTIFIED', 'PRODUCT_IDENTITY_VERIFIED', 'TECHNICAL_DATA_PARTIALLY_VERIFIED', 'TECHNICAL_DATA_VERIFIED', 'DATA_VERIFIED', 'EDITORIAL_REVIEW', 'APPROVED'];
   if (!validStatuses.includes(item.pipeline_status)) {
     console.error(`[FAIL] ${item.id}: Ungültiger Pipeline-Status: ${item.pipeline_status}`);
     errors++;

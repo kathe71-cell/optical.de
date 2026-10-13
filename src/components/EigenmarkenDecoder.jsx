@@ -101,7 +101,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
           Welche Marken-Referenz passt zu Ihrer Optiker-Linse?
         </h2>
         <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-          Geben Sie den Namen Ihrer Handelsmarke (z. B. von Apollo Optik, Fielmann oder Mister Spex) ein. Unser System vergleicht die hinterlegten technischen Produktdaten transparent mit dem wahrscheinlich übereinstimmenden Markenprodukt.
+          Geben Sie den Namen Ihrer Handelsmarke (z. B. von Apollo Optik, Fielmann oder Mister Spex) ein. Unser System zeigt hinterlegte, noch nicht abschließend belegte Produktangaben. Eine Herstellergleichheit oder Austauschbarkeit wird nicht behauptet.
         </p>
       </div>
 
@@ -179,24 +179,24 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   {activeEntry.technical_statement}
                 </p>
                 <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs">
-                  <div className="font-semibold text-slate-900 mb-1">Herleitung auf Basis technischer Merkmale:</div>
+                  <div className="font-semibold text-slate-900 mb-1">Angaben laut ungeprüfter Erfassung:</div>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-slate-600">
                     {activeEntry.matched_parameters.map((p, idx) => (
                       <li key={idx} className="flex items-center gap-1.5">
-                        <Check className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                        <Info className="w-3 h-3 text-slate-500 flex-shrink-0" />
                         <span><strong>{p.parameter}:</strong> {p.brand_value}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <p className="text-slate-600 text-[11px] pt-1">
-                  <strong>Fachliche Bewertung:</strong> {activeEntry.reasoning || activeEntry.derivation_evaluation}
+                  <strong>Einordnung:</strong> {activeEntry.reasoning || activeEntry.derivation_evaluation}
                 </p>
 
                 {/* Verbindlicher Sicherheits- und Anpassungshinweis */}
                 <div className="p-2.5 bg-amber-50/80 border border-amber-200 rounded-lg text-amber-950 text-[11px] font-medium flex items-center gap-2">
                   <AlertTriangle className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-                  <span>Auch bei technischer Übereinstimmung empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung.</span>
+                  <span>Unabhängig von ähnlichen Angaben empfiehlt optical.de keinen eigenmächtigen Wechsel ohne fachliche Anpassung.</span>
                 </div>
 
                 {/* Toggle zur detaillierten Quelleneinsicht */}
@@ -207,10 +207,10 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                     className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 transition"
                   >
                     <Database className="w-3.5 h-3.5" />
-                    <span>{showSourceDetails ? 'Datenquellen ausblenden' : 'Verifizierte Primärquellen anzeigen'}</span>
+                    <span>{showSourceDetails ? 'Datenquellen ausblenden' : 'Quellenstatus anzeigen'}</span>
                     {showSourceDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                   </button>
-                  <span className="text-[10px] text-slate-400">Keine Schätzung · rein dokumentenbasierte Erfassung</span>
+                  <span className="text-[10px] text-slate-400">Nicht abschließend geprüft</span>
                 </div>
 
                 {showSourceDetails && (
@@ -218,7 +218,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                     <div><strong>Quelle 1:</strong> {activeEntry.source_1 || activeEntry.source_name}</div>
                     <div><strong>Quelle 2:</strong> {activeEntry.source_2 || activeEntry.source_type}</div>
                     <div><strong>Erfassungsmethode:</strong> {activeEntry.mapping_source}</div>
-                    <div><strong>Letzte Verifikation:</strong> {activeEntry.last_verified}</div>
+                    <div><strong>Prüfstatus:</strong> {activeEntry.last_verified}</div>
                     {activeEntry.notes && <div><strong>Zusatzhinweis:</strong> {activeEntry.notes}</div>}
                   </div>
                 )}
@@ -358,7 +358,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   samePackCount && savingsPercent ? (
                     <div className="mt-3 p-2.5 bg-emerald-100/70 border border-emerald-300 rounded-lg text-center">
                       <span className="text-xs text-emerald-950 font-extrabold block">
-                        Rechnerische Differenz: ca. {savingsPercent} % ({savingsEuro} € Ersparnis)
+                        Rechnerische Differenz: ca. {savingsPercent} % ({savingsEuro} € Preisdifferenz; kein Beleg für Gleichwertigkeit der Produkte)
                       </span>
                       <span className="text-[10px] text-emerald-800 block mt-0.5">
                         * Individuelle Modellrechnung auf Basis Ihrer Preisangabe für {activeEntry.optician_pack_size}.

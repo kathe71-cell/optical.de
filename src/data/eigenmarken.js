@@ -19,7 +19,7 @@
  *    optical.de keinen eigenmächtigen Wechsel ohne vorherige fachliche Anpassung.
  */
 
-export const EIGENMARKEN_DATABASE = [
+const RAW_EIGENMARKEN_DATABASE = [
   {
     id: 'apollo-iwear-oxygen',
     slug: 'apollo-iwear-oxygen',
@@ -274,6 +274,29 @@ export const EIGENMARKEN_DATABASE = [
     notes: 'Omafilcon B ist ein biokompatibles Hydrogel-Material von CooperVision.'
   }
 ];
+
+/**
+ * Phase 9.5 – Vorsichtige Darstellung: Die Zuordnungen sind nicht durch Herstellerdokumente belegt.
+ * Sie werden daher einheitlich als UNVERIFIED ausgegeben. Keine Herstelleridentität, keine Austauschbarkeit,
+ * keine Wechselempfehlung. Parameterangaben sind Erfassungswerte ohne geprüften Beleg.
+ */
+export const EIGENMARKEN_UNVERIFIED_LABEL = 'Nicht belegt (Hinweis, ungeprüft)';
+export const EIGENMARKEN_DATABASE = RAW_EIGENMARKEN_DATABASE.map((m) => ({
+  ...m,
+  confidence_level: 'UNVERIFIED',
+  confidence_label: EIGENMARKEN_UNVERIFIED_LABEL,
+  classification: 'UNVERIFIED',
+  classification_label: EIGENMARKEN_UNVERIFIED_LABEL,
+  technical_statement: 'Hinweis: Die Angaben zu diesem Produkt wurden von optical.de noch nicht anhand von Herstellerdokumenten belegt. Es wird weder eine Herstellergleichheit noch eine Austauschbarkeit behauptet.',
+  reasoning: 'Die Parameterangaben stammen aus einer ungeprüften Erfassung (z. B. Verpackungs- oder Herstellerangaben) und können abweichen. Ähnliche Angaben belegen weder dieselbe Herkunft noch medizinische Austauschbarkeit. Maßgeblich sind die Angaben von Hersteller und Augenoptiker bzw. Augenarzt.',
+  derivation_evaluation: 'Ungeprüfter Hinweis. Keine Wechselempfehlung.',
+  source_1: 'Nicht abschließend geprüft – keine belegte Primärquelle hinterlegt',
+  source_2: 'Hersteller-/Verpackungsangaben vor Verwendung selbst prüfen',
+  mapping_source: 'Ungeprüfte Erfassung (Stand Phase 9.5)',
+  last_verified: 'Noch nicht abschließend geprüft',
+  notes: undefined,
+  matched_parameters: (m.matched_parameters || []).map((p) => ({ ...p, match: null })),
+}));
 
 export const searchEigenmarken = (query) => {
   if (!query || query.trim().length === 0) return [];
