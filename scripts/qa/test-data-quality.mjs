@@ -76,10 +76,60 @@ for (const r of AMAZON_VERIFICATION_REGISTER) {
   t(live39.has(r.product_id), 'Register: unbekanntes Produkt ' + r.product_id);
   t(AMAZON_VERIFICATION_STATUSES.includes(r.verification_status), 'Ungültiger Status ' + r.product_id);
   t(!!r.verification_method && !!r.verification_date && !!r.evidence && !!r.last_checked, 'Verifikationsdaten fehlen ' + r.product_id);
+  // Strenger Schutz: Keine automatischen EXACT_MATCH_VERIFIED ohne vollstaendige manuelle Pruefung
   if (r.verification_status === 'EXACT_MATCH_VERIFIED') t(/manuell/i.test(r.verification_method), 'EXACT_MATCH ohne manuelle Prüfung ' + r.product_id);
+  // Pruefe: Direktlink-Freigaben duerfen nicht als EXACT_MATCH gefuehrt werden, wenn nur Erreichbarkeit bestaetigt ist
+  if (r.verification_status === 'REACHABILITY_CONFIRMED') t(!r.evidence.toLowerCase().includes('exakt'), 'REACHABILITY_CONFIRMED darf keine Exaktheit behaupten ' + r.product_id);
   const direct = VERIFIED_ACTIVE_ASINS.has(r.asin);
   t(direct === ['REACHABILITY_CONFIRMED', 'IDENTITY_CONFIRMED', 'EXACT_MATCH_VERIFIED'].includes(r.verification_status), 'Direktlink-Gate inkonsistent ' + r.product_id);
   if (r.verification_status === 'BROKEN' || r.verification_status === 'MISMATCH') t(!direct, 'Defekte ASIN aktiv ' + r.product_id);
 }
-console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon)`);
+
+// Regressionstest: Verifizierte technische Parameter duerfen im Live-Katalog nicht ueberschrieben/abweichend sein
+const LIVE_TO_PILOT_MAPPING = {
+  'clariti-1day-toric': 'res-cv-clariti-1day-toric',
+  'clariti-1day-multifocal': 'res-cv-clariti-1day-multifocal',
+  'myday-multifocal': 'res-cv-myday-multifocal',
+  'acuvue-oasys-max-1day-multifocal': 'res-jnj-acuvue-oasys-max-1day-multifocal',
+  'avaira-vitality': 'res-cv-avaira-vitality',
+  'avaira-vitality-toric': 'res-cv-avaira-vitality-toric',
+  'biofinity-toric-multifocal': 'res-cv-biofinity-toric-multifocal',
+  'biofinity-xr': 'res-cv-biofinity-xr',
+  'biofinity-xr-toric': 'res-cv-biofinity-xr-toric',
+  'biomedics-55-evolution': 'res-cv-biomedics-55-evolution'
+};
+
+for (const [liveId, pilotId] of Object.entries(LIVE_TO_PILOT_MAPPING)) {
+  const p = PRODUCTS.find(x => x.id === liveId);
+  const pilot = PILOT_VERIFICATION.find(x => x.product_id === pilotId);
+  t(!!p, 'Live-Produkt fehlt fuer Regressionstest: ' + liveId);
+  t(!!pilot, 'Pilot-Verifikationsdatensatz fehlt fuer: ' + pilotId);
+  if (p && pilot && pilot.verified_attributes) {
+    const attrs = pilot.verified_attributes;
+    if (attrs.dk_t) {
+      const match = String(attrs.dk_t.value).match(/^(\d+)/);
+      if (match) {
+        const expectedDk = parseInt(match[1], 10);
+        t(p.dk_t === expectedDk, `Regression: Dk/t mismatch bei ${liveId} (Katalog: ${p.dk_t}, Verifiziert: ${expectedDk})`);
+      }
+    }
+    if (attrs.water_content) {
+      const expectedWater = String(attrs.water_content.value).replace(/\s+/g, '');
+      const actualWater = String(p.water_content).replace(/\s+/g, '');
+      t(actualWater === expectedWater, `Regression: Wassergehalt mismatch bei ${liveId} (Katalog: ${actualWater}, Verifiziert: ${expectedWater})`);
+    }
+    if (attrs.diameter) {
+      const expectedDia = String(attrs.diameter.value).replace(/\s+/g, '').replace(',', '.');
+      const actualDia = String(p.diameter).replace(/\s+/g, '').replace(',', '.');
+      t(expectedDia.includes(actualDia), `Regression: Durchmesser mismatch bei ${liveId} (Katalog: ${actualDia}, Verifiziert: ${expectedDia})`);
+    }
+    if (attrs.base_curve) {
+      const expectedBc = String(attrs.base_curve.value).replace(/\s+/g, '').replace(',', '.');
+      const actualBc = String(p.base_curve).replace(/\s+/g, '').replace(',', '.').split(',')[0];
+      t(expectedBc.includes(actualBc), `Regression: Basiskurve mismatch bei ${liveId} (Katalog: ${actualBc}, Verifiziert: ${expectedBc})`);
+    }
+  }
+}
+
+console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${Object.keys(LIVE_TO_PILOT_MAPPING).length} Live-Pilot-Konsistenzprüfungen)`);
 process.exit(fail ? 1 : 0);

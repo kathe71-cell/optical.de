@@ -294,7 +294,7 @@ export default function Home() {
                 Häufig nachgekaufte Kontaktlinsen
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Kompakte Auswahl geprüfter Markenlinsen mit transparenten Datenblättern.
+                Kompakte Auswahl gängiger Markenlinsen mit transparenten Datenblättern.
               </p>
             </div>
 
