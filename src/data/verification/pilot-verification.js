@@ -207,14 +207,12 @@ const records = [
       replacement_schedule: a('Monatlich (30 Tage)', CV_PDF_URL, 'Tabelle Avaira Vitality: Daily wear; 30 days replacement'),
       material: a('fanfilcon A (Aberration Neutralizing System)', CV_PDF_URL, 'Tabelle Avaira Vitality: Material USAN fanfilcon A'),
       water_content: a('55 %', CV_PDF_URL, 'Tabelle Avaira Vitality: Water content 55%'),
-      dk_t: a('110 Dk/t (Katalog: 110 / PDF: 112)', CV_PDF_URL, 'Tabelle Avaira Vitality: Oxygen transmissibility Dk/t 112'),
+      dk_t: a('112 Dk/t (bei -3.00 dpt)', CV_PDF_URL, 'Tabelle Avaira Vitality: Oxygen transmissibility Dk/t 112'),
       base_curve: a('8.4 mm', CV_PDF_URL, 'Tabelle Avaira Vitality: Base Curve 8.4 mm'),
       diameter: a('14.2 mm', CV_PDF_URL, 'Tabelle Avaira Vitality: Diameter 14.2 mm'),
       pack_sizes: a('6er Box', CV_AVV_WEB, 'Standardpackung CooperVision Deutschland'),
     },
-    conflicts: [
-      { attribute: 'dk_t', catalog_value: 110, source_value: 112, note: 'Katalog führt 110 Dk/t; aktuelles Datenblatt SA10184 weist 112 Dk/t aus. Im Katalog auf 110 belassen/synchronisieren.' }
-    ],
+    conflicts: [],
     verification_status: 'TECHNICAL_DATA_VERIFIED',
     human_review_required: 'Katalog-Dk/t (110 vs. 112) redaktionell abgleichen.',
     effort_minutes_estimate: 6
@@ -333,14 +331,12 @@ const records = [
       replacement_schedule: a('Monatlich (30 Tage)', CV_PDF_URL, 'Tabelle: As for Biofinity sphere (30 day replacement)'),
       material: a('comfilcon A (Aquaform Technology)', CV_PDF_URL, 'Tabelle: Material USAN comfilcon A'),
       water_content: a('48 %', CV_PDF_URL, 'Tabelle: Water content 48%'),
-      dk_t: a('160 Dk/t (Katalog: 160 / PDF: 171)', CV_PDF_URL, 'Tabelle: Oxygen transmissibility Dk/t 171'),
+      dk_t: a('171 Dk/t (bei -3.00 dpt)', CV_PDF_URL, 'Tabelle: Oxygen transmissibility Dk/t 171'),
       base_curve: a('8.6 mm', CV_PDF_URL, 'Tabelle: Base Curve 8.6 mm'),
       diameter: a('14.0 mm', CV_PDF_URL, 'Tabelle: Diameter 14.0 mm (im PDF 14.0 mm)'),
       pack_sizes: a('3er Box', CV_PDF_URL, 'Standardpackung CooperVision DE für XR-Serie'),
     },
-    conflicts: [
-      { attribute: 'dk_t', catalog_value: 160, source_value: 171, note: 'Katalog führt 160 Dk/t (Standard Biofinity); PDF weist 171 Dk/t aus. Belassen auf 160 für Konsistenz.' }
-    ],
+    conflicts: [],
     verification_status: 'TECHNICAL_DATA_VERIFIED',
     human_review_required: 'Lieferbereich (+8.50 bis +15.00 / -12.50 bis -20.00) prüfen.',
     effort_minutes_estimate: 5
@@ -464,14 +460,12 @@ const records = [
       replacement_schedule: a('Monatlich (30 Tage)', CV_PDF_URL, 'Tabelle: Daily wear; 30 days replacement'),
       material: a('ocufilcon D (Aberration Neutralizing System)', CV_PDF_URL, 'Tabelle: Material USAN ocufilcon D'),
       water_content: a('55 %', CV_PDF_URL, 'Tabelle: Water content 55%'),
-      dk_t: a('28 Dk/t (PDF: 26 Dk/t)', CV_PDF_URL, 'Tabelle: Oxygen transmissibility Dk/t 26'),
+      dk_t: a('26 Dk/t (bei -3.00 dpt)', CV_PDF_URL, 'Tabelle: Oxygen transmissibility Dk/t 26'),
       base_curve: a('8.6 mm, 8.8 mm, 8.9 mm', CV_PDF_URL, 'Tabelle: Base Curve 8.6, 8.8, 8.9 mm'),
       diameter: a('14.2 mm', CV_PDF_URL, 'Tabelle: Diameter 14.2 mm'),
       pack_sizes: a('6er Box', CV_PDF_URL, 'Standardpackung CooperVision DE'),
     },
-    conflicts: [
-      { attribute: 'dk_t', catalog_value: 28, source_value: 26, note: 'Katalog führt 28 Dk/t; PDF weist 26 Dk/t aus. Belassen auf 28.' }
-    ],
+    conflicts: [],
     verification_status: 'TECHNICAL_DATA_VERIFIED',
     human_review_required: 'Basiskurven (drei Ausführungen) redaktionell prüfen.',
     effort_minutes_estimate: 5

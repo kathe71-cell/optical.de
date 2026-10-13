@@ -470,4 +470,125 @@ export const AMAZON_VERIFICATION_REGISTER = [
   "evidence": "HTTP 404",
   "last_checked": "2026-10-13"
  }
+ ,
+ {
+  "product_id": "clariti-1day-toric",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision clariti 1 day toric",
+  "pack_size": "30er Packung (30 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "clariti-1day-multifocal",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision clariti 1 day multifocal",
+  "pack_size": "30er Packung (30 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "myday-multifocal",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision MyDay multifocal",
+  "pack_size": "30er Packung (30 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "acuvue-oasys-max-1day-multifocal",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "Johnson & Johnson ACUVUE OASYS MAX 1-Day MULTIFOCAL",
+  "pack_size": "30er Packung (30 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "avaira-vitality",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Avaira Vitality",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "avaira-vitality-toric",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Avaira Vitality toric",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "biofinity-toric-multifocal",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Biofinity toric multifocal",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "biofinity-xr",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Biofinity XR",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "biofinity-xr-toric",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Biofinity XR toric",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ },
+ {
+  "product_id": "biomedics-55-evolution",
+  "asin": null,
+  "merchant": "amazon.de",
+  "product_name": "CooperVision Biomedics 55 evolution",
+  "pack_size": "6er Packung (6 Linsen)",
+  "verification_status": "UNVERIFIED",
+  "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+  "verification_date": "2026-10-13",
+  "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+  "last_checked": "2026-10-13"
+ }
 ];

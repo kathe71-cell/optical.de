@@ -65,8 +65,8 @@ for (const p of PRODUCTS) {
   assert(url.includes('tag=optical.de-21'), `Produkt ${p.id} URL enthält korrekten Partner-Tag`);
 }
 
-assert(verifiedDirectCount === 17, `Exakt 17 von 39 Produkten sind als aktive Direktlinks freigegeben (${verifiedDirectCount}/39)`);
-assert(safeFallbackCount === 22, `Exakt 22 von 39 Produkten nutzen den sicheren Such-Fallback (${safeFallbackCount}/39)`);
+assert(verifiedDirectCount === 17, `Exakt 17 von ${PRODUCTS.length} Produkten sind als aktive Direktlinks freigegeben (${verifiedDirectCount}/${PRODUCTS.length})`);
+assert(safeFallbackCount === 32, `Exakt 32 von ${PRODUCTS.length} Produkten nutzen den sicheren Such-Fallback (${safeFallbackCount}/${PRODUCTS.length})`);
 
 // 3. Spezifischer Test des 404-Hotfixes (Acuvue Oasys B000052YP8)
 const oasys = PRODUCTS.find(p => p.id === 'acuvue-oasys-2week');
