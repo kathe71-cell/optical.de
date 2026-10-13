@@ -3,37 +3,62 @@
  * 
  * Unterstützt:
  * - Tageslinsen (Verbrauch nach Nutzungstagen/Woche, getrennt je Auge)
- * - Monatslinsen (Austauschzyklus z. B. 30 Tage, getrennt je Auge)
+ * - Monatslinsen (30-Tage-Austauschzyklus)
+ * - Zweiwochenlinsen (14-Tage-Austauschzyklus)
+ * - Angebrochene Vorräte (volle Packungen + einzelne Linsen)
  * - Individuelle Vorräte je Auge (z. B. unterschiedliche Stärken / Packungen)
+ * - Schutz vor vergangenen Terminen (Überfälligkeits-Status)
  * - Kalender-Export (.ics) ohne Weitergabe medizinischer Parameter
  */
 
 /**
+ * Ermittelt die nominelle Tragedauer einer einzelnen Linse in Tagen
+ * basierend auf lens_type und replacement_schedule.
+ * 
+ * @param {string} lensType 
+ * @param {string} replacementSchedule 
+ * @returns {number} Tage (1 für Tageslinse, 14 für Zweiwochenlinse, 30 für Monatslinse)
+ */
+export function getNominalWearCycleDays(lensType = '', replacementSchedule = '') {
+  const lt = (lensType || '').toLowerCase();
+  const rs = (replacementSchedule || '').toLowerCase();
+
+  if (lt.includes('tag') || rs.includes('1 tag')) {
+    return 1;
+  }
+  if (lt.includes('zweiwoch') || lt.includes('2-woch') || rs.includes('14 tag')) {
+    return 14;
+  }
+  // Standard-Monatslinse
+  return 30;
+}
+
+/**
  * Berechnet die Reichweite in Tagen für ein Auge
  * 
- * @param {Object} eyeConfig
- * @param {string} lensType - 'Tageslinse' | 'Monatslinse' | etc.
- * @param {number} daysPerWeek - Nutzungstage pro Woche (1 bis 7)
+ * @param {Object} eyeConfig - { packs, packCount, individualLenses }
+ * @param {string} lensType - z. B. 'Tageslinse', 'Zweiwochlinse', 'Monatslinse'
+ * @param {number} daysPerWeek - Nutzungstage pro Woche (1 bis 7, nur bei Tageslinsen wirksam)
+ * @param {string} replacementSchedule - z. B. '14 Tage', '30 Tage'
  * @returns {number} Reichweite in Kalendertagen
  */
-export function calculateEyeSupplyDays({ packs = 1, packCount = 30, individualLenses = 0 }, lensType = 'Tageslinse', daysPerWeek = 7) {
+export function calculateEyeSupplyDays({ packs = 1, packCount = 30, individualLenses = 0 }, lensType = 'Tageslinse', daysPerWeek = 7, replacementSchedule = '') {
   const totalLenses = (Number(packs) || 0) * (Number(packCount) || 0) + (Number(individualLenses) || 0);
   if (totalLenses <= 0) return 0;
 
-  const isDaily = lensType?.toLowerCase().includes('tag');
+  const cycleDays = getNominalWearCycleDays(lensType, replacementSchedule);
 
-  if (isDaily) {
+  if (cycleDays === 1) {
     // Bei Tageslinsen: 1 Linse pro Tragetag für dieses Auge.
     // Tragefrequenz: daysPerWeek von 7 Tagen.
     const freq = Math.min(Math.max(Number(daysPerWeek) || 7, 1), 7);
     const usagePerDay = freq / 7;
     return Math.floor(totalLenses / usagePerDay);
   } else {
-    // Bei Monatslinsen (oder 2-Wochen-Linsen):
-    // Eine geöffnete Linse muss nach Ablauf der Haltbarkeit (z. B. 30 Tage) entsorgt werden,
+    // Bei Monatslinsen (30 Tage) und Zweiwochenlinsen (14 Tage):
+    // Eine geöffnete Linse muss nach Ablauf der Haltbarkeit entsorgt werden,
     // unabhängig davon, wie oft sie getragen wurde (keine medizinisch unzulässige Verlängerung!).
-    const replacementCycleDays = lensType?.toLowerCase().includes('2-wochen') ? 14 : 30;
-    return totalLenses * replacementCycleDays;
+    return totalLenses * cycleDays;
   }
 }
 
@@ -41,11 +66,12 @@ export function calculateEyeSupplyDays({ packs = 1, packCount = 30, individualLe
  * Berechnet den empfohlenen Nachkauftermin für den Gesamtvorrat
  * 
  * @param {Object} config - Vollständige Konfiguration
- * @returns {Object} { rightDays, leftDays, minDays, refillDate, leadDays }
+ * @returns {Object} { rightDays, leftDays, minDays, expiryDate, refillDate, leadDays, isOverdue }
  */
 export function calculateRefillSchedule(config) {
   const {
     lensType = 'Tageslinse',
+    replacementSchedule = '',
     daysPerWeek = 7,
     startDate = new Date().toISOString().split('T')[0],
     leadDays = 14,
@@ -58,34 +84,34 @@ export function calculateRefillSchedule(config) {
   let rightDays = 0;
   let leftDays = 0;
 
+  const cycleDays = getNominalWearCycleDays(lensType, replacementSchedule);
+
   if (!separateEyes) {
     // Wenn Werte beider Augen gleich sind, teilen sich beide Augen den gemeinsamen Vorrat.
     // Jedes Auge verbraucht bei beidseitigem Tragen 1 Linse pro Zyklus.
     const totalLenses = (Number(sharedSupply.packs) || 0) * (Number(sharedSupply.packCount) || 0) + (Number(sharedSupply.individualLenses) || 0);
-    const isDaily = lensType?.toLowerCase().includes('tag');
     const freq = Math.min(Math.max(Number(daysPerWeek) || 7, 1), 7);
 
-    if (isDaily) {
+    if (cycleDays === 1) {
       // 2 Linsen pro Tragetag (Rechts + Links)
       const usagePerCalendarDay = (2 * freq) / 7;
       const days = usagePerCalendarDay > 0 ? Math.floor(totalLenses / usagePerCalendarDay) : 0;
       rightDays = days;
       leftDays = days;
     } else {
-      // 2 Monatslinsen pro Monat für beide Augen
+      // 2 Linsen pro Zyklus (14 oder 30 Tage) für beide Augen
       const pairs = Math.floor(totalLenses / 2);
-      const replacementCycleDays = lensType?.toLowerCase().includes('2-wochen') ? 14 : 30;
-      const days = pairs * replacementCycleDays;
+      const days = pairs * cycleDays;
       rightDays = days;
       leftDays = days;
     }
   } else {
     // Getrennte Vorräte je Auge
-    rightDays = calculateEyeSupplyDays(rightEye, lensType, daysPerWeek);
-    leftDays = calculateEyeSupplyDays(leftEye, lensType, daysPerWeek);
+    rightDays = calculateEyeSupplyDays(rightEye, lensType, daysPerWeek, replacementSchedule);
+    leftDays = calculateEyeSupplyDays(leftEye, lensType, daysPerWeek, replacementSchedule);
   }
 
-  // Der Nachkauf richtet sich nach dem ZUERST erschöpften Vorrat
+  // Der Nachkauf richtet sich deterministisch nach dem ZUERST erschöpften Vorrat
   const minDays = Math.min(rightDays, leftDays);
 
   const start = new Date(startDate);
@@ -97,13 +123,19 @@ export function calculateRefillSchedule(config) {
   const refillDate = new Date(expiryDate);
   refillDate.setDate(refillDate.getDate() - effectiveLeadDays);
 
+  const todayStr = new Date().toISOString().split('T')[0];
+  const refillDateStr = refillDate.toISOString().split('T')[0];
+  const isOverdue = refillDateStr <= todayStr;
+
   return {
     rightDays,
     leftDays,
     minDays,
+    cycleDays,
     expiryDate: expiryDate.toISOString().split('T')[0],
-    refillDate: refillDate.toISOString().split('T')[0],
-    leadDays: effectiveLeadDays
+    refillDate: refillDateStr,
+    leadDays: effectiveLeadDays,
+    isOverdue
   };
 }
 
