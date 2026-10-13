@@ -91,3 +91,25 @@ export function getAffiliateSearchUrl(queryOrAsin, asin) {
   }
   return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin || '')}&tag=${DEFAULT_AMAZON_TAG}`;
 }
+
+export const AMAZON_PARTNER_TAG = DEFAULT_AMAZON_TAG;
+
+/**
+ * Liefert den präzisen, richtlinienkonformen CTA-Text für einen Affiliate-Link.
+ * Unterscheidet strikt zwischen verifiziertem Produktlink und generischer Produktsuche.
+ * 
+ * @param {Object|string} productOrAsin 
+ * @returns {string} CTA-Label
+ */
+export function getAffiliateCtaLabel(productOrAsin) {
+  const asin = typeof productOrAsin === 'string' 
+    ? productOrAsin 
+    : productOrAsin?.asin;
+
+  if (asin && /^[A-Z0-9]{10}$/.test(asin)) {
+    return 'Produkt bei Amazon ansehen *';
+  }
+  return 'Bei Amazon nach Produkt suchen *';
+}
+
+

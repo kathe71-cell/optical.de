@@ -110,9 +110,66 @@ export function analyzeGscData(queriesCsvText) {
 }
 
 /**
- * Generiert die vollständige KPI-Zusammenfassung für Phase 8 / Optical 36
+ * Berechnet Kennzahlen aus offiziellen Amazon PartnerNet Berichten (Earnings / Orders CSV)
+ * Unterstützt deutsche und englische PartnerNet-Exporte.
+ */
+export function analyzeAmazonPartnerNetData(amazonCsvText) {
+  const rows = parseCsv(amazonCsvText);
+  if (rows.length === 0) {
+    return {
+      status: 'KEINE_DATEN',
+      clicks: 0,
+      ordered_items: 0,
+      shipped_items: 0,
+      revenue_eur: 0,
+      commissions_eur: 0,
+      conversion_rate: '0.00%'
+    };
+  }
+
+  let totalClicks = 0;
+  let totalOrdered = 0;
+  let totalShipped = 0;
+  let totalRevenue = 0;
+  let totalCommissions = 0;
+
+  for (const r of rows) {
+    const clicks = parseInt(r['Klicks'] || r['Clicks'] || '0', 10) || 0;
+    const ordered = parseInt(r['Bestellte Artikel'] || r['Ordered Items'] || '0', 10) || 0;
+    const shipped = parseInt(r['Versandte Artikel'] || r['Shipped Items'] || '0', 10) || 0;
+    
+    const revRaw = (r['Umsatz'] || r['Revenue'] || r['Price'] || '0').replace('€', '').replace(',', '.').trim();
+    const rev = parseFloat(revRaw) || 0;
+
+    const commRaw = (r['Werbekostenerstattung'] || r['Earnings'] || r['Provision'] || '0').replace('€', '').replace(',', '.').trim();
+    const comm = parseFloat(commRaw) || 0;
+
+    totalClicks += clicks;
+    totalOrdered += ordered;
+    totalShipped += shipped;
+    totalRevenue += rev;
+    totalCommissions += comm;
+  }
+
+  return {
+    status: 'VERIFIZIERT',
+    clicks: totalClicks,
+    orders: totalOrdered,
+    shipped: totalShipped,
+    revenue_eur: totalRevenue,
+    commissions: totalCommissions,
+    conversion_rate: totalClicks > 0 ? ((totalOrdered / totalClicks) * 100).toFixed(2) + '%' : '0.00%'
+  };
+}
+
+/**
+ * Generiert die vollständige KPI-Zusammenfassung für Phase 9 / Optical 36
  */
 export function generateKpiReport(gscData = null, affiliateData = null) {
+  const commissionsEur = affiliateData ? affiliateData.commissions : 0;
+  const ordersCount = affiliateData ? affiliateData.orders : 0;
+  const domainCost = 1.0;
+
   const report = {
     programm: 'OPTICAL 36',
     ziel_monat_36: '5.000,00 € monatlich',
@@ -122,13 +179,13 @@ export function generateKpiReport(gscData = null, affiliateData = null) {
       '3. Indexierte Seiten': { wert: '64 URLs (sitemap.xml synchron)', status: 'IST-WERT' },
       '4. Merkliste-Aktivierungen': { wert: 'Lokal im Client (Vercel Custom Events: bookmark_toggle)', status: 'MESSBEREIT' },
       '5. Nachkauf-Planer-Aktivierungen': { wert: 'Lokal im Client (Vercel Custom Events: refill_assistant_configured)', status: 'MESSBEREIT' },
-      '6. Affiliate-Klicks': { wert: 'Lokal im Client (Vercel Custom Events: affiliate_click)', status: 'MESSBEREIT' },
-      '7. Bestätigte Affiliate-Bestellungen': { wert: affiliateData ? affiliateData.orders : '0 (Keine Abrechnung eingepflegt)', status: affiliateData ? 'IST-WERT' : 'NICHT_VERFÜGBAR' },
-      '8. Gutgeschriebene Provisionen': { wert: affiliateData ? `${affiliateData.commissions.toFixed(2)} €` : '0,00 €', status: affiliateData ? 'IST-WERT' : 'NICHT_VERFÜGBAR' },
-      '9. Monatlicher Umsatz': { wert: affiliateData ? `${affiliateData.commissions.toFixed(2)} €` : '0,00 €', status: affiliateData ? 'IST-WERT' : 'IST-WERT' },
-      '10. Laufende Kosten': { wert: '0,00 € (Vercel Hobby, GitHub Free, Domain-Fixkosten ca. 1,00 €/Monat)', status: 'IST-WERT' },
-      '11. Operativer Gewinn': { wert: affiliateData ? `${(affiliateData.commissions - 1).toFixed(2)} €` : '-1,00 € (Domain-Kosten)', status: 'IST-WERT' },
-      '12. Umsatz vs. Zielpfad Monat 6 (100 €)': { wert: affiliateData ? `${((affiliateData.commissions / 100) * 100).toFixed(1)} %` : '0,0 % (Aufbauphase)', status: 'ZIELABWEICHUNG' },
+      '6. Affiliate-Klicks': { wert: affiliateData ? `${affiliateData.clicks} (PartnerNet)` : 'Lokal im Client (affiliate_click)', status: affiliateData ? 'IST-WERT' : 'MESSBEREIT' },
+      '7. Bestätigte Affiliate-Bestellungen': { wert: affiliateData ? `${ordersCount} Bestellungen` : '0 (Keine Abrechnung eingepflegt)', status: affiliateData ? 'IST-WERT' : 'NICHT_VERFÜGBAR' },
+      '8. Gutgeschriebene Provisionen': { wert: affiliateData ? `${commissionsEur.toFixed(2)} €` : '0,00 €', status: affiliateData ? 'IST-WERT' : 'NICHT_VERFÜGBAR' },
+      '9. Monatlicher Umsatz': { wert: affiliateData ? `${commissionsEur.toFixed(2)} €` : '0,00 €', status: affiliateData ? 'IST-WERT' : 'IST-WERT' },
+      '10. Laufende Kosten': { wert: `${domainCost.toFixed(2)} € (Vercel Hobby, GitHub Free, Domain-Fixkosten ca. 1,00 €/Monat)`, status: 'IST-WERT' },
+      '11. Operativer Gewinn': { wert: affiliateData ? `${(commissionsEur - domainCost).toFixed(2)} €` : '-1,00 € (Domain-Kosten)', status: 'IST-WERT' },
+      '12. Umsatz vs. Zielpfad Monat 6 (100 €)': { wert: affiliateData ? `${((commissionsEur / 100) * 100).toFixed(1)} %` : '0,0 % (Aufbauphase)', status: 'ZIELABWEICHUNG' },
     }
   };
   return report;

@@ -257,10 +257,10 @@ export default function SavedLensesPage() {
                           href={getProductAffiliateUrl(p)}
                           target="_blank"
                           rel="noopener noreferrer sponsored"
-                          onClick={() => trackAffiliateClick(p.product_name, 'partner', 'saved_lenses_page')}
+                          onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'saved_lenses_page')}
                           className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-[11px] py-2.5 px-2 rounded-xl text-center transition flex items-center justify-center gap-1 shadow-2xs"
                         >
-                          <span>Beim Partner prüfen *</span>
+                          <span>Produkt bei Amazon ansehen *</span>
                           <ExternalLink className="w-3 h-3 flex-shrink-0" />
                         </a>
                       </div>

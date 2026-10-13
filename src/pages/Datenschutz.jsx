@@ -96,7 +96,19 @@ export default function Datenschutz() {
 
             <div>
               <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
-                6. Ihre Rechte als betroffene Person
+                6. Amazon PartnerNet &amp; Partnerlinks
+              </h2>
+              <p>
+                Wir sind Teilnehmer am Partnerprogramm von Amazon EU (Amazon PartnerNet). Auf unseren Seiten sind Partner-Links zu Amazon.de eingebunden. Als Amazon-Partner verdient optical.de an qualifizierten Verkäufen. Wenn Sie auf einen solchen Link klicken und bei Amazon einkaufen, erhält Amazon die Information, dass Sie über optical.de vermittelt wurden. Die Datenverarbeitung bei Amazon unterliegt den Datenschutzbestimmungen von Amazon.
+              </p>
+              <p className="mt-2 text-xs text-slate-500">
+                Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der wirtschaftlichen Verwertung und dem Betrieb unseres redaktionellen Portals).
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-extrabold text-slate-900 mb-3 border-b border-slate-100 pb-2">
+                7. Ihre Rechte als betroffene Person
               </h2>
               <p>
                 Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung (Art. 15 DSGVO) sowie ein Recht auf Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO) oder Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20 DSGVO) sowie das Recht auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO). Zudem steht Ihnen ein Beschwerderecht bei der zuständigen Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO).

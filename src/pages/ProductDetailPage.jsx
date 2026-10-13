@@ -263,10 +263,10 @@ export default function ProductDetailPage({ productIdOverride }) {
                   href={getProductAffiliateUrl(product)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  onClick={() => trackAffiliateClick(product.product_name, 'partner', 'product_detail_sidebar')}
+                  onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
                 >
-                  <span>Angebote bei Partner prüfen *</span>
+                  <span>Produkt bei Amazon ansehen *</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 

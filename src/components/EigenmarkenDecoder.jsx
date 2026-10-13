@@ -394,10 +394,10 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   href={getAmazonLink(matchedProduct.amazon_query, matchedProduct.asin)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  onClick={() => trackAffiliateClick(matchedProduct.product_name, 'partner', 'eigenmarken_decoder')}
+                  onClick={() => trackAffiliateClick(matchedProduct.product_name, 'amazon', 'eigenmarken_decoder')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all group"
                 >
-                  <span>Angebote beim Partner suchen *</span>
+                  <span>Produkt bei Amazon ansehen *</span>
                   <ExternalLink className="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <div className="text-center mt-2 space-y-0.5">

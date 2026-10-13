@@ -92,7 +92,7 @@ export default function Impressum() {
                 Verbraucherhinweis zu Partnerlinks (Affiliate)
               </h2>
               <p>
-                Einige Links auf dieser Website sind sogenannte Affiliate-Links (z. B. zu Amazon.de). Wenn Sie über einen solchen Link ein Produkt erwerben, erhalten wir vom jeweiligen Anbieter eine Vermittlungsprovision. Für Sie als Verbraucher ändert sich der Preis dadurch nicht.
+                Einige Links auf dieser Website sind sogenannte Affiliate-Links (z. B. zu Amazon.de). Wenn Sie über einen solchen Link ein Produkt erwerben, erhalten wir vom jeweiligen Anbieter eine Vermittlungsprovision. Für Sie als Verbraucher ändert sich der Preis dadurch nicht. Als Amazon-Partner verdient optical.de an qualifizierten Verkäufen.
               </p>
             </div>
 

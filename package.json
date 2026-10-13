@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js && npm run test:qa && npm run test:refill && npm run test:browser",
-    "test": "node scripts/qa/run-qa.js && node scripts/qa/test-refill-assistant.js && node scripts/qa/test-browser-simulation.js",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js && npm run test:qa && npm run test:refill && npm run test:browser && npm run test:affiliate",
+    "test": "node scripts/qa/run-qa.js && node scripts/qa/test-refill-assistant.js && node scripts/qa/test-browser-simulation.js && node scripts/qa/test-amazon-affiliate.js",
     "test:qa": "node scripts/qa/run-qa.js",
     "test:refill": "node scripts/qa/test-refill-assistant.js",
     "test:browser": "node scripts/qa/test-browser-simulation.js",
+    "test:affiliate": "node scripts/qa/test-amazon-affiliate.js",
     "test:sources": "node scripts/qa/check-external-sources.js",
     "lint": "eslint .",
     "preview": "vite preview"
