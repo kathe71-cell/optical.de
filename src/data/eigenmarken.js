@@ -285,7 +285,7 @@ export const EIGENMARKEN_DATABASE = RAW_EIGENMARKEN_DATABASE.map((m) => ({
   ...m,
   confidence_level: 'UNVERIFIED',
   confidence_label: EIGENMARKEN_UNVERIFIED_LABEL,
-  classification: 'UNVERIFIED',
+  classification: 'INSUFFICIENT_EVIDENCE',
   classification_label: EIGENMARKEN_UNVERIFIED_LABEL,
   technical_statement: 'Hinweis: Die Angaben zu diesem Produkt wurden von optical.de noch nicht anhand von Herstellerdokumenten belegt. Es wird weder eine Herstellergleichheit noch eine Austauschbarkeit behauptet.',
   reasoning: 'Die Parameterangaben stammen aus einer ungeprüften Erfassung (z. B. Verpackungs- oder Herstellerangaben) und können abweichen. Ähnliche Angaben belegen weder dieselbe Herkunft noch medizinische Austauschbarkeit. Maßgeblich sind die Angaben von Hersteller und Augenoptiker bzw. Augenarzt.',
