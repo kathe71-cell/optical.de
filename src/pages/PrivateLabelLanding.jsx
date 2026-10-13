@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Eye, ArrowLeft, ShieldCheck, Check, ExternalLink, Database, RotateCcw, Scale } from 'lucide-react';
+import { Eye, ArrowLeft, ShieldCheck, Check, ExternalLink, Database, RotateCcw, Scale, Bookmark } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MetaTags from '../components/MetaTags';
 import { getEigenmarkeBySlug, EIGENMARKEN_DATABASE, calculateOpticianCosts } from '../data/eigenmarken';
 import { getProductById } from '../data/products';
+import { useSavedLenses } from '../hooks/useSavedLenses';
 import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
@@ -40,6 +41,9 @@ export default function PrivateLabelLanding({ slugOverride }) {
   const samePackCount = entry.optician_pack_count === matchedProduct?.pack_count;
   const savingsEuro = (opticianPrice && brandPrice && samePackCount) ? (opticianPrice - brandPrice).toFixed(2) : null;
   const savingsPercent = (opticianPrice && brandPrice && samePackCount) ? Math.round(((opticianPrice - brandPrice) / opticianPrice) * 100) : null;
+
+  const { isSaved, toggleSave } = useSavedLenses();
+  const saved = matchedProduct ? isSaved(matchedProduct.id) : false;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
@@ -188,6 +192,30 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   <span>Angebote bei Amazon suchen *</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
+
+                {matchedProduct && (
+                  <button
+                    type="button"
+                    onClick={() => toggleSave(matchedProduct.id)}
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 ${
+                      saved 
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                    }`}
+                  >
+                    <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600 text-emerald-600' : ''}`} />
+                    <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für späteren Nachkauf merken'}</span>
+                  </button>
+                )}
+
+                {saved && (
+                  <Link
+                    to="/meine-linsen"
+                    className="block text-center text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold underline py-0.5"
+                  >
+                    Im Nachkauf-Planer Vorrat &amp; Kalender einstellen →
+                  </Link>
+                )}
 
                 {matchedProduct && (
                   <Link

@@ -258,13 +258,19 @@ export default function PreisrechnerPage() {
                 )}
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
                 <Link
                   to="/vergleichskatalog"
                   className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition"
                 >
                   <span>Passende Kontaktlinsen ansehen</span>
                   <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/meine-linsen"
+                  className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition"
+                >
+                  <span>Zu „Meine Linsen“ &amp; Nachkauf-Planer</span>
                 </Link>
               </div>
 

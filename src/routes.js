@@ -24,7 +24,7 @@ export const STATIC_ROUTES = [
   },
   {
     path: '/preisrechner',
-    title: 'Kontaktlinsen-Kostenrechner: Was kosten Linsen wirklich? | optical.de',
+    title: 'Kontaktlinsen-Kostenrechner pro Tag & Monat | optical.de',
     description: 'Berechne deine tatsächlichen Kontaktlinsenkosten pro Tragetag, Monat und Jahr. Transparente Modellrechnung für Monats- und Tageslinsen.',
     priority: '0.8',
     indexable: true,
@@ -73,7 +73,7 @@ export const STATIC_ROUTES = [
   },
   {
     path: '/specsavers-easyvision-opteyes',
-    title: 'easyvision opteyes (Specsavers) – Original-Linse | optical.de',
+    title: 'easyvision opteyes (Specsavers) – Original | optical.de',
     description: 'Welches Markenprodukt steckt hinter easyvision opteyes? Technische Übereinstimmung mit Bausch + Lomb Ultra. Verifizierte Parameter & Preisvergleich.',
     priority: '0.8',
     indexable: true,
@@ -129,7 +129,7 @@ export const STATIC_ROUTES = [
   },
   {
     path: '/biofinity-vs-air-optix',
-    title: 'Biofinity vs. Air Optix Plus HydraGlyde im Vergleich | optical.de',
+    title: 'Biofinity vs. Air Optix HydraGlyde im Vergleich | optical.de',
     description: 'Direkter 1:1 Parametervergleich zwischen CooperVision Biofinity und Alcon Air Optix Plus HydraGlyde: Dk/t, Wassergehalt, Material und Preise.',
     priority: '0.8',
     indexable: true,
@@ -143,7 +143,7 @@ export const STATIC_ROUTES = [
   },
   {
     path: '/ratgeber/kontaktlinsen-anpassen',
-    title: 'Kontaktlinsen anpassen: Ablauf, Kosten & Parameter | optical.de',
+    title: 'Kontaktlinsen anpassen: Ablauf & Parameter | optical.de',
     description: 'Warum Brillenwerte nicht für Linsen reichen: Alles zu Basiskurve (BC), Durchmesser (DIA), Dioptrien-Umrechnung und Ablauf beim Optiker.',
     priority: '0.8',
     indexable: true,
@@ -232,9 +232,24 @@ export function getAllRoutes(products = []) {
   // Dynamische Produktrouten hinzufügen
   for (const p of products) {
     if (p.id !== 'biofinity') {
+      let base = p.product_name
+        .replace(' mit HydraLuxe', '')
+        .replace(' Daily Disposable', '')
+        .replace(' Plus Toric', ' Toric')
+        .replace(' for Astigmatism', ' Toric')
+        .replace(' mit HydraGlyde', '')
+        .replace(' All-in-One', '')
+        .replace(' Multi-Purpose Solution', '')
+        .replace(' Pflegebehaelter-Set', '')
+        .replace(' Augentropfen', '');
+      let title = `${base} – Preis & Daten | optical.de`;
+      if (title.length > 60) {
+        title = `${base} | optical.de`;
+      }
+
       routes[`/produkt/${p.id}`] = {
-        title: `${p.product_name} – Spezifikationen & Preisvergleich | optical.de`,
-        description: `Verifizierte Spezifikationen und Preisübersicht für ${p.product_name} von ${p.manufacturer}.`,
+        title,
+        description: `Spezifikationen, Dk/t-Wert und Preisübersicht für ${p.product_name} von ${p.manufacturer}. Unabhängiger Nachkauf-Vergleich.`,
         priority: '0.8',
         indexable: true,
         robots: 'index, follow',

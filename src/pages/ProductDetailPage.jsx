@@ -40,7 +40,7 @@ export default function ProductDetailPage({ productIdOverride }) {
     trackProductView(product.id, product.product_name);
   }, [product.id, product.product_name]);
 
-  const canonicalUrl = `https://www.optical.de/${product.id === 'biofinity' ? 'biofinity' : product.id}`;
+  const canonicalUrl = `https://www.optical.de/${product.id === 'biofinity' ? 'biofinity' : `produkt/${product.id}`}`;
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
@@ -282,6 +282,15 @@ export default function ProductDetailPage({ productIdOverride }) {
                   <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600 text-emerald-600' : ''}`} />
                   <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für späteren Nachkauf merken'}</span>
                 </button>
+
+                {saved && (
+                  <Link
+                    to="/meine-linsen"
+                    className="block text-center text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold underline py-0.5"
+                  >
+                    Im Nachkauf-Planer Vorrat &amp; Kalender-Erinnerung einstellen →
+                  </Link>
+                )}
 
                 <div className="text-center space-y-0.5 pt-1">
                   <span className="text-[10px] text-slate-500 block font-medium">
