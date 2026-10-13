@@ -23,7 +23,7 @@ import { getProductById, PRODUCTS } from '../data/products';
 import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { trackAffiliateClick, trackProductView } from '../utils/tracking';
-import { getProductAffiliateUrl } from '../utils/affiliate';
+import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 
 export default function ProductDetailPage({ productIdOverride }) {
   const { productId: routeId } = useParams();
@@ -262,11 +262,11 @@ export default function ProductDetailPage({ productIdOverride }) {
                 <a
                   href={getProductAffiliateUrl(product)}
                   target="_blank"
-                  rel="noopener noreferrer sponsored"
+                  rel={AFFILIATE_LINK_REL}
                   onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
                 >
-                  <span>Produkt bei Amazon ansehen *</span>
+                  <span>{getAffiliateCtaLabel(product)}</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 

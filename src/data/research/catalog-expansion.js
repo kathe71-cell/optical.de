@@ -2461,14 +2461,14 @@ export const RESEARCH_CATALOG = [
     "standard_pack_size": "30er Box",
     "source_url": "https://www.apollo.de/kontaktlinsen/tageslinsen/iwear-activ",
     "source_type": "RETAILER_PACKAGING_SPEC",
-    "source_name": "Blisterdeklaration Apollo-Optik & Alcon Dailies AquaComfort Plus",
+    "source_name": "Blisterdeklaration Apollo-Optik (Nelfilcon A, 69% H2O) & Alcon Dailies AquaComfort Plus",
     "research_date": "2026-10-13",
     "pipeline_status": "DATA_VERIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "dailies-aquacomfort",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
-    "strategic_value": "Entspricht nach deklariertem USAN-Material (Nelfilcon A), Wassergehalt (69 %) und Geometrie Alcon Dailies AquaComfort Plus."
+    "strategic_value": "Eindeutige technische Übereinstimmung mit Alcon Dailies AquaComfort Plus (Nelfilcon A, 69 % Wassergehalt, Dk/t 26, BC 8.7, DIA 14.0). Frühere Zuordnungsannahmen zu Somofilcon A / clariti 1 day (SiHy, 56 % H2O) waren sachlich falsch."
   },
   {
     "id": "res-em-fielmann-atmo-day",
@@ -3312,7 +3312,7 @@ export const RESEARCH_CATALOG = [
     "strategic_value": "Parameter (Fanfilcon A, 55 % Wasser, BC 8.4) entsprechen CooperVision Avaira Vitality."
   },
   {
-    "id": "res-em-apollo-iwear-oxygen-astigmatism",
+    "id": "res-em-apollo-iwear-oxygen-presbyopia",
     "product_name": "iWear oxygen presbyopia (Apollo-Optik)",
     "manufacturer": "Apollo-Optik (Vertrieb) / CooperVision (Hersteller)",
     "brand": "iWear",

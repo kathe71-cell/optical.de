@@ -12,15 +12,12 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick } from '../utils/tracking';
 
+import { getAffiliateSearchUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+
 const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (queryOrAsin, asin) => {
-  if (asin) {
-    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
-  }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
-};
+const getAmazonLink = (queryOrAsin, asin) => getAffiliateSearchUrl(queryOrAsin, asin);
 
 export default function PrivateLabelLanding({ slugOverride }) {
   const { slug: routeSlug } = useParams();
@@ -185,11 +182,11 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 <a
                   href={getAmazonLink(matchedProduct?.amazon_query, matchedProduct?.asin)}
                   target="_blank"
-                  rel="noopener noreferrer sponsored"
+                  rel={AFFILIATE_LINK_REL}
                   onClick={() => trackAffiliateClick(matchedProduct?.product_name || entry.optician_private_label, 'amazon', 'private_label_page')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition group"
                 >
-                  <span>Produkt bei Amazon ansehen *</span>
+                  <span>{getAffiliateCtaLabel(matchedProduct)}</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 

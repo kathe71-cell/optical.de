@@ -18,15 +18,12 @@ import { EIGENMARKEN_DATABASE, searchEigenmarken, calculateOpticianCosts } from 
 import { getProductById } from '../data/products';
 import { trackDecoderStarted, trackDecoderCompleted, trackAffiliateClick } from '../utils/tracking';
 
+import { getAffiliateSearchUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+
 const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (queryOrAsin, asin) => {
-  if (asin) {
-    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
-  }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
-};
+const getAmazonLink = (queryOrAsin, asin) => getAffiliateSearchUrl(queryOrAsin, asin);
 
 export default function EigenmarkenDecoder({ standalone = false }) {
   const [inputQuery, setInputQuery] = useState('');
@@ -393,11 +390,11 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                 <a
                   href={getAmazonLink(matchedProduct.amazon_query, matchedProduct.asin)}
                   target="_blank"
-                  rel="noopener noreferrer sponsored"
+                  rel={AFFILIATE_LINK_REL}
                   onClick={() => trackAffiliateClick(matchedProduct.product_name, 'amazon', 'eigenmarken_decoder')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-all group"
                 >
-                  <span>Produkt bei Amazon ansehen *</span>
+                  <span>{getAffiliateCtaLabel(matchedProduct)}</span>
                   <ExternalLink className="w-3.5 h-3.5 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 <div className="text-center mt-2 space-y-0.5">

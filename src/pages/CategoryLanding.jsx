@@ -11,15 +11,12 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick, trackFilterUsed, trackProductClicked } from '../utils/tracking';
 
+import { getAffiliateSearchUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+
 const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
 
-const getAmazonLink = (queryOrAsin, asin) => {
-  if (asin) {
-    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
-  }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
-};
+const getAmazonLink = (queryOrAsin, asin) => getAffiliateSearchUrl(queryOrAsin, asin);
 
 const CATEGORY_CONFIG = {
   'tageslinsen-vergleich': {
@@ -260,11 +257,11 @@ export default function CategoryLanding({ categorySlugOverride }) {
                     <a
                       href={getAmazonLink(p.amazon_query, p.asin)}
                       target="_blank"
-                      rel="noopener noreferrer sponsored"
+                      rel={AFFILIATE_LINK_REL}
                       onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'category_page')}
                       className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
                     >
-                      <span>Produkt bei Amazon ansehen *</span>
+                      <span>{getAffiliateCtaLabel(p)}</span>
                       <ExternalLink className="w-3 h-3 text-emerald-400" />
                     </a>
                   </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PRODUCTS } from '../data/products';
+import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 
 const MetaTags = ({ title, description, canonical }) => {
   React.useEffect(() => {
@@ -102,12 +103,12 @@ export default function MonatsVsTagesGuide() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Unsere Tageslinsen-Empfehlungen</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {tageslinsen.map(p => (
-              <a key={p.id} href={"https://www.amazon.de/dp/" + p.asin + "?tag=optical.de-21"} target="_blank" rel="noopener noreferrer sponsored"
+              <a key={p.id} href={getProductAffiliateUrl(p)} target="_blank" rel={AFFILIATE_LINK_REL}
                 className="block bg-white rounded-xl border border-gray-200 p-4 hover:border-blue-300 hover:shadow-md transition-all">
                 <div className="font-semibold text-gray-900 text-sm mb-1">{p.product_name}</div>
                 <div className="text-xs text-gray-500 mb-2">{p.pack_size}</div>
                 <div className="text-blue-600 font-bold">{p.price_per_day} / Tag</div>
-                <div className="text-xs text-gray-400 mt-1">{p.price} auf Amazon &rarr;</div>
+                <div className="text-xs text-gray-400 mt-1">{getAffiliateCtaLabel(p)} &rarr;</div>
               </a>
             ))}
           </div>
@@ -117,12 +118,12 @@ export default function MonatsVsTagesGuide() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Unsere Monatslinsen-Empfehlungen</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {monatslinsen.map(p => (
-              <a key={p.id} href={"https://www.amazon.de/dp/" + p.asin + "?tag=optical.de-21"} target="_blank" rel="noopener noreferrer sponsored"
+              <a key={p.id} href={getProductAffiliateUrl(p)} target="_blank" rel={AFFILIATE_LINK_REL}
                 className="block bg-white rounded-xl border border-gray-200 p-4 hover:border-green-300 hover:shadow-md transition-all">
                 <div className="font-semibold text-gray-900 text-sm mb-1">{p.product_name}</div>
                 <div className="text-xs text-gray-500 mb-2">{p.pack_size}</div>
                 <div className="text-green-600 font-bold">{p.price_per_day} / Tag</div>
-                <div className="text-xs text-gray-400 mt-1">{p.price} auf Amazon &rarr;</div>
+                <div className="text-xs text-gray-400 mt-1">{getAffiliateCtaLabel(p)} &rarr;</div>
               </a>
             ))}
           </div>

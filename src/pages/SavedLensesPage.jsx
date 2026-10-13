@@ -23,7 +23,7 @@ import RefillAssistantModal from '../components/RefillAssistantModal';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { useRefillConfigs } from '../hooks/useRefillConfigs';
 import { PRODUCTS, getProductById } from '../data/products';
-import { getProductAffiliateUrl } from '../utils/affiliate';
+import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 import { generateIcsCalendarEvent, downloadIcsFile } from '../utils/refillCalculator';
 import { trackAffiliateClick, trackEvent } from '../utils/tracking';
 
@@ -256,11 +256,11 @@ export default function SavedLensesPage() {
                         <a
                           href={getProductAffiliateUrl(p)}
                           target="_blank"
-                          rel="noopener noreferrer sponsored"
+                          rel={AFFILIATE_LINK_REL}
                           onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'saved_lenses_page')}
                           className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-[11px] py-2.5 px-2 rounded-xl text-center transition flex items-center justify-center gap-1 shadow-2xs"
                         >
-                          <span>Produkt bei Amazon ansehen *</span>
+                          <span>{getAffiliateCtaLabel(p)}</span>
                           <ExternalLink className="w-3 h-3 flex-shrink-0" />
                         </a>
                       </div>

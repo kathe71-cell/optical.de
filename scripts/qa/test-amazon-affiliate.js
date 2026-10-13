@@ -1,13 +1,13 @@
 /**
- * optical.de - Test-Suite für Amazon-Affiliate-Integrität & Link-Architektur (Phase 9)
+ * optical.de - Test-Suite für Amazon-Affiliate-Integrität & Link-Architektur (Phase 9.3 Hotfix)
  * 
  * Überprüft:
- * 1. Vollständigkeit und alphanumerisches Format sämtlicher ASINs
- * 2. Korrekte Injektion des Partner-Tags optical.de-21
- * 3. Robuste Generierung direkter Produktlinks vs. Suchlink-Fallbacks
- * 4. Saubere URL-Kodierung ohne doppelte Parameter
- * 5. Richtlinienkonforme CTA-Texte ("Produkt bei Amazon ansehen *" / "Bei Amazon nach Produkt suchen *")
- * 6. Vorhandensein des offiziellen Amazon-Partnerhinweises
+ * 1. Partner-Tag optical.de-21
+ * 2. Strikte Freigabelogik: Nur die 17 verifizierten ASINs erzeugen Direktlinks (/dp/{asin})
+ * 3. Nicht-verifizierte/404-ASINs (z. B. Acuvue Oasys B000052YP8) werden automatisch auf sichere Suche umgeleitet
+ * 4. Korrekte CTA-Texte ("Produkt bei Amazon ansehen *" für verifizierte vs. "Bei Amazon nach Produkt suchen *" für Fallback)
+ * 5. Schutz vor defekten 404-Direktlinks im aktiven Verkaufspfad
+ * 6. Google & PartnerNet Konformität: rel="noopener noreferrer sponsored"
  */
 
 import { PRODUCTS } from '../../src/data/products.js';
@@ -15,6 +15,9 @@ import {
   getProductAffiliateUrl, 
   getAffiliateSearchUrl, 
   getAffiliateCtaLabel, 
+  isDirectAsinActive,
+  VERIFIED_ACTIVE_ASINS,
+  AFFILIATE_LINK_REL,
   AMAZON_PARTNER_TAG 
 } from '../../src/utils/affiliate.js';
 
@@ -32,55 +35,60 @@ function assert(condition, testName) {
 }
 
 console.log('====================================================');
-console.log('TEST SUITE: AMAZON AFFILIATE & ASIN INTEGRITY');
+console.log('TEST SUITE: AMAZON AFFILIATE QUALITY GATE & HOTFIX (PHASE 9.3)');
 console.log('====================================================\n');
 
-// 1. Partner-Tag
+// 1. Partner-Tag & Rel-Attribut
 assert(AMAZON_PARTNER_TAG === 'optical.de-21', 'Amazon Partner-Tag ist exakt optical.de-21');
+assert(AFFILIATE_LINK_REL === 'noopener noreferrer sponsored', 'Affiliate rel-Attribut entspricht Google/PartnerNet Vorgabe sponsored');
 
-// 2. Alle 39 Produkte prüfen
-let validAsinCount = 0;
-let validDirectLinks = 0;
+// 2. Status der 39 Produkte
+let verifiedDirectCount = 0;
+let safeFallbackCount = 0;
 
 for (const p of PRODUCTS) {
-  const is10CharAsin = p.asin && /^[A-Z0-9]{10}$/.test(p.asin);
-  if (is10CharAsin) validAsinCount++;
-
+  const isDirect = isDirectAsinActive(p.asin);
   const url = getProductAffiliateUrl(p);
-  const hasTag = url.includes('tag=optical.de-21');
-  const hasDp = url.includes(`/dp/${p.asin}`);
-  const noDoubleTag = (url.match(/tag=/g) || []).length === 1;
-
-  if (hasTag && hasDp && noDoubleTag) {
-    validDirectLinks++;
-  }
-
-  // CTA Text Prüfung
   const cta = getAffiliateCtaLabel(p);
-  if (is10CharAsin && cta !== 'Produkt bei Amazon ansehen *') {
-    assert(false, `CTA Label für ${p.id} entspricht nicht dem Direktlink-Standard`);
+
+  if (isDirect) {
+    verifiedDirectCount++;
+    assert(url.includes(`/dp/${p.asin}`), `Verifiziertes Produkt ${p.id} verlinkt direkt auf /dp/${p.asin}`);
+    assert(cta === 'Produkt bei Amazon ansehen *', `Verifiziertes Produkt ${p.id} nutzt Direkt-CTA`);
+  } else {
+    safeFallbackCount++;
+    assert(url.includes('/s?k='), `Unverifiziertes Produkt ${p.id} nutzt sicheren Such-Fallback`);
+    assert(cta === 'Bei Amazon nach Produkt suchen *', `Unverifiziertes Produkt ${p.id} nutzt Such-CTA`);
+    assert(!url.includes(`/dp/${p.asin}`), `Unverifiziertes Produkt ${p.id} erzeugt KEINEN ungeprüften Direktlink`);
   }
+
+  assert(url.includes('tag=optical.de-21'), `Produkt ${p.id} URL enthält korrekten Partner-Tag`);
 }
 
-assert(validAsinCount === 39, `Alle 39 Produkte besitzen ein valides 10-stelliges ASIN-Format (${validAsinCount}/39)`);
-assert(validDirectLinks === 39, `Alle 39 Produkte erzeugen einen fehlerfreien Amazon-Direktlink mit tag=optical.de-21 (${validDirectLinks}/39)`);
+assert(verifiedDirectCount === 17, `Exakt 17 von 39 Produkten sind als aktive Direktlinks freigegeben (${verifiedDirectCount}/39)`);
+assert(safeFallbackCount === 22, `Exakt 22 von 39 Produkten nutzen den sicheren Such-Fallback (${safeFallbackCount}/39)`);
 
-// 3. Fallback-Verhalten bei fehlender ASIN oder Suchanfragen
-const fallbackSearchUrl = getAffiliateSearchUrl('Biofinity Toric 6er Packung', null);
-assert(fallbackSearchUrl.includes('https://www.amazon.de/s?k='), 'Suchlink-Fallback erzeugt Amazon-Such-URL');
-assert(fallbackSearchUrl.includes('tag=optical.de-21'), 'Suchlink-Fallback enthält korrekten Partner-Tag');
-assert(fallbackSearchUrl.includes('Biofinity%20Toric%206er%20Packung'), 'Suchbegriff ist ordnungsgemäß URL-kodiert');
+// 3. Spezifischer Test des 404-Hotfixes (Acuvue Oasys B000052YP8)
+const oasys = PRODUCTS.find(p => p.id === 'acuvue-oasys-2week');
+assert(oasys.asin === 'B000052YP8', 'Acuvue Oasys ASIN B000052YP8 identifiziert');
+assert(!isDirectAsinActive(oasys.asin), 'Acuvue Oasys ASIN B000052YP8 ist in isDirectAsinActive als DEAKTIVIERT eingestuft');
 
-const searchCta = getAffiliateCtaLabel({ product_name: 'Unbekannte Linse', asin: null });
-assert(searchCta === 'Bei Amazon nach Produkt suchen *', 'Suchlink liefert transparenten Such-CTA-Text');
+const oasysUrl = getProductAffiliateUrl(oasys);
+assert(!oasysUrl.includes('B000052YP8'), 'Acuvue Oasys URL enthält NICHT die defekte 404-ASIN');
+assert(oasysUrl.includes('/s?k='), 'Acuvue Oasys leitet auf sichere Amazon-Suche um');
+assert(getAffiliateCtaLabel(oasys) === 'Bei Amazon nach Produkt suchen *', 'Acuvue Oasys nutzt transparenten Such-CTA');
 
-// 4. Edge Cases: Leeres Produkt, undefined
+// 4. Edge Cases: getAffiliateSearchUrl
+assert(getAffiliateSearchUrl('Biofinity', 'B007UITPAQ').includes('/dp/B007UITPAQ'), 'Freigegebene ASIN B007UITPAQ erzeugt /dp/ Link');
+assert(getAffiliateSearchUrl('Acuvue Oasys', 'B000052YP8').includes('/s?k='), 'Nicht freigegebene ASIN B000052YP8 erzeugt /s?k= Suchlink');
+
+// 5. Fallback bei null-Produkt
 const emptyUrl = getProductAffiliateUrl(null);
 assert(emptyUrl.includes('tag=optical.de-21'), 'Fallback bei null-Produkt führt zu valider Amazon-URL mit Partner-Tag');
 
 console.log('\n====================================================');
 if (fails === 0) {
-  console.log(`✅ Alle ${passes} Affiliate- & ASIN-Tests erfolgreich bestanden!`);
+  console.log(`✅ Alle ${passes} Affiliate Quality Gate & Hotfix Tests erfolgreich bestanden!`);
   process.exit(0);
 } else {
   console.error(`❌ ${fails} Tests fehlgeschlagen!`);

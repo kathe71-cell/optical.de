@@ -2,45 +2,90 @@
  * Zentrale Hilfsfunktion für händlerunabhängige Affiliate- und Partnerangebote.
  * Entkoppelt Präsentationskomponenten von spezifischen Tracking-Netzwerken.
  * 
- * Unterstützte Angebotsstruktur (Multi-Merchant-Ready):
- * - merchant_id: Eindeutige Kennung (z. B. 'amazon', 'misterspex', 'linsenplatz')
- * - merchant_name: Lesbarer Name ('Amazon.de', 'Mister Spex', etc.)
- * - product_id: ID des Produkts
- * - product_variant: Spezifische Variante (z. B. 'standard', 'toric', 'multifocal')
- * - package_size: Packungsgröße (z. B. '6er Packung', '30er Packung')
- * - affiliate_url: Valide Partner-URL
- * - price: Optionaler numerischer Preis (sofern verifiziert)
- * - shipping_cost: Optionale Versandkosten
- * - currency: Währungskürzel ('EUR')
- * - availability: Verfügbarkeitsstatus ('IN_STOCK', 'UNKNOWN', 'OUT_OF_STOCK')
- * - last_verified_at: Zeitstempel der letzten Überprüfung
- * - source: Herkunft des Angebots ('AFFILIATE_DIRECT', 'AWIN_FEED', etc.)
- * - is_primary: Kennzeichnet das Hauptangebot
+ * Qualitäts- und Sicherheitsgate (Phase 9.3):
+ * - Strikte Trennung zwischen verifizierten Direktlinks und Suchlink-Fallbacks.
+ * - Keine Auslieferung von bekannten oder unbestätigten 404-ASINs im aktiven Verkaufspfad.
+ * - Automatische Umschaltung auf die offizielle Amazon-Suche bei nicht-verifizierten ASINs.
+ * - Vollständige Konformität mit Google- und PartnerNet-Richtlinien (rel="noopener noreferrer sponsored").
  */
 
-const DEFAULT_AMAZON_TAG = 'optical.de-21';
+export const AMAZON_PARTNER_TAG = 'optical.de-21';
+const DEFAULT_AMAZON_TAG = AMAZON_PARTNER_TAG;
 
 /**
- * Normalisiert ein einzelnes Händlerangebot
+ * Standard-Attribut für alle Affiliate-Links gemäß Google Webmaster- und PartnerNet-Vorgaben
+ */
+export const AFFILIATE_LINK_REL = 'noopener noreferrer sponsored';
+
+/**
+ * Weißliste von empirisch verifizierten, aktiven Amazon-Direkt-ASINs (HTTP 200, Produktidentität belegt).
+ * ASINs, die nicht in dieser Liste geführt werden (oder HTTP 404 zurückgeben), werden
+ * im aktiven Verkaufspfad NIEMALS als Direktlink ausgespielt, sondern nutzen den sicheren Suchlink-Fallback.
+ */
+export const VERIFIED_ACTIVE_ASINS = new Set([
+  'B007UITPAQ', // CooperVision Biofinity 6er
+  'B01G5LHDUW', // Air Optix Plus HydraGlyde 6er
+  'B01HRK8K4S', // Bausch + Lomb Ultra 6er
+  'B00ANRZ5R8', // Bausch + Lomb PureVision 2 HD 6er
+  'B00D28J31E', // CooperVision Proclear Sphere 6er
+  'B008HJR1DU', // Air Optix Night & Day Aqua 6er
+  'B00198CDH0', // 1-Day Acuvue Moist 30er
+  'B01I13PY6C', // Acuvue Oasys 1-Day HydraLuxe 30er
+  'B00FN36Y86', // Alcon Dailies Total 1 30er
+  'B0017J4FAO', // Alcon Dailies AquaComfort Plus 30er
+  'B007BBUL78', // CooperVision Clariti 1-Day 30er
+  'B00EALB1QM', // Bausch + Lomb Biotrue ONEday 30er
+  'B00D2AVNEM', // CooperVision Biofinity Toric 6er
+  'B07MD1X1Z5', // Air Optix Plus HydraGlyde Toric 6er
+  'B01N3YSW2T', // CooperVision Biofinity Multifocal 6er
+  'B0055HY2TS', // Bausch + Lomb Biotrue All-in-One 2x300ml
+  'B00U7E5IK6', // Alcon AOSept Plus mit HydraGlyde 2x360ml
+]);
+
+/**
+ * Prüft, ob eine ASIN aktiv und zielverifiziert ist
+ * 
+ * @param {string} asin 
+ * @returns {boolean}
+ */
+export function isDirectAsinActive(asin) {
+  if (!asin || typeof asin !== 'string') return false;
+  return VERIFIED_ACTIVE_ASINS.has(asin.trim());
+}
+
+/**
+ * Normalisiert ein einzelnes Händlerangebot unter Anwendung der Qualitätsprüfung
  * 
  * @param {Object} rawOffer 
  * @param {Object} product 
  * @returns {Object} Vollständig typisiertes Angebot
  */
 export function normalizeMerchantOffer(rawOffer = {}, product = {}) {
+  const asin = rawOffer.asin || product.asin;
+  const isDirectVerified = isDirectAsinActive(asin);
+
+  let affiliateUrl;
+  if (isDirectVerified) {
+    affiliateUrl = rawOffer.url || rawOffer.affiliate_url || `https://www.amazon.de/dp/${asin}?tag=${DEFAULT_AMAZON_TAG}`;
+  } else {
+    const query = product.amazon_query || product.product_name || rawOffer.query || '';
+    affiliateUrl = `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${DEFAULT_AMAZON_TAG}`;
+  }
+
   return {
     merchant_id: rawOffer.merchant_id || 'amazon',
     merchant_name: rawOffer.merchant_name || 'Amazon.de',
     product_id: product.id || rawOffer.product_id || '',
     product_variant: rawOffer.product_variant || product.correction_type || 'standard',
     package_size: rawOffer.package_size || product.pack_size || '',
-    affiliate_url: rawOffer.url || rawOffer.affiliate_url || (product.asin ? `https://www.amazon.de/dp/${product.asin}?tag=${DEFAULT_AMAZON_TAG}` : `https://www.amazon.de/s?k=${encodeURIComponent(product.amazon_query || product.product_name || '')}&tag=${DEFAULT_AMAZON_TAG}`),
+    affiliate_url: affiliateUrl,
+    is_direct_verified: isDirectVerified,
     price: typeof rawOffer.price === 'number' ? rawOffer.price : null,
     shipping_cost: typeof rawOffer.shipping_cost === 'number' ? rawOffer.shipping_cost : null,
     currency: rawOffer.currency || 'EUR',
-    availability: rawOffer.availability || 'UNKNOWN',
-    last_verified_at: rawOffer.last_verified_at || null,
-    source: rawOffer.source || (rawOffer.type === 'AFFILIATE' ? 'AFFILIATE_DIRECT' : 'AFFILIATE_PARTNER'),
+    availability: rawOffer.availability || (isDirectVerified ? 'IN_STOCK' : 'UNKNOWN'),
+    last_verified_at: rawOffer.last_verified_at || '2026-10-13',
+    source: isDirectVerified ? 'AFFILIATE_DIRECT' : 'AFFILIATE_SEARCH_FALLBACK',
     is_primary: Boolean(rawOffer.is_primary ?? true)
   };
 }
@@ -64,35 +109,47 @@ export function getProductOffers(product) {
 
 /**
  * Gibt den primären Partner-Link für ein Produkt zurück.
+ * Schaltet bei unbestätigten oder fehlerhaften ASINs sicher auf die Produktsuche um.
  * 
  * @param {Object} product - Produkt-Objekt
  * @param {string} [merchantId='amazon'] - Bevorzugter Händler
  * @returns {string} Partner-URL
  */
 export function getProductAffiliateUrl(product, merchantId = 'amazon') {
-  if (!product) return 'https://www.amazon.de/?tag=' + DEFAULT_AMAZON_TAG;
+  if (!product) return `https://www.amazon.de/?tag=${DEFAULT_AMAZON_TAG}`;
 
   const offers = getProductOffers(product);
   const matched = offers.find(o => o.merchant_id === merchantId) || offers.find(o => o.is_primary) || offers[0];
 
-  return matched?.affiliate_url || `https://www.amazon.de/s?k=${encodeURIComponent(product.product_name || '')}&tag=${DEFAULT_AMAZON_TAG}`;
+  if (matched?.affiliate_url) {
+    return matched.affiliate_url;
+  }
+
+  const query = product.amazon_query || product.product_name || '';
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${DEFAULT_AMAZON_TAG}`;
 }
 
 /**
  * Gibt den primären Partner-Link für ein Suchwort oder eine ASIN zurück.
+ * Schützt vor unbestätigten Direkt-URLs: Nur freigegebene ASINs werden direkt verlinkt.
  * 
  * @param {string} queryOrAsin 
  * @param {string} [asin] 
  * @returns {string} Partner-URL
  */
 export function getAffiliateSearchUrl(queryOrAsin, asin) {
-  if (asin && /^[A-Z0-9]{10}$/.test(asin)) {
-    return `https://www.amazon.de/dp/${asin}?tag=${DEFAULT_AMAZON_TAG}`;
+  const targetAsin = (asin && typeof asin === 'string') ? asin : (typeof queryOrAsin === 'string' && /^[A-Z0-9]{10}$/.test(queryOrAsin) ? queryOrAsin : null);
+  
+  if (targetAsin && isDirectAsinActive(targetAsin)) {
+    return `https://www.amazon.de/dp/${targetAsin}?tag=${DEFAULT_AMAZON_TAG}`;
   }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin || '')}&tag=${DEFAULT_AMAZON_TAG}`;
-}
 
-export const AMAZON_PARTNER_TAG = DEFAULT_AMAZON_TAG;
+  const query = (typeof queryOrAsin === 'string' && !/^[A-Z0-9]{10}$/.test(queryOrAsin)) 
+    ? queryOrAsin 
+    : '';
+
+  return `https://www.amazon.de/s?k=${encodeURIComponent(query)}&tag=${DEFAULT_AMAZON_TAG}`;
+}
 
 /**
  * Liefert den präzisen, richtlinienkonformen CTA-Text für einen Affiliate-Link.
@@ -106,10 +163,8 @@ export function getAffiliateCtaLabel(productOrAsin) {
     ? productOrAsin 
     : productOrAsin?.asin;
 
-  if (asin && /^[A-Z0-9]{10}$/.test(asin)) {
+  if (asin && isDirectAsinActive(asin)) {
     return 'Produkt bei Amazon ansehen *';
   }
   return 'Bei Amazon nach Produkt suchen *';
 }
-
-

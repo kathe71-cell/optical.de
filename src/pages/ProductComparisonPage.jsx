@@ -10,14 +10,11 @@ import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { trackAffiliateClick } from '../utils/tracking';
 
+import { getAffiliateSearchUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+
 const AMAZON_TAG = 'optical.de-21';
 
-const getAmazonLink = (queryOrAsin, asin) => {
-  if (asin) {
-    return `https://www.amazon.de/dp/${asin}?tag=${AMAZON_TAG}`;
-  }
-  return `https://www.amazon.de/s?k=${encodeURIComponent(queryOrAsin)}&tag=${AMAZON_TAG}`;
-};
+const getAmazonLink = (queryOrAsin, asin) => getAffiliateSearchUrl(queryOrAsin, asin);
 
 export default function ProductComparisonPage() {
   const [searchParams] = useSearchParams();
@@ -152,11 +149,11 @@ export default function ProductComparisonPage() {
                     <a
                       href={getAmazonLink(lens.amazon_query, lens.asin)}
                       target="_blank"
-                      rel="noopener noreferrer sponsored"
+                      rel={AFFILIATE_LINK_REL}
                       onClick={() => trackAffiliateClick(lens.product_name, 'partner', 'multi_comparison')}
                       className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-xs transition"
                     >
-                      <span className="truncate">{lens.product_name.split(' ').slice(0, 2).join(' ')} *</span>
+                      <span className="truncate">{getAffiliateCtaLabel(lens)}</span>
                       <ExternalLink className="w-3 h-3 text-emerald-400 shrink-0" />
                     </a>
                   </div>
