@@ -38,7 +38,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Produktspezifikation TOTAL30",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "CRITICAL",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erste Monatslinse mit Wassergradienten; extreme Nachfrage im deutschen Markt."
@@ -63,7 +63,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Produktspezifikation TOTAL30 Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Torische Ergänzung zur TOTAL30; PRECISION BALANCE 8|4 Design; hoher Warenkorbwert."
@@ -88,7 +88,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Produktspezifikation TOTAL30 Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Multifokale Gleitsicht-Monatslinse mit PRECISION PROFILE Design."
@@ -113,7 +113,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation DT1 Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Marktführende Gleitsicht-Tageslinse für Presbyopie; hochpreisiges Segment."
@@ -138,7 +138,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation DT1 Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr gefragte torische Wassergradienten-Tageslinse; Premium-Segment."
@@ -163,7 +163,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation Precision1 Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Schnell wachsende Tageslinse im mittleren Preissegment bei Hornhautverkrümmung."
@@ -188,7 +188,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation Air Optix Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Etablierte multifokale Monatslinse mit SmartShield-Technologie gegen Ablagerungen."
@@ -213,7 +213,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Spezifikationsübersicht Dailies Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Etablierte Hydrogel-Multifokallinse für Träger mit Vorliebe für hohe Spontanbenetzung."
@@ -238,7 +238,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation Air Optix Colors",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einzige hoch sauerstoffdurchlässige Silikon-Hydrogel-Farblinse auf dem Markt."
@@ -263,7 +263,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Katalog FreshLook",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Klassische Farblinse mit 3-in-1 Farbtechnologie; starkes Longtail-Suchvolumen."
@@ -288,7 +288,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Spezifikation FreshLook One-Day",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Tages-Farblinse für gelegentliche Nutzung (Events, Kosmetik)."
@@ -313,7 +313,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Focus Dailies Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Historischer Vorgänger der Dailies AquaComfort Plus; immer noch treue Stammkundenbasis."
@@ -338,7 +338,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Focus Dailies Toric Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "DISCONTINUED_OR_LIMITED",
     "strategic_value": "Ältere torische Tageslinse; schrittweise abgelöst durch Dailies AquaComfort Plus Toric."
@@ -363,7 +363,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Dimensions Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Farbtönungslinse speziell zur Intensivierung heller Augenfarben."
@@ -388,7 +388,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity XR",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erweiterter Lieferbereich von +15.00 bis -20.00 dpt; alternativlose Spezialversorgung."
@@ -413,7 +413,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity XR Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Zylinder bis -5.75 dpt; essenziell für komplexe Hornhautverkrümmungen; hohe Kundenloyalität."
@@ -438,7 +438,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biofinity Toric Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Kombinierte Korrektur von Astigmatismus und Presbyopie in einer Premium-Monatslinse."
@@ -463,7 +463,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation MyDay Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "CooperVision Joy-Optics Gleitsicht-Tageslinse mit Smart Silicone Technologie."
@@ -488,7 +488,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Preisgünstige SiHy-Tageslinse bei Astigmatismus mit WetLoc® Technologie."
@@ -513,7 +513,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erschwingliche SiHy-Tageslinse für Presbyope Träger."
@@ -538,7 +538,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Avaira Vitality",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Häufig angepasste Monatslinse mit integriertem Klasse-1-UV-Filter."
@@ -563,7 +563,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Avaira Vitality Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Optimierte Ballast-Geometrie für stabile torische Achsenlage."
@@ -588,7 +588,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Linse bei trockenen Augen mit Hornhautverkrümmung."
@@ -613,7 +613,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Toric XR",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Speziallinse für Zylinder bis -5.75 dpt."
@@ -638,7 +638,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Bewährte biokompatible Gleitsicht-Monatslinse mit Balanced Progressive Technology."
@@ -663,7 +663,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear Multifocal Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Spezialanfertigung auf Hydrogel-Basis für trockene Augen mit Astigmatismus und Presbyopie."
@@ -688,7 +688,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Proclear 1 Day Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Gleitsicht-Tageslinse für Presbyopie bei reduzierter Tränenfilmstabilität."
@@ -713,7 +713,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Professional Spezifikation MiSight",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "FDA-zugelassene und CE-zertifizierte Speziallinse zur Verlangsamung der Myopie-Progression bei Kindern."
@@ -738,7 +738,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics 55 evolution",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einer der weltweit meistverkauften Monatslinsen-Klassiker im Einstiegssegment."
@@ -763,7 +763,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Bewährte torische Hydrogel-Monatslinse mit stabiler Ballastgeometrie."
@@ -788,7 +788,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics 1 Day",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr verbreitete Hydrogel-Tageslinse für preisbewusste Käufer."
@@ -813,7 +813,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Biomedics 1 Day Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Günstige Tageslinse für gelegentliches Tragen beim Sport mit Hornhautverkrümmung."
@@ -838,7 +838,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Johnson & Johnson Vision Care Spezifikation Oasys MAX Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Technologie-Flaggschiff mit blau-violett Lichtfilter für Bildschirmarbeit und Presbyopie."
@@ -863,7 +863,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Moist Astigmatism",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "CRITICAL",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Eine der meistverkauften torischen Tageslinsen in Deutschland; riesige Kundenbasis."
@@ -888,7 +888,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Moist Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Pupillenoptimiertes Design (EYE-INSPIRED™ Design) für Alterssichtigkeit."
@@ -913,7 +913,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Oasys 1-Day Astigmatism",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Blink-Stabilized® Design gegen Verrutschen bei Kopfbewegungen."
@@ -938,7 +938,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Oasys Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einzige marktrelevante Zweiwochenlinse für Presbyopie in Deutschland."
@@ -963,7 +963,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Vita Astigmatism",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Monatslinse mit Lipid-Erhaltungs-Technologie gegen Trockenheit im vierten Träger-Wochenzyklus."
@@ -988,7 +988,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Acuvue Define",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Betont den natürlichen Limbusring des Auges ohne künstliche Farbveränderung."
@@ -1013,7 +1013,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Spezifikation Acuvue 2",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Traditionelle Hydrogel-Zweiwochenlinse mit großer treuer Anwenderbasis."
@@ -1038,7 +1038,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Fachinformation ULTRA ONEday",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Das moderne Premium-Tageslinsen-System von Bausch + Lomb."
@@ -1063,7 +1063,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Produktspezifikation ULTRA Toric Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einzige standardmäßig verfügbare SiHy-Monatslinse mit 3-Zone Progressive und OpticAlign Design."
@@ -1088,7 +1088,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Spezifikation Biotrue Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hoher Wassergehalt (78 %) entsprechend dem natürlichen Wassergehalt der Hornhaut."
@@ -1113,7 +1113,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Spezifikation Biotrue Presbyopia",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "3-Zonen-Progressiv-Design für scharfes Sehen in der Nähe, Zwischenbereich und Ferne."
@@ -1138,7 +1138,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb PureVision 2 Toric Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "High-Definition-Optik mit sphärischer Aberrationskontrolle."
@@ -1163,7 +1163,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb PureVision 2 Presbyopia Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Dünnes Randprofil für hohen Spontankomfort."
@@ -1188,7 +1188,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens Daily Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr beliebte, extrem günstige Einstiegs-Tageslinse mit asphärischer Optik."
@@ -1213,7 +1213,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens Daily Toric Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Günstige Tageslinse für Astigmatismus-Korrektur."
@@ -1238,7 +1238,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens Toric Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Klassische Hydrogel-Monatslinse bei Astigmatismus; Lo-Torque Formgebung."
@@ -1263,7 +1263,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens Multi-Focal Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Traditionslinse mit stabiler Geometrie und verlässlicher Nahlesezone."
@@ -1288,7 +1288,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens 59 Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Extrem preisgünstige Standard-Monatslinse; riesiges Suchvolumen bei preissensiblen Käufern."
@@ -1313,7 +1313,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb SofLens Natural Colors Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Ausgeprägter Limbusring für natürliche Farbwirkung."
@@ -1338,7 +1338,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru 1month",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Extrem hohe Sauerstofftransmissibilität (Dk/t 161); Premium-Monatslinse aus Japan."
@@ -1363,7 +1363,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru 1month Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hervorragende Stabilisierung mit Visiostable Design."
@@ -1388,7 +1388,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru 1month Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Doppel-Design (Dynamic-Struktur) für Presbyopie-Korrektur."
@@ -1413,7 +1413,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru Flat Pack",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Weltweit dünnste Linsenverpackung (1 mm); berührungsfreie Smart Touch Hygiene."
@@ -1438,7 +1438,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru UpSide",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Silikon-Hydrogel Tageslinse mit Smart Touch: Linse liegt immer mit Außenseite nach oben."
@@ -1463,7 +1463,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru UpSide Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Torische SiHy-Tageslinse mit hygienischem Smart Touch Blister."
@@ -1488,7 +1488,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Miru UpSide Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Gleitsicht-Tageslinse aus Silikon-Hydrogel mit Neuro Adaptive Design."
@@ -1513,7 +1513,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation PremiO",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hoch sauerstoffdurchlässige Zweiwochenlinse; starke Alternative zu Acuvue Oasys."
@@ -1538,7 +1538,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation PremiO Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Stabile Doppelachsen-Geometrie für Astigmatismus-Korrektur."
@@ -1563,7 +1563,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Bloom Day Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "CE-zugelassene Tageslinse zur Progressionshemmung kindlicher Kurzsichtigkeit."
@@ -1588,7 +1588,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Bloom Night Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Ortho-K Linse für scharfes Sehen tagsüber ohne Sehhilfe; erfordert fachärztliche Betreuung."
@@ -1613,7 +1613,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Contactlinsen Datenblatt Contact Day 30 Compatic",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Deutsche Traditionsmarke ZEISS (gefertigt bei Wöhlk); sehr hohe Markenbekanntheit in DACH."
@@ -1638,7 +1638,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Contactlinsen Datenblatt Contact Day 30 Compatic Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible torische Monatslinse für empfindliche Augen."
@@ -1663,7 +1663,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Contactlinsen Datenblatt Contact Day 30 Air",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Silikon-Hydrogel Monatslinse mit Alginat-Benetzungsstoff."
@@ -1688,7 +1688,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Contactlinsen Datenblatt Contact Day 1",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Tageslinse mit asphärischer Geometrie unter deutscher Premium-Marke ZEISS."
@@ -1713,7 +1713,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Produktkatalog Contact Air",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Eigenmarke des deutschen Herstellers Wöhlk aus Schönkirchen."
@@ -1738,7 +1738,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Produktkatalog Contact Air Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Präzisionsgefertigte torische Silikon-Hydrogel-Monatslinse."
@@ -1763,7 +1763,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Spezialkatalog Maßgefertigte Linsen",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Deutsche Maßanfertigung bei irregulären Hornhäuten."
@@ -1788,7 +1788,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "MPG&E Fachbereich Katalog ECCO",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr starker Anbieter im deutschen Fachoptiker-Kanal (Bordasholmer Spezialist)."
@@ -1813,7 +1813,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "MPG&E Produktübersicht ECCO Silicone",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Ausgewogene Monatslinse für lange Tragezeiten bei empfindlichen Augen."
@@ -1838,7 +1838,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "MPG&E Datenblatt ECCO change 30",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Asphärische Linsengeometrie für kontrastreiches Sehen bei Dämmerung."
@@ -1863,7 +1863,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "MPG&E Datenblatt Perfect 30 UV",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Etablierte Hydrogel-Monatslinse im Fachhandel."
@@ -1888,7 +1888,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "mark'ennovy Fachkatalog Individuelle Kontaktlinsen",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Europäischer Marktführer für individuell gefertigte Weichlinsen (Maßanfertigung)."
@@ -1913,7 +1913,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "mark'ennovy Fachkatalog Saphir RX Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Zylinder bis -8.00 dpt in 1°-Schritten; höchste Anpassflexibilität im Optikermarkt."
@@ -1938,7 +1938,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "mark'ennovy Fachkatalog Saphir RX Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Individuell wählbare Nahzonen und Additionen von +0.50 bis +4.00 dpt."
@@ -1963,7 +1963,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "mark'ennovy Datenblatt Gentle 80",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Extrem dehydrierungsresistente Linse für hochgradig trockene Augen."
@@ -1988,7 +1988,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "mark'ennovy Datenblatt Gentle 80 Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Biokompatible Hydrogel-Maßanfertigung bei Hornhautverkrümmung."
@@ -2013,7 +2013,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "SwissLens Laboratorium Produktkatalog",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Schweizer Präzisionslinse für anspruchsvolle Geometrien."
@@ -2038,7 +2038,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "SwissLens Toric Katalog",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Dynamische Prismenstabilisation für torische Anpassungen."
@@ -2063,7 +2063,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Pflegemittel Spezifikation AOSept Triple",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "CRITICAL",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Absoluter Bestseller bei Peroxid-Lösungen; perfekter Vorratspack für Nachkauf-Assistent."
@@ -2088,7 +2088,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Opti-Free PureMoist Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Marktführende Kombilösung für Silikon-Hydrogel-Monatslinsen."
@@ -2113,7 +2113,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Opti-Free Express Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Klassische, bewährte Mehrzweck-Desinfektionslösung."
@@ -2138,7 +2138,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Biotrue Packungsgrößen",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Optimal für Reisen und Flugreisen; starker saisonaler Nachkauf vor Urlaubszeiten."
@@ -2163,7 +2163,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Fachinformation EasySept",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Konservierungsmittelfreies Einstufen-Peroxidsystem für Allergiker."
@@ -2188,7 +2188,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb EasySept Hydro+ Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Weiterentwicklung von EasySept mit optimierter Oberflächenbenetzung."
@@ -2213,7 +2213,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation MeniCare Pure",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Referenzlösung für formstabile (harte) Kontaktlinsen mit natürlichen Inhaltsstoffen."
@@ -2238,7 +2238,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation Progent",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hochwirksame Proteinentfernung und Desinfektion gegen Viren, Pilze und Akanthamöben."
@@ -2263,7 +2263,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Systane ULTRA Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Schnelle Linderung bei Trockenheitsgefühl; für Kontaktlinsenträger direkt ins Auge applizierbar."
@@ -2288,7 +2288,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Systane COMPLETE Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Ergänzt alle drei Schichten des Tränenfilms bei evaporativem trockenen Auge."
@@ -2313,7 +2313,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Ursapharm Arzneimittel Datenblatt HYLO GEL",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hochviskose Tropfen für chronisch trockene Augen; voll kontaktlinsenverträglich."
@@ -2338,7 +2338,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Ursapharm Arzneimittel Datenblatt HYLO DUAL",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Kombination aus Hyaluron und Ectoin gegen entzündliche und allergische Reizungen."
@@ -2363,7 +2363,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Oté Pharma Medizinprodukte Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Pflegeformel mit Schutzfilm und Hornhautregeneration durch Provitamin B5."
@@ -2388,7 +2388,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Oté Pharma Datenblatt Kochsalzlösung",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Essenziell für Peroxid-Nutzer und zum Abspülen gelöster Rückstände."
@@ -2413,7 +2413,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "AMO Oxysept Comfort Produktspezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Tabletten-Peroxidsystem mit rosa Farbindikator zur optischen Kontrolle der Neutralisation."
@@ -2438,7 +2438,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Johnson & Johnson Vision Complete RevitaLens Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Breitband-Desinfektion mit Peroxid-ähnlicher Keimtötung bei All-in-One-Komfort."
@@ -2463,7 +2463,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Blisterdeklaration Apollo-Optik (Nelfilcon A, 69% H2O) & Alcon Dailies AquaComfort Plus",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "dailies-aquacomfort",
     "market_relevance": "HIGH",
@@ -2490,7 +2490,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung & Alcon Dailies Total 1 Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "dailies-total-1",
     "market_relevance": "HIGH",
@@ -2517,7 +2517,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Mister Spex Produktspezifikation True Day Silicone",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "clariti-1day",
     "market_relevance": "HIGH",
@@ -2544,7 +2544,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung Kontakt Air Day",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "myday-daily",
     "market_relevance": "HIGH",
@@ -2571,7 +2571,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Apollo Verpackung iWear vivid & CooperVision Biomedics 55 evolution",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-biomedics-55-evolution",
     "market_relevance": "HIGH",
@@ -2598,7 +2598,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Apollo Verpackung iWear direct & CooperVision Biomedics 1 Day Extra",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-biomedics-1day-extra",
     "market_relevance": "HIGH",
@@ -2625,7 +2625,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung Kontakt Day Hydro & B+L Biotrue ONEday",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "biotrue-oneday",
     "market_relevance": "HIGH",
@@ -2652,7 +2652,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung Atmo Toric & Alcon Air Optix Plus HydraGlyde Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "airoptix-toric",
     "market_relevance": "HIGH",
@@ -2679,7 +2679,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Systane Gel Drops Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hochviskose Tropfen für schwere Trockenheitssymptome über Nacht."
@@ -2704,7 +2704,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Tears Naturale Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Klassische HPMC-Tropfen für milde Trockenheitssymptome."
@@ -2729,7 +2729,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Opti-Free Packungsgrößen",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Flugreise-taugliche Reisegröße für den Urlaub."
@@ -2754,7 +2754,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon AOSept Reiseset Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Einziges gängiges Peroxid-Reiseset unter 100 ml für das Flugzeug-Handgepäck."
@@ -2779,7 +2779,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Frequency 55 Produktdatenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr traditionsreiche Hydrogel-Monatslinse mit stabiler Geometrie."
@@ -2804,7 +2804,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Frequency Aspheric Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Asphärische Vorderflächen-Geometrie zur Reduktion von Abbildungsfehlern."
@@ -2829,7 +2829,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Proclear XR Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Lieferbereich von +20.00 bis -20.00 dpt auf biokompatibler Hydrogel-Basis."
@@ -2854,7 +2854,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Proclear EP Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "LOW",
     "market_availability_de": "DISCONTINUED_OR_LIMITED",
     "strategic_value": "Frühere Übergangslinse für junge Presbyope; überwiegend durch Proclear Multifocal abgelöst."
@@ -2879,7 +2879,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Boston Simplus Produktdatenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Die am häufigsten genutzte 1-Schritt-Kombilösung für harte Kontaktlinsen in Deutschland."
@@ -2904,7 +2904,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Boston Advance Reiniger Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Abrasiver Intensivreiniger für hartnäckige Lipid- und Proteinbeläge auf formstabilen Linsen."
@@ -2929,7 +2929,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Boston Advance Aufbewahrung Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Zweite Stufe des Boston Zwei-Komponenten-Systems; reduziert Reibung beim Aufsetzen."
@@ -2954,7 +2954,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Boston Enzymreiniger Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Entfernt Proteine während der nächtlichen Aufbewahrung direkt im Linsenbehälter."
@@ -2979,7 +2979,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Avizor Ever Clean Plus Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Ohne Reiben: Tablette erzeugt Sauerstoff-Mikrobläschen und schlägt nach Neutralisation auf Grün um."
@@ -3004,7 +3004,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Avizor GP Cleaner Produktdatenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Reinigungsformel für harte Kontaktlinsen."
@@ -3029,7 +3029,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Avizor Lacrifresh Ocu-Dry Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Hypotonische Formulierung gleicht Hyperosmolarität des Tränenfilms bei Trockenem Auge aus."
@@ -3054,7 +3054,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Hecht Contactlinsen Fachanpasshandbuch ASCON",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Die bekannteste deutsche formstabile Kontaktlinse mit abflachender Asphäre."
@@ -3079,7 +3079,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Hecht Contactlinsen Produktblatt Multi-Life",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Alternierende oder simultane Presbyopie-Korrektur mit harter Linsenoptik."
@@ -3104,7 +3104,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Hecht Contactlinsen Datenblatt Consoft",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Präzisionsgedrehte Weichlinse bei außergewöhnlichen Hornhautdurchmessern."
@@ -3129,7 +3129,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Galifa Contactlinsen Katalog Solis",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Individuell gefertigte Silikon-Hydrogel-Monatslinse für anspruchsvolle Geometrien."
@@ -3154,7 +3154,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Galifa Contactlinsen Katalog Solis Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Torische Maßlinse mit Zylindern bis -6.00 dpt in 1°-Achsenschritten."
@@ -3179,7 +3179,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Galifa Contactlinsen Katalog Solis Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Individuell zentrierte Nah- und Fernoptik für Presbyope."
@@ -3204,7 +3204,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Contopharma Fachinformation Tabinett",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Löst biologische Ablagerungen auf formstabilen und weichen Linsen."
@@ -3229,7 +3229,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Contopharma Datenblatt Drop-Lens",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "PVA-Benetzungstropfen zur Reduktion der Reibung auf der Hornhaut."
@@ -3254,7 +3254,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Oté Pharma Fachinformation Monosept",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr beliebtes Peroxidsystem ohne Konservierungsstoffe für sensible Augen."
@@ -3279,7 +3279,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Oté Pharma Spezifikation Oté Clean",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Manueller Abreibereiniger vor dem Einlegen in Kombi- oder Peroxidlösung."
@@ -3304,7 +3304,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung Kontakt Air & CooperVision Avaira Vitality",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-avaira-vitality",
     "market_relevance": "HIGH",
@@ -3331,7 +3331,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Apollo Verpackung iWear oxygen presbyopia & CooperVision Biofinity Multifocal",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "biofinity-multifocal",
     "market_relevance": "HIGH",
@@ -3358,7 +3358,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Mister Spex Produktdatenblatt True Day & Alcon Dailies AquaComfort Plus",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "dailies-aquacomfort",
     "market_relevance": "HIGH",
@@ -3385,7 +3385,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Mister Spex Datenblatt True Month & CooperVision Biofinity",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "biofinity",
     "market_relevance": "HIGH",
@@ -3412,7 +3412,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Johnson & Johnson Vision TruEye Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erste SiHy-Tageslinse der Welt; treue Stammkundschaft, schrittweise durch Oasys 1-Day ergänzt."
@@ -3437,7 +3437,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "J&J Vision Care Oasys 12er Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Beliebter Halbjahresvorrat bei Zweiwochenlinsen-Nutzern."
@@ -3462,7 +3462,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Expressions Colors Produktdatenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Optisch intensive Farbveränderung durch Drei-Schichten-Farbtechnologie."
@@ -3487,7 +3487,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Elite",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Sehr verbreitete preiswerte SiHy-Monatslinse im Fach- und Onlinehandel."
@@ -3512,7 +3512,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Toric Monatslinse",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Wirtschaftliche torische SiHy-Monatslinse."
@@ -3537,7 +3537,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "CooperVision Spezifikation Clariti Multifocal Monatslinse",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Erschwingliche Gleitsicht-Monatslinse aus Silikon-Hydrogel."
@@ -3562,7 +3562,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Professional Spezifikation Dailies Colors",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Kombiniert Lidschlag-aktivierte Feuchtigkeit mit dezenten Augenfarbakzenten."
@@ -3587,7 +3587,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Alcon Opti-Free PureMoist Packungsübersicht",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Großpackung für Monatslinsennutzer mit maximaler Ersparnis."
@@ -3612,7 +3612,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb ReNu Advanced Produktdatenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Modernste ReNu-Generation mit Dreifach-Desinfektion gegen Keime und Akanthamöben."
@@ -3637,7 +3637,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb ReNu MPS Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Extra sanfte Formulierung mit reduzierter Wirkstoffkonzentration für sensible Augen."
@@ -3662,7 +3662,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Bausch + Lomb Artelac Splash Fachinformation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Führende Apotheken- und Optikermarke zur schnellen Befeuchtung bei Bildschirmmüdigkeit."
@@ -3687,7 +3687,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon Fachkreis Spezifikation MeniCare Soft",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Speziell auf Silikon-Hydrogel-Monatslinsen abgestimmte Mehrzwecklösung von Menicon."
@@ -3712,7 +3712,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Menicon SP-Care Datenblatt",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Manueller Vorreiniger für stark verschmutzte Menicon Z Linsen."
@@ -3737,7 +3737,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Contactlinsen Datenblatt ZEISS ADVANCE",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "HIGH",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Kombilösung der Marke ZEISS mit speziellem Lipidschutzfilm."
@@ -3762,7 +3762,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Datenblatt ZEISS Reiniger",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Alkohol- und partikelfreier Reiniger für empfindliche RGP-Materialien."
@@ -3787,7 +3787,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Wöhlk Datenblatt ZEISS Aufbewahrung",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Konditionierende Aufbewahrungslösung zur Vermeidung von Ablagerungen."
@@ -3812,7 +3812,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Hecht Concare Sept aktiv Spezifikation",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Konservierungsmittelfreie Peroxidpflege aus dem deutschen Optikerkanal."
@@ -3837,7 +3837,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "OFFICIAL_MANUFACTURER_SPEC",
     "source_name": "Hecht Datenblatt Concare Lipoclean",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "market_relevance": "MEDIUM",
     "market_availability_de": "CURRENTLY_AVAILABLE",
     "strategic_value": "Spezieller Fettlöser bei stark fettendem Tränenfilm."
@@ -3862,7 +3862,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Fielmann Umverpackung Kontakt Air Toric & CooperVision Avaira Vitality Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-avaira-vitality-toric",
     "market_relevance": "HIGH",
@@ -3889,7 +3889,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Apollo Verpackung iWear vivid astigmatism & CooperVision Biomedics Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-biomedics-toric",
     "market_relevance": "HIGH",
@@ -3916,7 +3916,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Mister Spex Datenblatt True Day Toric & CooperVision Clariti 1 Day Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "res-cv-clariti-1day-toric",
     "market_relevance": "HIGH",
@@ -3943,7 +3943,7 @@ export const RESEARCH_CATALOG = [
     "source_type": "RETAILER_PACKAGING_SPEC",
     "source_name": "Mister Spex Datenblatt True Month Toric & CooperVision Biofinity Toric",
     "research_date": "2026-10-13",
-    "pipeline_status": "DATA_VERIFIED",
+    "pipeline_status": "SOURCE_IDENTIFIED",
     "confidence_level": "DOCUMENTED_TECHNICAL_MATCH",
     "matched_brand_id": "biofinity-toric",
     "market_relevance": "HIGH",
@@ -3977,6 +3977,6 @@ export function getResearchCatalogStats() {
     by_type: byType,
     by_status: byStatus,
     by_entity_type: byEntityType,
-    verified_sources_count: RESEARCH_CATALOG.filter(i => i.pipeline_status === 'DATA_VERIFIED').length
+    verified_sources_count: RESEARCH_CATALOG.filter(i => i.pipeline_status === 'SOURCE_IDENTIFIED').length
   };
 }
