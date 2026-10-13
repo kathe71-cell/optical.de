@@ -39,15 +39,32 @@ export default function VergleichskatalogPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlQuery = searchParams.get('q') || '';
   const [searchQuery, setSearchQuery] = useState(urlQuery);
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [activeBrand, setActiveBrand] = useState('all');
-  const [activeMaterial, setActiveMaterial] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'monat', 'zweiwoche', 'tag', 'pflege', 'tropfen', 'zubehoer'
+  const [activeDesign, setActiveDesign] = useState('all'); // 'all', 'sphaerisch', 'torisch', 'multifokal'
+  const [activeBrand, setActiveBrand] = useState('all'); // 'all', 'coopervision', 'alcon', 'bausch-lomb', 'johnson-johnson-vision'
+  const [activeMaterial, setActiveMaterial] = useState('all'); // 'all', 'silicone', 'hydrogel'
   const [sortBy, setSortBy] = useState('popular'); // 'popular', 'price_asc', 'dkt_desc'
 
   const { isSaved, toggleSave } = useSavedLenses();
   const [compareList, setCompareList] = useState([]);
 
   const toggleCompare = (id) => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    
+    // Verhindere Cross-Category-Vergleich von Nicht-Linsen mit Linsen
+    if (!compareList.includes(id)) {
+      if (p.category !== 'kontaktlinsen') {
+        alert('Pflegemittel, Augentropfen und Zubehör können nicht in der Kontaktlinsen-Vergleichsmatrix verglichen werden.');
+        return;
+      }
+      const existingLenses = compareList.map(x => PRODUCTS.find(prod => prod.id === x)).filter(Boolean);
+      if (existingLenses.some(el => el.category !== 'kontaktlinsen')) {
+        alert('Ein Vergleich ist nur zwischen Kontaktlinsen möglich.');
+        return;
+      }
+    }
+
     setCompareList(prev =>
       prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 4 ? [...prev, id] : prev
     );
@@ -61,27 +78,31 @@ export default function VergleichskatalogPage() {
 
   // Gefilterte & sortierte Produkte
   const filteredProducts = PRODUCTS.filter((item) => {
-    // Kategorie
-    if (activeCategory === 'monat' && !(item.lens_type.includes('Monatslinse') && !item.lens_type.includes('Torisch') && !item.lens_type.includes('Multifokal'))) return false;
-    if (activeCategory === 'tag' && !(item.lens_type.includes('Tageslinse') && !item.lens_type.includes('Torisch'))) return false;
-    if (activeCategory === 'toric' && !item.lens_type.includes('Torisch')) return false;
-    if (activeCategory === 'multifocal' && !item.lens_type.includes('Multifokal')) return false;
-    if (activeCategory === 'pflege' && !(item.lens_type.includes('Pflegemittel') || item.lens_type.includes('Augentropfen'))) return false;
-    if (activeCategory === 'zubehoer' && !(item.lens_type.includes('Zubehoer') || item.lens_type.includes('Augentropfen') || item.lens_type.includes('Zubehör'))) return false;
+    // 1. Austauschintervall / Produktkategorie
+    if (activeCategory === 'monat' && item.wear_schedule !== 'monatslinsen') return false;
+    if (activeCategory === 'zweiwoche' && item.wear_schedule !== 'zweiwochenlinsen') return false;
+    if (activeCategory === 'tag' && item.wear_schedule !== 'tageslinsen') return false;
+    if (activeCategory === 'pflege' && item.category !== 'pflegemittel') return false;
+    if (activeCategory === 'tropfen' && item.category !== 'augentropfen') return false;
+    if (activeCategory === 'zubehoer' && item.category !== 'zubehoer') return false;
 
-    // Hersteller
-    if (activeBrand !== 'all') {
-      if (activeBrand === 'coopervision' && item.manufacturer !== 'CooperVision') return false;
-      if (activeBrand === 'alcon' && item.manufacturer !== 'Alcon') return false;
-      if (activeBrand === 'bausch' && item.manufacturer !== 'Bausch + Lomb') return false;
-      if (activeBrand === 'johnson' && item.manufacturer !== 'Johnson & Johnson') return false;
+    // 2. Linsenausführung (Sphärisch, Torisch, Multifokal) - unabhängig kombinierbar
+    if (activeDesign === 'sphaerisch' && item.design_type !== 'sphaerisch') return false;
+    if (activeDesign === 'torisch' && item.design_type !== 'torisch') return false;
+    if (activeDesign === 'multifokal' && item.design_type !== 'multifokal') return false;
+
+    // 3. Hersteller über normalisierte manufacturer_id
+    if (activeBrand !== 'all' && item.manufacturer_id !== activeBrand) return false;
+
+    // 4. Material-Typ (strikte Prüfung nur auf Kontaktlinsen)
+    if (activeMaterial === 'silicone') {
+      if (item.category !== 'kontaktlinsen' || item.material_type !== 'silikon-hydrogel') return false;
+    }
+    if (activeMaterial === 'hydrogel') {
+      if (item.category !== 'kontaktlinsen' || item.material_type !== 'hydrogel') return false;
     }
 
-    // Material-Typ
-    if (activeMaterial === 'silicone' && !item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
-    if (activeMaterial === 'hydrogel' && item.material?.toLowerCase().includes('silikon-hydrogel')) return false;
-
-    // Textsuche mit Token-Zerlegung, Groß-/Kleinschreibung & Alias-Berücksichtigung
+    // 5. Textsuche mit Token-Zerlegung, Aliasen, Intervall-Synonymen & Packungsgrößen
     if (searchQuery.trim().length > 0) {
       const searchTokens = searchQuery
         .toLowerCase()
@@ -96,14 +117,23 @@ export default function VergleichskatalogPage() {
 
       const aliasesStr = Array.isArray(item.aliases) ? item.aliases.join(' ') : '';
 
+      // Intervall-Synonyme anreichern
+      let intervalSynonyms = '';
+      if (item.wear_schedule === 'zweiwochenlinsen') intervalSynonyms = '2 wochen 2-wochen zweiwochen 14 tage 14-tage';
+      else if (item.wear_schedule === 'monatslinsen') intervalSynonyms = 'monat monatslinse 30 tage monatlich';
+      else if (item.wear_schedule === 'tageslinsen') intervalSynonyms = 'tag tageslinse 1 tag daily einweg';
+
       const searchableText = [
         item.product_name,
         item.manufacturer,
-        item.brand,
+        item.brand || '',
         item.material || '',
         item.lens_type || '',
+        item.replacement_schedule || '',
+        item.pack_size || '',
         item.id,
         item.amazon_query || '',
+        intervalSynonyms,
         aliasesStr,
         relatedEigenmarken
       ].join(' ').toLowerCase();
@@ -148,6 +178,7 @@ export default function VergleichskatalogPage() {
   const resetFilters = () => {
     setSearchQuery('');
     setActiveCategory('all');
+    setActiveDesign('all');
     setActiveBrand('all');
     setActiveMaterial('all');
     setSortBy('popular');
@@ -227,19 +258,19 @@ export default function VergleichskatalogPage() {
             </div>
           </div>
 
-          {/* Filter-Zeile: Kategorien, Hersteller, Material */}
-          <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          {/* Filter-Zeile: Kategorien, Design, Hersteller, Material */}
+          <div className="pt-3 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3">
             
-            {/* Linsentyp Pills */}
+            {/* Linsentyp & Kategorie Pills */}
             <div className="flex flex-wrap gap-1.5 text-xs">
               {[
-                { key: 'all', label: 'Alle Linsen' },
+                { key: 'all', label: 'Alle Produkte' },
                 { key: 'monat', label: 'Monatslinsen' },
+                { key: 'zweiwoche', label: '2-Wochen-Linsen' },
                 { key: 'tag', label: 'Tageslinsen' },
-                { key: 'toric', label: 'Torisch (Astigmatismus)' },
-                { key: 'multifocal', label: 'Multifokal (Gleitsicht)' },
                 { key: 'pflege', label: 'Pflegemittel' },
-                { key: 'zubehoer', label: 'Zubehör & Tropfen' }
+                { key: 'tropfen', label: 'Augentropfen' },
+                { key: 'zubehoer', label: 'Zubehör' }
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -258,8 +289,22 @@ export default function VergleichskatalogPage() {
               ))}
             </div>
 
-            {/* Dropdowns für Hersteller & Material */}
+            {/* Dropdowns für Linsenausführung, Hersteller & Material */}
             <div className="flex flex-wrap items-center gap-2 text-xs">
+              <select
+                value={activeDesign}
+                onChange={(e) => {
+                  setActiveDesign(e.target.value);
+                  trackFilterUsed('design', e.target.value);
+                }}
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="all">Alle Ausführungen</option>
+                <option value="sphaerisch">Sphärisch (Standard)</option>
+                <option value="torisch">Torisch (Hornhautverkrümmung)</option>
+                <option value="multifokal">Multifokal (Gleitsicht)</option>
+              </select>
+
               <select
                 value={activeBrand}
                 onChange={(e) => {
@@ -270,9 +315,9 @@ export default function VergleichskatalogPage() {
               >
                 <option value="all">Alle Hersteller</option>
                 <option value="coopervision">CooperVision</option>
-                <option value="alcon">Alcon Vision Care</option>
-                <option value="bausch">Bausch + Lomb</option>
-                <option value="johnson">Johnson &amp; Johnson</option>
+                <option value="alcon">Alcon</option>
+                <option value="bausch-lomb">Bausch + Lomb</option>
+                <option value="johnson-johnson-vision">Johnson &amp; Johnson</option>
               </select>
 
               <select
@@ -284,11 +329,11 @@ export default function VergleichskatalogPage() {
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="all">Alle Materialien</option>
-                <option value="silicone">Nur Silikon-Hydrogel</option>
+                <option value="silicone">Silikon-Hydrogel (hoher Dk/t)</option>
                 <option value="hydrogel">Klassisches Hydrogel</option>
               </select>
 
-              {(activeCategory !== 'all' || activeBrand !== 'all' || activeMaterial !== 'all' || searchQuery) && (
+              {(activeCategory !== 'all' || activeDesign !== 'all' || activeBrand !== 'all' || activeMaterial !== 'all' || searchQuery) && (
                 <button
                   onClick={resetFilters}
                   className="flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-rose-600 px-2 py-1 transition"
@@ -446,37 +491,41 @@ export default function VergleichskatalogPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2">
-                    <Link
-                      to={p.id === 'biofinity' ? '/biofinity' : `/produkt/${p.id}`}
-                      onClick={() => trackProductClicked(p.id, p.product_name)}
-                      className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"
-                    >
-                      Datenblatt
-                    </Link>
-                    <button
-                      onClick={() => toggleCompare(p.id)}
-                      className={`w-full font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition border ${
-                        compareList.includes(p.id)
-                          ? 'bg-emerald-600 text-white border-emerald-700'
-                          : compareList.length >= 3
-                          ? 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'
-                          : 'bg-white text-emerald-700 border-emerald-300 hover:bg-emerald-50'
-                      }`}
-                      disabled={compareList.length >= 4 && !compareList.includes(p.id)}
-                    >
-                      {compareList.includes(p.id) ? '✓ Ausgewählt' : 'Vergleichen'}
-                    </button>
+                  {/* CTA-Hierarchie: Primärer Amazon-Button prominent, Sekundäraktionen Datenblatt & Vergleich sauber getrennt */}
+                  <div className="space-y-2">
                     <a
                       href={getAmazonLink(p.amazon_query, p.asin)}
                       target="_blank"
                       rel={AFFILIATE_LINK_REL}
                       onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'vergleichskatalog')}
-                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
+                      className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition"
                     >
-                      <span>{getAffiliateCtaLabel(p)}</span>
-                      <ExternalLink className="w-3 h-3 text-emerald-400" />
+                      <span className="truncate">{getAffiliateCtaLabel(p)}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     </a>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <Link
+                        to={p.id === 'biofinity' ? '/biofinity' : `/produkt/${p.id}`}
+                        onClick={() => trackProductClicked(p.id, p.product_name)}
+                        className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2 px-2 rounded-xl text-center transition"
+                      >
+                        Datenblatt
+                      </Link>
+                      <button
+                        onClick={() => toggleCompare(p.id)}
+                        className={`w-full font-bold text-xs py-2 px-2 rounded-xl text-center transition border ${
+                          compareList.includes(p.id)
+                            ? 'bg-emerald-600 text-white border-emerald-700'
+                            : compareList.length >= 4 && !compareList.includes(p.id)
+                            ? 'bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed'
+                            : 'bg-white text-emerald-700 border-emerald-300 hover:bg-emerald-50'
+                        }`}
+                        disabled={compareList.length >= 4 && !compareList.includes(p.id)}
+                      >
+                        {compareList.includes(p.id) ? '✓ Im Vergleich' : '+ Vergleichen'}
+                      </button>
+                    </div>
                   </div>
 
                   <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">

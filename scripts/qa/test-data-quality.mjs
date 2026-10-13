@@ -129,5 +129,19 @@ for (const p of PRODUCTS) {
 
 t(dynamicCheckCount >= 10, 'Mindestens 10 Live-Pilot-Vergleiche muessen durchgefuehrt werden (Gefunden: ' + dynamicCheckCount + ')');
 
-console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${dynamicCheckCount} dynamische Live-Pilot-Konsistenzprüfungen)`);
+// Phase 9.9.1 Regressionstests: Normalisierte Dimensionen & Filterintegrität
+const jnjProducts = PRODUCTS.filter(p => p.manufacturer_id === 'johnson-johnson-vision');
+t(jnjProducts.length === 12, 'Exakt 12 Johnson & Johnson Produkte müssen normalisiert auffindbar sein (Gefunden: ' + jnjProducts.length + ')');
+
+const twoWeekProducts = PRODUCTS.filter(p => p.wear_schedule === 'zweiwochenlinsen');
+t(twoWeekProducts.length === 3, 'Exakt 3 Zweiwochenlinsen müssen normalisiert vorhanden sein (Gefunden: ' + twoWeekProducts.length + ')');
+
+const nonLensProducts = PRODUCTS.filter(p => p.category !== 'kontaktlinsen');
+t(nonLensProducts.length === 11, 'Exakt 11 Nicht-Linsen-Produkte (Pflege/Tropfen/Zubehör) im Katalog (Gefunden: ' + nonLensProducts.length + ')');
+for (const nlp of nonLensProducts) {
+  t(nlp.material_type === null, `Nicht-Linsen-Produkt ${nlp.id} darf keinen material_type besitzen (Ist: ${nlp.material_type})`);
+  t(nlp.wear_schedule === null, `Nicht-Linsen-Produkt ${nlp.id} darf keinen wear_schedule besitzen (Ist: ${nlp.wear_schedule})`);
+}
+
+console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${dynamicCheckCount} dynamische Live-Pilot-Konsistenzprüfungen, 12 J&J, 3 Zweiwochenlinsen normalisiert)`);
 process.exit(fail ? 1 : 0);

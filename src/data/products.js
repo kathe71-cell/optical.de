@@ -2255,10 +2255,53 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
     }
   ];
 
+  let manufacturer_id = 'other';
+  const mfLower = (p.manufacturer || '').toLowerCase();
+  if (mfLower.includes('coopervision')) manufacturer_id = 'coopervision';
+  else if (mfLower.includes('alcon')) manufacturer_id = 'alcon';
+  else if (mfLower.includes('bausch')) manufacturer_id = 'bausch-lomb';
+  else if (mfLower.includes('johnson') || mfLower.includes('j&j')) manufacturer_id = 'johnson-johnson-vision';
+  else if (mfLower.includes('santen')) manufacturer_id = 'santen';
+  else if (mfLower.includes('ursapharm')) manufacturer_id = 'ursapharm';
+
+  let category = 'kontaktlinsen';
+  const ltLower = (p.lens_type || '').toLowerCase();
+  if (ltLower.includes('pflegemittel')) category = 'pflegemittel';
+  else if (ltLower.includes('tropfen')) category = 'augentropfen';
+  else if (ltLower.includes('zubehoer') || ltLower.includes('zubehör')) category = 'zubehoer';
+
+  let wear_schedule = null;
+  if (category === 'kontaktlinsen') {
+    const rsLower = (p.replacement_schedule || '').toLowerCase();
+    if (rsLower.includes('1 tag') || ltLower.includes('tag')) wear_schedule = 'tageslinsen';
+    else if (rsLower.includes('14 tag') || ltLower.includes('zweiwoch') || ltLower.includes('2-woch')) wear_schedule = 'zweiwochenlinsen';
+    else if (rsLower.includes('30 tag') || ltLower.includes('monat')) wear_schedule = 'monatslinsen';
+  }
+
+  let design_type = 'sphaerisch';
+  if (category === 'kontaktlinsen') {
+    if (ltLower.includes('torisch')) design_type = 'torisch';
+    else if (ltLower.includes('multifokal')) design_type = 'multifokal';
+  } else {
+    design_type = 'nicht_zutreffend';
+  }
+
+  let material_type = null;
+  if (category === 'kontaktlinsen') {
+    const matLower = (p.material || '').toLowerCase();
+    if (matLower.includes('silikon-hydrogel') || matLower.includes('wassergradient')) material_type = 'silikon-hydrogel';
+    else material_type = 'hydrogel';
+  }
+
   return {
     ...p,
     canonical_name: p.product_name,
     product_family: p.brand || p.manufacturer,
+    manufacturer_id,
+    category,
+    wear_schedule,
+    design_type,
+    material_type,
     material_class,
     correction_type,
     data_status,

@@ -22,6 +22,8 @@ import ScrollToTop from '../components/ScrollToTop';
 import { getProductById, PRODUCTS } from '../data/products';
 import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
+import { useRefillConfigs } from '../hooks/useRefillConfigs';
+import RefillAssistantModal from '../components/RefillAssistantModal';
 import { trackAffiliateClick, trackProductView } from '../utils/tracking';
 import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 
@@ -30,8 +32,12 @@ export default function ProductDetailPage({ productIdOverride }) {
   const productId = productIdOverride || routeId || 'biofinity';
 
   const product = getProductById(productId) || PRODUCTS[0];
-  const { isSaved, toggleSave } = useSavedLenses();
+  const { isSaved, toggleSave, saveProduct } = useSavedLenses();
+  const { getConfig, saveConfig } = useRefillConfigs();
+  const [showRefillModal, setShowRefillModal] = React.useState(false);
+
   const saved = isSaved(product.id);
+  const currentRefillConfig = getConfig(product.id);
 
   // Finde zugeordnete Handelsmarken für dieses Produkt
   const relatedEigenmarken = EIGENMARKEN_DATABASE.filter(item => item.matched_brand_product_id === product.id);
@@ -281,17 +287,36 @@ export default function ProductDetailPage({ productIdOverride }) {
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 
+                {/* Direkter Nachkauf-Assistent (nur für Kontaktlinsen, nicht für Pflegemittel/Tropfen) */}
+                {product.category === 'kontaktlinsen' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!saved) toggleSave(product.id);
+                      setShowRefillModal(true);
+                    }}
+                    className="w-full py-2.5 px-3 rounded-xl text-xs font-extrabold bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 transition flex items-center justify-center gap-1.5 shadow-2xs"
+                  >
+                    <Calendar className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>
+                      {currentRefillConfig?.refillDate 
+                        ? `Nachkauf-Plan aktiv (ab ${new Date(currentRefillConfig.refillDate).toLocaleDateString('de-DE')})`
+                        : 'Nachkauf planen'}
+                    </span>
+                  </button>
+                )}
+
                 <button
                   type="button"
                   onClick={() => toggleSave(product.id)}
                   className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 ${
                     saved 
-                      ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
+                      ? 'bg-slate-100 border-slate-300 text-slate-800' 
                       : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
                   <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600 text-emerald-600' : ''}`} />
-                  <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für späteren Nachkauf merken'}</span>
+                  <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für Merkliste vormerken'}</span>
                 </button>
 
                 {saved && (
@@ -299,7 +324,7 @@ export default function ProductDetailPage({ productIdOverride }) {
                     to="/meine-linsen"
                     className="block text-center text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold underline py-0.5"
                   >
-                    Im Nachkauf-Planer Vorrat &amp; Kalender-Erinnerung einstellen →
+                    Zu „Meine Linsen“ &amp; Gesamtübersicht →
                   </Link>
                 )}
 
@@ -333,6 +358,19 @@ export default function ProductDetailPage({ productIdOverride }) {
 
       <Footer />
       <ScrollToTop />
+
+      {/* Nachkauf-Assistent Modal */}
+      {showRefillModal && (
+        <RefillAssistantModal
+          product={product}
+          initialConfig={currentRefillConfig}
+          onClose={() => setShowRefillModal(false)}
+          onSave={(cfg) => {
+            saveConfig(cfg);
+            setShowRefillModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

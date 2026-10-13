@@ -21,15 +21,19 @@ export default function ProductComparisonPage() {
   const ids = searchParams.get('ids');
   const idList = ids ? ids.split(',').filter(Boolean) : ['biofinity', 'airoptix-hydraglyde'];
   
-  // Unterstützt 2 bis 4 Linsen im objektiven Vergleich
-  const selectedLenses = idList
+  // Unterstützt 2 bis 4 Produkte im objektiven Vergleich - nur Kontaktlinsen sind miteinander kompatibel
+  const rawSelected = idList
     .slice(0, 4)
     .map(id => getProductById(id))
     .filter(Boolean);
 
-  // Fallback falls ungültige IDs
-  const lenses = selectedLenses.length >= 2 
-    ? selectedLenses 
+  // Filtere Produkte: Nur Kontaktlinsen dürfen in der Linsen-Vergleichsmatrix dargestellt werden
+  const incompatibleProducts = rawSelected.filter(p => p.category !== 'kontaktlinsen');
+  const validLenses = rawSelected.filter(p => p.category === 'kontaktlinsen');
+
+  // Fallback falls weniger als 2 gültige Linsen
+  const lenses = validLenses.length >= 2 
+    ? validLenses 
     : [getProductById('biofinity'), getProductById('airoptix-hydraglyde')].filter(Boolean);
 
   const isDynamic = !!ids;
@@ -94,6 +98,17 @@ export default function ProductComparisonPage() {
             {isDynamic && <Link to="/vergleichskatalog" className="ml-2 text-emerald-600 hover:underline text-xs">← Weitere Linsen auswählen</Link>}
           </p>
         </div>
+
+        {/* Inkompatibilitäts-Hinweis bei Versuch, Nicht-Linsen zu vergleichen */}
+        {incompatibleProducts.length > 0 && (
+          <div className="mb-6 p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 flex items-start gap-3">
+            <span className="font-bold text-amber-800 text-sm">ℹ</span>
+            <div>
+              <span className="font-bold block mb-0.5">Kategorie-Hinweis:</span>
+              Folgende ausgewählte Produkte ({incompatibleProducts.map(p => p.product_name).join(', ')}) sind Pflegemittel oder Augentropfen und besitzen keine geometrischen Linsen-Spezifikationen. Sie wurden aus der Kontaktlinsen-Matrix ausgeschlossen, um fachlich irreführende Vergleiche zu verhindern.
+            </div>
+          </div>
+        )}
 
         {/* Medical Disclaimer */}
         <MedicalDisclaimer className="mb-8" />

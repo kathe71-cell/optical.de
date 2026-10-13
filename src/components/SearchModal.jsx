@@ -171,7 +171,12 @@ export default function SearchModal({ isOpen, onClose }) {
     // 2. Suche über Produkte
     const matchedProducts = PRODUCTS.filter(p => {
       const aliasesStr = Array.isArray(p.aliases) ? p.aliases.join(' ') : '';
-      const text = `${p.product_name} ${p.manufacturer} ${p.material || ''} ${p.lens_type || ''} ${aliasesStr}`.toLowerCase();
+      let intervalSynonyms = '';
+      if (p.wear_schedule === 'zweiwochenlinsen') intervalSynonyms = '2 wochen 2-wochen zweiwochen 14 tage 14-tage';
+      else if (p.wear_schedule === 'monatslinsen') intervalSynonyms = 'monat monatslinse 30 tage monatlich monatslinsen';
+      else if (p.wear_schedule === 'tageslinsen') intervalSynonyms = 'tag tageslinse 1 tag daily einweg tageslinsen';
+
+      const text = `${p.product_name} ${p.manufacturer} ${p.brand || ''} ${p.material || ''} ${p.lens_type || ''} ${p.replacement_schedule || ''} ${p.pack_size || ''} ${intervalSynonyms} ${aliasesStr}`.toLowerCase();
       const exactMatch = searchTokens.every(tok => text.includes(tok));
       if (exactMatch) return true;
       return searchTokens.some(tok => {
