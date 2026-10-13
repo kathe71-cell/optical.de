@@ -66,7 +66,7 @@ for (const p of PRODUCTS) {
 }
 
 assert(verifiedDirectCount === 17, `Exakt 17 von ${PRODUCTS.length} Produkten sind als aktive Direktlinks freigegeben (${verifiedDirectCount}/${PRODUCTS.length})`);
-assert(safeFallbackCount === 32, `Exakt 32 von ${PRODUCTS.length} Produkten nutzen den sicheren Such-Fallback (${safeFallbackCount}/${PRODUCTS.length})`);
+assert(safeFallbackCount === 40, `Exakt 40 von ${PRODUCTS.length} Produkten nutzen den sicheren Such-Fallback (${safeFallbackCount}/${PRODUCTS.length})`);
 
 // 3. Spezifischer Test des 404-Hotfixes (Acuvue Oasys B000052YP8)
 const oasys = PRODUCTS.find(p => p.id === 'acuvue-oasys-2week');

@@ -13,6 +13,9 @@ const CV_MDMF_WEB = 'https://coopervision.de/kontaktlinsen/myday-multifocal';
 const CV_CLT_WEB = 'https://coopervision.de/kontaktlinsen/clariti-1-day-toric';
 const CV_AVV_WEB = 'https://coopervision.de/kontaktlinsen/avaira-vitality';
 const ART = 'https://www.artelac.de/produkte/artelac-splash/';
+const JNJ_OAS_1D_AST = 'https://www.jnjvisionpro.com/de-de/products/acuvue-oasys-1-day-astigmatism/';
+const JNJ_OAS_MF_2W = 'https://www.jnjvisionpro.com/de-de/products/acuvue-oasys-multifocal/';
+const JNJ_VITA_AST = 'https://www.jnjvisionpro.com/de-de/products/acuvue-vita-astigmatism/';
 
 const CV_PDF_URL = 'https://coopervision.de/sites/coopervision.de/files/media-document/CVI_1-Day_FRP_Spec%20Sheet_DE-Version_241023_FINAL.pdf';
 const CV_DOC_TITLE = 'CooperVision 1-Day & FRP Fitting Reference Guide / Product Specification Sheet (Doc SA10184 Rev#3 04/2026)';
@@ -496,6 +499,74 @@ const records = [
     verification_status: 'TECHNICAL_DATA_VERIFIED',
     human_review_required: 'Zylinderbereich (-0.75 bis -2.25) prüfen.',
     effort_minutes_estimate: 5
+  },
+
+  // 21. Acuvue Oasys 1-Day for Astigmatism (Johnson & Johnson Vision)
+  {
+    product_id: 'res-jnj-acuvue-oasys-1day-astigmatism',
+    manufacturer: 'Johnson & Johnson Vision',
+    product_name: 'ACUVUE OASYS 1-Day for ASTIGMATISM',
+    sources: [src(JNJ_OAS_1D_AST, 'OFFICIAL_MANUFACTURER', true, 'Offizielle Johnson & Johnson Vision Pro Spezifikationstabelle')],
+    verified_attributes: {
+      lens_type: a('Torische Tageslinse', JNJ_OAS_1D_AST, 'Produktname: ACUVUE OASYS 1-Day for ASTIGMATISM; Lidschlag-Stabilisations-Design'),
+      replacement_schedule: a('Tageslinse (Ein-Tages-Austausch)', JNJ_OAS_1D_AST, 'Empfohlener Austauschrhythmus: Täglicher Austausch'),
+      material: a('Silikon-Hydrogel (Senofilcon A)', JNJ_OAS_1D_AST, 'Tabelle Linsenmaterial: Silicon-Hydrogel (senofilcon A)'),
+      water_content: a('38 %', JNJ_OAS_1D_AST, 'Tabelle Wassergehalt: 38%'),
+      dk_t: a('129 x 10^-9 (edge and boundary corrected)', JNJ_OAS_1D_AST, 'Tabelle Sauerstofftransmissibilität: 129 x 10^-9 (-3.00D)'),
+      base_curve: a('8.5 mm', JNJ_OAS_1D_AST, 'Tabelle Basiskurve (mm): 8,5'),
+      diameter: a('14.3 mm', JNJ_OAS_1D_AST, 'Tabelle Durchmesser (mm): 14,3'),
+      pack_sizes: a('30er Box', JNJ_OAS_1D_AST, 'Tabelle Erhältliche Packungsgrößen: 30'),
+    },
+    conflicts: [
+      { attribute: 'dk_t', catalog_value: 121, source_value: 129, note: 'Recherchebericht führte fälschlich 121 Dk/t (sphärischer Wert). Primärquelle jnjvisionpro.com belegt eindeutig 129 Dk/t.' }
+    ],
+    verification_status: 'TECHNICAL_DATA_VERIFIED',
+    human_review_required: 'Achsenabstufungen (10° bis 180°) redaktionell prüfen.',
+    effort_minutes_estimate: 6
+  },
+
+  // 22. Acuvue Oasys Multifocal 2-Wochen (Johnson & Johnson Vision)
+  {
+    product_id: 'res-jnj-acuvue-oasys-multifocal-2week',
+    manufacturer: 'Johnson & Johnson Vision',
+    product_name: 'ACUVUE OASYS MULTIFOCAL',
+    sources: [src(JNJ_OAS_MF_2W, 'OFFICIAL_MANUFACTURER', true, 'Offizielle Johnson & Johnson Vision Pro Spezifikationstabelle')],
+    verified_attributes: {
+      lens_type: a('Multifokale 2-Wochenlinse', JNJ_OAS_MF_2W, 'Pupillenoptimiertes Design; Addition LOW, MID, HIGH'),
+      replacement_schedule: a('2-Wochen-Linse (14 Tage)', JNJ_OAS_MF_2W, 'Empfohlener Austauschrhythmus: 2-wöchiger Austausch bei täglichem Tragen'),
+      material: a('Silikon-Hydrogel (Senofilcon A)', JNJ_OAS_MF_2W, 'Tabelle Linsenmaterial: Silicon-Hydrogel (senofilcon A)'),
+      water_content: a('38 %', JNJ_OAS_MF_2W, 'Tabelle Wassergehalt: 38%'),
+      dk_t: a('147 x 10^-9 (edge and boundary corrected)', JNJ_OAS_MF_2W, 'Tabelle Sauerstofftransmissibilität: 147 x 10^-9 (-3.00D)'),
+      base_curve: a('8.4 mm', JNJ_OAS_MF_2W, 'Tabelle Basiskurve (mm): 8,4'),
+      diameter: a('14.3 mm', JNJ_OAS_MF_2W, 'Tabelle Durchmesser (mm): 14,3'),
+      pack_sizes: a('6er Box', JNJ_OAS_MF_2W, 'Tabelle Erhältliche Packungsgrößen: 6'),
+    },
+    conflicts: [],
+    verification_status: 'TECHNICAL_DATA_VERIFIED',
+    human_review_required: 'Additionsstufen LOW/MID/HIGH redaktionell prüfen.',
+    effort_minutes_estimate: 5
+  },
+
+  // 23. Acuvue Vita for Astigmatism (Johnson & Johnson Vision)
+  {
+    product_id: 'res-jnj-acuvue-vita-toric',
+    manufacturer: 'Johnson & Johnson Vision',
+    product_name: 'ACUVUE VITA for ASTIGMATISM',
+    sources: [src(JNJ_VITA_AST, 'OFFICIAL_MANUFACTURER', true, 'Offizielle Johnson & Johnson Vision Pro Spezifikationstabelle')],
+    verified_attributes: {
+      lens_type: a('Torische Monatslinse', JNJ_VITA_AST, 'Produktname: ACUVUE VITA for ASTIGMATISM; Lidschlag-Stabilisations-Design'),
+      replacement_schedule: a('Monatlich (30 Tage)', JNJ_VITA_AST, 'Empfohlener Austauschrhythmus: Monatlicher Austausch'),
+      material: a('Silikon-Hydrogel (Senofilcon C)', JNJ_VITA_AST, 'Tabelle Linsenmaterial: Silicon-Hydrogel (senofilcon C) mit HydraMax Technologie'),
+      water_content: a('41 %', JNJ_VITA_AST, 'Tabelle Wassergehalt: 41%'),
+      dk_t: a('129 x 10^-9 (edge and boundary corrected)', JNJ_VITA_AST, 'Tabelle Sauerstofftransmissibilität: 129 x 10^-9 (-3.00D)'),
+      base_curve: a('8.6 mm', JNJ_VITA_AST, 'Tabelle Basiskurve (mm): 8,6'),
+      diameter: a('14.5 mm', JNJ_VITA_AST, 'Tabelle Durchmesser (mm): 14,5'),
+      pack_sizes: a('6er Box', JNJ_VITA_AST, 'Tabelle Erhältliche Packungsgrößen: 6'),
+    },
+    conflicts: [],
+    verification_status: 'TECHNICAL_DATA_VERIFIED',
+    human_review_required: 'Zylinderwerte (-0.75 bis -2.25) redaktionell prüfen.',
+    effort_minutes_estimate: 6
   }
 ];
 

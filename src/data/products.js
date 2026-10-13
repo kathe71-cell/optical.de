@@ -853,8 +853,9 @@ const RAW_PRODUCTS = [
     cylinder_range: null,
     axis_range: null,
     add_power: null,
-    pack_size: '6er Packung (6 Linsen)',
+    pack_size: '6er Box (auch als 12er Vorratspack erhältlich)',
     pack_count: 6,
+    pack_options: ['6er Box (6 Linsen)', '12er Vorratspack (12 Linsen)'],
     usage_assumption: 'Zweiwochenlinse, 14-Tage-Wechsel, beide Augen, 26 Wechsel/Jahr',
     price: 29.99,
     price_per_lens: '5,00 EUR',
@@ -868,7 +869,7 @@ const RAW_PRODUCTS = [
     source_date: '28.09.2026',
     confidence: 'verifiziert',
     objective_badges: ['Silikon-Hydrogel', 'Dk/t 147', 'Senofilcon A', 'HYDRACLEAR Plus'],
-    aliases: ['Acuvue Oasys', 'Oasys 2-Wochen']
+    aliases: ['Acuvue Oasys', 'Oasys 2-Wochen', 'Acuvue Oasys 12er Packung', 'Acuvue Oasys Vorratspack']
   },
   {
     id: 'acuvue-oasys-astigmatism',
@@ -1786,6 +1787,357 @@ const RAW_PRODUCTS = [
           "Biomedics 55",
           "CooperVision Biomedics 55"
       ]
+  },
+  {
+      "id": "proclear-1day-multifocal",
+      "asin": null,
+      "product_name": "CooperVision Proclear 1 Day Multifocal",
+      "manufacturer": "CooperVision",
+      "brand": "Proclear",
+      "lens_type": "Multifokale Tageslinse",
+      "replacement_schedule": "1 Tag",
+      "material": "Omafilcon A (Hydrogel mit PC Technology™)",
+      "dk_t": 28,
+      "water_content": "60 %",
+      "base_curve": "8.7 mm",
+      "diameter": "14.2 mm",
+      "sphere_range": "+4.00 bis -10.00 dpt",
+      "cylinder_range": null,
+      "axis_range": null,
+      "add_power": "bis +2.50 dpt",
+      "pack_size": "30er Packung (30 Linsen)",
+      "pack_count": 30,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Tag, 30er Box reicht für 15 Tragetage)",
+      "price": 28.90,
+      "price_per_lens": "0,96 €",
+      "cost_per_day": "1,93 €",
+      "cost_per_month": "57,80 €",
+      "price_per_day": "1,93 €",
+      "amazon_query": "CooperVision Proclear 1 Day Multifocal 30er",
+      "source_type": "Hersteller-Datenblatt",
+      "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
+      "source_url": "https://coopervision.de/kontaktlinsen/proclear-1-day-multifocal",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Hydrogel",
+          "Dk/t 28",
+          "Omafilcon A",
+          "PC Technology™",
+          "Multifokal"
+      ],
+      "aliases": [
+          "Proclear 1 Day Multifocal",
+          "Proclear 1-Day Multifocal",
+          "CooperVision Proclear 1 Day Multifocal"
+      ]
+  },
+  {
+      "id": "proclear-toric",
+      "asin": null,
+      "product_name": "CooperVision Proclear Toric",
+      "manufacturer": "CooperVision",
+      "brand": "Proclear",
+      "lens_type": "Torische Monatslinse",
+      "replacement_schedule": "30 Tage",
+      "material": "Omafilcon B (Hydrogel mit PC Technology™)",
+      "dk_t": 25,
+      "water_content": "62 %",
+      "base_curve": "8.8 mm, 8.4 mm",
+      "diameter": "14.4 mm",
+      "sphere_range": "+6.00 bis -8.00 dpt",
+      "cylinder_range": "-0.75 bis -2.25 dpt",
+      "axis_range": "10° bis 180°",
+      "add_power": null,
+      "pack_size": "6er Packung (6 Linsen)",
+      "pack_count": 6,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Monat, 6er Box reicht für 3 Monate)",
+      "price": 38.90,
+      "price_per_lens": "6,48 €",
+      "cost_per_day": "0,43 €",
+      "cost_per_month": "12,97 €",
+      "price_per_day": "0,43 €",
+      "amazon_query": "CooperVision Proclear Toric 6er",
+      "source_type": "Hersteller-Datenblatt",
+      "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
+      "source_url": "https://coopervision.de/kontaktlinsen/proclear-toric",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Hydrogel",
+          "Dk/t 25",
+          "Omafilcon B",
+          "PC Technology™",
+          "Torisch"
+      ],
+      "aliases": [
+          "Proclear Toric",
+          "Proclear toric 6er",
+          "CooperVision Proclear Toric"
+      ]
+  },
+  {
+      "id": "proclear-multifocal",
+      "asin": null,
+      "product_name": "CooperVision Proclear Multifocal",
+      "manufacturer": "CooperVision",
+      "brand": "Proclear",
+      "lens_type": "Multifokale Monatslinse",
+      "replacement_schedule": "30 Tage",
+      "material": "Omafilcon B (Hydrogel mit PC Technology™)",
+      "dk_t": 27,
+      "water_content": "62 %",
+      "base_curve": "8.7 mm",
+      "diameter": "14.4 mm",
+      "sphere_range": "+6.00 bis -8.00 dpt",
+      "cylinder_range": null,
+      "axis_range": null,
+      "add_power": "+1.00 bis +2.50 dpt (D- und N-Linsen)",
+      "pack_size": "6er Packung (6 Linsen)",
+      "pack_count": 6,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Monat, 6er Box reicht für 3 Monate)",
+      "price": 46.90,
+      "price_per_lens": "7,82 €",
+      "cost_per_day": "0,52 €",
+      "cost_per_month": "15,63 €",
+      "price_per_day": "0,52 €",
+      "amazon_query": "CooperVision Proclear Multifocal 6er",
+      "source_type": "Hersteller-Datenblatt",
+      "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
+      "source_url": "https://coopervision.de/kontaktlinsen/proclear-multifocal",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Hydrogel",
+          "Dk/t 27",
+          "Omafilcon B",
+          "PC Technology™",
+          "Balanced Progressive Technology"
+      ],
+      "aliases": [
+          "Proclear Multifocal",
+          "Proclear multifocal 6er",
+          "CooperVision Proclear Multifocal"
+      ]
+  },
+  {
+      "id": "biomedics-toric",
+      "asin": null,
+      "product_name": "CooperVision Biomedics Toric",
+      "manufacturer": "CooperVision",
+      "brand": "Biomedics",
+      "lens_type": "Torische Monatslinse",
+      "replacement_schedule": "30 Tage",
+      "material": "Ocufilcon D (Hydrogel)",
+      "dk_t": 17,
+      "water_content": "55 %",
+      "base_curve": "8.7 mm",
+      "diameter": "14.5 mm",
+      "sphere_range": "+6.00 bis -9.00 dpt",
+      "cylinder_range": "-0.75 bis -2.25 dpt",
+      "axis_range": "10° bis 180°",
+      "add_power": null,
+      "pack_size": "6er Packung (6 Linsen)",
+      "pack_count": 6,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Monat, 6er Box reicht für 3 Monate)",
+      "price": 24.90,
+      "price_per_lens": "4,15 €",
+      "cost_per_day": "0,28 €",
+      "cost_per_month": "8,30 €",
+      "price_per_day": "0,28 €",
+      "amazon_query": "CooperVision Biomedics Toric 6er",
+      "source_type": "Hersteller-Datenblatt",
+      "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
+      "source_url": "https://coopervision.de/kontaktlinsen/biomedics-toric",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Hydrogel",
+          "Dk/t 17",
+          "Ocufilcon D",
+          "UV-Schutz",
+          "Torisch"
+      ],
+      "aliases": [
+          "Biomedics Toric",
+          "Biomedics toric 6er",
+          "CooperVision Biomedics Toric"
+      ]
+  },
+  {
+      "id": "acuvue-oasys-1day-astigmatism",
+      "asin": null,
+      "product_name": "Acuvue Oasys 1-Day for Astigmatism",
+      "manufacturer": "Johnson & Johnson Vision",
+      "brand": "Acuvue",
+      "lens_type": "Torische Tageslinse",
+      "replacement_schedule": "1 Tag",
+      "material": "Senofilcon A (Silikon-Hydrogel mit HydraLuxe™)",
+      "dk_t": 129,
+      "water_content": "38 %",
+      "base_curve": "8.5 mm",
+      "diameter": "14.3 mm",
+      "sphere_range": "+4.00 bis -9.00 dpt",
+      "cylinder_range": "-0.75 bis -2.25 dpt",
+      "axis_range": "10° bis 180°",
+      "add_power": null,
+      "pack_size": "30er Packung (30 Linsen)",
+      "pack_count": 30,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Tag, 30er Box reicht für 15 Tragetage)",
+      "price": 35.90,
+      "price_per_lens": "1,20 €",
+      "cost_per_day": "2,39 €",
+      "cost_per_month": "71,80 €",
+      "price_per_day": "2,39 €",
+      "amazon_query": "Acuvue Oasys 1-Day for Astigmatism 30er",
+      "source_type": "Hersteller-Spezifikation",
+      "source": "Johnson & Johnson Vision Pro Produktspezifikation",
+      "source_url": "https://www.jnjvisionpro.com/de-de/products/acuvue-oasys-1-day-astigmatism/",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Silikon-Hydrogel",
+          "Dk/t 129",
+          "Senofilcon A",
+          "HydraLuxe™",
+          "Blink-Stabilized® Design"
+      ],
+      "aliases": [
+          "Acuvue Oasys 1-Day Astigmatism",
+          "Oasys 1-Day Toric",
+          "Acuvue Oasys 1 Day for Astigmatism"
+      ]
+  },
+  {
+      "id": "acuvue-oasys-multifocal-2week",
+      "asin": null,
+      "product_name": "Acuvue Oasys Multifocal",
+      "manufacturer": "Johnson & Johnson Vision",
+      "brand": "Acuvue",
+      "lens_type": "Multifokale Zweiwochenlinse",
+      "replacement_schedule": "14 Tage",
+      "material": "Senofilcon A (Silikon-Hydrogel mit HYDRACLEAR® PLUS)",
+      "dk_t": 147,
+      "water_content": "38 %",
+      "base_curve": "8.4 mm",
+      "diameter": "14.3 mm",
+      "sphere_range": "+6.00 bis -9.00 dpt",
+      "cylinder_range": null,
+      "axis_range": null,
+      "add_power": "LOW (+0.75 bis +1.25), MID (+1.50 bis +1.75), HIGH (+2.00 bis +2.50)",
+      "pack_size": "6er Box (6 Linsen)",
+      "pack_count": 6,
+      "usage_assumption": "Zweiwochenlinse, 14-Tage-Wechsel, beide Augen (6er Box reicht für 6 Wochen = 42 Tragetage)",
+      "price": 39.90,
+      "price_per_lens": "6,65 €",
+      "cost_per_day": "0,95 €",
+      "cost_per_month": "28,50 €",
+      "price_per_day": "0,95 €",
+      "amazon_query": "Acuvue Oasys Multifocal 6er",
+      "source_type": "Hersteller-Spezifikation",
+      "source": "Johnson & Johnson Vision Pro Produktspezifikation",
+      "source_url": "https://www.jnjvisionpro.com/de-de/products/acuvue-oasys-multifocal/",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Silikon-Hydrogel",
+          "Dk/t 147",
+          "Senofilcon A",
+          "HYDRACLEAR® PLUS",
+          "Pupillenoptimiertes Design"
+      ],
+      "aliases": [
+          "Acuvue Oasys Multifocal 6er",
+          "Oasys Multifocal 2-Wochen",
+          "Acuvue Oasys Multifocal"
+      ]
+  },
+  {
+      "id": "acuvue-vita-toric",
+      "asin": null,
+      "product_name": "Acuvue Vita for Astigmatism",
+      "manufacturer": "Johnson & Johnson Vision",
+      "brand": "Acuvue",
+      "lens_type": "Torische Monatslinse",
+      "replacement_schedule": "30 Tage",
+      "material": "Senofilcon C (Silikon-Hydrogel mit HydraMax™)",
+      "dk_t": 129,
+      "water_content": "41 %",
+      "base_curve": "8.6 mm",
+      "diameter": "14.5 mm",
+      "sphere_range": "+4.00 bis -9.00 dpt",
+      "cylinder_range": "-0.75 bis -2.25 dpt",
+      "axis_range": "10° bis 180°",
+      "add_power": null,
+      "pack_size": "6er Box (6 Linsen)",
+      "pack_count": 6,
+      "usage_assumption": "Beidseitiges Tragen (2 Linsen / Monat, 6er Box reicht für 3 Monate)",
+      "price": 41.90,
+      "price_per_lens": "6,98 €",
+      "cost_per_day": "0,47 €",
+      "cost_per_month": "13,97 €",
+      "price_per_day": "0,47 €",
+      "amazon_query": "Acuvue Vita for Astigmatism 6er",
+      "source_type": "Hersteller-Spezifikation",
+      "source": "Johnson & Johnson Vision Pro Produktspezifikation",
+      "source_url": "https://www.jnjvisionpro.com/de-de/products/acuvue-vita-astigmatism/",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Silikon-Hydrogel",
+          "Dk/t 129",
+          "Senofilcon C",
+          "HydraMax™",
+          "Blink-Stabilized® Design"
+      ],
+      "aliases": [
+          "Acuvue Vita Astigmatism",
+          "Vita for Astigmatism",
+          "Acuvue Vita Toric"
+      ]
+  },
+  {
+      "id": "artelac-splash",
+      "asin": null,
+      "product_name": "Bausch + Lomb Artelac Splash Augentropfen",
+      "manufacturer": "Bausch + Lomb",
+      "brand": "Artelac",
+      "lens_type": "Augentropfen",
+      "replacement_schedule": null,
+      "material": "Hyaluronsäure (0,24 % Natriumhyaluronat)",
+      "dk_t": null,
+      "water_content": null,
+      "base_curve": null,
+      "diameter": null,
+      "sphere_range": null,
+      "cylinder_range": null,
+      "axis_range": null,
+      "add_power": null,
+      "pack_size": "10 ml Flasche (auch als Einzeldosis EDO erhältlich)",
+      "pack_count": 1,
+      "usage_assumption": "Zur Befeuchtung trockener Augen und Benetzung von Kontaktlinsen",
+      "price": 10.99,
+      "price_per_lens": null,
+      "cost_per_day": null,
+      "cost_per_month": null,
+      "price_per_day": null,
+      "amazon_query": "Bausch Lomb Artelac Splash Augentropfen 10ml",
+      "source_type": "Offizielle Herstellerseite",
+      "source": "Bausch + Lomb Artelac Produktinformation",
+      "source_url": "https://www.artelac.de/produkte/artelac-splash/",
+      "source_date": "14.10.2026",
+      "confidence": "verifiziert",
+      "objective_badges": [
+          "Augentropfen",
+          "0,24 % Hyaluronsäure",
+          "Ohne Konservierungsmittel",
+          "Kontaktlinsen-kompatibel"
+      ],
+      "aliases": [
+          "Artelac Splash",
+          "Artelac Splash MDO",
+          "Artelac Splash 10ml"
+      ]
   }
 ];
 
@@ -1795,18 +2147,19 @@ const RAW_PRODUCTS = [
  * wird transparent mitgeteilt, dass keine belastbare Berechnung möglich ist.
  */
 export const calculateLensCosts = (product, usage = 'both_eyes') => {
-  if (!product || !product.pack_count || !product.price || product.lens_type?.toLowerCase().includes('pflegemittel')) {
+  if (!product || !product.pack_count || !product.price || product.lens_type?.toLowerCase().includes('pflegemittel') || product.lens_type?.toLowerCase().includes('tropfen')) {
     return {
       computable: false,
-      reason: 'Keine belastbare Berechnung möglich – Packungsgröße nicht hinterlegt oder Pflegemittel.',
-      price_per_lens: '–',
-      cost_per_day: '–',
-      cost_per_month: '–'
+      reason: 'Keine belastbare Berechnung möglich – Augentropfen, Pflegemittel oder fehlende Packungsgröße.',
+      price_per_lens: null,
+      cost_per_day: null,
+      cost_per_month: null
     };
   }
 
   const isMonthly = product.replacement_schedule?.toLowerCase().includes('30 tage');
   const isDaily = product.replacement_schedule?.toLowerCase().includes('1 tag');
+  const isTwoWeek = product.replacement_schedule?.toLowerCase().includes('14 tage');
   const pricePerLensNum = product.price / product.pack_count;
   const eyesFactor = usage === 'both_eyes' ? 2 : 1;
 
@@ -1838,12 +2191,26 @@ export const calculateLensCosts = (product, usage = 'both_eyes') => {
     };
   }
 
+  if (isTwoWeek) {
+    // 14-Tage-Linse: Packung mit N Linsen reicht für (N / eyesFactor) * 14 Tage
+    const daysPerPack = (product.pack_count / eyesFactor) * 14;
+    const costPerDayNum = product.price / daysPerPack;
+    const costPerMonthNum = costPerDayNum * 30;
+    return {
+      computable: true,
+      price_per_lens: `${pricePerLensNum.toFixed(2).replace('.', ',')} €`,
+      cost_per_day: `${costPerDayNum.toFixed(2).replace('.', ',')} €`,
+      cost_per_month: `${costPerMonthNum.toFixed(2).replace('.', ',')} €`,
+      usage_description: usage === 'both_eyes' ? 'Beidseitiges Tragen (2 Linsen / 14 Tage)' : 'Einseitiges Tragen (1 Linse / 14 Tage)'
+    };
+  }
+
   return {
     computable: false,
-    reason: 'Berechnung nur für Tages- und Monatslinsen hinterlegt.',
+    reason: 'Berechnung nur für Tages-, Zweiwochen- und Monatslinsen hinterlegt.',
     price_per_lens: `${pricePerLensNum.toFixed(2).replace('.', ',')} €`,
-    cost_per_day: '–',
-    cost_per_month: '–'
+    cost_per_day: null,
+    cost_per_month: null
   };
 };
 

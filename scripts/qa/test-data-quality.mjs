@@ -86,50 +86,48 @@ for (const r of AMAZON_VERIFICATION_REGISTER) {
 }
 
 // Regressionstest: Verifizierte technische Parameter duerfen im Live-Katalog nicht ueberschrieben/abweichend sein
-const LIVE_TO_PILOT_MAPPING = {
-  'clariti-1day-toric': 'res-cv-clariti-1day-toric',
-  'clariti-1day-multifocal': 'res-cv-clariti-1day-multifocal',
-  'myday-multifocal': 'res-cv-myday-multifocal',
-  'acuvue-oasys-max-1day-multifocal': 'res-jnj-acuvue-oasys-max-1day-multifocal',
-  'avaira-vitality': 'res-cv-avaira-vitality',
-  'avaira-vitality-toric': 'res-cv-avaira-vitality-toric',
-  'biofinity-toric-multifocal': 'res-cv-biofinity-toric-multifocal',
-  'biofinity-xr': 'res-cv-biofinity-xr',
-  'biofinity-xr-toric': 'res-cv-biofinity-xr-toric',
-  'biomedics-55-evolution': 'res-cv-biomedics-55-evolution'
-};
+// Erfasst dynamisch alle veroeffentlichten Produkte, fuer die ein Verifikationsdatensatz existiert
+const PREFIXES = ['res-cv-', 'res-alcon-', 'res-jnj-', 'res-bl-'];
+let dynamicCheckCount = 0;
 
-for (const [liveId, pilotId] of Object.entries(LIVE_TO_PILOT_MAPPING)) {
-  const p = PRODUCTS.find(x => x.id === liveId);
-  const pilot = PILOT_VERIFICATION.find(x => x.product_id === pilotId);
-  t(!!p, 'Live-Produkt fehlt fuer Regressionstest: ' + liveId);
-  t(!!pilot, 'Pilot-Verifikationsdatensatz fehlt fuer: ' + pilotId);
+for (const p of PRODUCTS) {
+  let pilot = PILOT_VERIFICATION.find(pv => pv.product_id === p.id);
+  if (!pilot) {
+    for (const pre of PREFIXES) {
+      pilot = PILOT_VERIFICATION.find(pv => pv.product_id === pre + p.id);
+      if (pilot) break;
+    }
+  }
+
   if (p && pilot && pilot.verified_attributes) {
+    dynamicCheckCount++;
     const attrs = pilot.verified_attributes;
     if (attrs.dk_t) {
       const match = String(attrs.dk_t.value).match(/^(\d+)/);
       if (match) {
         const expectedDk = parseInt(match[1], 10);
-        t(p.dk_t === expectedDk, `Regression: Dk/t mismatch bei ${liveId} (Katalog: ${p.dk_t}, Verifiziert: ${expectedDk})`);
+        t(p.dk_t === expectedDk, `Regression: Dk/t mismatch bei ${p.id} (Katalog: ${p.dk_t}, Verifiziert: ${expectedDk})`);
       }
     }
     if (attrs.water_content) {
       const expectedWater = String(attrs.water_content.value).replace(/\s+/g, '');
       const actualWater = String(p.water_content).replace(/\s+/g, '');
-      t(actualWater === expectedWater, `Regression: Wassergehalt mismatch bei ${liveId} (Katalog: ${actualWater}, Verifiziert: ${expectedWater})`);
+      t(actualWater === expectedWater, `Regression: Wassergehalt mismatch bei ${p.id} (Katalog: ${actualWater}, Verifiziert: ${expectedWater})`);
     }
     if (attrs.diameter) {
       const expectedDia = String(attrs.diameter.value).replace(/\s+/g, '').replace(',', '.');
       const actualDia = String(p.diameter).replace(/\s+/g, '').replace(',', '.');
-      t(expectedDia.includes(actualDia), `Regression: Durchmesser mismatch bei ${liveId} (Katalog: ${actualDia}, Verifiziert: ${expectedDia})`);
+      t(expectedDia.includes(actualDia), `Regression: Durchmesser mismatch bei ${p.id} (Katalog: ${actualDia}, Verifiziert: ${expectedDia})`);
     }
     if (attrs.base_curve) {
       const expectedBc = String(attrs.base_curve.value).replace(/\s+/g, '').replace(',', '.');
-      const actualBc = String(p.base_curve).replace(/\s+/g, '').replace(',', '.').split(',')[0];
-      t(expectedBc.includes(actualBc), `Regression: Basiskurve mismatch bei ${liveId} (Katalog: ${actualBc}, Verifiziert: ${expectedBc})`);
+      const actualBc = String(p.base_curve).split(',')[0].replace(/\s+/g, '').replace(',', '.');
+      t(expectedBc.includes(actualBc), `Regression: Basiskurve mismatch bei ${p.id} (Katalog: ${actualBc}, Verifiziert: ${expectedBc})`);
     }
   }
 }
 
-console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${Object.keys(LIVE_TO_PILOT_MAPPING).length} Live-Pilot-Konsistenzprüfungen)`);
+t(dynamicCheckCount >= 10, 'Mindestens 10 Live-Pilot-Vergleiche muessen durchgefuehrt werden (Gefunden: ' + dynamicCheckCount + ')');
+
+console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${dynamicCheckCount} dynamische Live-Pilot-Konsistenzprüfungen)`);
 process.exit(fail ? 1 : 0);

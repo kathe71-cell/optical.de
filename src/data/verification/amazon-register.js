@@ -590,5 +590,101 @@ export const AMAZON_VERIFICATION_REGISTER = [
   "verification_date": "2026-10-13",
   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
   "last_checked": "2026-10-13"
- }
+ },
+  {
+   "product_id": "proclear-1day-multifocal",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "CooperVision Proclear 1 Day Multifocal",
+   "pack_size": "30er Packung (30 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "proclear-toric",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "CooperVision Proclear Toric",
+   "pack_size": "6er Packung (6 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "proclear-multifocal",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "CooperVision Proclear Multifocal",
+   "pack_size": "6er Packung (6 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "biomedics-toric",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "CooperVision Biomedics Toric",
+   "pack_size": "6er Packung (6 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "acuvue-oasys-1day-astigmatism",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "Acuvue Oasys 1-Day for Astigmatism",
+   "pack_size": "30er Packung (30 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "acuvue-oasys-multifocal-2week",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "Acuvue Oasys Multifocal",
+   "pack_size": "6er Box (6 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "acuvue-vita-toric",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "Acuvue Vita for Astigmatism",
+   "pack_size": "6er Box (6 Linsen)",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  },
+  {
+   "product_id": "artelac-splash",
+   "asin": null,
+   "merchant": "amazon.de",
+   "product_name": "Bausch + Lomb Artelac Splash Augentropfen",
+   "pack_size": "10 ml Flasche",
+   "verification_status": "UNVERIFIED",
+   "verification_method": "Sicherer Suchlink-Fallback (/s?k=...&tag=optical.de-21)",
+   "verification_date": "2026-10-14",
+   "evidence": "Keine ASIN verifiziert; sicherer Such-Fallback aktiv",
+   "last_checked": "2026-10-14"
+  }
 ];

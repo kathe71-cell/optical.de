@@ -121,13 +121,18 @@ export default function ProductDetailPage({ productIdOverride }) {
                   <span className="col-span-7 font-semibold text-slate-800">{product.manufacturer}</span>
                 </div>
                 <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-5 text-slate-500 font-medium">Linsentyp / Rhythmus</span>
-                  <span className="col-span-7 font-semibold text-slate-800">{product.lens_type} ({product.replacement_schedule})</span>
+                  <span className="col-span-5 text-slate-500 font-medium">Produktkategorie</span>
+                  <span className="col-span-7 font-semibold text-slate-800">
+                    {product.lens_type}
+                    {product.replacement_schedule ? ` (${product.replacement_schedule})` : ''}
+                  </span>
                 </div>
-                <div className="grid grid-cols-12 px-4 py-3">
-                  <span className="col-span-5 text-slate-500 font-medium">Material (USAN)</span>
-                  <span className="col-span-7 font-semibold text-slate-800">{product.material}</span>
-                </div>
+                {product.material && (
+                  <div className="grid grid-cols-12 px-4 py-3">
+                    <span className="col-span-5 text-slate-500 font-medium">Material / Wirkstoff</span>
+                    <span className="col-span-7 font-semibold text-slate-800">{product.material}</span>
+                  </div>
+                )}
                 {product.dk_t && (
                   <div className="grid grid-cols-12 px-4 py-3">
                     <span className="col-span-5 text-slate-500 font-medium">Sauerstofffluss (Dk/t)</span>
@@ -241,20 +246,26 @@ export default function ProductDetailPage({ productIdOverride }) {
                   Tagesaktueller Händlerpreis auf Amazon.de einsehbar
                 </div>
 
-                <div className="flex justify-between items-center text-slate-600 pt-2 border-t border-slate-100">
-                  <span>Preis pro Einzellinse:</span>
-                  <span className="font-semibold text-slate-800">{product.price_per_lens || '–'}</span>
-                </div>
+                {product.price_per_lens && (
+                  <div className="flex justify-between items-center text-slate-600 pt-2 border-t border-slate-100">
+                    <span>Preis pro Einzellinse:</span>
+                    <span className="font-semibold text-slate-800">{product.price_per_lens}</span>
+                  </div>
+                )}
 
-                <div className="flex justify-between items-center text-slate-600">
-                  <span>Kosten pro Tragetag (2 Linsen):</span>
-                  <span className="font-semibold text-emerald-700">{product.cost_per_day || '–'}</span>
-                </div>
+                {product.cost_per_day && (
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Kosten pro Tragetag (2 Linsen):</span>
+                    <span className="font-semibold text-emerald-700">{product.cost_per_day}</span>
+                  </div>
+                )}
 
-                <div className="flex justify-between items-center text-slate-600">
-                  <span>Kosten pro Monat (2 Linsen):</span>
-                  <span className="font-semibold text-slate-800">{product.cost_per_month || '–'}</span>
-                </div>
+                {product.cost_per_month && (
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Kosten pro Monat (2 Linsen):</span>
+                    <span className="font-semibold text-slate-800">{product.cost_per_month}</span>
+                  </div>
+                )}
               </div>
 
               {/* Kauf-Button */}
