@@ -11,7 +11,7 @@
     "test:refill": "node scripts/qa/test-refill-assistant.js",
     "test:browser": "node scripts/qa/test-browser-simulation.js",
     "test:affiliate": "node scripts/qa/test-amazon-affiliate.js",
-    "test:research": "node scripts/qa/test-research-systematic.js",
+    "test:research": "node scripts/qa/test-research-systematic.js && node scripts/qa/test-data-quality.mjs",
     "test:sources": "node scripts/qa/check-external-sources.js",
     "lint": "eslint .",
     "preview": "vite preview"
