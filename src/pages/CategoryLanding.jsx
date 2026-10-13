@@ -260,11 +260,11 @@ export default function CategoryLanding({ categorySlugOverride }) {
                     <a
                       href={getAmazonLink(p.amazon_query, p.asin)}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'category_page')}
+                      rel="noopener noreferrer sponsored"
+                      onClick={() => trackAffiliateClick(p.product_name, 'partner', 'category_page')}
                       className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-2xs transition"
                     >
-                      <span>Angebote bei Amazon *</span>
+                      <span>Angebote beim Partner *</span>
                       <ExternalLink className="w-3 h-3 text-emerald-400" />
                     </a>
                   </div>

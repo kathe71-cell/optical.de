@@ -185,11 +185,11 @@ export default function PrivateLabelLanding({ slugOverride }) {
                 <a
                   href={getAmazonLink(matchedProduct?.amazon_query, matchedProduct?.asin)}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackAffiliateClick(matchedProduct?.product_name || entry.optician_private_label, 'amazon', 'private_label_page')}
+                  rel="noopener noreferrer sponsored"
+                  onClick={() => trackAffiliateClick(matchedProduct?.product_name || entry.optician_private_label, 'partner', 'private_label_page')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition group"
                 >
-                  <span>Angebote bei Amazon suchen *</span>
+                  <span>Angebote beim Partner suchen *</span>
                   <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 

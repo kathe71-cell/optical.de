@@ -152,8 +152,8 @@ export default function ProductComparisonPage() {
                     <a
                       href={getAmazonLink(lens.amazon_query, lens.asin)}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackAffiliateClick(lens.product_name, 'amazon', 'multi_comparison')}
+                      rel="noopener noreferrer sponsored"
+                      onClick={() => trackAffiliateClick(lens.product_name, 'partner', 'multi_comparison')}
                       className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] py-2.5 px-2 rounded-xl flex items-center justify-center gap-1 shadow-xs transition"
                     >
                       <span className="truncate">{lens.product_name.split(' ').slice(0, 2).join(' ')} *</span>
