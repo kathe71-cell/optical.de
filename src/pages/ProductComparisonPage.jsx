@@ -174,7 +174,7 @@ export default function ProductComparisonPage() {
                   </div>
                 ))}
               </div>
-              <div className="col-span-12 text-center text-[9px] text-slate-400 pt-1 leading-tight">
+              <div className="col-span-12 text-center text-[11px] text-slate-600 font-medium pt-1 leading-tight">
                 * Werbelink / Partnerlink (Amazon.de) · Orientierungspreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
               </div>
             </div>

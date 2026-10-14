@@ -82,7 +82,7 @@ export default function Footer() {
             <li><Link to="/impressum" className="hover:text-white font-semibold text-emerald-400 transition">→ Impressum</Link></li>
             <li><Link to="/datenschutz" className="hover:text-white transition">→ Datenschutzerklärung</Link></li>
             <li><Link to="/transparenz" className="hover:text-white transition text-left">→ Transparenz-Standard</Link></li>
-            <li><button onClick={scrollToTrust} className="hover:text-white transition text-left">→ Häufige Fragen (FAQ)</button></li>
+            <li><Link to="/transparenz#faq" className="hover:text-white transition text-left">→ Häufige Fragen (FAQ)</Link></li>
           </ul>
         </div>
 

@@ -22,9 +22,11 @@ export default function RefillBanner() {
           <Clock className="w-4 h-4 text-emerald-200 flex-shrink-0 animate-pulse" />
           <span>
             {dueRefill.isOverdue ? (
-              <strong>Zeit für deinen nächsten Linsenkauf?</strong>
+              <span>Dein Vorrat an <strong>{dueRefill.productName}</strong> ist aufgebraucht. Jetzt nachbestellen.</span>
+            ) : dueRefill.isReminderDue ? (
+              <span>Erinnerung: Dein Vorrat an <strong>{dueRefill.productName}</strong> reicht noch ca. {dueRefill.daysRemaining} {dueRefill.daysRemaining === 1 ? 'Tag' : 'Tage'} (Nachkauf empfohlen).</span>
             ) : (
-              <span>Erinnerung: Dein Vorrat an <strong>{dueRefill.productName}</strong> reicht noch ca. {dueRefill.daysRemaining} Tage.</span>
+              <span>Erinnerung: Dein Vorrat an <strong>{dueRefill.productName}</strong> reicht noch ca. {dueRefill.daysRemaining} {dueRefill.daysRemaining === 1 ? 'Tag' : 'Tage'}.</span>
             )}
           </span>
         </div>

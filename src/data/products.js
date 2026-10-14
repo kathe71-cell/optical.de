@@ -1684,7 +1684,7 @@ const RAW_PRODUCTS = [
       "amazon_query": "CooperVision Biofinity XR",
       "source_type": "Hersteller-Datenblatt",
       "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
-      "source_url": "https://coopervision.de/kontaktlinsen/biofinity-xr",
+      "source_url": "https://coopervision.de/kontaktlinsen/biofinity",
       "source_date": "14.10.2026",
       "confidence": "verifiziert",
       "objective_badges": [
@@ -1728,7 +1728,7 @@ const RAW_PRODUCTS = [
       "amazon_query": "CooperVision Biofinity XR Toric",
       "source_type": "Hersteller-Datenblatt",
       "source": "CooperVision 1-Day & FRP Fitting Reference Guide (Doc SA10184)",
-      "source_url": "https://coopervision.de/kontaktlinsen/biofinity-xr-toric",
+      "source_url": "https://coopervision.de/kontaktlinsen/biofinity-toric",
       "source_date": "14.10.2026",
       "confidence": "verifiziert",
       "objective_badges": [
@@ -2279,9 +2279,19 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
   }
 
   let design_type = 'sphaerisch';
+  const is_toric = category === 'kontaktlinsen' && (ltLower.includes('torisch') || (p.product_name || '').toLowerCase().includes('toric') || (p.product_name || '').toLowerCase().includes('astigmatism') || Boolean(p.cylinder_range));
+  const is_multifocal = category === 'kontaktlinsen' && (ltLower.includes('multifokal') || (p.product_name || '').toLowerCase().includes('multifocal') || Boolean(p.add_power));
+  const is_spheric = category === 'kontaktlinsen' && !is_toric && !is_multifocal;
+
+  const design_types = [];
   if (category === 'kontaktlinsen') {
-    if (ltLower.includes('torisch')) design_type = 'torisch';
-    else if (ltLower.includes('multifokal')) design_type = 'multifokal';
+    if (is_spheric) design_types.push('sphaerisch');
+    if (is_toric) design_types.push('torisch');
+    if (is_multifocal) design_types.push('multifokal');
+    
+    // Für Rückwärtskompatibilität bleibt design_type das primäre Merkmal
+    if (is_toric) design_type = 'torisch';
+    else if (is_multifocal) design_type = 'multifokal';
   } else {
     design_type = 'nicht_zutreffend';
   }
@@ -2317,6 +2327,10 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
     category,
     wear_schedule,
     design_type,
+    design_types,
+    is_toric,
+    is_multifocal,
+    is_spheric,
     material_type,
     material_class,
     correction_type,

@@ -81,18 +81,53 @@ export function useRefillConfigs() {
   };
 
   /**
-   * Prüft, ob irgendein Nachkauftermin in Kürze ansteht (innerhalb der nächsten 14 Tage)
+   * Prüft, ob ein Nachkauftermin oder Vorratsende ansteht oder erreicht ist
    */
   const getDueRefill = () => {
     const today = new Date().toISOString().split('T')[0];
+    const todayTime = new Date(today).getTime();
+
     for (const [productId, conf] of Object.entries(configs)) {
-      if (conf && conf.refillDate && conf.refillDate <= today) {
-        return { productId, ...conf, isOverdue: true };
+      if (!conf) continue;
+
+      // 1. Berechnung der echten Restvorratstage (bis Vorrat erschöpft ist)
+      let stockDaysRemaining = null;
+      if (conf.expiryDate) {
+        const expiryTime = new Date(conf.expiryDate).getTime();
+        stockDaysRemaining = Math.max(0, Math.ceil((expiryTime - todayTime) / (1000 * 60 * 60 * 24)));
+      } else if (typeof conf.minDays === 'number') {
+        stockDaysRemaining = conf.minDays;
       }
-      if (conf && conf.refillDate) {
-        const diffDays = Math.ceil((new Date(conf.refillDate) - new Date(today)) / (1000 * 60 * 60 * 24));
-        if (diffDays <= 7 && diffDays >= 0) {
-          return { productId, ...conf, daysRemaining: diffDays, isUpcoming: true };
+
+      // 2. Prüfung des Nachkauf-Erinnerungsdatums (refillDate = Vorrat minus Vorlaufzeit)
+      if (conf.refillDate) {
+        const refillTime = new Date(conf.refillDate).getTime();
+        const daysUntilRefill = Math.ceil((refillTime - todayTime) / (1000 * 60 * 60 * 24));
+
+        // Fall A: Erinnerungsdatum ist heute oder bereits überschritten
+        if (conf.refillDate <= today) {
+          const isStockDepleted = stockDaysRemaining !== null && stockDaysRemaining <= 0;
+          return {
+            productId,
+            ...conf,
+            daysRemaining: stockDaysRemaining !== null ? stockDaysRemaining : 0,
+            stockDaysRemaining,
+            daysUntilRefill,
+            isOverdue: isStockDepleted,
+            isReminderDue: true
+          };
+        }
+
+        // Fall B: Erinnerungsdatum steht in Kürze an (innerhalb der nächsten 7 Tage)
+        if (daysUntilRefill <= 7 && daysUntilRefill >= 0) {
+          return {
+            productId,
+            ...conf,
+            daysRemaining: stockDaysRemaining !== null ? stockDaysRemaining : daysUntilRefill,
+            stockDaysRemaining,
+            daysUntilRefill,
+            isUpcoming: true
+          };
         }
       }
     }

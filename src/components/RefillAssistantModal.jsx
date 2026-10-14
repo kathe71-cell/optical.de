@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, Bell, Check, Clock, ChevronDown, ChevronUp, Download, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
 import { calculateRefillSchedule, generateIcsCalendarEvent, downloadIcsFile } from '../utils/refillCalculator';
 import { trackEvent } from '../utils/tracking';
@@ -20,6 +20,57 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
   const [leftEye, setLeftEye] = useState(initialConfig?.leftEye || { packs: 1, packCount: defaultPackCount, individualLenses: 0 });
 
   const [manualRefillDate, setManualRefillDate] = useState(initialConfig?.customRefillDate || '');
+
+  const modalRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  const previousFocusRef = useRef(null);
+
+  // Escape-Taste, Fokus-Trap & Fokus-Rückgabe für Barrierefreiheit (WCAG 2.2)
+  useEffect(() => {
+    previousFocusRef.current = document.activeElement;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement?.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement?.focus();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    // Initialer Fokus auf den ersten interaktiven Button / Close-Button
+    const rafId = requestAnimationFrame(() => {
+      closeBtnRef.current?.focus();
+    });
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('keydown', handleKeyDown);
+      // Fokus an das auslösende Element zurückgeben
+      if (previousFocusRef.current && typeof previousFocusRef.current.focus === 'function') {
+        previousFocusRef.current.focus();
+      }
+    };
+  }, [onClose]);
 
   // Live-Berechnung
   const schedule = calculateRefillSchedule({
@@ -74,8 +125,13 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-xl w-full border border-slate-200 shadow-2xl overflow-hidden my-8">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="refill-modal-title"
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+    >
+      <div ref={modalRef} className="bg-white rounded-3xl max-w-xl w-full border border-slate-200 shadow-2xl overflow-hidden my-8">
         
         {/* Modal Header */}
         <div className="p-6 bg-slate-900 text-white flex items-center justify-between">
@@ -85,13 +141,14 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-emerald-400 font-bold block">Nachkauf-Assistent</span>
-              <h2 className="text-lg font-black text-white">{product.product_name}</h2>
+              <h2 id="refill-modal-title" className="text-lg font-black text-white">{product.product_name}</h2>
             </div>
           </div>
           <button 
+            ref={closeBtnRef}
             onClick={onClose}
             className="text-slate-400 hover:text-white p-2 rounded-lg transition"
-            aria-label="Schließen"
+            aria-label="Nachkauf-Assistent schließen"
           >
             ✕
           </button>
@@ -134,11 +191,12 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
           {/* 2. Vorratsbestand */}
           {!separateEyes ? (
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-              <label className="font-bold text-slate-900 block">Vorhandener Vorrat:</label>
+              <span className="font-bold text-slate-900 block">Vorhandener Vorrat:</span>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <span className="text-[11px] text-slate-500 block mb-1">Volle Packungen:</span>
+                  <label htmlFor="refill-shared-packs" className="text-[11px] text-slate-500 block mb-1">Volle Packungen:</label>
                   <input
+                    id="refill-shared-packs"
                     type="number"
                     min="1"
                     max="50"
@@ -148,8 +206,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
                   />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-500 block mb-1">Linsen pro Packung:</span>
+                  <label htmlFor="refill-shared-pack-count" className="text-[11px] text-slate-500 block mb-1">Linsen pro Packung:</label>
                   <input
+                    id="refill-shared-pack-count"
                     type="number"
                     min="1"
                     max="180"
@@ -167,8 +226,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
                 <span className="font-bold text-slate-900 block">Rechtes Auge (OD):</span>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <span className="text-[11px] text-slate-500 block mb-1">Packungen:</span>
+                    <label htmlFor="refill-right-packs" className="text-[11px] text-slate-500 block mb-1">Packungen:</label>
                     <input
+                      id="refill-right-packs"
                       type="number"
                       min="1"
                       max="50"
@@ -178,8 +238,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
                     />
                   </div>
                   <div>
-                    <span className="text-[11px] text-slate-500 block mb-1">Linsen/Packung:</span>
+                    <label htmlFor="refill-right-pack-count" className="text-[11px] text-slate-500 block mb-1">Linsen/Packung:</label>
                     <input
+                      id="refill-right-pack-count"
                       type="number"
                       min="1"
                       max="180"
@@ -196,8 +257,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
                 <span className="font-bold text-slate-900 block">Linkes Auge (OS):</span>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <span className="text-[11px] text-slate-500 block mb-1">Packungen:</span>
+                    <label htmlFor="refill-left-packs" className="text-[11px] text-slate-500 block mb-1">Packungen:</label>
                     <input
+                      id="refill-left-packs"
                       type="number"
                       min="1"
                       max="50"
@@ -207,8 +269,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
                     />
                   </div>
                   <div>
-                    <span className="text-[11px] text-slate-500 block mb-1">Linsen/Packung:</span>
+                    <label htmlFor="refill-left-pack-count" className="text-[11px] text-slate-500 block mb-1">Linsen/Packung:</label>
                     <input
+                      id="refill-left-pack-count"
                       type="number"
                       min="1"
                       max="180"
@@ -226,12 +289,13 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
           {isDaily && (
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
               <div className="flex justify-between items-center mb-2">
-                <label className="font-bold text-slate-900">Tragetage pro Woche:</label>
+                <label htmlFor="refill-days-per-week" className="font-bold text-slate-900">Tragetage pro Woche:</label>
                 <span className="font-extrabold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded text-xs">
                   {daysPerWeek} Tage / Woche
                 </span>
               </div>
               <input
+                id="refill-days-per-week"
                 type="range"
                 min="1"
                 max="7"
@@ -248,8 +312,9 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
           {/* 4. Startdatum & Vorlauf */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-              <label className="font-bold text-slate-900 block mb-1">Startdatum:</label>
+              <label htmlFor="refill-start-date" className="font-bold text-slate-900 block mb-1">Startdatum:</label>
               <input
+                id="refill-start-date"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}

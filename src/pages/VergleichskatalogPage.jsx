@@ -87,9 +87,9 @@ export default function VergleichskatalogPage() {
     if (activeCategory === 'zubehoer' && item.category !== 'zubehoer') return false;
 
     // 2. Linsenausführung (Sphärisch, Torisch, Multifokal) - unabhängig kombinierbar
-    if (activeDesign === 'sphaerisch' && item.design_type !== 'sphaerisch') return false;
-    if (activeDesign === 'torisch' && item.design_type !== 'torisch') return false;
-    if (activeDesign === 'multifokal' && item.design_type !== 'multifokal') return false;
+    if (activeDesign === 'sphaerisch' && !(item.is_spheric || item.design_type === 'sphaerisch' || (item.design_types && item.design_types.includes('sphaerisch')))) return false;
+    if (activeDesign === 'torisch' && !(item.is_toric || item.design_type === 'torisch' || (item.design_types && item.design_types.includes('torisch')))) return false;
+    if (activeDesign === 'multifokal' && !(item.is_multifocal || item.design_type === 'multifokal' || (item.design_types && item.design_types.includes('multifokal')))) return false;
 
     // 3. Hersteller über normalisierte manufacturer_id
     if (activeBrand !== 'all' && item.manufacturer_id !== activeBrand) return false;
@@ -244,13 +244,13 @@ export default function VergleichskatalogPage() {
               )}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 max-w-full flex-wrap sm:flex-nowrap">
               <span className="text-xs font-bold text-slate-500 whitespace-nowrap">Sortieren nach:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 aria-label="Katalog sortieren nach"
-                className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 max-w-full"
               >
                 <option value="popular">Standard / Beliebt</option>
                 <option value="price_asc">Niedrigster Packungspreis</option>
@@ -556,7 +556,7 @@ export default function VergleichskatalogPage() {
                     </div>
                   </div>
 
-                  <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
+                  <div className="text-center mt-2 text-[11px] text-slate-600 font-medium leading-tight">
                     * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </div>
                 </div>

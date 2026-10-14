@@ -329,10 +329,10 @@ export default function ProductDetailPage({ productIdOverride }) {
                 )}
 
                 <div className="text-center space-y-0.5 pt-1">
-                  <span className="text-[10px] text-slate-500 block font-medium">
+                  <span className="text-[11px] text-slate-600 block font-medium">
                     Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </span>
-                  <span className="text-[9px] text-slate-400 block font-medium">
+                  <span className="text-[11px] text-slate-600 block font-medium">
                     * Werbelink / Partnerlink
                   </span>
                 </div>

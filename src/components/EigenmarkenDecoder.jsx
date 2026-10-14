@@ -401,7 +401,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                   <div className="text-[10px] text-slate-500 font-medium">
                     Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                   </div>
-                  <div className="text-[9px] text-slate-400">
+                  <div className="text-[11px] text-slate-600 font-medium">
                     * Werbelink / Partnerlink
                   </div>
                 </div>

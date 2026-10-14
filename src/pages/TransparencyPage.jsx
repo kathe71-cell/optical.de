@@ -143,6 +143,49 @@ export default function TransparencyPage() {
           </p>
         </section>
 
+        {/* Section 6: Häufige Fragen (FAQ) */}
+        <section id="faq" className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6 scroll-mt-24">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-xl font-black text-slate-950">Häufig gestellte Fragen (FAQ)</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Antworten zu Daten, Nachkauf und Unabhängigkeit von optical.de</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 text-xs sm:text-sm">
+            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+              <h3 className="font-extrabold text-slate-900 mb-1.5">Verkauft optical.de direkt Kontaktlinsen?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Nein. optical.de ist kein Händler, kein Online-Shop und keine Apotheke. Wir sind ein reines Informations- und Vergleichsportal, das Ihnen hilft, bereits angepasste Kontaktlinsen wiederzufinden und direkt zum geprüften Händlerangebot (z. B. Amazon) zu wechseln.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+              <h3 className="font-extrabold text-slate-900 mb-1.5">Kann ich meine Kontaktlinsenstärke bei optical.de bestimmen lassen?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Nein. Die Bestimmung Ihrer Sehstärke, Basiskurve und des passenden Linsenmaterials kann ausschließlich vor Ort durch einen Facharzt für Augenheilkunde oder einen ausgebildeten Augenoptiker erfolgen. Wir bieten keine medizinische Beratung und empfehlen niemals den eigenmächtigen Wechsel von Linsenparametern.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+              <h3 className="font-extrabold text-slate-900 mb-1.5">Wie verlässlich sind die technischen Produktdaten?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Alle technischen Werte (Dk/t, Wassergehalt, Durchmesser, Basiskurve, Material) werden systematisch anhand der offiziellen Hersteller-Datenblätter (CooperVision, Alcon, Johnson &amp; Johnson, Bausch + Lomb) verifiziert. Liegt für ein Feld kein valider Herstellerbeleg vor, wird es transparent als unbestätigt ausgewiesen.
+              </p>
+            </div>
+
+            <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
+              <h3 className="font-extrabold text-slate-900 mb-1.5">Werden meine Daten beim Nachkauf-Planer auf Servern gespeichert?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Nein. Ihre gemerkten Kontaktlinsen und Nachkaufpläne verbleiben zu 100 % lokal im Speicher Ihres Browsers (<code className="text-emerald-700 bg-slate-100 px-1 py-0.5 rounded">localStorage</code>). Es erfolgt keinerlei Übertragung persönlicher Dioptrienwerte oder Nutzungsprofile an externe Server.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Medizinischer Pflicht-Hinweis */}
         <MedicalDisclaimer />
 

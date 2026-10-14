@@ -221,7 +221,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
                   </Link>
                 )}
 
-                <div className="text-center pt-1 text-[9px] text-slate-400 leading-tight">
+                <div className="text-center pt-1 text-[11px] text-slate-600 font-medium leading-tight">
                   * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                 </div>
               </div>

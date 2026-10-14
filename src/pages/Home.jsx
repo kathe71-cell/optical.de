@@ -597,7 +597,7 @@ export default function Home() {
                       </a>
                     </div>
 
-                    <div className="text-center mt-2 text-[9px] text-slate-400 leading-tight">
+                    <div className="text-center mt-2 text-[11px] text-slate-600 font-medium leading-tight">
                       * Werbelink / Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
                     </div>
                   </div>
