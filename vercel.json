@@ -42,6 +42,11 @@
       "source": "/bookmarks",
       "destination": "/meine-linsen",
       "permanent": true
+    },
+    {
+      "source": "/produkt/biofinity",
+      "destination": "/biofinity",
+      "permanent": true
     }
   ],
   "headers": [

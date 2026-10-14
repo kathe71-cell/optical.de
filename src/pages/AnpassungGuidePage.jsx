@@ -21,8 +21,6 @@ export default function AnpassungGuidePage() {
         <nav className="text-xs text-slate-500 flex items-center space-x-2">
           <Link to="/" className="hover:underline">Startseite</Link>
           <span>/</span>
-          <Link to="/vergleichskatalog" className="hover:underline">Katalog</Link>
-          <span>/</span>
           <span className="text-slate-900 font-semibold">Kontaktlinsen anpassen</span>
         </nav>
 

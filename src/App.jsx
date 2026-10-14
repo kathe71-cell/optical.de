@@ -68,6 +68,7 @@ export function AppRoutes() {
         <Route path="/kontaktlinsen-preisvergleich" element={<CategoryLanding categorySlugOverride="kontaktlinsen-preisvergleich" />} />
 
         {/* SEO-Landingpages: Einzelprodukt & Direktvergleich */}
+        <Route path="/produkt/biofinity" element={<Navigate to="/biofinity" replace />} />
         <Route path="/biofinity" element={<ProductDetailPage productIdOverride="biofinity" />} />
         <Route path="/produkt/:productId" element={<ProductDetailPage />} />
         <Route path="/biofinity-vs-air-optix" element={<ProductComparisonPage />} />
