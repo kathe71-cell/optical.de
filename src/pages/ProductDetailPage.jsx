@@ -224,6 +224,39 @@ export default function ProductDetailPage({ productIdOverride }) {
               </div>
             )}
 
+            {/* Vergleiche & Alternativen */}
+            {product.category === 'kontaktlinsen' && (
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
+                <div className="flex items-center gap-2 mb-3">
+                  <Layers className="w-5 h-5 text-emerald-600" />
+                  <h3 className="text-base font-black text-slate-900">
+                    Spezifikationsvergleich &amp; Alternativen
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+                  Vergleiche die technischen Kenngrößen von {product.product_name} direkt mit anderen marktgängigen Kontaktlinsen:
+                </p>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {(product.id === 'biofinity' || product.id === 'airoptix-hydraglyde') && (
+                    <Link
+                      to="/biofinity-vs-air-optix"
+                      className="inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 text-xs font-bold px-3.5 py-2 rounded-xl transition"
+                    >
+                      <span>Biofinity vs. Air Optix HydraGlyde vergleichen</span>
+                      <span>→</span>
+                    </Link>
+                  )}
+                  <Link
+                    to={`/vergleich?ids=${product.id}`}
+                    className="inline-flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl transition"
+                  >
+                    <span>{product.product_name} im 2-Linsen-Vergleich</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar / Kauf- & Nachkauf-Box (4 Spalten) */}

@@ -45,6 +45,54 @@ export default function DecoderPage() {
         {/* Decoder-Komponente (Direkter Fokus) */}
         <EigenmarkenDecoder standalone={true} />
 
+        {/* Statische Übersicht der analysierten Handelsmarken (SEO- & Discoverability-Anker) */}
+        <section aria-labelledby="dossiers-heading" className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4 mb-6">
+            <div>
+              <h2 id="dossiers-heading" className="text-xl font-black text-slate-950">
+                Analysierte Optiker-Handelsmarken
+              </h2>
+              <p className="text-xs text-slate-600 mt-1">
+                Alle Einzeldossiers mit detaillierter Gegenüberstellung von Material, Wassergehalt und Parametern.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { slug: 'apollo-iwear-oxygen', brand: 'Apollo iWear Oxygen', chain: 'Apollo Optik', match: 'CooperVision Biofinity', type: 'Monatslinse' },
+              { slug: 'apollo-iwear-harmony', brand: 'Apollo iWear Harmony', chain: 'Apollo Optik', match: 'CooperVision Proclear Sphere', type: 'Monatslinse' },
+              { slug: 'fielmann-actimed', brand: 'Fielmann ActiMed', chain: 'Fielmann', match: 'CooperVision Biofinity', type: 'Monatslinse' },
+              { slug: 'fielmann-atmo', brand: 'Fielmann Atmo', chain: 'Fielmann', match: 'Air Optix Plus HydraGlyde', type: 'Monatslinse' },
+              { slug: 'mister-spex-true-day', brand: 'Mister Spex True Day', chain: 'Mister Spex', match: 'Dailies AquaComfort Plus', type: 'Tageslinse' },
+              { slug: 'specsavers-easyvision-opteyes', brand: 'Specsavers Easyvision Opteyes', chain: 'Specsavers', match: 'Bausch + Lomb Ultra', type: 'Monatslinse' },
+            ].map((d) => (
+              <Link
+                key={d.slug}
+                to={`/${d.slug}`}
+                className="p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40 transition group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase mb-1">
+                    <span>{d.chain}</span>
+                    <span className="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded">{d.type}</span>
+                  </div>
+                  <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-emerald-700 transition">
+                    {d.brand}
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-2">
+                    Technischer Abgleich mit <strong className="text-slate-800">{d.match}</strong>
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-800">
+                  <span>Dossier öffnen</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* Medizinischer Pflicht-Hinweis */}
         <MedicalDisclaimer />
 

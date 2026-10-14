@@ -44,11 +44,15 @@ export default function Footer() {
           <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Funktionen &amp; Linsen</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/vergleichskatalog" className="hover:text-white transition">Kontaktlinsen finden</Link></li>
+            <li><Link to="/kontaktlinsen-preisvergleich" className="hover:text-white transition">Preis- &amp; Datenvergleich</Link></li>
+            <li><Link to="/tageslinsen-vergleich" className="hover:text-white transition">Tageslinsen im Überblick</Link></li>
+            <li><Link to="/monatslinsen-vergleich" className="hover:text-white transition">Monatslinsen im Überblick</Link></li>
+            <li><Link to="/torische-kontaktlinsen" className="hover:text-white transition">Torische Linsen (Astigmatismus)</Link></li>
+            <li><Link to="/multifokale-kontaktlinsen" className="hover:text-white transition">Multifokale Linsen (Gleitsicht)</Link></li>
+            <li><Link to="/vergleich" className="hover:text-white transition">Produktvergleich (2 Linsen)</Link></li>
             <li><Link to="/eigenmarken-decoder" className="hover:text-white transition">Eigenmarken-Decoder</Link></li>
             <li><Link to="/preisrechner" className="hover:text-white transition">Kostenrechner</Link></li>
             <li><Link to="/meine-linsen" className="hover:text-white transition">Meine gemerkten Linsen</Link></li>
-            <li><Link to="/tageslinsen-vergleich" className="hover:text-white transition">Tageslinsen im Überblick</Link></li>
-            <li><Link to="/monatslinsen-vergleich" className="hover:text-white transition">Monatslinsen im Überblick</Link></li>
           </ul>
         </div>
 
@@ -57,6 +61,7 @@ export default function Footer() {
           <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Optiker-Eigenmarken</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/apollo-iwear-oxygen" className="hover:text-white transition">Apollo iWear Oxygen</Link></li>
+            <li><Link to="/apollo-iwear-harmony" className="hover:text-white transition">Apollo iWear Harmony</Link></li>
             <li><Link to="/fielmann-actimed" className="hover:text-white transition">Fielmann ActiMed</Link></li>
             <li><Link to="/fielmann-atmo" className="hover:text-white transition">Fielmann Atmo</Link></li>
             <li><Link to="/mister-spex-true-day" className="hover:text-white transition">Mister Spex True Day</Link></li>

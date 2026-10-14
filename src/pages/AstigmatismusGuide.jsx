@@ -83,12 +83,20 @@ export default function AstigmatismusGuide() {
           <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 mt-8">
             <h3 className="font-black text-emerald-900 text-base mb-2">Jetzt torische Linsen vergleichen</h3>
             <p className="text-xs text-emerald-800 mb-3">Im Katalog alle verfügbaren torischen Linsen mit Preisen und Spezifikationen auf einen Blick.</p>
-            <Link
-              to="/vergleichskatalog?cat=toric"
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition"
-            >
-              Torische Linsen im Katalog ansehen →
-            </Link>
+            <div className="flex flex-wrap gap-2">
+              <Link
+                to="/vergleichskatalog?cat=toric"
+                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition"
+              >
+                Torische Linsen filtern →
+              </Link>
+              <Link
+                to="/torische-kontaktlinsen"
+                className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-bold text-xs px-4 py-2.5 rounded-xl transition"
+              >
+                Zur Kategorie Torische Linsen →
+              </Link>
+            </div>
           </div>
         </article>
 
