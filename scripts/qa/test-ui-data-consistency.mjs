@@ -180,6 +180,21 @@ it('Kombination Filter + Suche: Pflegemittel gesucht nach „Aosept“ liefert 2
   assert.strictEqual(label, '2 Pflegemittel gefunden für „Aosept“');
 });
 
+// 4. Startseiten-CTA & Neutrale Überschriften
+it('Home.jsx nutzt dynamischen, sachlichen Produkt-CTA ohne hartcodierte Zahl', () => {
+  const code = fs.readFileSync('src/pages/Home.jsx', 'utf8');
+  assert(code.includes('Alle {PRODUCTS.length} Produkte im Gesamtkatalog ansehen'), 'Dynamischer CTA-Text fehlt');
+  assert(!code.includes('Alle 57 Kontaktlinsen'), 'Fehlerhafte Behauptung 57 Kontaktlinsen noch vorhanden');
+});
+
+it('Home.jsx verwendet neutrale, belegbare Überschriften für die Produktauswahl', () => {
+  const code = fs.readFileSync('src/pages/Home.jsx', 'utf8');
+  assert(code.includes('Gängige Kontaktlinsen im Überblick'), 'Neutrale Überschrift fehlt');
+  assert(code.includes('PRODUKTÜBERSICHT'), 'Neutrale Eyebrow fehlt');
+  assert(!code.includes('BELIEBTE LINSEN'), 'Unbelegte Werbeaussage BELIEBTE LINSEN noch vorhanden');
+  assert(!code.includes('Häufig nachgekaufte Kontaktlinsen'), 'Unbelegte Aussage Häufig nachgekaufte Kontaktlinsen noch vorhanden');
+});
+
 console.log('====================================================');
 console.log(`TESTERGEBNIS: ${testsPassed} PASS | ${testsFailed} FAIL`);
 if (testsFailed > 0) {

@@ -435,18 +435,18 @@ export default function Home() {
         </section>
 
 
-        {/* KOMPAKTE PRODUKTAUSWAHL (Häufig nachgekaufte Linsen) */}
+        {/* PRODUKTAUSWAHL (Marken- und Produktübersicht) */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-5 mb-8">
             <div>
               <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
-                BELIEBTE LINSEN
+                PRODUKTÜBERSICHT
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight mt-1">
-                Häufig nachgekaufte Kontaktlinsen
+                Gängige Kontaktlinsen im Überblick
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Kompakte Auswahl gängiger Markenlinsen mit transparenten Datenblättern.
+                Auswahl gängiger Markenlinsen mit verifizierten technischen Datenblättern.
               </p>
             </div>
 
@@ -454,7 +454,7 @@ export default function Home() {
               to="/vergleichskatalog"
               className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 transition"
             >
-              <span>Alle Linsen im Katalog anzeigen</span>
+              <span>Alle {PRODUCTS.length} Produkte im Katalog anzeigen</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -613,7 +613,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition shadow-xs"
             >
               <Layers className="w-4 h-4 text-emerald-400" />
-              <span>Alle {PRODUCTS.length} Kontaktlinsen im Gesamtkatalog vergleichen</span>
+              <span>Alle {PRODUCTS.length} Produkte im Gesamtkatalog ansehen</span>
               <ArrowRight className="w-4 h-4 text-slate-400" />
             </Link>
           </div>
