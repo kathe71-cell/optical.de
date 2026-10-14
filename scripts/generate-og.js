@@ -124,8 +124,10 @@ fs.writeFileSync(path.join(outDir, 'og-optical-brand-v2.svg'), svgContent.trim()
 fs.writeFileSync(path.join(outDir, 'og-image.png'), pngBuffer);
 fs.writeFileSync(path.join(outDir, 'og-image.svg'), svgContent.trim());
 
-// Also copy to artifacts directory for direct user preview
+// Optionally copy to artifacts directory if it exists locally
 const artifactDir = '/Users/MRT/.gemini/antigravity/brain/0c17d309-bc7a-4f2d-8467-8720b483062d';
-fs.writeFileSync(path.join(artifactDir, 'og-optical-brand-v3.png'), pngBuffer);
+if (fs.existsSync(artifactDir)) {
+  fs.writeFileSync(path.join(artifactDir, 'og-optical-brand-v3.png'), pngBuffer);
+}
 
 console.log('✓ Successfully generated 1200x630 light-theme og-optical-brand-v3.png');
