@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Eye, 
@@ -13,7 +13,8 @@ import {
   ShieldCheck, 
   HelpCircle,
   Clock,
-  ArrowUpRight
+  ArrowUpRight,
+  Trash2
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -21,12 +22,13 @@ import MetaTags from '../components/MetaTags';
 import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, getProductById } from '../data/products';
 import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
+import { useRefillConfigs } from '../hooks/useRefillConfigs';
 import { trackSearchUsed, trackProductClicked, trackAffiliateClick } from '../utils/tracking';
 
-import { getAffiliateSearchUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+import { getAffiliateSearchUrl, getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 
 const AMAZON_TAG = 'optical.de-21';
 const AMAZON_SUBID = 'optical.de-21';
@@ -48,8 +50,18 @@ export default function Home() {
   const [isFocused, setIsFocused] = useState(false);
   const [homeCategory, setHomeCategory] = useState('all');
   const [homeSort, setHomeSort] = useState('popular');
+  const [isClient, setIsClient] = useState(false);
   const navigate = useNavigate();
-  const { savedIds, isSaved, toggleSave } = useSavedLenses();
+  const { savedIds, isSaved, toggleSave, removeSaved } = useSavedLenses();
+  const { getConfig } = useRefillConfigs();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const savedProducts = (isClient ? savedIds : [])
+    .map((id) => getProductById(id))
+    .filter(Boolean);
 
   // Gefilterte Vorschläge während des Tippens
   const searchSuggestions = searchQuery.trim().length > 0
@@ -203,33 +215,189 @@ export default function Home() {
         </section>
 
 
-        {/* SCHNELLZUGRIFF: MEINE GEMERKTEN LINSEN (falls vorhanden) */}
-        {savedIds.length > 0 && (
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-emerald-50/50 border border-emerald-200 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 text-emerald-800 font-bold text-xs uppercase tracking-wider mb-1">
-                  <Bookmark className="w-4 h-4 text-emerald-600 fill-emerald-600" />
-                  <span>Deine gemerkten Linsen ({savedIds.length})</span>
+        {/* ==================================================================
+            EASY-REORDER-EINSTIEG: DEINE GEMERKTEN KONTAKTLINSEN
+            - Erscheint leicht erreichbar für wiederkehrende Nutzer
+            - Zeigt vorhandene Merkliste-Einträge mit Namen, Hersteller, Bild/Visual,
+              großer Schaltfläche "Produkt ansehen" und direktem Nachkaufangebot
+            - Bei leerer Merkliste: Verständliche Erklärung & gut sichtbarer Einstieg
+            - Strikt MDR-konform: Sicherheitshinweis vor dem Kauf (Dioptrien, BC, DIA)
+            ================================================================== */}
+        <section aria-labelledby="saved-lenses-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {savedProducts.length > 0 ? (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+                    <Bookmark className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+                    <span>Einfacher Nachkauf · Lokal gemerkt</span>
+                  </div>
+                  <h2 id="saved-lenses-heading" className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+                    Deine gemerkten Kontaktlinsen
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
+                    Deine gewohnten Kontaktlinsen für den schnellen Wiederkauf. Prüfe deine Parameter und wechsle direkt zum geprüften Händlerangebot.
+                  </p>
                 </div>
-                <h2 className="text-xl font-extrabold text-slate-950">
-                  Bereit für die nächste Nachbestellung
+
+                <Link
+                  to="/meine-linsen"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 hover:text-emerald-950 underline self-start sm:self-end py-1"
+                >
+                  <span>Alle {savedProducts.length} {savedProducts.length === 1 ? 'Linse' : 'Linsen'} verwalten</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              {/* Zentraler Medizinprodukt-Sicherheitshinweis vor dem Nachkauf */}
+              <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-4 text-xs text-amber-950 flex items-start gap-3 shadow-2xs">
+                <ShieldCheck className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <strong className="block font-extrabold text-amber-950 text-xs sm:text-sm">
+                    Medizinprodukt-Prüfung vor dem Nachkauf
+                  </strong>
+                  <p className="text-amber-900/90 leading-relaxed text-xs">
+                    Kontaktlinsen sind individuelle Medizinprodukte. Bitte gleiche vor dem Wechsel zum Händler sämtliche für deine Kontaktlinsen relevanten Parameter (wie Dioptrien/Stärke, Basiskurve, Durchmesser sowie bei Bedarf Zylinder, Achse oder Addition) sorgfältig mit deiner aktuellen augenärztlichen Verordnung oder der vorhandenen Originalpackung ab. Nicht jedes Produkt benötigt alle Parameter. optical.de ist ein unabhängiges Portal und trifft keine automatische Varianten- oder Stärkenauswahl.
+                  </p>
+                </div>
+              </div>
+
+              {/* Grid der gemerkten Produkte */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {savedProducts.map((p) => {
+                  const config = getConfig(p.id);
+                  const hasPlan = Boolean(config && config.refillDate);
+
+                  return (
+                    <div
+                      key={p.id}
+                      className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs flex flex-col justify-between hover:border-slate-300 transition"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                            {p.manufacturer}
+                          </span>
+                          <button
+                            onClick={() => removeSaved(p.id)}
+                            className="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition"
+                            title={`${p.product_name} aus gemerkten Linsen entfernen`}
+                            aria-label={`${p.product_name} aus gemerkten Linsen entfernen`}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        {/* Produktbild / Eindeutiges Linsen-Visual */}
+                        <div className="flex items-center gap-4 mb-4 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                          {p.image_url ? (
+                            <img
+                              src={p.image_url}
+                              alt={p.product_name}
+                              className="w-16 h-16 object-contain rounded-lg bg-white border border-slate-200 p-1 flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center text-emerald-600 flex-shrink-0 shadow-2xs">
+                              <Eye className="w-6 h-6 stroke-[1.75]" />
+                              <span className="text-[9px] font-bold text-slate-600 uppercase mt-0.5 tracking-tighter">
+                                {p.lens_type.includes('Tages') ? '1-Day' : p.lens_type.includes('Monat') ? '30-Day' : 'Linse'}
+                              </span>
+                            </div>
+                          )}
+                          <div className="min-w-0 flex-1">
+                            <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                              <Link
+                                to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
+                                className="hover:text-emerald-700 transition"
+                              >
+                                {p.product_name}
+                              </Link>
+                            </h3>
+                            <div className="text-xs text-slate-500 mt-0.5">
+                              {p.lens_type} · {p.pack_size}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Nachkauf-Plan Hinweis (falls aktiv) */}
+                        {hasPlan && (
+                          <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-2.5 mb-3 text-[11px] text-emerald-950 flex items-center justify-between">
+                            <span className="flex items-center gap-1 font-bold">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                              Nachkauf ab: {new Date(config.refillDate).toLocaleDateString('de-DE')}
+                            </span>
+                            <Link to="/meine-linsen" className="underline font-bold text-emerald-800 hover:text-emerald-950">
+                              Plan
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Aktionsschaltflächen (card-action-grid) */}
+                      <div className="pt-2 border-t border-slate-100">
+                        <div className="grid grid-cols-2 gap-2 card-action-grid">
+                          <Link
+                            to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
+                            className="w-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-extrabold text-xs py-3 px-2 rounded-xl text-center transition flex items-center justify-center"
+                          >
+                            Produkt ansehen
+                          </Link>
+
+                          <a
+                            href={getProductAffiliateUrl(p)}
+                            target="_blank"
+                            rel={AFFILIATE_LINK_REL}
+                            onClick={() => trackAffiliateClick(p.product_name, 'amazon', 'home_easy_reorder')}
+                            className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs py-3 px-2 rounded-xl text-center transition flex items-center justify-center gap-1 shadow-2xs"
+                          >
+                            <span>{getAffiliateCtaLabel(p)}</span>
+                            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                          </a>
+                        </div>
+                        <div className="text-[10px] text-slate-500 text-center mt-2">
+                          * Werbelink / Partnerlink (Amazon.de)
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            /* Leere Merkliste */
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-3">
+                  <Bookmark className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Einfacher Nachkauf · Merkliste</span>
+                </div>
+                <h2 id="saved-lenses-heading" className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                  Deine gemerkten Kontaktlinsen
                 </h2>
-                <p className="text-xs text-slate-600 mt-1">
-                  Du hast {savedIds.length} {savedIds.length === 1 ? 'Kontaktlinse' : 'Kontaktlinsen'} auf deinem Merkzettel hinterlegt.
+                <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                  Hier findest du deine gewohnten Kontaktlinsen für den schnellen Wiederkauf wieder. Klicke im Katalog oder auf einer Produktseite auf <strong>„Linse merken“</strong>, um deine Kontaktlinse hier griffbereit abzulegen und beim nächsten Mal direkt zum passenden Angebot zu gelangen.
                 </p>
               </div>
 
-              <Link
-                to="/meine-linsen"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-xs transition flex items-center gap-1.5 whitespace-nowrap"
-              >
-                <span>Merkzettel öffnen</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <div className="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <Link
+                  to="/vergleichskatalog"
+                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-xs transition"
+                >
+                  <Layers className="w-4 h-4 text-emerald-200" />
+                  <span>Kontaktlinsen im Katalog finden</span>
+                </Link>
+                <Link
+                  to="/eigenmarken-decoder"
+                  className="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition"
+                >
+                  <Sparkles className="w-4 h-4 text-emerald-600" />
+                  <span>Optiker-Eigenmarke prüfen</span>
+                </Link>
+              </div>
             </div>
-          </section>
-        )}
+          )}
+        </section>
 
 
         {/* SO FUNKTIONIERT OPTICAL.DE (Transparent & MDR-konform) */}

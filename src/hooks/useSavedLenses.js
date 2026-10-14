@@ -4,25 +4,51 @@ import { trackBookmarkToggle } from '../utils/tracking';
 const STORAGE_KEY = 'optical_saved_lenses';
 const STORAGE_EVENT = 'optical_saved_lenses_changed';
 
-export function useSavedLenses() {
-  const [savedIds, setSavedIds] = useState(() => {
-    if (typeof window === 'undefined' || typeof localStorage === 'undefined') return [];
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
+// Modulweiter In-Memory-Fallback bei blockiertem localStorage (z.B. Safari Private Mode)
+let memorySavedFallback = [];
+
+function readStorage() {
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    return memorySavedFallback;
+  }
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        memorySavedFallback = parsed;
+        return parsed;
+      }
     }
-  });
+    return memorySavedFallback;
+  } catch {
+    return memorySavedFallback;
+  }
+}
+
+function writeStorage(next) {
+  memorySavedFallback = next;
+  if (typeof window === 'undefined') return;
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    }
+  } catch {
+    // Stiller In-Memory-Fallback bei blockiertem/vollem localStorage
+  }
+  try {
+    window.dispatchEvent(new Event(STORAGE_EVENT));
+  } catch {
+    // Ignoriere Event-Fehler in isolierten Umgebungen
+  }
+}
+
+export function useSavedLenses() {
+  const [savedIds, setSavedIds] = useState(() => readStorage());
 
   useEffect(() => {
     const handleStorageChange = () => {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        setSavedIds(stored ? JSON.parse(stored) : []);
-      } catch {
-        setSavedIds([]);
-      }
+      setSavedIds(readStorage());
     };
 
     window.addEventListener(STORAGE_EVENT, handleStorageChange);
@@ -46,12 +72,7 @@ export function useSavedLenses() {
       } else {
         next = prev.filter((id) => id !== productId);
       }
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-        window.dispatchEvent(new Event(STORAGE_EVENT));
-      } catch (e) {
-        console.error('Could not save to localStorage', e);
-      }
+      writeStorage(next);
       trackBookmarkToggle(productId, willBeSaved);
       return next;
     });
@@ -60,24 +81,14 @@ export function useSavedLenses() {
   const removeSaved = (productId) => {
     setSavedIds((prev) => {
       const next = prev.filter((id) => id !== productId);
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-        window.dispatchEvent(new Event(STORAGE_EVENT));
-      } catch (e) {
-        console.error('Could not remove from localStorage', e);
-      }
+      writeStorage(next);
       trackBookmarkToggle(productId, false);
       return next;
     });
   };
 
   const clearAllSaved = () => {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-      window.dispatchEvent(new Event(STORAGE_EVENT));
-    } catch (e) {
-      console.error('Could not clear localStorage', e);
-    }
+    writeStorage([]);
     setSavedIds([]);
   };
 

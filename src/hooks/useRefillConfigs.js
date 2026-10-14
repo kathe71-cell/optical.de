@@ -3,29 +3,54 @@ import { useState, useEffect } from 'react';
 const REFILL_STORAGE_KEY = 'optical_refill_configs';
 const REFILL_STORAGE_EVENT = 'optical_refill_changed';
 
+let memoryRefillFallback = {};
+
+function readRefillStorage() {
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    return memoryRefillFallback;
+  }
+  try {
+    const stored = localStorage.getItem(REFILL_STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (parsed && typeof parsed === 'object') {
+        memoryRefillFallback = parsed;
+        return parsed;
+      }
+    }
+    return memoryRefillFallback;
+  } catch {
+    return memoryRefillFallback;
+  }
+}
+
+function writeRefillStorage(next) {
+  memoryRefillFallback = next;
+  if (typeof window === 'undefined') return;
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(REFILL_STORAGE_KEY, JSON.stringify(next));
+    }
+  } catch {
+    // Stiller In-Memory-Fallback
+  }
+  try {
+    window.dispatchEvent(new Event(REFILL_STORAGE_EVENT));
+  } catch {
+    // Ignoriere Event-Fehler
+  }
+}
+
 /**
  * Hook zur Verwaltung der Nachkauf-Konfigurationen je Produkt
  * Speichert Nutzereinstellungen 100% lokal im Browser.
  */
 export function useRefillConfigs() {
-  const [configs, setConfigs] = useState(() => {
-    if (typeof window === 'undefined' || typeof localStorage === 'undefined') return {};
-    try {
-      const stored = localStorage.getItem(REFILL_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : {};
-    } catch {
-      return {};
-    }
-  });
+  const [configs, setConfigs] = useState(() => readRefillStorage());
 
   useEffect(() => {
     const handleStorageChange = () => {
-      try {
-        const stored = localStorage.getItem(REFILL_STORAGE_KEY);
-        setConfigs(stored ? JSON.parse(stored) : {});
-      } catch {
-        setConfigs({});
-      }
+      setConfigs(readRefillStorage());
     };
 
     window.addEventListener(REFILL_STORAGE_EVENT, handleStorageChange);
@@ -41,12 +66,7 @@ export function useRefillConfigs() {
   const saveConfig = (productId, newConfig) => {
     setConfigs((prev) => {
       const next = { ...prev, [productId]: newConfig };
-      try {
-        localStorage.setItem(REFILL_STORAGE_KEY, JSON.stringify(next));
-        window.dispatchEvent(new Event(REFILL_STORAGE_EVENT));
-      } catch (e) {
-        console.error('Could not save refill config', e);
-      }
+      writeRefillStorage(next);
       return next;
     });
   };
@@ -55,12 +75,7 @@ export function useRefillConfigs() {
     setConfigs((prev) => {
       const next = { ...prev };
       delete next[productId];
-      try {
-        localStorage.setItem(REFILL_STORAGE_KEY, JSON.stringify(next));
-        window.dispatchEvent(new Event(REFILL_STORAGE_EVENT));
-      } catch (e) {
-        console.error('Could not remove refill config', e);
-      }
+      writeRefillStorage(next);
       return next;
     });
   };

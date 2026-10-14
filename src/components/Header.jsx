@@ -40,15 +40,17 @@ export default function Header() {
             setMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }} 
-          className="flex items-center space-x-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl"
+          className="flex items-center space-x-2.5 sm:space-x-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl flex-shrink-0"
           aria-label="optical.de Startseite"
         >
-          <div className="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-sm group-hover:bg-slate-800 transition">
+          <div className="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow-sm group-hover:bg-slate-800 transition flex-shrink-0">
             <Eye className="w-6 h-6 text-emerald-400" />
           </div>
-          <div>
-            <span className="font-black text-2xl tracking-tight text-slate-950">optical<span className="text-emerald-600">.de</span></span>
-            <span className="hidden sm:inline-block ml-2 text-xs font-semibold text-slate-500 border-l border-slate-200 pl-2">
+          <div className="flex flex-col items-start justify-center leading-none">
+            <span className="font-black text-xl sm:text-2xl tracking-tight text-slate-950 leading-tight">
+              optical<span className="text-emerald-600">.de</span>
+            </span>
+            <span className="hidden sm:inline-block text-[11px] font-semibold text-slate-500 tracking-normal mt-0.5 leading-tight brand-claim">
               Deine Kontaktlinsen
             </span>
           </div>

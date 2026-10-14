@@ -12,7 +12,8 @@ import {
   Bell, 
   Download, 
   Sparkles,
-  CheckCircle2
+  CheckCircle2,
+  Eye
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -132,6 +133,19 @@ export default function SavedLensesPage() {
         ) : (
           /* Liste der gemerkten Produkte */
           <div className="space-y-6">
+            {/* Zentraler Medizinprodukt-Sicherheitshinweis vor dem Nachkauf */}
+            <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-4 text-xs text-amber-950 flex items-start gap-3 shadow-2xs">
+              <ShieldCheck className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <strong className="block font-extrabold text-amber-950 text-xs sm:text-sm">
+                  Medizinprodukt-Prüfung vor dem Nachkauf
+                </strong>
+                <p className="text-amber-900/90 leading-relaxed text-xs">
+                  Kontaktlinsen sind individuelle Medizinprodukte. Bitte gleiche vor dem Wechsel zum Händler sämtliche für deine Kontaktlinsen relevanten Parameter (wie Dioptrien/Stärke, Basiskurve, Durchmesser sowie bei Bedarf Zylinder, Achse oder Addition) sorgfältig mit deiner aktuellen augenärztlichen Verordnung oder der vorhandenen Originalpackung ab. Nicht jedes Produkt benötigt alle Parameter. optical.de ist ein unabhängiges Portal und trifft keine automatische Varianten- oder Stärkenauswahl.
+                </p>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {savedProducts.map((p) => {
                 const config = getConfig(p.id);
@@ -158,20 +172,32 @@ export default function SavedLensesPage() {
                         </button>
                       </div>
 
-                      <h2 className="text-lg font-black text-slate-900 leading-snug">
-                        <Link to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`} className="hover:text-emerald-700 transition">
-                          {p.product_name}
-                        </Link>
-                      </h2>
-
-                      <div className="mt-2 text-xs text-slate-500 flex items-center justify-between">
-                        <span>Typ / Rhythmus:</span>
-                        <span className="font-semibold text-slate-800">{p.lens_type}</span>
-                      </div>
-
-                      <div className="mt-1 text-xs text-slate-500 flex items-center justify-between">
-                        <span>Standardpackung:</span>
-                        <strong className="text-slate-800 font-semibold">{p.pack_size}</strong>
+                      {/* Produktbild / Linsen-Visual */}
+                      <div className="flex items-center gap-3.5 my-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        {p.image_url ? (
+                          <img
+                            src={p.image_url}
+                            alt={p.product_name}
+                            className="w-14 h-14 object-contain rounded-lg bg-white border border-slate-200 p-1 flex-shrink-0"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex flex-col items-center justify-center text-emerald-600 flex-shrink-0 shadow-2xs">
+                            <Eye className="w-5 h-5 stroke-[1.75]" />
+                            <span className="text-[8px] font-bold text-slate-600 uppercase mt-0.5 tracking-tighter">
+                              {p.lens_type.includes('Tages') ? '1-Day' : p.lens_type.includes('Monat') ? '30-Day' : 'Linse'}
+                            </span>
+                          </div>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <h2 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                            <Link to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`} className="hover:text-emerald-700 transition">
+                              {p.product_name}
+                            </Link>
+                          </h2>
+                          <div className="text-[11px] text-slate-500 mt-0.5">
+                            {p.lens_type} · {p.pack_size}
+                          </div>
+                        </div>
                       </div>
 
                       {/* NACHKAUF-ASSISTENT STATUS CARD */}
@@ -235,22 +261,12 @@ export default function SavedLensesPage() {
 
                     {/* Preisteil & Nachkauf-Button */}
                     <div className="mt-5 pt-4 border-t border-slate-100">
-                      <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-3 space-y-1 text-xs">
-                        <div className="flex items-baseline justify-between">
-                          <span className="text-[11px] text-slate-600 font-medium">Orientierungspreis:</span>
-                          <span className="text-base font-extrabold text-slate-900">ca. {p.price.toFixed(2)} € *</span>
-                        </div>
-                        <div className="text-[10px] text-slate-500">
-                          Tagesaktueller Preis beim Partner einsehbar
-                        </div>
-                      </div>
-
                       <div className="grid grid-cols-2 gap-2 card-action-grid">
                         <Link
                           to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
-                          className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"
+                          className="w-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-extrabold text-[11px] py-2.5 px-2 rounded-xl text-center transition flex items-center justify-center"
                         >
-                          Datenblatt
+                          Produkt ansehen
                         </Link>
 
                         <a
@@ -263,6 +279,9 @@ export default function SavedLensesPage() {
                           <span>{getAffiliateCtaLabel(p)}</span>
                           <ExternalLink className="w-3 h-3 flex-shrink-0" />
                         </a>
+                      </div>
+                      <div className="text-[10px] text-slate-500 text-center mt-2">
+                        * Werbelink / Partnerlink (Amazon.de)
                       </div>
                     </div>
                   </div>
