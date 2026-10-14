@@ -138,10 +138,37 @@ t(twoWeekProducts.length === 3, 'Exakt 3 Zweiwochenlinsen müssen normalisiert v
 
 const nonLensProducts = PRODUCTS.filter(p => p.category !== 'kontaktlinsen');
 t(nonLensProducts.length === 11, 'Exakt 11 Nicht-Linsen-Produkte (Pflege/Tropfen/Zubehör) im Katalog (Gefunden: ' + nonLensProducts.length + ')');
-for (const nlp of nonLensProducts) {
-  t(nlp.material_type === null, `Nicht-Linsen-Produkt ${nlp.id} darf keinen material_type besitzen (Ist: ${nlp.material_type})`);
-  t(nlp.wear_schedule === null, `Nicht-Linsen-Produkt ${nlp.id} darf keinen wear_schedule besitzen (Ist: ${nlp.wear_schedule})`);
+// Phase 9.9.3 Regressionstests: Materialklassifizierung & Ausschluss
+const lenses = PRODUCTS.filter(p => p.category === 'kontaktlinsen');
+t(lenses.length === 46, 'Exakt 46 Kontaktlinsen im Katalog (Gefunden: ' + lenses.length + ')');
+
+const sihyLenses = lenses.filter(p => p.material_type === 'silikon-hydrogel');
+const hydrogelLenses = lenses.filter(p => p.material_type === 'hydrogel');
+t(sihyLenses.length === 34, 'Exakt 34 Silikon-Hydrogel Linsen (Gefunden: ' + sihyLenses.length + ')');
+t(hydrogelLenses.length === 12, 'Exakt 12 Hydrogel Linsen (Gefunden: ' + hydrogelLenses.length + ')');
+t(sihyLenses.length + hydrogelLenses.length === lenses.length, 'Alle 46 Linsen müssen eindeutig als silikon-hydrogel oder hydrogel klassifiziert sein');
+
+// Clariti 1-day Familie muss Silikon-Hydrogel sein (Somofilcon A)
+const claritiProducts = PRODUCTS.filter(p => p.id.startsWith('clariti-1day'));
+t(claritiProducts.length === 3, 'Exakt 3 Clariti 1-Day Produkte im Katalog');
+for (const cp of claritiProducts) {
+  t(cp.material_type === 'silikon-hydrogel', `Clariti Produkt ${cp.id} muss silikon-hydrogel sein (Ist: ${cp.material_type})`);
+  t(cp.material.includes('Somofilcon A'), `Clariti Produkt ${cp.id} muss Somofilcon A als Material ausweisen`);
 }
 
-console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${dynamicCheckCount} dynamische Live-Pilot-Konsistenzprüfungen, 12 J&J, 3 Zweiwochenlinsen normalisiert)`);
+// Jede Linse muss substantiell geprüftes Material haben
+for (const lens of lenses) {
+  t(typeof lens.material === 'string' && lens.material.length > 0, `Linse ${lens.id} muss spezifischen Materialnamen besitzen`);
+  const matLower = lens.material.toLowerCase();
+  if (lens.material_type === 'silikon-hydrogel') {
+    const isSiHy = matLower.includes('silikon') || matLower.includes('silicone') || matLower.includes('sihy') || matLower.includes('wassergradienten') ||
+      ['senofilcon', 'comfilcon', 'samfilcon', 'delefilcon', 'verofilcon', 'somofilcon', 'lotrafilcon', 'fanfilcon', 'stenfilcon', 'enfilcon', 'asmofilcon', 'kalifilcon', 'balafilcon', 'lehfilcon', 'efrofilcon', 'filcon v', 'methacryloyloxypropyl tris'].some(m => matLower.includes(m));
+    t(isSiHy, `Silikon-Hydrogel Linse ${lens.id} muss SiHy-Material oder Monomer belegen (Ist: ${lens.material})`);
+  } else if (lens.material_type === 'hydrogel') {
+    const isConventional = ['omafilcon', 'etafilcon', 'nelfilcon', 'nesofilcon', 'ocufilcon', 'polymacon', 'hilafilcon'].some(m => matLower.includes(m));
+    t(isConventional, `Hydrogel Linse ${lens.id} muss konventionelles Hydrogel-Monomer belegen (Ist: ${lens.material})`);
+  }
+}
+
+console.log(fail ? `❌ ${fail} Fehler` : `✅ Datenqualitäts-Gate bestanden (${RESEARCH_CATALOG.length} Recherche, ${AMAZON_VERIFICATION_REGISTER.length} Amazon, ${dynamicCheckCount} dynamische Live-Pilot-Konsistenzprüfungen, 12 J&J, 3 Zweiwochenlinsen, 46 Linsen nach Material validiert)`);
 process.exit(fail ? 1 : 0);

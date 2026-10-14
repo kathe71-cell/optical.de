@@ -94,7 +94,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!ads\\.txt|robots\\.txt|sitemap\\.xml|feed\\.xml|llms\\.txt|og-image\\.png|favicon\\.svg|assets/.*).*)",
+      "source": "/((?!ads\\.txt|robots\\.txt|sitemap\\.xml|feed\\.xml|llms\\.txt|og-optical-brand-v2\\.(png|svg)|og-image\\.(png|svg)|favicon\\.svg|assets/.*).*)",
       "destination": "/index.html"
     }
   ]

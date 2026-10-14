@@ -97,7 +97,7 @@ export default function Home() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
         title="optical.de – Deine Kontaktlinsen. Einfach wiederfinden."
-        description="Finde deine gewohnten Kontaktlinsen, prüfe verfügbare Angebote und merke sie dir für deinen nächsten Kauf. Unabhängig, werbefrei & ohne erfundene Siegel."
+        description="Finde deine gewohnten Kontaktlinsen, vergleiche Produktinformationen und plane deinen nächsten Nachkauf."
         canonical="https://www.optical.de/"
       />
       <Header />
@@ -108,10 +108,10 @@ export default function Home() {
         <section className="bg-gradient-to-b from-white via-slate-50 to-slate-100/80 border-b border-slate-200 py-12 sm:py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             
-            {/* Trust Badge */}
+            {/* Trust Badge / Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-bold uppercase tracking-wider mb-5">
               <Eye className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Unabhängige Nachkauf-Plattform</span>
+              <span>KONTAKTLINSEN FINDEN &amp; NACHKAUF PLANEN</span>
             </div>
 
             {/* H1 & Subtitle (Exakt nach Vorgabe) */}
@@ -121,7 +121,7 @@ export default function Home() {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Finde deine gewohnten Kontaktlinsen, prüfe verfügbare Angebote und merke sie dir für deinen nächsten Kauf.
+              Finde deine gewohnten Kontaktlinsen, vergleiche Produktinformationen und plane deinen nächsten Nachkauf.
             </p>
 
             {/* ZENTRALE SUCHLEISTE MIT AUTOCOMPLETE */}

@@ -11,7 +11,7 @@ export const STATIC_ROUTES = [
   {
     path: '/',
     title: 'optical.de – Deine Kontaktlinsen. Einfach wiederfinden.',
-    description: 'Finde deine gewohnten Kontaktlinsen, prüfe verfügbare Angebote und merke sie dir für deinen nächsten Kauf. Unabhängig, werbefrei & ohne erfundene Siegel.',
+    description: 'Finde deine gewohnten Kontaktlinsen, vergleiche Produktinformationen und plane deinen nächsten Nachkauf.',
     priority: '1.0',
     indexable: true,
   },

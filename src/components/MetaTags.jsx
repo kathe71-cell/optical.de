@@ -6,7 +6,7 @@ import { useEffect } from 'react';
  */
 export default function MetaTags({
   title = 'optical.de – Deine Kontaktlinsen. Einfach wiederfinden.',
-  description = 'Finde deine gewohnten Kontaktlinsen, prüfe verfügbare Angebote und merke sie dir für deinen nächsten Kauf. Unabhängig & verifiziert.',
+  description = 'Finde deine gewohnten Kontaktlinsen, vergleiche Produktinformationen und plane deinen nächsten Nachkauf.',
   canonical = 'https://www.optical.de/',
   ogType = 'website',
   robots = 'index, follow'

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js && npm run test:qa && npm run test:refill && npm run test:browser && npm run test:affiliate",
+    "generate:og": "node scripts/generate-og.js",
+    "build": "node scripts/generate-og.js && vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js && npm run test:qa && npm run test:refill && npm run test:browser && npm run test:affiliate",
     "test": "node scripts/qa/run-qa.js && node scripts/qa/test-refill-assistant.js && node scripts/qa/test-browser-simulation.js && node scripts/qa/test-amazon-affiliate.js",
     "test:qa": "node scripts/qa/run-qa.js",
     "test:refill": "node scripts/qa/test-refill-assistant.js",
@@ -26,6 +27,7 @@
     "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.3.4",
