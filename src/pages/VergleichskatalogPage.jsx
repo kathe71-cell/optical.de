@@ -351,11 +351,35 @@ export default function VergleichskatalogPage() {
 
           </div>
 
-          {/* Treffer-Zähler */}
+          {/* Treffer-Zähler mit Kategorie-spezifischer Bezeichnung & barrierefreier Live-Region */}
           <div className="text-xs text-slate-500 pt-2 flex items-center justify-between">
-            <span>
-              {filteredProducts.length} {filteredProducts.length === 1 ? 'Kontaktlinse' : 'Kontaktlinsen'} gefunden
-              {searchQuery.trim() ? ` für „${searchQuery.trim()}“` : ''}
+            <span role="status" aria-live="polite">
+              {(() => {
+                const count = filteredProducts.length;
+                let noun = '';
+                if (activeCategory === 'monat') {
+                  noun = count === 1 ? 'Monatslinse' : 'Monatslinsen';
+                } else if (activeCategory === 'zweiwoche') {
+                  noun = count === 1 ? '2-Wochen-Linse' : '2-Wochen-Linsen';
+                } else if (activeCategory === 'tag') {
+                  noun = count === 1 ? 'Tageslinse' : 'Tageslinsen';
+                } else if (activeCategory === 'pflege') {
+                  noun = count === 1 ? 'Pflegemittel' : 'Pflegemittel';
+                } else if (activeCategory === 'tropfen') {
+                  noun = count === 1 ? 'Augentropfen-Produkt' : 'Augentropfen-Produkte';
+                } else if (activeCategory === 'zubehoer') {
+                  noun = count === 1 ? 'Zubehör-Artikel' : 'Zubehör-Artikel';
+                } else {
+                  // activeCategory === 'all'
+                  // Falls über Material/Design gefiltert wird oder standardmäßig alle Produkte
+                  noun = count === 1 ? 'Produkt' : 'Produkte';
+                }
+
+                if (count === 0) {
+                  return `Keine ${noun} gefunden${searchQuery.trim() ? ` für „${searchQuery.trim()}“` : ''}`;
+                }
+                return `${count} ${noun} gefunden${searchQuery.trim() ? ` für „${searchQuery.trim()}“` : ''}`;
+              })()}
             </span>
             <span className="text-[11px] text-slate-400">Verifizierte Herstellerdaten ohne Siegel</span>
           </div>
@@ -548,7 +572,15 @@ export default function VergleichskatalogPage() {
               <Search className="w-6 h-6 text-slate-500" />
             </div>
             <h3 className="text-base sm:text-lg font-black text-slate-900 mb-2">
-              Keine Kontaktlinsen für {searchQuery.trim() ? `„${searchQuery.trim()}“` : 'diese Filterung'} gefunden
+              Keine {(() => {
+                if (activeCategory === 'monat') return 'Monatslinsen';
+                if (activeCategory === 'zweiwoche') return '2-Wochen-Linsen';
+                if (activeCategory === 'tag') return 'Tageslinsen';
+                if (activeCategory === 'pflege') return 'Pflegemittel';
+                if (activeCategory === 'tropfen') return 'Augentropfen';
+                if (activeCategory === 'zubehoer') return 'Zubehör-Artikel';
+                return 'Produkte';
+              })()} für {searchQuery.trim() ? `„${searchQuery.trim()}“` : 'diese Filterung'} gefunden
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
               Überprüfe bitte die Schreibweise oder setze die Filtereinstellungen zurück, um alle Produkte im Katalog anzuzeigen.

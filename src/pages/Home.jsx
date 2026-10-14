@@ -364,36 +364,20 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            /* Leere Merkliste */
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
-              <div className="max-w-2xl">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-3">
-                  <Bookmark className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Einfacher Nachkauf · Merkliste</span>
+            /* Leere Merkliste – kompakter, barrierearmer Hinweis */
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0 text-slate-700 mt-0.5">
+                  <Bookmark className="w-5 h-5 text-emerald-600" />
                 </div>
-                <h2 id="saved-lenses-heading" className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
-                  Deine gemerkten Kontaktlinsen
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
-                  Hier findest du deine gewohnten Kontaktlinsen für den schnellen Wiederkauf wieder. Klicke im Katalog oder auf einer Produktseite auf <strong>„Linse merken“</strong>, um deine Kontaktlinse hier griffbereit abzulegen und beim nächsten Mal direkt zum passenden Angebot zu gelangen.
-                </p>
-              </div>
-
-              <div className="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                <Link
-                  to="/vergleichskatalog"
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-xs transition"
-                >
-                  <Layers className="w-4 h-4 text-emerald-200" />
-                  <span>Kontaktlinsen im Katalog finden</span>
-                </Link>
-                <Link
-                  to="/eigenmarken-decoder"
-                  className="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm px-5 py-3 rounded-xl transition"
-                >
-                  <Sparkles className="w-4 h-4 text-emerald-600" />
-                  <span>Optiker-Eigenmarke prüfen</span>
-                </Link>
+                <div>
+                  <h2 id="saved-lenses-heading" className="text-base sm:text-lg font-black text-slate-950 tracking-tight">
+                    Deine gemerkten Kontaktlinsen
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                    Hier findest du deine gewohnten Kontaktlinsen für den schnellen Wiederkauf wieder. Klicke im <Link to="/vergleichskatalog" className="font-bold text-emerald-800 hover:text-emerald-950 underline">Katalog</Link> oder beim <Link to="/eigenmarken-decoder" className="font-bold text-emerald-800 hover:text-emerald-950 underline">Eigenmarken-Check</Link> auf <strong>„Linse merken“</strong>, um deine Kontaktlinse hier griffbereit abzulegen.
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -511,7 +495,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map((p) => {
+            {featuredProducts.slice(0, 6).map((p) => {
               const saved = isSaved(p.id);
 
               return (
@@ -622,66 +606,81 @@ export default function Home() {
               );
             })}
           </div>
-        </section>
 
-
-        {/* DECODER TEASER SECTION */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-            <div className="max-w-2xl space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Optiker-Eigenmarken</span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
-                Trägst du eine Eigenmarke von Apollo, Fielmann oder Mister Spex?
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Viele Handelsmarken großer Optikerketten stammen von bekannten Linsenherstellern (wie CooperVision oder Alcon). Unser Decoder gleicht Material, Wassergehalt und Geometrie objektiv ab.
-              </p>
-              <div className="flex flex-wrap gap-2 pt-2 text-xs">
-                <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Apollo iWear Oxygen</span>
-                <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Fielmann ActiMed</span>
-                <span className="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Mister Spex True Day</span>
-              </div>
-            </div>
-
-            <div className="flex-shrink-0 w-full lg:w-auto">
-              <Link
-                to="/eigenmarken-decoder"
-                className="w-full lg:w-auto bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm px-7 py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg transition"
-              >
-                <span>Eigenmarke jetzt prüfen</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+          <div className="mt-8 text-center">
+            <Link
+              to="/vergleichskatalog"
+              className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition shadow-xs"
+            >
+              <Layers className="w-4 h-4 text-emerald-400" />
+              <span>Alle {PRODUCTS.length} Kontaktlinsen im Gesamtkatalog vergleichen</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </Link>
           </div>
         </section>
 
 
-        {/* KOSTENRECHNER TEASER SECTION */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 text-xs font-bold uppercase tracking-wider">
-                <Calculator className="w-3.5 h-3.5 text-sky-600" />
-                <span>Transparenz-Rechner</span>
+        {/* SEKUNDÄRE WERKZEUGE: DECODER & PREISRECHNER */}
+        <section aria-labelledby="tools-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-b border-slate-200 pb-4 mb-6">
+            <h2 id="tools-heading" className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+              Hilfreiche Werkzeuge für deinen Kontaktlinsenkauf
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Objektive Rechner und Zuordnungen für maximale Transparenz vor der Bestellung.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Tool 1: Eigenmarken-Decoder */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between hover:border-slate-300 transition">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-3">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Optiker-Eigenmarken</span>
+                </div>
+                <h3 className="text-lg font-black text-slate-950 leading-snug mb-2">
+                  Eigenmarke von Apollo, Fielmann oder Mister Spex?
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  Viele Handelsmarken großer Optikerketten stammen von bekannten Markenherstellern (wie CooperVision oder Alcon). Unser Decoder gleicht Material, Wassergehalt und Geometrie objektiv ab.
+                </p>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-950">
-                Was kosten deine Kontaktlinsen wirklich pro Tag?
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Berechne deine tatsächlichen Ausgaben pro Monat und Jahr für Tages- oder Monatslinsen – inklusive Pflegemittel und angepasst an deine Tragetage pro Woche.
-              </p>
+              <div>
+                <Link
+                  to="/eigenmarken-decoder"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <span>Eigenmarke jetzt prüfen</span>
+                  <ArrowRight className="w-4 h-4 text-emerald-200" />
+                </Link>
+              </div>
             </div>
 
-            <Link
-              to="/preisrechner"
-              className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-xs transition flex items-center gap-2 whitespace-nowrap"
-            >
-              <span>Zum Kostenrechner</span>
-              <ArrowRight className="w-4 h-4 text-emerald-400" />
-            </Link>
+            {/* Tool 2: Kostenrechner */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between hover:border-slate-300 transition">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 text-xs font-bold uppercase tracking-wider mb-3">
+                  <Calculator className="w-3.5 h-3.5 text-sky-600" />
+                  <span>Transparenz-Rechner</span>
+                </div>
+                <h3 className="text-lg font-black text-slate-950 leading-snug mb-2">
+                  Was kosten deine Kontaktlinsen wirklich pro Tag?
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                  Berechne deine tatsächlichen Ausgaben pro Monat und Jahr für Tages- oder Monatslinsen – inklusive Pflegemittel und angepasst an deine Tragetage pro Woche.
+                </p>
+              </div>
+              <div>
+                <Link
+                  to="/preisrechner"
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <span>Zum Kostenrechner</span>
+                  <ArrowRight className="w-4 h-4 text-emerald-400" />
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
