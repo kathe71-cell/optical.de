@@ -46,7 +46,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
         title={`${entry.optician_private_label} (${entry.optician_chain}) – Technischer Abgleich | optical.de`}
-        description={`Technische Daten von ${entry.optician_private_label} im Vergleich: Spezifikationsabgleich mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
+        description={`Spezifikationsabgleich der Optiker-Handelsmarke ${entry.optician_private_label}: Technische Übereinstimmung der Parameter mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}).`}
         canonical={`https://www.optical.de/${slug}`}
       />
       <Header />
@@ -69,7 +69,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
             Eigenmarken-Dossier · {entry.optician_chain}
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            {entry.optician_private_label}: Original-Hersteller &amp; Preisvergleich
+            {entry.optician_private_label}: Technischer Abgleich &amp; Spezifikationen
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
             Detaillierte Gegenüberstellung der Optiker-Handelsmarke {entry.optician_private_label} mit der Marken-Referenz {matchedProduct?.product_name || ''} auf Basis technischer Spezifikationen.
@@ -150,7 +150,7 @@ export default function PrivateLabelLanding({ slugOverride }) {
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                Original-Markenprodukt
+                Marken-Referenzprodukt
               </span>
               <h3 className="text-xl font-black text-slate-950 mt-1">
                 {matchedProduct?.product_name || 'Markenprodukt'}

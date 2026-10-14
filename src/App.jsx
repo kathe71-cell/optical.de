@@ -22,8 +22,36 @@ import ProductComparisonPage from './pages/ProductComparisonPage';
 import TransparencyPage from './pages/TransparencyPage';
 
 function ScrollToTopOnNav() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      // Wenn ein URL-Hash vorliegt (z. B. #faq), warte auf DOM-Bereitstellung und scrolle gezielt zum Element
+      const targetId = hash.replace('#', '');
+      let frameId = null;
+      let attempts = 0;
+
+      const scrollToElement = () => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (attempts < 10) {
+          attempts++;
+          frameId = requestAnimationFrame(scrollToElement);
+        }
+      };
+
+      // Führe nach dem Rendern der Zielkomponente aus
+      frameId = requestAnimationFrame(scrollToElement);
+
+      return () => {
+        if (frameId) cancelAnimationFrame(frameId);
+      };
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
   return null;
 }
 

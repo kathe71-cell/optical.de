@@ -45,14 +45,16 @@ const SehkomfortContext = createContext({
 });
 
 export function SehkomfortProvider({ children }) {
-  const [sehkomfort, setSehkomfortState] = useState(() => {
-    const initial = readStorage();
-    updateRootClass(initial);
-    return initial;
-  });
+  // Deterministischer Zustand: SSR und initialer Client-Render starten immer synchron mit false
+  const [sehkomfort, setSehkomfortState] = useState(false);
 
   useEffect(() => {
-    updateRootClass(sehkomfort);
+    // Persistierten Sehkomfort-Zustand erst nach initialer Hydration einlesen
+    const stored = readStorage();
+    if (stored) {
+      setSehkomfortState(true);
+      updateRootClass(true);
+    }
 
     // Cross-Tab-Synchronisation via nativem 'storage' Event
     const handleStorage = (e) => {

@@ -24,14 +24,14 @@ export default function Datenschutz() {
           <span className="font-semibold text-slate-900">Datenschutz</span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-xs">
+        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-8 md:p-12 shadow-xs">
           
           <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-950 text-xs font-extrabold px-3 py-1 rounded-full mb-6">
             <Lock className="w-4 h-4 text-emerald-600" />
             <span>100 % DSGVO-Konform &amp; Zero-CDN Privacy</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 tracking-tight mb-8 break-words">
             Datenschutzerklärung
           </h1>
 

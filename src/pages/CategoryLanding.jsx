@@ -101,8 +101,8 @@ export default function CategoryLanding({ categorySlugOverride }) {
         </div>
 
         {/* Header */}
-        <div className="max-w-3xl mb-8">
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        <div className="max-w-3xl mb-8 min-w-0">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 tracking-tight break-words">
             {config.h1}
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
@@ -137,7 +137,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                 trackFilterUsed('sort_by', e.target.value);
               }}
               aria-label="Kategorie-Sortierung"
-              className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-emerald-500"
+              className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto max-w-full"
             >
               <option value="price_asc">Günstigster Preis</option>
               <option value="dkt_desc">Höchste Sauerstoffdurchlässigkeit (Dk/t)</option>

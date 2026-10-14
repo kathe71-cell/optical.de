@@ -33,7 +33,7 @@ const STATIC_TOOLS_AND_CATS = [
   {
     id: 'tool-decoder',
     title: 'Optiker-Eigenmarken-Decoder',
-    subtitle: 'Ermitteln Sie die Original-Markenlinse hinter Fielmann, Apollo, Mister Spex & Co.',
+    subtitle: 'Prüfen Sie technische Übereinstimmungen bei Fielmann, Apollo, Mister Spex & Co.',
     url: '/eigenmarken-decoder',
     group: 'Tools & Rechner',
     badge: 'Decoder Tool',
@@ -144,7 +144,7 @@ export default function SearchModal({ isOpen, onClose }) {
         title: 'CooperVision Biofinity',
         subtitle: 'Monatslinse · Comfilcon A, Dk/t 160 · Referenz für Optiker-Handelsmarken',
         url: '/biofinity',
-        group: 'Original-Produkte',
+        group: 'Herstellermarken',
         badge: 'CooperVision'
       }
     ];
@@ -188,7 +188,7 @@ export default function SearchModal({ isOpen, onClose }) {
       title: p.product_name,
       subtitle: `${p.lens_type} · ${p.material || ''} ${p.dk_t ? `· Dk/t ${p.dk_t}` : ''} · ${p.pack_size}`,
       url: p.id === 'biofinity' ? '/biofinity' : `/produkt/${p.id}`,
-      group: 'Original-Produkte',
+      group: 'Herstellermarken',
       badge: p.manufacturer
     }));
 

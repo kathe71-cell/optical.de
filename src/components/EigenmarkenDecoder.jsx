@@ -333,7 +333,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                     )}
                   </div>
 
-                  {/* Marken-Original */}
+                  {/* Marken-Referenz */}
                   <div className="bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-200">
                     <div className="font-bold text-slate-900 flex justify-between items-baseline">
                       <span className="text-xs">Beispielpreis auf Amazon.de:</span>

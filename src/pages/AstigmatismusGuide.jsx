@@ -15,15 +15,15 @@ export default function AstigmatismusGuide() {
         canonical="https://www.optical.de/ratgeber/astigmatismus-kontaktlinsen"
       />
       <Header />
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 flex-grow">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 flex-grow w-full">
         <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
           <Link to="/" className="hover:text-emerald-700">Startseite</Link>
           <span>/</span>
           <span className="font-semibold text-slate-900">Astigmatismus &amp; torische Linsen</span>
         </div>
 
-        <article className="prose prose-slate max-w-none">
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mb-4">
+        <article className="prose prose-slate max-w-none min-w-0 w-full">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mb-4 break-words">
             Kontaktlinsen bei Astigmatismus: Alles zu torischen Linsen
           </h1>
           <p className="text-base text-slate-600 mb-8 leading-relaxed">
@@ -41,7 +41,7 @@ export default function AstigmatismusGuide() {
           </p>
 
           <h2 className="text-xl font-black text-slate-900 mt-8 mb-3">Welche torischen Linsen gibt es?</h2>
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 mb-6 overflow-x-auto">
+          <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 mb-6 overflow-x-auto max-w-full">
             <table className="w-full text-xs">
               <thead>
                 <tr className="border-b border-slate-200">

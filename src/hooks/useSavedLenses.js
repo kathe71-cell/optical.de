@@ -44,9 +44,13 @@ function writeStorage(next) {
 }
 
 export function useSavedLenses() {
-  const [savedIds, setSavedIds] = useState(() => readStorage());
+  // Deterministischer Zustand: SSR und initialer Client-Render starten immer synchron mit leerem Zustand
+  const [savedIds, setSavedIds] = useState([]);
 
   useEffect(() => {
+    // Persistierter Zustand aus localStorage wird erst nach erfolgreicher initialer Hydration übernommen
+    setSavedIds(readStorage());
+
     const handleStorageChange = () => {
       setSavedIds(readStorage());
     };

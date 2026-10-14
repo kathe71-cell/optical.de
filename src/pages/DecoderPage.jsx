@@ -35,10 +35,10 @@ export default function DecoderPage() {
             Transparente Handelsmarken
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
-            Optiker-Eigenmarken prüfen &amp; Original finden
+            Optiker-Eigenmarken prüfen &amp; Spezifikationen abgleichen
           </h1>
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
-            Große Optikerketten vertreiben Markenlinsen bekannter Hersteller oft unter eigenem Namen (z. B. Apollo iWear, Fielmann ActiMed). Prüfen Sie hier die technische Übereinstimmung anhand von Material und Geometrie.
+            Große Optikerketten vertreiben Kontaktlinsen oft unter eigenem Namen (z. B. Apollo iWear, Fielmann ActiMed). Prüfen Sie hier die technische Übereinstimmung anhand von Material, Dk/t und Geometrie mit etablierten Herstellermarken.
           </p>
         </div>
 

@@ -291,7 +291,7 @@ export default function VergleichskatalogPage() {
             </div>
 
             {/* Dropdowns für Linsenausführung, Hersteller & Material */}
-            <div className="flex flex-wrap items-center gap-2 text-xs">
+            <div className="flex flex-wrap items-center gap-2 text-xs w-full sm:w-auto">
               <select
                 value={activeDesign}
                 onChange={(e) => {
@@ -299,7 +299,7 @@ export default function VergleichskatalogPage() {
                   trackFilterUsed('design', e.target.value);
                 }}
                 aria-label="Linsenausführung filtern"
-                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto max-w-full"
               >
                 <option value="all">Alle Ausführungen</option>
                 <option value="sphaerisch">Sphärisch (Standard)</option>
@@ -314,7 +314,7 @@ export default function VergleichskatalogPage() {
                   trackFilterUsed('brand', e.target.value);
                 }}
                 aria-label="Hersteller filtern"
-                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto max-w-full"
               >
                 <option value="all">Alle Hersteller</option>
                 <option value="coopervision">CooperVision</option>
@@ -330,7 +330,7 @@ export default function VergleichskatalogPage() {
                   trackFilterUsed('material', e.target.value);
                 }}
                 aria-label="Linsenmaterial filtern"
-                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
+                className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto max-w-full"
               >
                 <option value="all">Alle Materialien</option>
                 <option value="silicone">Silikon-Hydrogel (hoher Dk/t)</option>

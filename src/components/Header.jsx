@@ -31,7 +31,7 @@ export default function Header() {
     <>
       <RefillBanner />
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-1 sm:gap-4 overflow-hidden">
         
         {/* Brand Logo */}
         <Link 
@@ -40,14 +40,14 @@ export default function Header() {
             setMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }} 
-          className="flex items-center space-x-2 sm:space-x-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl shrink-0"
+          className="flex items-center space-x-1.5 sm:space-x-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl shrink-0 min-w-0"
           aria-label="optical.de Startseite"
         >
-          <div className="w-9 h-9 sm:w-10 sm:h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-lg sm:text-xl shadow-sm group-hover:bg-slate-800 transition shrink-0">
-            <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold text-base sm:text-xl shadow-sm group-hover:bg-slate-800 transition shrink-0">
+            <Eye className="w-4 h-4 sm:w-6 sm:h-6 text-emerald-400" />
           </div>
-          <div className="flex flex-col items-start justify-center leading-none">
-            <span className="font-black text-lg sm:text-2xl tracking-tight text-slate-950 leading-tight">
+          <div className="flex flex-col items-start justify-center leading-none min-w-0">
+            <span className="font-black text-base sm:text-2xl tracking-tight text-slate-950 leading-tight">
               optical<span className="text-emerald-600">.de</span>
             </span>
             <span className="hidden sm:inline-block text-[11px] font-semibold text-slate-500 tracking-normal mt-0.5 leading-tight brand-claim">
@@ -84,7 +84,7 @@ export default function Header() {
             onClick={toggleSehkomfort}
             aria-pressed={sehkomfort}
             aria-label={sehkomfort ? "Sehkomfort-Modus aktiv (Klicken zum Deaktivieren)" : "Sehkomfort-Modus aktivieren (größere Schrift & hohe Kontraste)"}
-            className={`flex items-center gap-1 sm:gap-1.5 p-2 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition shrink-0 ${
+            className={`flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition shrink-0 ${
               sehkomfort
                 ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs ring-2 ring-emerald-500/30'
                 : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-slate-300'
@@ -104,7 +104,7 @@ export default function Header() {
 
           <button
             onClick={() => setSearchOpen(true)}
-            className="flex items-center gap-1 sm:gap-1.5 p-2 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition shrink-0"
+            className="flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition shrink-0"
             title="Suche öffnen (Strg + K)"
             aria-label="Suche öffnen"
           >
@@ -116,7 +116,7 @@ export default function Header() {
           <Link
             to="/meine-linsen"
             aria-label={`Meine gemerkten Linsen (${savedCount})`}
-            className={`relative flex items-center gap-1 sm:gap-1.5 p-2 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition shrink-0 ${
+            className={`relative flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold border transition shrink-0 ${
               isActive('/meine-linsen')
                 ? 'bg-emerald-600 border-emerald-600 text-white'
                 : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50 hover:border-slate-300'
@@ -124,22 +124,22 @@ export default function Header() {
           >
             <Bookmark className={`w-4 h-4 shrink-0 ${isActive('/meine-linsen') ? 'text-white fill-white' : 'text-emerald-600'}`} />
             <span className="hidden md:inline">Meine Linsen</span>
-            <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-extrabold transition-transform ${
-              isActive('/meine-linsen') 
-                ? 'bg-white text-emerald-700' 
-                : savedCount > 0 
-                  ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' 
-                  : 'bg-slate-100 text-slate-500'
-            }`}>
-              {savedCount}
-            </span>
+            {savedCount > 0 && (
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-extrabold transition-transform ${
+                isActive('/meine-linsen') 
+                  ? 'bg-white text-emerald-700' 
+                  : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+              }`}>
+                {savedCount}
+              </span>
+            )}
           </Link>
 
           {/* Mobile Menu Toggle Button (aktiv bis xl) */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-slate-950 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 shrink-0"
+            className="xl:hidden p-1.5 sm:p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-slate-950 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 shrink-0"
             aria-expanded={mobileMenuOpen}
             aria-label="Hauptmenü umschalten"
           >

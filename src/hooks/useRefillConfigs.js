@@ -46,9 +46,13 @@ function writeRefillStorage(next) {
  * Speichert Nutzereinstellungen 100% lokal im Browser.
  */
 export function useRefillConfigs() {
-  const [configs, setConfigs] = useState(() => readRefillStorage());
+  // Deterministischer Zustand: SSR und initialer Client-Render starten immer synchron mit leerem Objekt
+  const [configs, setConfigs] = useState({});
 
   useEffect(() => {
+    // Persistierte Nachkaufpläne aus localStorage erst nach initialer Hydration einlesen
+    setConfigs(readRefillStorage());
+
     const handleStorageChange = () => {
       setConfigs(readRefillStorage());
     };
