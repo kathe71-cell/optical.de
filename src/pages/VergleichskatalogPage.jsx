@@ -249,6 +249,7 @@ export default function VergleichskatalogPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
+                aria-label="Katalog sortieren nach"
                 className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="popular">Standard / Beliebt</option>
@@ -297,6 +298,7 @@ export default function VergleichskatalogPage() {
                   setActiveDesign(e.target.value);
                   trackFilterUsed('design', e.target.value);
                 }}
+                aria-label="Linsenausführung filtern"
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="all">Alle Ausführungen</option>
@@ -311,6 +313,7 @@ export default function VergleichskatalogPage() {
                   setActiveBrand(e.target.value);
                   trackFilterUsed('brand', e.target.value);
                 }}
+                aria-label="Hersteller filtern"
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="all">Alle Hersteller</option>
@@ -326,6 +329,7 @@ export default function VergleichskatalogPage() {
                   setActiveMaterial(e.target.value);
                   trackFilterUsed('material', e.target.value);
                 }}
+                aria-label="Linsenmaterial filtern"
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-semibold text-slate-800 text-xs focus:ring-2 focus:ring-emerald-500"
               >
                 <option value="all">Alle Materialien</option>
@@ -504,7 +508,7 @@ export default function VergleichskatalogPage() {
                       <ExternalLink className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     </a>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 card-action-grid">
                       <Link
                         to={p.id === 'biofinity' ? '/biofinity' : `/produkt/${p.id}`}
                         onClick={() => trackProductClicked(p.id, p.product_name)}

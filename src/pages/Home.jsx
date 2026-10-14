@@ -334,6 +334,7 @@ export default function Home() {
             <select
               value={homeSort}
               onChange={e => setHomeSort(e.target.value)}
+              aria-label="Ausgewählte Produkte sortieren nach"
               className="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none"
             >
               <option value="popular">Standard</option>
@@ -425,7 +426,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 card-action-grid">
                       <Link
                         to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
                         className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"

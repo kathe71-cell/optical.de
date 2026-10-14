@@ -136,6 +136,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                 setSortBy(e.target.value);
                 trackFilterUsed('sort_by', e.target.value);
               }}
+              aria-label="Kategorie-Sortierung"
               className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-emerald-500"
             >
               <option value="price_asc">Günstigster Preis</option>
@@ -247,7 +248,7 @@ export default function CategoryLanding({ categorySlugOverride }) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-2 card-action-grid">
                     <Link
                       to={`/${p.id === 'biofinity' ? 'biofinity' : `produkt/${p.id}`}`}
                       className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] py-2.5 px-2 rounded-xl text-center transition"

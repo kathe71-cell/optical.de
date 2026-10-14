@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Eye, Bookmark, Sparkles, Menu, X, Layers, Calculator, Search } from 'lucide-react';
+import { Eye, Bookmark, Sparkles, Menu, X, Layers, Calculator, Search, SlidersHorizontal, Glasses, Check } from 'lucide-react';
 import { useSavedLenses } from '../hooks/useSavedLenses';
+import { useSehkomfort } from '../context/SehkomfortContext';
 import SearchModal from './SearchModal';
 import RefillBanner from './RefillBanner';
 
@@ -9,6 +10,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { savedCount } = useSavedLenses();
+  const { sehkomfort, toggleSehkomfort } = useSehkomfort();
   const location = useLocation();
 
   useEffect(() => {
@@ -72,8 +74,32 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Action Buttons: Suche & Meine Linsen */}
+        {/* Action Buttons: Sehkomfort, Suche & Meine Linsen */}
         <div className="flex items-center space-x-2">
+          {/* Sehkomfort Umschalter */}
+          <button
+            type="button"
+            onClick={toggleSehkomfort}
+            aria-pressed={sehkomfort}
+            aria-label={sehkomfort ? "Sehkomfort-Modus aktiv (Klicken zum Deaktivieren)" : "Sehkomfort-Modus aktivieren (größere Schrift & hohe Kontraste)"}
+            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold border transition ${
+              sehkomfort
+                ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs ring-2 ring-emerald-500/30'
+                : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-slate-300'
+            }`}
+            title={sehkomfort ? "Sehkomfort: AN" : "Sehkomfort: AUS"}
+          >
+            <Glasses className={`w-4 h-4 shrink-0 ${sehkomfort ? 'text-white' : 'text-slate-600'}`} />
+            <span className="hidden sm:inline">Sehkomfort</span>
+            <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider ${
+              sehkomfort
+                ? 'bg-emerald-800 text-emerald-100'
+                : 'bg-slate-100 text-slate-600 border border-slate-200'
+            }`}>
+              {sehkomfort ? 'AN' : 'AUS'}
+            </span>
+          </button>
+
           <button
             onClick={() => setSearchOpen(true)}
             className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 transition"
@@ -149,7 +175,30 @@ export default function Header() {
             );
           })}
 
-          <div className="pt-2 border-t border-slate-100">
+          <div className="pt-2 border-t border-slate-100 space-y-2">
+            <button
+              type="button"
+              onClick={toggleSehkomfort}
+              aria-pressed={sehkomfort}
+              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold border transition ${
+                sehkomfort
+                  ? 'bg-emerald-600 text-white border-emerald-700'
+                  : 'bg-slate-50 text-slate-800 border-slate-200 hover:bg-slate-100'
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <Glasses className={`w-4 h-4 ${sehkomfort ? 'text-white' : 'text-slate-600'}`} />
+                <span>Sehkomfort-Modus</span>
+              </div>
+              <span className={`text-xs px-2 py-0.5 rounded-full font-extrabold uppercase tracking-wider ${
+                sehkomfort
+                  ? 'bg-emerald-800 text-white'
+                  : 'bg-white text-slate-700 border border-slate-200'
+              }`}>
+                {sehkomfort ? 'Aktiv (AN)' : 'Inaktiv (AUS)'}
+              </span>
+            </button>
+
             <Link
               to="/meine-linsen"
               onClick={() => setMobileMenuOpen(false)}

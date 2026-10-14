@@ -4,6 +4,7 @@ import MonatsVsTagesGuide from './pages/MonatsVsTagesGuide';
 import PflegemittelGuide from './pages/PflegemittelGuide';
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { SehkomfortProvider } from './context/SehkomfortContext';
 import VercelAnalytics from './components/VercelAnalytics';
 import Home from './pages/Home';
 import VergleichskatalogPage from './pages/VergleichskatalogPage';
@@ -28,7 +29,7 @@ function ScrollToTopOnNav() {
 
 export function AppRoutes() {
   return (
-    <>
+    <SehkomfortProvider>
       <VercelAnalytics />
       <ScrollToTopOnNav />
       <Routes>
@@ -83,8 +84,8 @@ export function AppRoutes() {
         {/* ECHTER 404 FEHLER-ROUTENFALLBACK (Kein Pseudo-Home Redirect) */}
         <Route path="*" element={<NotFoundPage />} />
 
-</Routes>
-    </>
+      </Routes>
+    </SehkomfortProvider>
   );
 }
 

@@ -8,6 +8,141 @@ body {
   color: #0f172a;
 }
 
+/* ==========================================================================
+   SEHKOMFORT-MODUS (VISION-FIRST UX & WCAG AAA CONTRAST)
+   Gezielte Komponentenarchitektur:
+   - Saubere Vererbung ohne schädliche globale Universalselektoren
+   - Schutz von Icons (w-*, h-* behalten ihre Dimensionen)
+   - Schutz von Navigationslayouts & Grid-Systemen
+   - Mindest-Touch-Targets 48px für Aktions- & Formularelemente
+   - Button-Text-Integrität: Kein Abschneiden, kein Textüberlauf, flexibles Wachstum
+   - WCAG AAA Kontraste für Typografie und Steuerelemente
+   ========================================================================== */
+
+html.sehkomfort-active {
+  font-size: 18px; /* Standard 16px -> 18px Grundskalierung (+12.5%) */
+}
+
+.sehkomfort-active body {
+  line-height: 1.6;
+  letter-spacing: 0.012em;
+  color: #020617; /* Tiefdunkles Schieferschwarz für optimalen Lesekontrast */
+}
+
+/* Lesbarkeits-Optimierung für Inhaltsbereiche */
+.sehkomfort-active p,
+.sehkomfort-active li,
+.sehkomfort-active label {
+  text-rendering: optimizeLegibility;
+}
+
+/* Verstärkter Kontrast für Textfarben (WCAG AAA) */
+.sehkomfort-active .text-slate-400 {
+  color: #475569;
+}
+.sehkomfort-active .text-slate-500 {
+  color: #334155;
+}
+.sehkomfort-active .text-slate-600 {
+  color: #1e293b;
+}
+.sehkomfort-active .text-slate-700 {
+  color: #0f172a;
+}
+
+/* Kontrastreichere Rahmen & Linien */
+.sehkomfort-active .border-slate-100,
+.sehkomfort-active .border-slate-200 {
+  border-color: #cbd5e1;
+}
+.sehkomfort-active .border-slate-300 {
+  border-color: #94a3b8;
+}
+
+/* Optimierte Kontraste für grüne Interaktionsflächen (WCAG AAA >= 7.0:1) */
+.sehkomfort-active .bg-emerald-600 {
+  background-color: #065f46; /* emerald-800: 7.68:1 Kontrast gegen weiße Schrift */
+}
+.sehkomfort-active .hover\:bg-emerald-700:hover {
+  background-color: #064e3b; /* emerald-900: 9.72:1 Kontrast */
+}
+
+/* ==========================================================================
+   BUTTON- & INTERAKTIONSELEMENT-INTEGRITÄT (GEZIELTE REGELN)
+   ========================================================================== */
+
+/* Gezielte Entkopplung von Schaltflächen & CTA-Links */
+.sehkomfort-active button:not(.btn-icon-only):not(header button),
+.sehkomfort-active a[role="button"]:not(header a),
+.sehkomfort-active .card-action-grid button,
+.sehkomfort-active .card-action-grid a,
+.sehkomfort-active a.w-full,
+.sehkomfort-active button.w-full {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-overflow: clip;
+  min-height: 48px;
+  height: auto;
+  line-height: 1.35;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+/* Header-Aktionsbuttons im Sehkomfort-Modus: Kein vertikaler Buchstabenumbruch */
+.sehkomfort-active header button,
+.sehkomfort-active header a {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  min-height: 44px;
+}
+.sehkomfort-active header .h-16 {
+  min-height: 4rem;
+  height: auto !important;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Schutz von Icons vor Stauchung oder Verzerrung durch Flexbox-Wrapping */
+.sehkomfort-active svg,
+.sehkomfort-active button svg,
+.sehkomfort-active a svg {
+  flex-shrink: 0;
+}
+
+/* Aufheben von .truncate ausschließlich innerhalb von Buttons & Aktionslinks */
+.sehkomfort-active button .truncate,
+.sehkomfort-active a .truncate {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  display: inline;
+}
+
+/* Vertikales Stapeln bei engen 2-Spalten-Aktions-Grids in Karten */
+.sehkomfort-active .card-action-grid {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.625rem;
+}
+
+/* Formular-Elemente & Dropdowns im Sehkomfort-Modus */
+.sehkomfort-active input[type="text"],
+.sehkomfort-active input[type="number"],
+.sehkomfort-active input[type="date"],
+.sehkomfort-active select {
+  min-height: 48px;
+  font-size: 1rem;
+}
+
+/* Barrierefreier Fokus-Ring für Tastaturnavigation */
+.sehkomfort-active a:focus-visible,
+.sehkomfort-active button:focus-visible,
+.sehkomfort-active input:focus-visible,
+.sehkomfort-active select:focus-visible {
+  outline: 3px solid #059669;
+  outline-offset: 2px;
+}
+
 @media print {
   header, footer, nav, .no-print, button, input[type="range"] {
     display: none !important;

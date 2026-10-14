@@ -22,7 +22,7 @@ export default function MedicalDisclaimer({ compact = false, className = '' }) {
         <AlertCircle className="w-4 h-4" />
       </div>
       <div className="space-y-1">
-        <h4 className="font-bold text-amber-950 text-xs uppercase tracking-wide">Wichtiger Verbraucher- &amp; Gesundheitshinweis</h4>
+        <h2 className="font-bold text-amber-950 text-xs uppercase tracking-wide">Wichtiger Verbraucher- &amp; Gesundheitshinweis</h2>
         <p className="leading-relaxed text-amber-900">
           Die Informationen auf optical.de dienen dem sachlichen Produkt- und Preisvergleich für Kontaktlinsen, die Ihnen bereits von einer augenoptischen oder augenärztlichen Fachkraft angepasst wurden. Sie stellen <strong>keine medizinische Beratung oder Heilaussage</strong> dar.
         </p>

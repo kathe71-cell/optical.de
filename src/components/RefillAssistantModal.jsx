@@ -257,8 +257,10 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
               />
             </div>
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-              <label className="font-bold text-slate-900 block mb-1">Erinnerungsvorlauf:</label>
+              <label htmlFor="refill-lead-days" className="font-bold text-slate-900 block mb-1">Erinnerungsvorlauf:</label>
               <select
+                id="refill-lead-days"
+                aria-label="Erinnerungsvorlauf auswählen"
                 value={leadDays}
                 onChange={(e) => setLeadDays(Number(e.target.value))}
                 className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 font-semibold text-xs text-slate-900"

@@ -41,7 +41,7 @@ export default function Footer() {
 
         {/* Direktnavigation */}
         <div>
-          <h4 className="font-bold text-white mb-3 tracking-wide">Funktionen &amp; Linsen</h4>
+          <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Funktionen &amp; Linsen</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/vergleichskatalog" className="hover:text-white transition">Kontaktlinsen finden</Link></li>
             <li><Link to="/eigenmarken-decoder" className="hover:text-white transition">Eigenmarken-Decoder</Link></li>
@@ -54,7 +54,7 @@ export default function Footer() {
 
         {/* Handelsmarken-Dossiers */}
         <div>
-          <h4 className="font-bold text-white mb-3 tracking-wide">Optiker-Eigenmarken</h4>
+          <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Optiker-Eigenmarken</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/apollo-iwear-oxygen" className="hover:text-white transition">Apollo iWear Oxygen</Link></li>
             <li><Link to="/fielmann-actimed" className="hover:text-white transition">Fielmann ActiMed</Link></li>
@@ -66,7 +66,7 @@ export default function Footer() {
 
         {/* Ratgeber */}
         <div className="hidden md:block">
-          <h4 className="font-bold text-white mb-3 tracking-wide">Ratgeber</h4>
+          <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Ratgeber</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/ratgeber/astigmatismus-kontaktlinsen" className="hover:text-white transition">Kontaktlinsen bei Astigmatismus</Link></li>
             <li><Link to="/ratgeber/tageslinsen-vs-monatslinsen-kosten" className="hover:text-white transition">Tages- vs. Monatslinsen Kosten</Link></li>
@@ -77,7 +77,7 @@ export default function Footer() {
 
         {/* Rechtliches & Transparenz */}
         <div>
-          <h4 className="font-bold text-white mb-3 tracking-wide">Rechtliches &amp; Schutz</h4>
+          <h3 className="font-bold text-white mb-3 tracking-wide text-xs">Rechtliches &amp; Schutz</h3>
           <ul className="space-y-2 text-slate-400">
             <li><Link to="/impressum" className="hover:text-white font-semibold text-emerald-400 transition">→ Impressum</Link></li>
             <li><Link to="/datenschutz" className="hover:text-white transition">→ Datenschutzerklärung</Link></li>

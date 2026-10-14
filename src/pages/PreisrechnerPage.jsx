@@ -140,6 +140,7 @@ export default function PreisrechnerPage() {
                   max="7"
                   value={daysPerWeek}
                   onChange={(e) => setDaysPerWeek(parseInt(e.target.value))}
+                  aria-label="Tragetage pro Woche"
                   className="w-full accent-emerald-600 cursor-pointer h-2 bg-slate-200 rounded-lg"
                 />
                 <div className="flex justify-between text-[11px] text-slate-400 mt-1.5 font-medium">
