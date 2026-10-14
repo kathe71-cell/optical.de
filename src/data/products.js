@@ -606,10 +606,10 @@ const RAW_PRODUCTS = [
     brand: 'Acuvue',
     lens_type: 'Tageslinse',
     replacement_schedule: '1 Tag',
-    material: 'Senofilcon C (Silikon-Hydrogel)',
+    material: 'Senofilcon A (Silikon-Hydrogel)',
     dk_t: 121,
     water_content: '38 %',
-    base_curve: '8.5 mm',
+    base_curve: '8.5 mm / 9.0 mm',
     diameter: '14.3 mm',
     sphere_range: '+4.00 bis -12.00 dpt',
     cylinder_range: null,
@@ -629,7 +629,7 @@ const RAW_PRODUCTS = [
     source_url: 'https://www.jnjvisionpro.com/de-de/',
     source_date: '28.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 121', 'Senofilcon C', 'TearStable'],
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 121', 'Senofilcon A', 'TearStable', 'OptiBlue'],
     aliases: ['Acuvue Oasys Max 1-Day', 'Oasys Max 1Day']
   },
   {
@@ -913,10 +913,10 @@ const RAW_PRODUCTS = [
     brand: 'Acuvue',
     lens_type: 'Monatslinse',
     replacement_schedule: '30 Tage',
-    material: 'Methacryloyloxypropyl Tris (Silikon-Hydrogel)',
+    material: 'Senofilcon C (Silikon-Hydrogel)',
     dk_t: 147,
     water_content: '41 %',
-    base_curve: '8.4 mm',
+    base_curve: '8.4 mm / 8.8 mm',
     diameter: '14.0 mm',
     sphere_range: '+4.00 bis -12.00 dpt',
     cylinder_range: null,
@@ -936,7 +936,7 @@ const RAW_PRODUCTS = [
     source_url: 'https://www.jnjvisionpro.com/de-de/',
     source_date: '28.09.2026',
     confidence: 'verifiziert',
-    objective_badges: ['Silikon-Hydrogel', 'Dk/t 147', 'HYDRAMAX'],
+    objective_badges: ['Silikon-Hydrogel', 'Dk/t 147', 'Senofilcon C', 'HydraMax'],
     aliases: ['Acuvue Vita', 'Vita Monatslinse']
   },
   {
@@ -2293,6 +2293,22 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
     else material_type = 'hydrogel';
   }
 
+  // Feld-spezifischer Prüfstatus (VERIFIED, UNVERIFIED, CONFLICTING, NOT_APPLICABLE)
+  // HINWEIS: price: 'VERIFIED' bestätigt ausschließlich die interne formale Plausibilität und Konsistenz
+  // des in der Datenbank hinterlegten Orientierungspreises (Stand 09/2026), nicht einen tagesaktuellen Live-Händlerpreis.
+  const isLens = category === 'kontaktlinsen';
+  const hasManufacturerSource = p.source_url && !p.source_url.includes('amazon.de') && p.source_type && p.source_type !== 'Produktbeschreibung';
+  const field_verification = {
+    material: p.material ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    base_curve: p.base_curve ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    diameter: p.diameter ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    dk_t: p.dk_t ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    water_content: p.water_content ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    sphere_range: p.sphere_range ? (hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED') : (isLens ? 'UNVERIFIED' : 'NOT_APPLICABLE'),
+    source_url: hasManufacturerSource ? 'VERIFIED' : 'UNVERIFIED',
+    price: p.price ? 'VERIFIED' : 'UNVERIFIED' // Interne Datenbankprüfung (Stand 09/2026)
+  };
+
   return {
     ...p,
     canonical_name: p.product_name,
@@ -2306,6 +2322,7 @@ export const PRODUCTS = RAW_PRODUCTS.map((p) => {
     correction_type,
     data_status,
     verification,
+    field_verification,
     offers,
     price_type: 'Orientierungspreis',
     last_price_checked: '09/2026',

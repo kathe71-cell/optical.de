@@ -45,8 +45,8 @@ export default function PrivateLabelLanding({ slugOverride }) {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
       <MetaTags 
-        title={`${entry.optician_private_label} (${entry.optician_chain}) – Original-Linse | optical.de`}
-        description={`Welches Markenprodukt steckt hinter ${entry.optician_private_label}? Technische Übereinstimmung mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
+        title={`${entry.optician_private_label} (${entry.optician_chain}) – Technischer Abgleich | optical.de`}
+        description={`Technische Daten von ${entry.optician_private_label} im Vergleich: Spezifikationsabgleich mit ${matchedProduct?.product_name || ''} (${matchedProduct?.manufacturer || ''}). Verifizierte Parameter & Preisvergleich.`}
         canonical={`https://www.optical.de/${slug}`}
       />
       <Header />

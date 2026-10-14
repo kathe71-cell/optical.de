@@ -243,20 +243,20 @@ export default function PreisrechnerPage() {
               </div>
 
               {/* Empfehlung / Vergleichs-Fazit */}
-              <div className="pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed">
-                {lensType === 'monat' && daysPerWeek <= 2 ? (
+              <div className="pt-3 border-t border-slate-800 text-xs text-slate-300 leading-relaxed space-y-2">
+                {lensType === 'monat' && daysPerWeek <= 2 && (
                   <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700 text-slate-200">
                     💡 <strong>Tipp:</strong> Bei nur {daysPerWeek} Tragetag(en) pro Woche sind oft <strong>Tageslinsen</strong> wirtschaftlicher und hygienischer, da keine Pflegemittel anfallen und die Monatslinse nicht ungenutzt altert.
                   </div>
-                ) : lensType === 'tag' && daysPerWeek >= 5 ? (
+                )}
+                {lensType === 'tag' && daysPerWeek >= 5 && (
                   <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700 text-slate-200">
                     💡 <strong>Tipp:</strong> Bei fast täglichem Tragen ({daysPerWeek} Tage) sind <strong>Monatslinsen</strong> auf das Jahr gerechnet meist deutlich preisgünstiger.
                   </div>
-                ) : (
-                  <div className="text-[11px] text-slate-400">
-                    * Modellrechnung basierend auf gängigen Packungspreisen (6er Packung Monatslinsen bzw. 30er Packung Tageslinsen). Individuelle Händlerpreise und Versandkosten können abweichen.
-                  </div>
                 )}
+                <div className="text-[11px] text-slate-400">
+                  * Modellrechnung basierend auf beispielhaften Packungspreisen (6er Packung Monatslinsen zu 19,90 € bzw. 30er Packung Tageslinsen zu 24,90 €). Individuelle Händlerpreise, Verordnungen und Versandkosten können abweichen.
+                </div>
               </div>
 
               <div className="pt-2 space-y-2">

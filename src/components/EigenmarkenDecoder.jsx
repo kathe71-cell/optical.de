@@ -381,7 +381,7 @@ export default function EigenmarkenDecoder({ standalone = false }) {
                     <Scale className="w-3 h-3 text-slate-500" />
                     <span>Rechtlicher Hinweis zu Preisvergleichen:</span>
                   </div>
-                  optical.de trifft keine pauschalen Preisfeststellungen für stationäre Filialen. Preise können regional, filialabhängig oder aktionsbedingt variieren. Die Differenzberechnung ist eine unverbindliche, individuelle Modellrechnung, die ausschließlich auf dem vom Nutzer selbst eingegebenen Preis und den tagesaktuellen Online-Preisen der Referenzprodukte basiert.
+                  optical.de trifft keine pauschalen Preisfeststellungen für stationäre Filialen. Preise können regional, filialabhängig oder aktionsbedingt variieren. Die Differenzberechnung ist eine unverbindliche, individuelle Modellrechnung, die ausschließlich auf dem vom Nutzer selbst eingegebenen Preis und den hinterlegten Online-Beispielpreisen (Stand 09/2026) der Referenzprodukte basiert.
                 </div>
               </div>
 

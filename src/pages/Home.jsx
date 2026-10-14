@@ -73,7 +73,7 @@ export default function Home() {
         })),
         ...EIGENMARKEN_DATABASE.filter(e => e.optician_private_label.toLowerCase().includes(searchQuery.toLowerCase()) || e.optician_chain.toLowerCase().includes(searchQuery.toLowerCase())).slice(0, 3).map(e => ({
           label: e.optician_private_label,
-          sub: `${e.optician_chain} · Entspricht ${e.original_brand_name}`,
+          sub: `${e.optician_chain} · Technischer Abgleich: ${e.original_brand_name}`,
           path: `/${e.slug}`
         }))
       ]

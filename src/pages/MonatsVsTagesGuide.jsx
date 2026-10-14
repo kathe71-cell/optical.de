@@ -51,22 +51,22 @@ export default function MonatsVsTagesGuide() {
         </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-          <h2 className="text-lg font-bold text-blue-900 mb-3">Kurz-Antwort</h2>
+          <h2 className="text-lg font-bold text-blue-900 mb-3">Kurz-Antwort &amp; Kosten-Schwelle</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-white rounded-lg p-4 border border-blue-100">
-              <div className="font-bold text-blue-800 mb-2">Tageslinsen lohnen sich wenn&hellip;</div>
+              <div className="font-bold text-blue-800 mb-2">Tageslinsen lohnen sich rechnerisch wenn&hellip;</div>
               <ul className="text-sm text-gray-700 space-y-1">
-                <li>&#8226; Du die Linsen selten tr&auml;gst (unter 5&times; pro Woche)</li>
-                <li>&#8226; Du kein Lust auf Pflegepflicht hast</li>
-                <li>&#8226; Du trockene oder empfindliche Augen hast</li>
+                <li>&#8226; Du die Linsen an bis zu 2 Tagen pro Woche tr&auml;gst (z. B. Sport oder Wochenende)</li>
+                <li>&#8226; Du keinen Aufwand f&uuml;r t&auml;gliche Reinigung und Aufbewahrung m&ouml;chtest</li>
+                <li>&#8226; Du maximale Hygiene ohne Pflegemittel bevorzugst</li>
               </ul>
             </div>
             <div className="bg-white rounded-lg p-4 border border-blue-100">
-              <div className="font-bold text-green-800 mb-2">Monatslinsen lohnen sich wenn&hellip;</div>
+              <div className="font-bold text-green-800 mb-2">Monatslinsen lohnen sich rechnerisch wenn&hellip;</div>
               <ul className="text-sm text-gray-700 space-y-1">
-                <li>&#8226; Du die Linsen t&auml;glich oder fast t&auml;glich tr&auml;gst</li>
-                <li>&#8226; Du Jahreskosten minimieren willst</li>
-                <li>&#8226; Du spezielle Parameter brauchst (Torik, Multifokal)</li>
+                <li>&#8226; Du die Linsen an 3 oder mehr Tagen pro Woche tr&auml;gst</li>
+                <li>&#8226; Du deine Jahreskosten bei regelm&auml;&szlig;igem Tragen minimieren willst</li>
+                <li>&#8226; Eine sorgf&auml;ltige t&auml;gliche Reinigung f&uuml;r dich selbstverst&auml;ndlich ist</li>
               </ul>
             </div>
           </div>
@@ -75,28 +75,30 @@ export default function MonatsVsTagesGuide() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Die echten Jahreskosten im Vergleich</h2>
           <p className="text-gray-600 mb-6">
-            Viele Vergleiche ignorieren die Pflegemittelkosten bei Monatslinsen. Wir rechnen alles mit ein.
+            Viele Vergleiche ignorieren die notwendigen Pflegemittelkosten bei Monatslinsen. In dieser Modellrechnung stellen wir realistische Marktpreise transparenter Markenprodukte gegen&uuml;ber (Basis: 52 Wochen/Jahr, beide Augen).
           </p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50">
                   <th className="text-left p-3 font-semibold text-gray-700">Tr&auml;geh&auml;ufigkeit</th>
-                  <th className="text-center p-3 font-semibold text-blue-700">Tageslinsen (~0,50&euro;/Paar)</th>
-                  <th className="text-center p-3 font-semibold text-green-700">Monatslinsen (+ Pflege)</th>
-                  <th className="text-center p-3 font-semibold text-gray-700">Empfehlung</th>
+                  <th className="text-center p-3 font-semibold text-blue-700">Tageslinsen (Standard, ~1,30 &euro;/Paar)</th>
+                  <th className="text-center p-3 font-semibold text-green-700">Monatslinsen (Linsen + Pflege)</th>
+                  <th className="text-center p-3 font-semibold text-gray-700">Kostenvorteil</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">2&times; pro Woche</td><td className="p-3 text-center text-blue-700 font-mono">52&euro;</td><td className="p-3 text-center text-green-700 font-mono">190&euro;</td><td className="p-3 text-center">Tageslinse</td></tr>
-                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">3&times; pro Woche</td><td className="p-3 text-center text-blue-700 font-mono">78&euro;</td><td className="p-3 text-center text-green-700 font-mono">190&euro;</td><td className="p-3 text-center">Tageslinse</td></tr>
-                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">5&times; pro Woche</td><td className="p-3 text-center text-blue-700 font-mono">130&euro;</td><td className="p-3 text-center text-green-700 font-mono">190&euro;</td><td className="p-3 text-center">Je nach Typ</td></tr>
-                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">T&auml;glich (7&times;)</td><td className="p-3 text-center text-blue-700 font-mono">182&euro;</td><td className="p-3 text-center text-green-700 font-mono">190&euro;</td><td className="p-3 text-center">Monatslinse</td></tr>
-                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">T&auml;glich (Premium)</td><td className="p-3 text-center text-blue-700 font-mono">260&euro;+</td><td className="p-3 text-center text-green-700 font-mono">190&euro;</td><td className="p-3 text-center font-bold text-green-700">Monatslinse</td></tr>
+                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">1&times; pro Woche (52 Tage)</td><td className="p-3 text-center text-blue-700 font-mono">68 &euro;</td><td className="p-3 text-center text-green-700 font-mono">190 &euro;</td><td className="p-3 text-center font-bold text-blue-700">Tageslinse (-122 &euro;)</td></tr>
+                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">2&times; pro Woche (104 Tage)</td><td className="p-3 text-center text-blue-700 font-mono">135 &euro;</td><td className="p-3 text-center text-green-700 font-mono">190 &euro;</td><td className="p-3 text-center font-bold text-blue-700">Tageslinse (-55 &euro;)</td></tr>
+                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">3&times; pro Woche (156 Tage)</td><td className="p-3 text-center text-blue-700 font-mono">203 &euro;</td><td className="p-3 text-center text-green-700 font-mono">190 &euro;</td><td className="p-3 text-center font-bold text-green-700">Monatslinse (-13 &euro;)</td></tr>
+                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">5&times; pro Woche (260 Tage)</td><td className="p-3 text-center text-blue-700 font-mono">338 &euro;</td><td className="p-3 text-center text-green-700 font-mono">190 &euro;</td><td className="p-3 text-center font-bold text-green-700">Monatslinse (-148 &euro;)</td></tr>
+                <tr className="hover:bg-gray-50"><td className="p-3 font-medium">T&auml;glich / 7&times; (365 Tage)</td><td className="p-3 text-center text-blue-700 font-mono">475 &euro;</td><td className="p-3 text-center text-green-700 font-mono">190 &euro;</td><td className="p-3 text-center font-bold text-green-700">Monatslinse (-285 &euro;)</td></tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-500 mt-3">Monatslinsen: 12 Paare/Jahr (~180&euro;) + Pflegemittel (~10&euro;/Monat). Tageslinse: 0,50&euro;/Paar &times; Tragetage.</p>
+          <p className="text-xs text-gray-500 mt-3 leading-relaxed">
+            * Modellrechnung: Monatslinsen kalkuliert mit ca. 120 &euro; f&uuml;r 12 Linsenpaare/Jahr (z. B. 4x 6er Pack g&auml;ngiger Silikon-Hydrogel-Monatslinsen zu je ca. 30 &euro;) zzgl. ca. 70 &euro; f&uuml;r All-in-One Kombil&ouml;sungen (ca. 6 Flaschen &agrave; 300–360 ml/Jahr). Tageslinsen kalkuliert mit ca. 0,65 &euro; pro Einzellinse (1,30 &euro; pro Paar). Tats&auml;chliche Preise h&auml;ngen vom gew&auml;hlten Produkt, individuellen Verordnungen und Packungsgr&ouml;&szlig;en ab.
+          </p>
         </div>
 
         <div className="mb-8">

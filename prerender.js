@@ -38,6 +38,46 @@ for (const [url, meta] of Object.entries(ROUTES)) {
   html = html.replace(/<link rel="canonical" href=".*?" \/>/, `<link rel="canonical" href="${canonicalUrl}" />`);
   html = html.replace(/<meta property="og:url" content=".*?" \/>/, `<meta property="og:url" content="${canonicalUrl}" />`);
 
+  // Route-spezifische strukturierte FAQ-Daten (ausschließlich auf Routen mit sichtbaren FAQs)
+  if (url === '/ratgeber/kontaktlinsen-pflegemittel-vergleich') {
+    const pflegeFaqSchema = `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.optical.de/ratgeber/kontaktlinsen-pflegemittel-vergleich#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Kann ich Leitungswasser zum Spülen verwenden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein, niemals. Leitungswasser enthält Keime wie Acanthamoeba, die zu schweren Hornhautinfektionen führen können. Immer sterile Kochsalzlösung oder die empfohlene Pflegeflüssigkeit verwenden."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie oft muss ich den Linsenbehälter wechseln?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Den Behälter spätestens alle 3 Monate wechseln. Nach dem Ablegen der Linsen den Behälter mit frischer Lösung spülen, nie mit Wasser, und offen trocknen lassen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was tun wenn die Linsen im Pflegemittel brennen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ein Brennen kann auf eine Unverträglichkeit mit dem Pflegemittel hinweisen. Probiere ein Produkt ohne Konservierungsstoffe oder wechsle zu einem H2O2-System. Bei anhaltendem Brennen Augenarzt aufsuchen."
+          }
+        }
+      ]
+    }
+    </script>
+`;
+    html = html.replace('</head>', `${pflegeFaqSchema}\n  </head>`);
+  }
+
   const filePath = url === '/' ? 'dist/index.html' : `dist${url}/index.html`;
   const dir = path.dirname(toAbsolute(filePath));
   if (!fs.existsSync(dir)) {

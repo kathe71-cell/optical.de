@@ -156,7 +156,7 @@ export default function ProductComparisonPage() {
             {/* CTAs */}
             <div className="grid grid-cols-12 p-4 sm:p-5 bg-slate-50 border-t border-slate-200 gap-3 items-center">
               <div className="col-span-4 text-[11px] text-slate-500 font-medium hidden sm:block">
-                Tagesaktuelle Online-Angebote:
+                Online-Angebote bei Partnern:
               </div>
               <div className={`col-span-12 sm:col-span-8 grid grid-cols-${lenses.length} gap-2`}>
                 {lenses.map((lens) => (
