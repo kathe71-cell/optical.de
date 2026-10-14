@@ -257,6 +257,53 @@ if (!fs.existsSync(vercelConfigPath)) {
 }
 
 // ----------------------------------------------------
+// TEST 10: Open-Graph-Bild (v3) & Hero-Wording Integrität
+// ----------------------------------------------------
+console.log('\n--- 10. Open-Graph-Bild (v3) & Hero-Wording Integrität ---');
+const ogV3PngPath = toAbs('public/og-optical-brand-v3.png');
+const ogV3SvgPath = toAbs('public/og-optical-brand-v3.svg');
+const indexHtmlPath = toAbs('dist/index.html');
+
+if (!fs.existsSync(ogV3PngPath) || !fs.existsSync(ogV3SvgPath)) {
+  logResult('FAIL', 'OG v3 Assets', 'public/og-optical-brand-v3.png oder .svg fehlt.');
+} else {
+  const statsPng = fs.statSync(ogV3PngPath);
+  if (statsPng.size < 50000) {
+    logResult('FAIL', 'OG v3 PNG Grösse', `Dateigröße zu klein (${statsPng.size} Bytes).`);
+  } else {
+    logResult('PASS', 'OG v3 Assets Vorhanden', `og-optical-brand-v3.png (${(statsPng.size / 1024).toFixed(1)} kB) & .svg vorhanden.`);
+  }
+}
+
+if (fs.existsSync(indexHtmlPath)) {
+  const distHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+  
+  // 1. OG Image Link Check
+  const hasV3Image = distHtml.includes('<meta property="og:image" content="https://www.optical.de/og-optical-brand-v3.png" />') &&
+                     distHtml.includes('<meta name="twitter:image" content="https://www.optical.de/og-optical-brand-v3.png" />');
+  const hasNoV2 = !distHtml.includes('og-optical-brand-v2.png');
+  
+  if (hasV3Image && hasNoV2) {
+    logResult('PASS', 'OG Image Metadaten', 'dist/index.html referenziert exklusiv https://www.optical.de/og-optical-brand-v3.png.');
+  } else {
+    logResult('FAIL', 'OG Image Metadaten', 'dist/index.html referenziert nicht korrekt og-optical-brand-v3.png oder enthält v2.');
+  }
+
+  // 2. Hero Wording Check
+  const hasNewEyebrow = distHtml.includes('KONTAKTLINSEN FINDEN &amp; NACHKAUF PLANEN') || distHtml.includes('KONTAKTLINSEN FINDEN & NACHKAUF PLANEN');
+  const hasNewHeadline = distHtml.includes('Deine Kontaktlinsen.') && distHtml.includes('Einfach wiederfinden.');
+  const hasNewDesc = distHtml.includes('Finde deine gewohnten Kontaktlinsen, vergleiche Produktinformationen und plane deinen nächsten Nachkauf.');
+  const hasOldEyebrow = distHtml.includes('Unabhängige Nachkauf-Plattform');
+  const hasOldDesc = distHtml.includes('prüfe verfügbare Angebote');
+
+  if (hasNewEyebrow && hasNewHeadline && hasNewDesc && !hasOldEyebrow && !hasOldDesc) {
+    logResult('PASS', 'Hero Wording Integrität', 'Soll-Wording (Eyebrow, Headline, Description) vollständig im DOM; altes Wording getilgt.');
+  } else {
+    logResult('FAIL', 'Hero Wording Integrität', `Wording-Mismatch im DOM: newEye=${hasNewEyebrow}, newDesc=${hasNewDesc}, oldEye=${hasOldEyebrow}, oldDesc=${hasOldDesc}`);
+  }
+}
+
+// ----------------------------------------------------
 // ZUSAMMENFASSUNG
 // ----------------------------------------------------
 console.log('\n================================================================');
