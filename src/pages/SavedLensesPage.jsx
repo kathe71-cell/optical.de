@@ -25,6 +25,7 @@ import CalendarExportDropdown from '../components/CalendarExportDropdown';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { useRefillConfigs } from '../hooks/useRefillConfigs';
 import { PRODUCTS, getProductById } from '../data/products';
+import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
 import { trackAffiliateClick } from '../utils/tracking';
 
 export default function SavedLensesPage() {
