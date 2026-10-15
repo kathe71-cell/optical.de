@@ -26,6 +26,8 @@ import { useRefillConfigs } from '../hooks/useRefillConfigs';
 import RefillAssistantModal from '../components/RefillAssistantModal';
 import { trackAffiliateClick, trackProductView } from '../utils/tracking';
 import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
+import MisterSpexOfferCard from '../components/MisterSpexOfferCard';
+import { hasMisterSpexOffer } from '../utils/misterSpexValidation';
 
 export default function ProductDetailPage({ productIdOverride }) {
   const { productId: routeId } = useParams();
@@ -371,6 +373,11 @@ export default function ProductDetailPage({ productIdOverride }) {
                 </div>
               </div>
             </div>
+
+            {/* Mister Spex Partnerangebot (nur für die 7 verifizierten Produkte) */}
+            {hasMisterSpexOffer(product) && (
+              <MisterSpexOfferCard product={product} />
+            )}
 
             {/* Dk/t Fachhinweis */}
             <div className="bg-slate-100 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2 leading-relaxed">
