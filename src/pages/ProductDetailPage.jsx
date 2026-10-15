@@ -193,7 +193,7 @@ export default function ProductDetailPage({ productIdOverride }) {
                   href={getProductAffiliateUrl(product)}
                   target="_blank"
                   rel={AFFILIATE_LINK_REL}
-                  onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
+                  onClick={() => trackAffiliateClick(product.id, 'amazon', 'product_detail_merchant_grid')}
                   className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
                 >
                   <span>{getAffiliateCtaLabel(product)}</span>

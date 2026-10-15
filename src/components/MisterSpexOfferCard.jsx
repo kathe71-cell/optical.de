@@ -19,7 +19,7 @@ export default function MisterSpexOfferCard({ product }) {
   if (!offer) return null;
 
   const handleClick = () => {
-    trackAffiliateClick(product.product_name, 'mister_spex', 'product_detail_merchant_card');
+    trackAffiliateClick(product.id, 'mister_spex', 'product_detail_merchant_grid');
   };
 
   return (
