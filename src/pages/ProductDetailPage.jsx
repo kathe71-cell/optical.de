@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { 
-  Eye, 
-  ArrowLeft, 
-  ShieldCheck, 
-  Check, 
-  ExternalLink, 
-  Bookmark, 
-  Calendar, 
-  Database, 
-  Layers, 
+import {
+  Eye,
+  ArrowLeft,
+  ShieldCheck,
+  Check,
+  ExternalLink,
+  Bookmark,
+  Calendar,
+  Database,
+  Layers,
   Sparkles,
   Info
 } from 'lucide-react';
@@ -52,7 +52,7 @@ export default function ProductDetailPage({ productIdOverride }) {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
-      <MetaTags 
+      <MetaTags
         title={`${product.product_name} – Spezifikationen & Preisvergleich | optical.de`}
         description={`${product.product_name} von ${product.manufacturer}: Verifizierte Spezifikationen (Dk/t ${product.dk_t || '-'}, ${product.material}), Packungsgröße ${product.pack_size} und Angebote zum Nachkauf.`}
         canonical={canonicalUrl}
@@ -61,7 +61,7 @@ export default function ProductDetailPage({ productIdOverride }) {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full flex-grow">
-        
+
         {/* Breadcrumb Navigation */}
         <div className="text-xs text-slate-500 flex items-center gap-2 mb-6">
           <Link to="/" className="hover:text-emerald-700">Startseite</Link>
@@ -90,8 +90,8 @@ export default function ProductDetailPage({ productIdOverride }) {
           <button
             onClick={() => toggleSave(product.id)}
             className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-extrabold border transition shadow-xs ${
-              saved 
-                ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
+              saved
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
                 : 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50 hover:border-slate-400'
             }`}
             aria-label={`${product.product_name} ${saved ? 'aus Merkliste entfernen' : 'merken'}`}
@@ -104,17 +104,174 @@ export default function ProductDetailPage({ productIdOverride }) {
         {/* Medical Disclaimer */}
         <MedicalDisclaimer className="mb-8" />
 
+        {/* Händlerangebote (Mobile-First vor der Spezifikations-Matrix) */}
+        <section aria-labelledby="haendlerangebote-heading" className="mb-10">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 id="haendlerangebote-heading" className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight">
+                Händlerangebote
+              </h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Bezugsquellen für {product.product_name}. Preise und Verfügbarkeit direkt beim Händler prüfen.
+              </p>
+            </div>
+            {hasMisterSpexOffer(product) && (
+              <span className="hidden sm:inline-flex items-center text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+                2 Händlerangebote
+              </span>
+            )}
+          </div>
+
+          <div className={`grid grid-cols-1 ${hasMisterSpexOffer(product) ? 'lg:grid-cols-2' : 'max-w-2xl'} gap-6`}>
+
+            {/* Amazon Händlerkarte */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs flex flex-col justify-between">
+              <div>
+                {/* Header mit Branding & Kennzeichnung */}
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 font-black text-xs flex items-center justify-center shadow-2xs">
+                      a
+                    </div>
+                    <div>
+                      <h3 className="font-extrabold text-sm text-slate-950 leading-tight">
+                        Amazon.de
+                      </h3>
+                      <span className="text-[10px] text-slate-500 block">
+                        Marktplatz &amp; Direktversand · amazon.de
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] font-bold text-amber-950 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full">
+                    Partnerangebot *
+                  </span>
+                </div>
+
+                {/* Preis- und Packungsinformationen */}
+                <div className="mt-4 space-y-2.5 text-xs">
+                  <div className="flex justify-between items-center text-slate-600">
+                    <span>Standardpackung:</span>
+                    <span className="font-semibold text-slate-800">{product.pack_size}</span>
+                  </div>
+
+                  <div className="flex justify-between items-baseline text-slate-900">
+                    <span className="text-xs text-slate-600 font-medium">Beispielpreis auf Amazon.de:</span>
+                    <span className="text-emerald-700 font-black text-xl">ca. {product.price.toFixed(2)} € *</span>
+                  </div>
+
+                  <div className="text-[10px] text-slate-500">
+                    Tagesaktueller Händlerpreis auf Amazon.de einsehbar
+                  </div>
+
+                  {product.price_per_lens && (
+                    <div className="flex justify-between items-center text-slate-600 pt-2 border-t border-slate-100">
+                      <span>Preis pro Einzellinse:</span>
+                      <span className="font-semibold text-slate-800">{product.price_per_lens}</span>
+                    </div>
+                  )}
+
+                  {product.cost_per_day && (
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Kosten pro Tragetag (2 Linsen):</span>
+                      <span className="font-semibold text-emerald-700">{product.cost_per_day}</span>
+                    </div>
+                  )}
+
+                  {product.cost_per_month && (
+                    <div className="flex justify-between items-center text-slate-600">
+                      <span>Kosten pro Monat (2 Linsen):</span>
+                      <span className="font-semibold text-slate-800">{product.cost_per_month}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Kauf- & Aktionsbereich */}
+              <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
+                <a
+                  href={getProductAffiliateUrl(product)}
+                  target="_blank"
+                  rel={AFFILIATE_LINK_REL}
+                  onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
+                >
+                  <span>{getAffiliateCtaLabel(product)}</span>
+                  <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+
+                {/* Direkter Nachkauf-Assistent (nur für Kontaktlinsen, nicht für Pflegemittel/Tropfen) */}
+                {product.category === 'kontaktlinsen' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!saved) toggleSave(product.id);
+                      setShowRefillModal(true);
+                    }}
+                    className="w-full py-2.5 px-3 rounded-xl text-xs font-extrabold bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 transition flex items-center justify-center gap-1.5 shadow-2xs"
+                  >
+                    <Calendar className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>
+                      {currentRefillConfig?.refillDate
+                        ? `Nachkauf-Plan aktiv (ab ${new Date(currentRefillConfig.refillDate).toLocaleDateString('de-DE')})`
+                        : 'Nachkauf planen'}
+                    </span>
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => toggleSave(product.id)}
+                  className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 ${
+                    saved
+                      ? 'bg-slate-100 border-slate-300 text-slate-800'
+                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                  }`}
+                >
+                  <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600 text-emerald-600' : ''}`} />
+                  <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für Merkliste vormerken'}</span>
+                </button>
+
+                {saved && (
+                  <Link
+                    to="/meine-linsen"
+                    className="block text-center text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold underline py-0.5"
+                  >
+                    Zu „Meine Linsen“ &amp; Gesamtübersicht →
+                  </Link>
+                )}
+
+                <div className="text-center space-y-0.5 pt-1">
+                  <span className="text-[11px] text-slate-600 block font-medium">
+                    Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
+                  </span>
+                  <span className="text-[11px] text-slate-600 block font-medium">
+                    * Werbelink / Partnerlink
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Mister Spex Partnerangebot (nur für die 7 verifizierten Produkte) */}
+            {hasMisterSpexOffer(product) && (
+              <MisterSpexOfferCard product={product} />
+            )}
+
+          </div>
+        </section>
+
+        {/* Produktdetails & Spezifikationen Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-          
+
           {/* Main Datasheet (8 Spalten) */}
           <div className="lg:col-span-8 space-y-6">
-            
+
             {/* Technische Matrix */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
               <h2 className="text-lg font-black text-slate-900 mb-4">
                 Technische Spezifikations-Matrix
               </h2>
-              
+
               <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 text-xs">
                 <div className="grid grid-cols-12 px-4 py-3 bg-slate-50 font-semibold text-slate-700">
                   <span className="col-span-5">Parameter</span>
@@ -261,129 +418,28 @@ export default function ProductDetailPage({ productIdOverride }) {
             )}
           </div>
 
-          {/* Sidebar / Kauf- & Nachkauf-Box (4 Spalten) */}
+          {/* Sidebar / Fachliche Hinweise (4 Spalten) */}
           <div className="lg:col-span-4 space-y-6">
-            
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                Verfügbarkeit &amp; Nachkauf
-              </span>
-              <h3 className="text-xl font-black text-slate-950 mt-1">
-                {product.product_name}
-              </h3>
-              
-              <div className="mt-5 pt-4 border-t border-slate-100 space-y-2.5 text-xs">
-                <div className="flex justify-between items-center text-slate-600">
-                  <span>Standardpackung:</span>
-                  <span className="font-semibold text-slate-800">{product.pack_size}</span>
-                </div>
-                
-                <div className="flex justify-between items-baseline text-slate-900">
-                  <span className="text-xs text-slate-600 font-medium">Beispielpreis auf Amazon.de:</span>
-                  <span className="text-emerald-700 font-black text-xl">ca. {product.price.toFixed(2)} € *</span>
-                </div>
-
-                <div className="text-[10px] text-slate-500">
-                  Tagesaktueller Händlerpreis auf Amazon.de einsehbar
-                </div>
-
-                {product.price_per_lens && (
-                  <div className="flex justify-between items-center text-slate-600 pt-2 border-t border-slate-100">
-                    <span>Preis pro Einzellinse:</span>
-                    <span className="font-semibold text-slate-800">{product.price_per_lens}</span>
-                  </div>
-                )}
-
-                {product.cost_per_day && (
-                  <div className="flex justify-between items-center text-slate-600">
-                    <span>Kosten pro Tragetag (2 Linsen):</span>
-                    <span className="font-semibold text-emerald-700">{product.cost_per_day}</span>
-                  </div>
-                )}
-
-                {product.cost_per_month && (
-                  <div className="flex justify-between items-center text-slate-600">
-                    <span>Kosten pro Monat (2 Linsen):</span>
-                    <span className="font-semibold text-slate-800">{product.cost_per_month}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Kauf-Button */}
-              <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
-                <a
-                  href={getProductAffiliateUrl(product)}
-                  target="_blank"
-                  rel={AFFILIATE_LINK_REL}
-                  onClick={() => trackAffiliateClick(product.product_name, 'amazon', 'product_detail_sidebar')}
-                  className="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-all group"
-                >
-                  <span>{getAffiliateCtaLabel(product)}</span>
-                  <ExternalLink className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
-                </a>
-
-                {/* Direkter Nachkauf-Assistent (nur für Kontaktlinsen, nicht für Pflegemittel/Tropfen) */}
-                {product.category === 'kontaktlinsen' && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (!saved) toggleSave(product.id);
-                      setShowRefillModal(true);
-                    }}
-                    className="w-full py-2.5 px-3 rounded-xl text-xs font-extrabold bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 transition flex items-center justify-center gap-1.5 shadow-2xs"
-                  >
-                    <Calendar className="w-3.5 h-3.5 text-emerald-700" />
-                    <span>
-                      {currentRefillConfig?.refillDate 
-                        ? `Nachkauf-Plan aktiv (ab ${new Date(currentRefillConfig.refillDate).toLocaleDateString('de-DE')})`
-                        : 'Nachkauf planen'}
-                    </span>
-                  </button>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => toggleSave(product.id)}
-                  className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold border transition flex items-center justify-center gap-1.5 ${
-                    saved 
-                      ? 'bg-slate-100 border-slate-300 text-slate-800' 
-                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
-                  }`}
-                >
-                  <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-emerald-600 text-emerald-600' : ''}`} />
-                  <span>{saved ? 'In „Meine Linsen“ gemerkt' : 'Für Merkliste vormerken'}</span>
-                </button>
-
-                {saved && (
-                  <Link
-                    to="/meine-linsen"
-                    className="block text-center text-[11px] text-emerald-700 hover:text-emerald-800 font-semibold underline py-0.5"
-                  >
-                    Zu „Meine Linsen“ &amp; Gesamtübersicht →
-                  </Link>
-                )}
-
-                <div className="text-center space-y-0.5 pt-1">
-                  <span className="text-[11px] text-slate-600 block font-medium">
-                    Amazon-Partnerlink (Amazon.de) · Beispielpreis Stand 09/2026 · Tagesaktueller Preis auf Amazon.de einsehbar · Preise können abweichen
-                  </span>
-                  <span className="text-[11px] text-slate-600 block font-medium">
-                    * Werbelink / Partnerlink
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Mister Spex Partnerangebot (nur für die 7 verifizierten Produkte) */}
-            {hasMisterSpexOffer(product) && (
-              <MisterSpexOfferCard product={product} />
-            )}
 
             {/* Dk/t Fachhinweis */}
-            <div className="bg-slate-100 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2 leading-relaxed">
-              <h4 className="font-bold text-slate-900">Fachliche Erläuterung zu Dk/t:</h4>
+            <div className="bg-slate-100 rounded-2xl p-6 border border-slate-200 text-xs text-slate-600 space-y-3 leading-relaxed">
+              <h4 className="font-bold text-slate-900 text-sm">Fachliche Erläuterung zu Dk/t:</h4>
               <p>
                 Der Dk/t-Wert beschreibt die Sauerstofftransmissibilität einer Kontaktlinse bei definierter Mittendicke (-3.00 dpt). Er ist eine wichtige technische Kenngröße, sollte jedoch nicht als alleiniges Wechselkriterium herangezogen werden.
+              </p>
+              <p className="text-slate-500 text-[11px] pt-2 border-t border-slate-200">
+                Vor einem Wechsel von Kontaktlinsenmarken sollte stets eine fachgerechte Anpassung durch Augenoptiker oder Augenärzte erfolgen.
+              </p>
+            </div>
+
+            {/* Vertrauens- & Qualitätshinweis */}
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 text-xs text-slate-600 space-y-3 leading-relaxed shadow-xs">
+              <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>Unabhängiges Fachportal</span>
+              </div>
+              <p className="text-[11px] text-slate-500">
+                optical.de prüft Spezifikationen direkt anhand offizieller Hersteller-Deklarationen und verlinkt ausschließlich auf verifizierte Fach- und Versandhändler.
               </p>
             </div>
 
