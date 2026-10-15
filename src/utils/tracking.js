@@ -60,6 +60,20 @@ export const trackAffiliateClick = (productName, destination = 'amazon', sourceC
   });
 };
 
+/**
+ * Universelles Klick-Tracking für Multi-Merchant-Angebote.
+ * Datenminimiert: Keine Linsenparameter (Dioptrien, Achse, Zylinder), keine Cookies.
+ */
+export const trackMerchantOutboundClick = ({ productId, productName, merchant, network, sourceComponent = 'multi_merchant_section' }) => {
+  trackEvent('affiliate_click', {
+    product_id: productId,
+    product_name: productName,
+    destination: merchant,
+    network: network || 'unknown',
+    source_component: sourceComponent
+  });
+};
+
 export const trackPriceCalculatorUsed = (lensType, sph) => {
   trackEvent('price_calculator_used', { lens_type: lensType, sph_value: sph });
 };
