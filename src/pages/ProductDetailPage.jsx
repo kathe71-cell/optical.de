@@ -11,7 +11,9 @@ import {
   Database,
   Layers,
   Sparkles,
-  Info
+  Info,
+  HelpCircle,
+  BookOpen
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,6 +22,7 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import TrustSection from '../components/TrustSection';
 import ScrollToTop from '../components/ScrollToTop';
 import { getProductById, PRODUCTS } from '../data/products';
+import { getProductProfile } from '../data/productProfiles';
 import { EIGENMARKEN_DATABASE } from '../data/eigenmarken';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { useRefillConfigs } from '../hooks/useRefillConfigs';
@@ -40,6 +43,7 @@ export default function ProductDetailPage({ productIdOverride }) {
 
   const saved = isSaved(product.id);
   const currentRefillConfig = getConfig(product.id);
+  const profile = getProductProfile(product.id);
 
   // Finde zugeordnete Handelsmarken für dieses Produkt
   const relatedEigenmarken = EIGENMARKEN_DATABASE.filter(item => item.matched_brand_product_id === product.id);
@@ -349,6 +353,75 @@ export default function ProductDetailPage({ productIdOverride }) {
                 )}
               </div>
             </div>
+
+            {/* Redaktionelles Profil & Spezifikationen (für Pilotprodukte) */}
+            {profile && (
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-6">
+                <div>
+                  <h3 className="text-lg font-black text-slate-900 mb-2">
+                    {profile.sectionTitle}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    {profile.summary}
+                  </p>
+                </div>
+
+                {/* Charakteristische Merkmale */}
+                {profile.characteristics && profile.characteristics.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {profile.characteristics.map((item, idx) => (
+                      <div key={idx} className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex flex-col justify-between">
+                        <div className="text-xs font-bold text-slate-900 mb-1">{item.title}</div>
+                        <p className="text-[11px] text-slate-600 leading-relaxed">{item.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Produktspezifische FAQ */}
+                {profile.faqs && profile.faqs.length > 0 && (
+                  <div className="pt-4 border-t border-slate-100">
+                    <h4 className="text-sm font-black text-slate-900 mb-3 flex items-center gap-1.5">
+                      <HelpCircle className="w-4 h-4 text-emerald-600" />
+                      <span>Häufige Fragen zu {product.product_name}</span>
+                    </h4>
+                    <div className="space-y-3">
+                      {profile.faqs.map((faq, fIdx) => (
+                        <div key={fIdx} className="bg-slate-50/60 border border-slate-200 rounded-xl p-3.5">
+                          <div className="text-xs font-bold text-slate-900 mb-1">{faq.question}</div>
+                          <p className="text-xs text-slate-600 leading-relaxed">{faq.answer}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Themenrelevante interne Verlinkungen */}
+                {profile.relatedLinks && profile.relatedLinks.length > 0 && (
+                  <div className="pt-4 border-t border-slate-100">
+                    <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Themenrelevante Übersichten &amp; Ratgeber</span>
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {profile.relatedLinks.map((link, lIdx) => (
+                        <Link
+                          key={lIdx}
+                          to={link.href}
+                          className="p-3 bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 rounded-xl transition group block"
+                        >
+                          <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-700 transition flex items-center justify-between">
+                            <span>{link.label}</span>
+                            <span className="text-emerald-600 group-hover:translate-x-0.5 transition-transform">→</span>
+                          </div>
+                          <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-snug">{link.description}</p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Zugeordnete Eigenmarken / Handelsmarken */}
             {relatedEigenmarken.length > 0 && (

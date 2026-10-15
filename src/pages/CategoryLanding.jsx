@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Eye, ArrowLeft, ArrowUpDown, Filter, ExternalLink, ShieldCheck, Check, Bookmark } from 'lucide-react';
+import { Eye, ArrowLeft, ArrowUpDown, Filter, ExternalLink, ShieldCheck, Check, Bookmark, BookOpen } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MetaTags from '../components/MetaTags';
@@ -21,17 +21,113 @@ const getAmazonLink = (queryOrAsin, asin) => getAffiliateSearchUrl(queryOrAsin, 
 const CATEGORY_CONFIG = {
   'tageslinsen-vergleich': {
     categoryKey: 'tag',
-    title: 'Tageslinsen im transparenten Vergleich 2026 | optical.de',
+    title: 'Tageslinsen im transparenten Vergleich | optical.de',
     subtitle: 'Tägliche Hygiene ohne Pflegemittelaufwand. Vergleichen Sie Dk/t-Werte, Wassergehalt und die tatsächlichen Kosten pro Tag.',
     h1: 'Tageslinsen Vergleich: Technische Daten & Preis pro Tag',
-    descriptionText: 'Tageslinsen werden nach einmaligem Tragen entsorgt. Dadurch entfällt der tägliche Reinigungsaufwand vollständig. Wichtige technische Kriterien sind die Sauerstofftransmissibilität (Dk/t) sowie das Material (klassisches Hydrogel vs. modernes Silikon-Hydrogel oder Wassergradient).'
+    descriptionText: 'Tageslinsen werden nach einmaligem Tragen entsorgt. Dadurch entfällt der tägliche Reinigungsaufwand vollständig. Wichtige technische Kriterien sind die Sauerstofftransmissibilität (Dk/t) sowie das Material (klassisches Hydrogel vs. modernes Silikon-Hydrogel oder Wassergradient).',
+    criteria: [
+      {
+        title: 'Einmalnutzung ohne täglichen Pflegeaufwand',
+        description: 'Tageslinsen werden nach einmaligem Tragen entsorgt. Dadurch entfallen die tägliche Reinigung, Desinfektion, Aufbewahrungsbehälter und Pflegemittel vollständig.'
+      },
+      {
+        title: 'Flexibilität & Trageanlässe',
+        description: 'Besonders geeignet für Gelegenheitsträger, Sport, Reisen oder als Ergänzung zur Brille, da angebrochene Packungen nicht altern wie Pflegemittel.'
+      },
+      {
+        title: 'Moderne Silikon-Hydrogele vs. Hydrogele',
+        description: 'Moderne Silikon-Hydrogele (z. B. Stenfilcon A) verbinden hohe Sauerstoffwerte mit niedrigem Modulus (Weichheit) und gutem Benetzungsverhalten.'
+      }
+    ],
+    featuredProducts: [
+      {
+        id: 'myday-daily',
+        name: 'CooperVision MyDay Daily Disposable',
+        path: '/produkt/myday-daily',
+        manufacturer: 'CooperVision',
+        highlight: 'Stenfilcon A (Silikon-Hydrogel) · Dk/t 100 · 54 % Wasser · Smart Silicone™ mit niedrigem Modulus (0,4 MPa)'
+      },
+      {
+        id: 'dailies-total-1',
+        name: 'Alcon Dailies Total 1',
+        path: '/produkt/dailies-total-1',
+        manufacturer: 'Alcon',
+        highlight: 'Delefilcon A · Dk/t 156 · Wassergradienten-Technologie (>80 % Wasser an der äußersten Oberfläche)'
+      }
+    ],
+    guides: [
+      {
+        title: 'Ratgeber: Kontaktlinsen anpassen',
+        href: '/ratgeber/kontaktlinsen-anpassen',
+        description: 'Warum Basiskurve (BC) und Durchmesser (DIA) vor dem Kauf vom Fachmann vermessen werden müssen.'
+      },
+      {
+        title: 'Ratgeber: Tages- vs. Monatslinsen Kosten',
+        href: '/ratgeber/tageslinsen-vs-monatslinsen-kosten',
+        description: 'Detaillierter Kostenvergleich beider Tragekonzepte inklusive Pflegemittel und Jahreskalkulation.'
+      }
+    ]
   },
   'monatslinsen-vergleich': {
     categoryKey: 'monat',
-    title: 'Monatslinsen im transparenten Vergleich 2026 | optical.de',
+    title: 'Monatslinsen im transparenten Vergleich | optical.de',
     subtitle: 'Wirtschaftliche Option bei täglichem Tragen. Vergleichen Sie Linsen mit hoher Sauerstofftransmissibilität und kalkulieren Sie Ihre monatlichen Gesamtkosten.',
     h1: 'Monatslinsen Vergleich: Sauerstofffluss & Kostenkalkulation',
-    descriptionText: 'Monatslinsen bieten bei regelmäßiger Nutzung häufig einen niedrigen rechnerischen Preis pro Tragetag (oft ab ca. 0,22 €/Tag bei beidseitigem Tragen). Entscheidend für die Augengesundheit bei langen Tragezeiten sind hochwertige Silikon-Hydrogel-Materialien mit adäquatem Dk/t-Wert.'
+    descriptionText: 'Monatslinsen bieten bei regelmäßiger Nutzung häufig einen niedrigen rechnerischen Preis pro Tragetag (oft ab ca. 0,22 €/Tag bei beidseitigem Tragen). Entscheidend für die Augengesundheit bei langen Tragezeiten sind hochwertige Silikon-Hydrogel-Materialien mit adäquatem Dk/t-Wert.',
+    criteria: [
+      {
+        title: 'Materialklasse & Sauerstoffversorgung',
+        description: 'Silikon-Hydrogele (z. B. Comfilcon A, Lotrafilcon B) erreichen hohe Sauerstoffwerte (Dk/t 130–160). Klassische Hydrogele (z. B. Omafilcon B) bieten eine Alternative bei Silikon-Unverträglichkeit.'
+      },
+      {
+        title: 'Pflege- & Hygieneaufwand',
+        description: 'Erfordert eine konsequente tägliche Reinigung. All-in-One-Lösungen eignen sich für unkomplizierte Handhabung; konservierungsmittelfreie Peroxidsysteme für empfindliche Augen.'
+      },
+      {
+        title: 'Wirtschaftlichkeit & Tragehäufigkeit',
+        description: 'Die tatsächliche Wirtschaftlichkeit hängt von individueller Nutzungshäufigkeit, Packungspreisen und Pflegemittelkosten ab. Bei regelmäßigem oder täglichem Tragen bieten Monatslinsen rechnerisch häufig einen geringeren Preis pro Tragetag.'
+      }
+    ],
+    featuredProducts: [
+      {
+        id: 'biofinity',
+        name: 'CooperVision Biofinity',
+        path: '/biofinity',
+        manufacturer: 'CooperVision',
+        highlight: 'Comfilcon A · Dk/t 160 · 48 % Wasser · Natürlich benetzende Aquaform® Technology ohne Oberflächenbeschichtung'
+      },
+      {
+        id: 'airoptix-hydraglyde',
+        name: 'Air Optix Plus HydraGlyde',
+        path: '/produkt/airoptix-hydraglyde',
+        manufacturer: 'Alcon',
+        highlight: 'Lotrafilcon B · Dk/t 138 · 33 % Wasser · SmartShield® gegen Lipidablagerungen & HydraGlyde® Moisture Matrix'
+      },
+      {
+        id: 'proclear-sphere',
+        name: 'CooperVision Proclear Sphere',
+        path: '/produkt/proclear-sphere',
+        manufacturer: 'CooperVision',
+        highlight: 'Omafilcon B (Hydrogel) · Dk/t 42 · 62 % Wasser · Biokompatible PC Technology™ mit Phosphorylcholin'
+      }
+    ],
+    guides: [
+      {
+        title: 'Ratgeber: Kontaktlinsen anpassen',
+        href: '/ratgeber/kontaktlinsen-anpassen',
+        description: 'Bedeutung der optometrischen Anpassung von Basiskurve (BC), Durchmesser (DIA) und Hornhautradien.'
+      },
+      {
+        title: 'Ratgeber: Tages- vs. Monatslinsen Kosten',
+        href: '/ratgeber/tageslinsen-vs-monatslinsen-kosten',
+        description: 'Vollständiger Kostenvergleich inklusive Pflegemittel und Jahresverbrauch.'
+      },
+      {
+        title: 'Ratgeber: Pflegemittel-Vergleich',
+        href: '/ratgeber/kontaktlinsen-pflegemittel-vergleich',
+        description: 'All-in-One- vs. Peroxidlösungen für Silikon-Hydrogel- und klassische Hydrogel-Linsen.'
+      }
+    ]
   },
   'torische-kontaktlinsen': {
     categoryKey: 'toric',
@@ -113,10 +209,75 @@ export default function CategoryLanding({ categorySlugOverride }) {
         {/* Medical Disclaimer */}
         <MedicalDisclaimer className="mb-8" />
 
-        {/* Info Box */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs mb-8 text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2">
-          <h2 className="font-extrabold text-base text-slate-900">Fachliche Einordnung &amp; Kriterien</h2>
-          <p>{config.descriptionText}</p>
+        {/* Info Box & Fachliche Kriterien */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs mb-8 text-xs sm:text-sm text-slate-700 leading-relaxed space-y-4">
+          <div>
+            <h2 className="font-extrabold text-base text-slate-900 mb-1">Fachliche Einordnung &amp; Kriterien</h2>
+            <p>{config.descriptionText}</p>
+          </div>
+
+          {/* Kriterien-Grid, falls definiert */}
+          {config.criteria && config.criteria.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+              {config.criteria.map((crit, cIdx) => (
+                <div key={cIdx} className="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex flex-col justify-between">
+                  <div className="font-bold text-xs text-slate-900 mb-1">{crit.title}</div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">{crit.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Ausgewählte Produkte im Vergleich (neutral ohne Superlative) */}
+          {config.featuredProducts && config.featuredProducts.length > 0 && (
+            <div className="pt-4 border-t border-slate-100">
+              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
+                Ausgewählte Produkte im Vergleich
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {config.featuredProducts.map((fp, fpIdx) => (
+                  <Link
+                    key={fpIdx}
+                    to={fp.path}
+                    className="p-3.5 bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 rounded-xl transition group block"
+                  >
+                    <div className="text-[10px] font-bold text-slate-500 uppercase">{fp.manufacturer}</div>
+                    <div className="font-bold text-xs text-slate-900 group-hover:text-emerald-700 transition flex items-center justify-between mt-0.5">
+                      <span>{fp.name}</span>
+                      <span className="text-emerald-600 group-hover:translate-x-0.5 transition-transform">→</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-1.5 leading-snug">{fp.highlight}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Themenrelevante Ratgeber */}
+          {config.guides && config.guides.length > 0 && (
+            <div className="pt-4 border-t border-slate-100">
+              <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Themenrelevante Ratgeber</span>
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {config.guides.map((g, gIdx) => (
+                  <Link
+                    key={gIdx}
+                    to={g.href}
+                    className="p-3 bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 rounded-xl transition group block"
+                  >
+                    <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-700 transition flex items-center justify-between">
+                      <span>{g.title}</span>
+                      <span className="text-emerald-600 group-hover:translate-x-0.5 transition-transform">→</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 mt-1 leading-snug">{g.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="pt-2 border-t border-slate-100 text-xs text-slate-500">
             <strong>Hinweis zur Dk/t-Kennzahl:</strong> Der Dk/t-Wert beschreibt die Sauerstofftransmissibilität einer Kontaktlinse. Er ist eine technische Kenngröße und sollte nicht isoliert zur Auswahl einer Kontaktlinse verwendet werden.
           </div>
