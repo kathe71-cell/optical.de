@@ -140,7 +140,7 @@ export default function CalendarExportDropdown({
           ref={menuRef}
           role="menu"
           aria-orientation="vertical"
-          className={`absolute left-0 right-0 sm:left-auto sm:right-0 sm:w-72 bg-white rounded-xl border border-slate-200 shadow-xl z-50 p-1.5 space-y-1 ${positionClasses}`}
+          className={`absolute left-0 sm:left-0 right-0 sm:right-auto sm:w-72 bg-white rounded-xl border border-slate-200 shadow-xl z-50 p-1.5 space-y-1 ${positionClasses}`}
         >
           {/* Option 1: Google Kalender */}
           <button

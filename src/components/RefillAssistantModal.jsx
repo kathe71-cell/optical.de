@@ -123,10 +123,10 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
       aria-labelledby="refill-modal-title"
       className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
     >
-      <div ref={modalRef} className="bg-white rounded-3xl max-w-xl w-full border border-slate-200 shadow-2xl overflow-hidden my-8">
+      <div ref={modalRef} className="bg-white rounded-3xl max-w-xl w-full border border-slate-200 shadow-2xl my-8">
         
         {/* Modal Header */}
-        <div className="p-6 bg-slate-900 text-white flex items-center justify-between">
+        <div className="p-6 bg-slate-900 text-white flex items-center justify-between rounded-t-3xl">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
               <Calendar className="w-5 h-5" />
@@ -348,7 +348,7 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
         </div>
 
         {/* Modal Footer */}
-        <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 rounded-b-3xl">
           <CalendarExportDropdown
             product={product}
             refillDate={effectiveRefillDate}
