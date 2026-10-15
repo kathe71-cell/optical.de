@@ -55,6 +55,7 @@ export default function SavedLensesPage() {
         title="Meine Linsen & Nachkauf-Planer | optical.de"
         description="Ihre lokal gemerkten Kontaktlinsen mit individuellem Vorratsrechner, Kalenderexport und Erinnerung für den rechtzeitigen Nachkauf."
         canonical="https://www.optical.de/meine-linsen"
+        robots="noindex, follow"
       />
       <Header />
 

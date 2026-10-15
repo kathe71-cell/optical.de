@@ -94,7 +94,7 @@ export default function MonatsVsTagesGuide() {
             </table>
           </div>
           <p className="text-xs text-slate-500 mt-4 leading-relaxed border-t border-slate-100 pt-3">
-            * Modellrechnung: Monatslinsen kalkuliert mit ca. 120 &euro; für 12 Linsenpaare/Jahr (z. B. 4x 6er Pack gängiger Silikon-Hydrogel-Monatslinsen zu je ca. 30 &euro;) zzgl. ca. 70 &euro; für All-in-One Kombilösungen (ca. 6 Flaschen à 300–360 ml/Jahr). Tageslinsen kalkuliert mit ca. 0,65 &euro; pro Einzellinse (1,30 &euro; pro Paar). Tatsächliche Preise hängen vom gewählten Produkt, individuellen Verordnungen und Packungsgrößen ab.
+            * Modellrechnung: Monatslinsen kalkuliert mit ca. 120 &euro; für 12 Linsenpaare/Jahr (z. B. auf Basis gängiger Silikon-Hydrogel-Monatslinsen wie der <Link to="/biofinity" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Biofinity</Link> oder <Link to="/produkt/airoptix-hydraglyde" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Air Optix plus HydraGlyde</Link>) zzgl. ca. 70 &euro; für All-in-One Kombilösungen. Tageslinsen kalkuliert mit ca. 0,65 &euro; pro Einzellinse bzw. Premium-Tageslinsen wie der <Link to="/produkt/dailies-total-1" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Dailies Total 1</Link>. Tatsächliche Preise hängen vom gewählten Produkt, individuellen Verordnungen und Packungsgrößen ab.
           </p>
         </div>
 

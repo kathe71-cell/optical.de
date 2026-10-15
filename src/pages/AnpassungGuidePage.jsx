@@ -88,7 +88,7 @@ export default function AnpassungGuidePage() {
               <span className="text-xs font-mono font-bold text-emerald-700 uppercase">4. Dk/t (Sauerstoffdurchlässigkeit)</span>
               <h3 className="font-extrabold text-slate-900 text-base">Material & Atmungsaktivität</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Moderne Silikon-Hydrogel-Linsen (z. B. Comfilcon A, Senofilcon A) bieten Werte über 100 Dk/t und schützen die Hornhaut vor Hypoxie.
+                Moderne Silikon-Hydrogel-Linsen (wie Comfilcon A bei der <Link to="/biofinity" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Biofinity</Link> oder Senofilcon A bei der <Link to="/produkt/acuvue-oasys-2week" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Acuvue Oasys</Link>) bieten Werte über 100 Dk/t und unterstützen eine hohe Sauerstoffversorgung der Hornhaut.
               </p>
             </div>
           </div>

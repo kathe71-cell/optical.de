@@ -40,8 +40,9 @@ export const STATIC_ROUTES = [
     path: '/meine-linsen',
     title: 'Meine gemerkten Kontaktlinsen | optical.de',
     description: 'Ihre lokal gespeicherten Kontaktlinsen für den schnellen und unkomplizierten Nachkauf. Ohne Login, direkt im Browser gespeichert.',
-    priority: '0.8',
-    indexable: true,
+    priority: '0.0',
+    indexable: false,
+    robots: 'noindex, follow',
   },
   {
     path: '/apollo-iwear-oxygen',

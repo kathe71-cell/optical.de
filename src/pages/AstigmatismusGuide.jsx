@@ -53,14 +53,22 @@ export default function AstigmatismusGuide() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {[
-                  { name: 'Acuvue Oasys Max 1-Day for Astigmatism', typ: 'Täglich', mat: 'Silikon-Hydrogel', price: '44,99 €' },
-                  { name: 'Alcon Dailies AquaComfort Plus Toric', typ: 'Täglich', mat: 'Hydrogel', price: '29,99 €' },
-                  { name: 'CooperVision MyDay Toric', typ: 'Täglich', mat: 'Silikon-Hydrogel', price: '34,99 €' },
-                  { name: 'Acuvue Oasys for Astigmatism', typ: '2-wöchentlich', mat: 'Silikon-Hydrogel', price: '34,99 €' },
-                  { name: 'Bausch ULTRA for Astigmatism', typ: 'Monatlich', mat: 'Silikon-Hydrogel', price: '39,99 €' },
+                  { name: 'Acuvue Oasys Max 1-Day for Astigmatism', slug: 'acuvue-oasys-max-1day-toric', typ: 'Täglich', mat: 'Silikon-Hydrogel', price: '44,99 €' },
+                  { name: 'Alcon Dailies AquaComfort Plus Toric', slug: 'dailies-aquacomfort-toric', typ: 'Täglich', mat: 'Hydrogel', price: '29,99 €' },
+                  { name: 'CooperVision MyDay Toric', slug: 'myday-toric', typ: 'Täglich', mat: 'Silikon-Hydrogel', price: '34,99 €' },
+                  { name: 'Acuvue Oasys for Astigmatism', slug: 'acuvue-oasys-astigmatism', typ: '2-wöchentlich', mat: 'Silikon-Hydrogel', price: '34,99 €' },
+                  { name: 'Bausch ULTRA for Astigmatism', slug: 'bausch-ultra-astigmatism', typ: 'Monatlich', mat: 'Silikon-Hydrogel', price: '39,99 €' },
                 ].map((row, i) => (
                   <tr key={i} className="text-slate-700">
-                    <td className="py-2 font-semibold pr-3">{row.name}</td>
+                    <td className="py-2 font-semibold pr-3">
+                      {row.slug ? (
+                        <Link to={`/produkt/${row.slug}`} className="text-emerald-700 hover:text-emerald-800 hover:underline">
+                          {row.name}
+                        </Link>
+                      ) : (
+                        row.name
+                      )}
+                    </td>
                     <td className="py-2 pr-3">{row.typ}</td>
                     <td className="py-2 pr-3">{row.mat}</td>
                     <td className="py-2 text-right font-bold text-slate-900">{row.price}</td>
@@ -72,7 +80,7 @@ export default function AstigmatismusGuide() {
 
           <h2 className="text-xl font-black text-slate-900 mt-8 mb-3">Tageslinsen vs. Monatslinsen bei Astigmatismus</h2>
           <p className="text-sm text-slate-700 leading-relaxed mb-4">
-            Torische Tageslinsen bieten maximale Hygiene ohne Pflegeaufwand, sind aber teurer im Jahresverbrauch. Torische Monatslinsen sind günstiger pro Packung, erfordern aber tägliche Pflege. Torische Zweiwochen-Linsen wie die Acuvue Oasys for Astigmatism sind ein beliebter Kompromiss.
+            Torische Tageslinsen bieten maximale Hygiene ohne Pflegeaufwand, sind aber teurer im Jahresverbrauch. Torische Monatslinsen wie die <Link to="/produkt/biofinity-toric" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Biofinity Toric</Link> sind günstiger pro Packung, erfordern aber tägliche Pflege. Torische Zweiwochen-Linsen wie die <Link to="/produkt/acuvue-oasys-astigmatism" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Acuvue Oasys for Astigmatism</Link> sind ein beliebter Kompromiss.
           </p>
 
           <h2 className="text-xl font-black text-slate-900 mt-8 mb-3">Was kostet die Korrektur von Astigmatismus mit Kontaktlinsen?</h2>

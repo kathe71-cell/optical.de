@@ -199,11 +199,11 @@ export default function ProductDetailPage({ productIdOverride }) {
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-5 h-5 text-emerald-600" />
                   <h3 className="text-base font-black text-slate-900">
-                    Bekannte Optiker-Handelsmarken zu {product.product_name}
+                    Optiker-Eigenmarken im Parameter-Vergleich
                   </h3>
                 </div>
                 <p className="text-xs text-slate-600 mb-4 leading-relaxed">
-                  Die folgenden Eigenmarken großer Optikerketten weisen eine nachgewiesene Übereinstimmung in Material ({product.material}) und Geometrie auf:
+                  Informationen und technische Merkmale zu Optiker-Eigenmarken mit ähnlichen physikalischen Parametern im Vergleichsdossier ansehen:
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

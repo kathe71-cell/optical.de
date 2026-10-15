@@ -79,7 +79,7 @@ export default function PflegemittelGuide() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs">
             <h3 className="font-bold text-slate-950 mb-2">All-in-One Lösungen</h3>
-            <p className="text-xs text-slate-600 mb-3 leading-relaxed">Reinigen, desinfizieren, abspülen und aufbewahren in einem Schritt. Die beliebteste Wahl für flexible Linsenträger.</p>
+            <p className="text-xs text-slate-600 mb-3 leading-relaxed">Reinigen, desinfizieren, abspülen und aufbewahren in einem Schritt. Die beliebteste Wahl für flexible Linsenträger (z. B. <Link to="/produkt/biotrue-fluid" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Biotrue All-in-One</Link> oder <Link to="/produkt/opti-free-puremoist" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">Opti-Free PureMoist</Link>).</p>
             <div className="text-xs text-slate-500 space-y-1">
               <div>✓ Einfache Handhabung</div>
               <div>✓ Wirtschaftlich</div>
@@ -88,7 +88,7 @@ export default function PflegemittelGuide() {
           </div>
           <div className="bg-white rounded-2xl border border-emerald-200 p-5 shadow-2xs bg-emerald-50/20">
             <h3 className="font-bold text-emerald-950 mb-2">H2O2-Peroxidsysteme</h3>
-            <p className="text-xs text-slate-600 mb-3 leading-relaxed">Wasserstoffperoxid vernichtet Keime und neutralisiert sich am Platinkatalysator zu Wasser. Ideal bei empfindlichen Augen.</p>
+            <p className="text-xs text-slate-600 mb-3 leading-relaxed">Wasserstoffperoxid vernichtet Keime und neutralisiert sich am Platinkatalysator zu Wasser. Ideal bei empfindlichen Augen (z. B. <Link to="/produkt/aosept-hydraglyde" className="text-emerald-700 hover:text-emerald-800 font-semibold underline">AOSEPT Plus HydraGlyde</Link>).</p>
             <div className="text-xs text-slate-500 space-y-1">
               <div>✓ Maximale Desinfektion</div>
               <div>✓ 100 % konservierungsmittelfrei nach Katalyse</div>
