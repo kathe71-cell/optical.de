@@ -140,23 +140,115 @@ export function calculateRefillSchedule(config) {
 }
 
 /**
+ * Hilfsfunktion zum sauberen Escapen von Textfeldern nach RFC 5545 (iCalendar)
+ * Backslash, Semikolon, Komma und Zeilenumbrüche müssen escaped werden.
+ */
+function escapeIcsText(text = '') {
+  return String(text)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r?\n/g, '\\n');
+}
+
+/**
+ * Berechnet das exklusive Folgedatum (DTEND = Startdatum + 1 Tag) für ein ganztägiges Ereignis.
+ * Format: YYYYMMDD
+ */
+function getExclusiveNextDay(dateStr) {
+  // dateStr im Format YYYY-MM-DD
+  const parts = dateStr.split('-');
+  const year = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const day = parseInt(parts[2], 10);
+
+  const dateObj = new Date(Date.UTC(year, month, day));
+  dateObj.setUTCDate(dateObj.getUTCDate() + 1);
+
+  const nextY = dateObj.getUTCFullYear();
+  const nextM = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+  const nextD = String(dateObj.getUTCDate()).padStart(2, '0');
+  return `${nextY}${nextM}${nextD}`;
+}
+
+/**
+ * Faltet eine iCalendar-Zeile gemäß RFC 5545 (Section 3.1):
+ * Zeilen dürfen maximal 75 Oktette (Bytes) lang sein. Längere Zeilen werden
+ * durch CRLF gefolgt von einem einzelnen Leerzeichen fortgesetzt.
+ */
+function foldIcsLine(line) {
+  const buf = Buffer.from(line, 'utf8');
+  if (buf.length <= 75) {
+    return line;
+  }
+
+  const chunks = [];
+  let currentStart = 0;
+  let isFirst = true;
+
+  while (currentStart < line.length) {
+    // Erstes Segment darf bis zu 75 Bytes lang sein, Folgezeilen bis zu 74 Bytes (da 1 Byte für führendes Leerzeichen reserviert ist)
+    const maxBytes = isFirst ? 75 : 74;
+    let end = currentStart;
+    let validEnd = currentStart;
+
+    while (end < line.length) {
+      const candidate = line.slice(currentStart, end + 1);
+      if (Buffer.byteLength(candidate, 'utf8') <= maxBytes) {
+        validEnd = end + 1;
+        end++;
+      } else {
+        break;
+      }
+    }
+
+    if (validEnd === currentStart) {
+      // Sicherheits-Fallback falls ein einzelnes Zeichen > maxBytes ist
+      validEnd = currentStart + 1;
+    }
+
+    const chunk = line.slice(currentStart, validEnd);
+    chunks.push(isFirst ? chunk : ` ${chunk}`);
+    isFirst = false;
+    currentStart = validEnd;
+  }
+
+  return chunks.join('\r\n');
+}
+
+/**
  * Erzeugt einen standardkonformen .ics Kalendereintrag für den Nachkauf
+ * Ganztägiges Ereignis nach RFC 5545 mit inclusive DTSTART und exclusive DTEND.
  * 
  * @param {Object} params
  * @param {string} params.productName - Produktname
  * @param {string} params.refillDate - YYYY-MM-DD
- * @param {string} params.targetUrl - Rücksprunglink zu optical.de/meine-linsen
+ * @param {string} [params.targetUrl] - Rücksprunglink zu optical.de/meine-linsen
+ * @param {string} [params.location] - Ort / Plattform
  * @returns {string} ICS Dateistring
  */
-export function generateIcsCalendarEvent({ productName, refillDate, targetUrl = 'https://www.optical.de/meine-linsen' }) {
+export function generateIcsCalendarEvent({
+  productName,
+  refillDate,
+  targetUrl = 'https://www.optical.de/meine-linsen',
+  location = 'optical.de Online-Vergleich'
+}) {
   if (!refillDate) return '';
 
-  const cleanDate = refillDate.replace(/-/g, '');
+  const cleanStartDate = refillDate.replace(/-/g, '');
+  const cleanEndDate = getExclusiveNextDay(refillDate);
   const now = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-  const uid = `optical-refill-${cleanDate}-${Math.random().toString(36).substring(2, 9)}@optical.de`;
+  const uid = `optical-refill-${cleanStartDate}-${Math.random().toString(36).substring(2, 9)}@optical.de`;
+  const prod = productName || 'optical.de';
 
-  // Format: Ganztägiges Ereignis (DTSTART;VALUE=DATE:YYYYMMDD)
-  return [
+  const summary = escapeIcsText(`Kontaktlinsen nachbestellen (${prod})`);
+  const description = escapeIcsText(`Ihr Kontaktlinsenvorrat (${prod}) geht in Kürze zu Ende. Jetzt Angebote prüfen und rechtzeitig nachbestellen: ${targetUrl}`);
+  const escapedLocation = escapeIcsText(location);
+
+  // RFC 5545 konformes ganztägiges Ereignis mit Zeilenfaltung:
+  // DTSTART;VALUE=DATE:YYYYMMDD
+  // DTEND;VALUE=DATE:YYYYMMDD (exklusiv = nächster Tag)
+  const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//optical.de//Nachkauf-Assistent//DE',
@@ -165,9 +257,11 @@ export function generateIcsCalendarEvent({ productName, refillDate, targetUrl = 
     'BEGIN:VEVENT',
     `UID:${uid}`,
     `DTSTAMP:${now}`,
-    `DTSTART;VALUE=DATE:${cleanDate}`,
-    `SUMMARY:Kontaktlinsen nachbestellen (${productName || 'optical.de'})`,
-    `DESCRIPTION:Ihr Kontaktlinsenvorrat geht in Kürze zu Ende. Jetzt Angebote prüfen und rechtzeitig nachbestellen: ${targetUrl}`,
+    `DTSTART;VALUE=DATE:${cleanStartDate}`,
+    `DTEND;VALUE=DATE:${cleanEndDate}`,
+    `SUMMARY:${summary}`,
+    `DESCRIPTION:${description}`,
+    `LOCATION:${escapedLocation}`,
     `URL:${targetUrl}`,
     'STATUS:CONFIRMED',
     'TRANSP:TRANSPARENT',
@@ -178,7 +272,48 @@ export function generateIcsCalendarEvent({ productName, refillDate, targetUrl = 
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR'
-  ].join('\r\n');
+  ];
+
+  return lines.map(foldIcsLine).join('\r\n');
+}
+
+/**
+ * Erzeugt eine vorausgefüllte Google Calendar URL für das ganztägige Nachkaufereignis.
+ * Google Calendar erwartet für ganztägige Events: dates=YYYYMMDD/YYYYMMDD (Start/Ende exklusiv)
+ * 
+ * @param {Object} params
+ * @param {string} params.productName - Produktname
+ * @param {string} params.refillDate - YYYY-MM-DD
+ * @param {string} [params.targetUrl] - Rücksprunglink
+ * @param {string} [params.location] - Ort (Default: 'optical.de Online-Vergleich')
+ * @returns {string} Vollständige Google Calendar Web-URL
+ */
+export function generateGoogleCalendarUrl({
+  productName,
+  refillDate,
+  targetUrl = 'https://www.optical.de/meine-linsen',
+  location = 'optical.de Online-Vergleich'
+}) {
+  if (!refillDate) return '';
+
+  const cleanStartDate = refillDate.replace(/-/g, '');
+  const cleanEndDate = getExclusiveNextDay(refillDate);
+  const prod = productName || 'optical.de';
+  const title = `Kontaktlinsen nachbestellen (${prod})`;
+  const details = `Ihr Kontaktlinsenvorrat (${prod}) geht in Kürze zu Ende. Jetzt Angebote prüfen und rechtzeitig nachbestellen: ${targetUrl}`;
+
+  // Ganztägiges Ereignis in Google Calendar: dates=YYYYMMDD/YYYYMMDD (ohne 'T' und Uhrzeit)
+  const datesParam = `${cleanStartDate}/${cleanEndDate}`;
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: datesParam,
+    details: details,
+    location: location
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 /**

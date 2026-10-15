@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, Bell, Check, Clock, ChevronDown, ChevronUp, Download, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
-import { calculateRefillSchedule, generateIcsCalendarEvent, downloadIcsFile } from '../utils/refillCalculator';
+import { calculateRefillSchedule } from '../utils/refillCalculator';
+import CalendarExportDropdown from './CalendarExportDropdown';
 import { trackEvent } from '../utils/tracking';
 
 export default function RefillAssistantModal({ product, initialConfig, onClose, onSave }) {
@@ -114,15 +115,6 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
     onClose();
   };
 
-  const handleExportIcs = () => {
-    const ics = generateIcsCalendarEvent({
-      productName: product.product_name,
-      refillDate: effectiveRefillDate,
-      targetUrl: 'https://www.optical.de/meine-linsen'
-    });
-    downloadIcsFile(ics, `nachkauf-${product.id}.ics`);
-    trackEvent('calendar_reminder_exported', { product_id: product.id });
-  };
 
   return (
     <div
@@ -356,15 +348,13 @@ export default function RefillAssistantModal({ product, initialConfig, onClose, 
         </div>
 
         {/* Modal Footer */}
-        <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={handleExportIcs}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 font-bold text-xs transition"
-          >
-            <Download className="w-4 h-4 text-slate-500" />
-            <span>In Kalender exportieren (.ics)</span>
-          </button>
+        <div className="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <CalendarExportDropdown
+            product={product}
+            refillDate={effectiveRefillDate}
+            direction="up"
+            className="w-full sm:w-auto"
+          />
 
           <div className="w-full sm:w-auto flex items-center gap-2">
             <button

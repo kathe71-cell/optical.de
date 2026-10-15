@@ -21,12 +21,11 @@ import MetaTags from '../components/MetaTags';
 import MedicalDisclaimer from '../components/MedicalDisclaimer';
 import ScrollToTop from '../components/ScrollToTop';
 import RefillAssistantModal from '../components/RefillAssistantModal';
+import CalendarExportDropdown from '../components/CalendarExportDropdown';
 import { useSavedLenses } from '../hooks/useSavedLenses';
 import { useRefillConfigs } from '../hooks/useRefillConfigs';
 import { PRODUCTS, getProductById } from '../data/products';
-import { getProductAffiliateUrl, getAffiliateCtaLabel, AFFILIATE_LINK_REL } from '../utils/affiliate';
-import { generateIcsCalendarEvent, downloadIcsFile } from '../utils/refillCalculator';
-import { trackAffiliateClick, trackEvent } from '../utils/tracking';
+import { trackAffiliateClick } from '../utils/tracking';
 
 export default function SavedLensesPage() {
   const { savedIds, removeSaved, clearAllSaved } = useSavedLenses();
@@ -37,17 +36,6 @@ export default function SavedLensesPage() {
   const savedProducts = savedIds
     .map((id) => getProductById(id))
     .filter(Boolean);
-
-  const handleExportIcsDirect = (product, config) => {
-    if (!config || !config.refillDate) return;
-    const ics = generateIcsCalendarEvent({
-      productName: product.product_name,
-      refillDate: config.refillDate,
-      targetUrl: 'https://www.optical.de/meine-linsen'
-    });
-    downloadIcsFile(ics, `nachkauf-${product.id}.ics`);
-    trackEvent('calendar_reminder_exported', { product_id: product.id });
-  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased flex flex-col justify-between">
@@ -232,14 +220,14 @@ export default function SavedLensesPage() {
                               </div>
                             </div>
 
-                            <button
-                              type="button"
-                              onClick={() => handleExportIcsDirect(p, config)}
-                              className="w-full mt-2 inline-flex items-center justify-center gap-1.5 py-1.5 px-2 bg-white border border-emerald-300 hover:bg-emerald-100/50 rounded-lg text-[11px] font-bold text-emerald-900 transition"
-                            >
-                              <Download className="w-3.5 h-3.5 text-emerald-700" />
-                              <span>Kalendereintrag (.ics)</span>
-                            </button>
+                            <CalendarExportDropdown
+                              product={p}
+                              refillDate={config.refillDate}
+                              size="sm"
+                              variant="emerald"
+                              direction="up"
+                              className="w-full mt-2"
+                            />
                           </div>
                         ) : (
                           <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center space-y-2">

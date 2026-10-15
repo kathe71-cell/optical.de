@@ -71,13 +71,35 @@ assert(separateDaily.refillDate === '2026-10-21', 'Erinnerung 10 Tage vor Minimu
 
 // 6. Kalender-Export (.ics):
 const ics = generateIcsCalendarEvent({
-  productName: 'Biofinity',
+  productName: 'Biofinity, Sphere; Extra',
   refillDate: '2026-11-15',
   targetUrl: 'https://www.optical.de/meine-linsen'
 });
 assert(ics.includes('BEGIN:VCALENDAR') && ics.includes('END:VCALENDAR'), 'ICS Syntax vollständig', 'Validierung fehlgeschlagen');
-assert(ics.includes('DTSTART;VALUE=DATE:20261115'), 'ICS DTSTART Datum korrekt', 'Datum fehlt');
-assert(!ics.includes('dpt') && !ics.includes('Dioptrien'), 'ICS enthält keine sensiblen Dioptriendaten', 'Datenschutz gewahrt');
+assert(ics.includes('DTSTART;VALUE=DATE:20261115'), 'ICS DTSTART Datum korrekt', 'Startdatum fehlt');
+assert(ics.includes('DTEND;VALUE=DATE:20261116'), 'ICS DTEND exklusives Folgedatum korrekt (RFC 5545)', 'Enddatum fehlt oder nicht exklusiv');
+assert(ics.includes('LOCATION:optical.de Online-Vergleich'), 'ICS LOCATION korrekt', 'Location fehlt');
+assert(ics.includes('\\,') && ics.includes('\\;'), 'ICS RFC 5545 Escaping von Sonderzeichen', 'Escaping fehlt');
+assert(!ics.includes('dpt') && !ics.includes('Dioptrien') && !ics.includes('cyl') && !ics.includes('Achse'), 'ICS enthält keine sensiblen Dioptriendaten', 'Datenschutz gewahrt');
+
+// RFC 5545 Zeilenfaltung (max 75 Bytes pro Zeile):
+const icsLines = ics.split('\r\n');
+const maxLineBytes = Math.max(...icsLines.map(l => Buffer.byteLength(l, 'utf8')));
+assert(maxLineBytes <= 75, `RFC 5545 Zeilenfaltung (max 75 Bytes)`, `Maximale Zeilenlänge überschritten: ${maxLineBytes} Bytes`);
+
+// 7. Google Kalender URL-Generierung (ganztägig, synchron zu ICS):
+import { generateGoogleCalendarUrl } from '../../src/utils/refillCalculator.js';
+const gcalUrl = generateGoogleCalendarUrl({
+  productName: 'Biofinity Toric',
+  refillDate: '2026-11-20',
+  targetUrl: 'https://www.optical.de/meine-linsen',
+  location: 'optical.de Online-Vergleich'
+});
+assert(gcalUrl.startsWith('https://calendar.google.com/calendar/render?'), 'Google Calendar Basis-URL', 'URL falsch');
+assert(gcalUrl.includes('action=TEMPLATE'), 'Google Calendar Template-Aktion', 'Aktion fehlt');
+assert(gcalUrl.includes('dates=20261120%2F20261121'), 'Google Calendar ganztägig exklusives Datumsintervall (Start/Ende)', `Dates falsch: ${gcalUrl}`);
+assert(gcalUrl.includes('location=optical.de+Online-Vergleich') || gcalUrl.includes('location=optical.de%20Online-Vergleich'), 'Google Calendar Location codiert', 'Location fehlt');
+assert(gcalUrl.includes('Biofinity+Toric') || gcalUrl.includes('Biofinity%20Toric'), 'Google Calendar Produktname im Titel', 'Titel fehlt');
 
 console.log('\n====================================================');
 if (failed === 0) {
